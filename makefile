@@ -18,4 +18,4 @@ $(EXE_NOEXT).o: $(EXE_NOEXT).asm
 
 clean:
 	#find . -iname "*$(OUT_EXT)" -delete 
-	rm -rf *$(OUT_EXT)
+	rm -rf *$(EXE_EXT) *.o
