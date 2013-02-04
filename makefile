@@ -1,21 +1,43 @@
-AS=nasm -f elf
-#assembler
+override GAS=as
+override LN=ld -s
+override IN_DIR?=./
+override NASM=nasm -f elf
+override OUT_DIR?=_out/
+override OUT_EXT?=
+override OUT_BASENAME_NOEXT?=nasm_cheat
 
-LN=ld -s
-#linker
+EXT:=.asm
+INS:=$(wildcard $(IN_DIR)*$(EXT))
+INS_NODIR:=$(notdir $(INS))
+OUTS_NODIR:=$(patsubst %$(EXT),%$(OUT_EXT),$(INS_NODIR))
+ASM_OUTS:=$(addprefix $(OUT_DIR),$(OUTS_NODIR))
 
-EXE_NOEXT=nasm_cheat
-EXE_EXT=.out
-EXE=$(EXE_NOEXT)$(EXE_EXT)
+EXT:=.s
+INS:=$(wildcard $(IN_DIR)*$(EXT))
+INS_NODIR:=$(notdir $(INS))
+OUTS_NODIR:=$(patsubst %$(EXT),%$(OUT_EXT),$(INS_NODIR))
+S_OUTS:=$(addprefix $(OUT_DIR),$(OUTS_NODIR))
 
-all: $(EXE)
+OUT_PATH:=$(OUT_DIR)$(OUT_BASENAME_NOEXT)$(OUT_EXT)
 
-$(EXE): $(EXE_NOEXT).o
-	$(LN) -o $(EXE) nasm_cheat.o 
+.PHONY: all mkdir clean
 
-$(EXE_NOEXT).o: $(EXE_NOEXT).asm
-	$(AS) $(EXE_NOEXT).asm
+all: mkdir $(S_OUTS) $(ASM_OUTS)
+
+run: all
+	./$(OUT_PATH)
+
+$(OUT_DIR)%$(OUT_EXT): $(OUT_DIR)%.o
+	$(LN) -o "$@" "$<" 
+
+$(OUT_DIR)%.o: $(IN_DIR)%.asm
+	$(NASM) -o "$@" "$<"
+
+$(OUT_DIR)%.o: $(IN_DIR)%.s
+	$(GAS) -o "$@" "$<"
+
+mkdir:
+	mkdir -p "$(OUT_DIR)"
 
 clean:
-	#find . -iname "*$(OUT_EXT)" -delete 
-	rm -rf *$(EXE_EXT) *.o
+	rm -rf "$(OUT_DIR)"
