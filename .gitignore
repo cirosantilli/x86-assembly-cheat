@@ -23,7 +23,7 @@ _tmp/
 *.a
 
 #assembly code
-*.s
+#*.s
 
 #temporary files
 *.tmp

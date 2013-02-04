@@ -33,19 +33,28 @@ simple assembler scripts and cheatsheets
     {
         no stdlibs
 
-        very system dependant and thus importable
+        os/processor dependant and thus importable
+
+        other things are much more likelly to speed up your code
+        if that's what you want namely:
+
+        #better algorithms
+
+        #better cache usage
+
+        and only then, using assembly is likely to speed thing up.
     }
 }
 
 #instruction set architectures (ISA)
 {
-    list of operations the processor can do
+    list of operations the processor can do. obvioustly, ultra processor dependant.
     
     <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
     #intel x86
     {
-        major on pcs today
+        majority of pcs today
 
         AMD also has compatible cpus
 
@@ -60,17 +69,19 @@ simple assembler scripts and cheatsheets
             {
                 1976, 16 bit, very popular, base to x86 language
             }
+            #intel 80386
+            {
+                1985, 32 bit word register
+            }
         }
 
         #registers
         {
-            word = 2 bytes
-
             #suffixes
             {
                 B byte
-                W word
-                D double word
+                W word = 2 bytes
+                D double word = 2 words (a c ``int``)
                 Q quad word
                 T ten bytes
             }
@@ -88,6 +99,11 @@ simple assembler scripts and cheatsheets
                 #8 general-purpose registers (gpr)
                 #6 segment registers
                 #1 flags register
+                {
+                    each bit means some boolean
+
+                    ex: 0: CF (carry flag)
+                }
                 #an instruction pointer
             }
 
@@ -98,12 +114,11 @@ simple assembler scripts and cheatsheets
         {
             <http://en.wikipedia.org/wiki/X86_instruction_listings>
         }
-
     }
 
     #arm
     {
-        used in most mobile phones
+        great majority of mobile phones
 
         low power consumption
     }
@@ -114,6 +129,7 @@ simple assembler scripts and cheatsheets
     #elf
     {
         linux
+
         superseeds ``.coff`` which superseeds ``a.out``
     }
 
@@ -221,7 +237,7 @@ simple assembler scripts and cheatsheets
         #write to stdout, stderr, files
         #access devices
 
-        ultra os dependant
+        ultra os dependant. to work around, you can inerface with c stdlib.
     }
 
     #linux
