@@ -26,23 +26,43 @@ simple assembler scripts and cheatsheets
 
     #pros
     {
-        #understand what the processor really does
+        #speed
+        {
+            it gets harder and harder to make code more efficient using assembler
+            because compilers are smarter and smarter
+
+            #{
+                use instructions that are so cpu specific and useful for your needs
+                that compilers don't implement
+            }
+
+            #{
+                use instructions in a way that is smarter than any compiler is likely to do
+            }
+        }
+
+        #do the impossible
+        {
+            access low level hardware which is so hardware specific it is not implemented in standard c
+        }
     }
 
     #cons
     {
-        no stdlibs
+        #os/processor dependant
 
-        os/processor dependant and thus importable
+        #hard to read/write
 
-        other things are much more likelly to speed up your code
-        if that's what you want namely:
+        {
+            other things are much more likelly to speed up your code
+            if that's what you want, namely:
 
-        #better algorithms
+            #better algorithms
 
-        #better cache usage
+            #better cache usage
 
-        and only then, using assembly is likely to speed thing up.
+            and only then, using assembly may stand a change to speeding thing up.
+        }
     }
 }
 
@@ -52,8 +72,34 @@ simple assembler scripts and cheatsheets
     
     <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
+    #CISC vs RISC
+    {
+        #RISC
+        {
+            a minimum of operations
+
+            performs each one very fast
+        }
+
+        #CISC
+        {
+            lots of operations
+        }
+    }
+
+    #flynn's taxonomy
+    {
+        <http://en.wikipedia.org/wiki/Flynn%27s_taxonomy>
+
+        #SISD
+        #SIMD
+        #MIMD
+    }
+
     #intel x86
     {
+        <http://en.wikipedia.org/wiki/X86_instruction_listings>
+
         majority of pcs today
 
         AMD also has compatible cpus
@@ -69,9 +115,49 @@ simple assembler scripts and cheatsheets
             {
                 1976, 16 bit, very popular, base to x86 language
             }
+
             #intel 80386
             {
+                aka i386
+
                 1985, 32 bit word register
+            }
+
+            #intel 8087
+            {
+                1980
+
+                external floating point coprocessor for 8086
+
+                included inside cpus starting from hte 80436
+
+                x87 often used to describe the floating point operations
+                inside the processors
+
+                instructions include:
+
+                #FSQRT
+                #FPTAN
+                #FPATAN
+            }
+
+            #intel 8087
+            {
+                1987
+                
+                external floating point coprocessor
+
+                added more f point operations:
+
+                #FSIN
+                #FSINCOS
+            }
+
+            #intel 80486
+            {
+                1989
+
+                includes floating point unity
             }
         }
 
@@ -97,14 +183,33 @@ simple assembler scripts and cheatsheets
             #list of all
             {
                 #8 general-purpose registers (gpr)
+                {
+                }
+
                 #6 segment registers
+                {
+                    #SS {start of stack}
+                    #DS {start of data}
+                    #CS {start of code}
+                    #ES, FG, GS {far pointer == god knows what TODO}
+                }
+
+                #index and pointers
+                {
+                    ESI EDI EBP EIP ESP
+                }
+
                 #1 flags register
                 {
                     each bit means some boolean
 
-                    ex: 0: CF (carry flag)
+                    #0 CF (carry flag)
                 }
+
                 #an instruction pointer
+                {
+                    adress of instruction to execute
+                }
             }
 
             #little endian
@@ -139,6 +244,17 @@ simple assembler scripts and cheatsheets
 
 #language syntax
 {
+
+    #standardization
+    {
+        there is de facto standard (even if there is an IEEE one)
+        even for a given architecture!
+
+        therefore, each assemble has its own language
+        
+        luckly, this language often based on the manual syntax
+    }
+    
     directive: not machine language, assembler programming
 
     #two main branches
@@ -210,6 +326,15 @@ simple assembler scripts and cheatsheets
 
             x86
         }
+
+        #tasm
+        {
+            borland
+
+            stands for ``turbo`` assembler lol, why not ``basm``?
+
+            windows only
+        }
     }
 }
 
@@ -254,11 +379,24 @@ simple assembler scripts and cheatsheets
     }
 }
 
+#SIMD instructions
+{
+    more and more, SIMD instructions are being added
+
+    for some time now intel has been grouping those instructions under the ``SSE`` name
+
+    <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
+
+    TODO
+}
+
 TODO
 {
-
     - interfacing with c
     - protected vs real mode
     - kernel
     - segments/flat memory model TODO ?
+
+    #c integration
+    { intrinsics: TODO }
 }
