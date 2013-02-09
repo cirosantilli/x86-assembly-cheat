@@ -1,33 +1,56 @@
 %include "lib/asm_io.inc"
     ;#include
 
-;asserts eax eq %1
-%macro assert_eq 1
+;default args
+;%macro assert_eq 1-2 eax
+    ;pushf
+    ;cmp %2, %1
+    ;je %%ok
+        ;call assert_fail
+    ;%%ok:
+    ;popf
+;%endmacro
 
-    cmp eax, %1
-    je %%ok
+;asserts eax eq %1
+;eflags and registers are put on stack and restored afterwards
+    ;as a consequence, stack pointer comparisons such as ``assert_eq [ESP], 1`` will fail!
+    ;workaround: ``mov eax, [ESP]``, ``assert_eq 1``
+%macro assert_eq 3       ;multiline macro
+    pushf
+    cmp %3 %1, %2
+    je %%ok             ;inner label, visible only from the inside
         call assert_fail
     %%ok:
+    popf
+%endmacro
 
+%macro assert_eq 2
+    assert_eq %1, %2, %3
+%endmacro
+
+;macro overload
+;assert_eq eax
+%macro assert_eq 1
+    assert_eq eax, %1
 %endmacro
 
 ;asserts eax neq %1
-%macro assert_dif 1
-
-    cmp eax, %1
+%macro assert_dif 2
+    pushfd
+    pusha
+    cmp %1, %2
     jne %%ok
         call assert_fail
     %%ok:
-
+    popa
+    popfd
 %endmacro
 
 ;assert jX or jnX jumps
 %macro assert_flag 1
-
     %1 %%ok
         call assert_fail
     %%ok:
-
 %endmacro
 
 section .data
@@ -121,6 +144,7 @@ asm_main:
             ;AF adjust
 
         ;flage usage
+            ;not all flags have direct clear/set methods
             stc
             assert_flag jc
             clc
@@ -168,7 +192,7 @@ asm_main:
                 mov eax, 0
                 mov ax, -1
                 movzx eax, ax
-                assert_dif -1
+                assert_dif eax, -1
 
                 ;movzx al, al
                     ;ERROR
@@ -191,12 +215,73 @@ asm_main:
                 movsx eax, ax
                 assert_eq -1
 
+            ;cmovXX
+
+                ;flag
+
+                    ;cmovXX a, b
+                    ;if( flag ) a = b
+
+                    clc
+                    mov eax, 0
+                    mov ebx, 1
+                    cmovc eax, ebx
+                    assert_eq 0
+
+                    clc
+                    mov eax, 0
+                    mov ebx, 1
+                    cmovnc eax, ebx
+                    assert_eq 1
+
+                    stc
+                    mov eax, 0
+                    mov ebx, 1
+                    cmovc eax, ebx
+                    assert_eq 1
+
+                    ;cmovc eax, 1
+                        ;ERROR
+                        ;must be adress
+
+            ;exchange
+
+                ;xchg
+                    
+                    mov eax, 0
+                    mov ebx, 1
+
+                    xchg eax, ebx
+                    assert_eq 1
+                    assert_eq ebx, 0
+
+                    xchg eax, ebx
+                    assert_eq 0
+                    assert_eq ebx, 1
+
+                ;bswap
+
+                    ;little endian <=> big endian
+
+                    mov eax, 11223344h
+                    bswap eax
+                    assert_eq 44332211h
+
+                ;xadd
+                
+                    mov eax, 1
+                    mov ebx, 2
+                    xadd eax, ebx
+                    assert_eq 3
+                    assert_eq ebx, 1
+
+
         ;arithmetic
 
             ;add
                 mov eax, 0
                 add eax, 1
-                ;assert_eq 1
+                assert_eq 1
 
                 mov eax, 0
                 mov ebx, 1
@@ -230,8 +315,7 @@ asm_main:
                         ;edx:eax += ebx:ecx
 
                     assert_eq 0
-                    mov eax, edx
-                    assert_eq 1
+                    assert_eq edx, 1
 
                 ;inc eax++
                     mov eax, 0
@@ -255,8 +339,7 @@ asm_main:
                     sbb edx, ebx
 
                     assert_eq 80000000h
-                    mov eax, edx
-                    assert_eq 0
+                    assert_eq edx, 0
                         ;edx:eax -= ebx:ecx
 
                 ;dec eax--
@@ -271,8 +354,7 @@ asm_main:
                 mov ebx, 2
                 mul ebx
                 assert_eq 4
-                mov eax, ebx
-                assert_eq 2
+                assert_eq ebx, 2
 
                 ;reg size
 
@@ -303,8 +385,7 @@ asm_main:
                         mov edx, 0
                         mul ebx
                         assert_eq 0
-                        mov eax, edx
-                        assert_eq 1
+                        assert_eq edx, 1
 
                 ;mul 2
                     ;ERROR
@@ -318,8 +399,7 @@ asm_main:
                 mov ebx, 2
                 imul ebx
                 assert_eq 4
-                mov eax, ebx
-                assert_eq 2
+                assert_eq ebx, 2
                 
                 mov eax, -2
                 imul eax
@@ -337,6 +417,16 @@ asm_main:
                 ;imul eax, 2, 2
                     ;ERROR
                     ;second must be register
+            
+            ;neg
+
+                mov eax, 2
+
+                neg eax
+                assert_eq -2
+
+                neg eax
+                assert_eq 2
 
             ;div
                 ;signed divide
@@ -347,8 +437,7 @@ asm_main:
                 mov ecx, 2
                 div ecx
                 assert_eq 2
-                mov eax, edx
-                assert_eq 1
+                assert_eq edx, 1
 
                 ;reg size
 
@@ -369,8 +458,7 @@ asm_main:
                         mov cx, 2
                         div cx
                         assert_eq 8000h
-                        mov ax, dx
-                        assert_eq 1
+                        assert_eq edx, 1
 
                     ;32 
                         mov eax, 1
@@ -378,8 +466,7 @@ asm_main:
                         mov ecx, 2
                         div ecx
                         assert_eq 80000000h
-                        mov eax, edx
-                        assert_eq 1
+                        assert_eq edx, 1
 
                         ;mov eax, 1
                         ;mov edx, 2
@@ -389,21 +476,19 @@ asm_main:
                             ;output must fit into dword
 
             ;cdq
-                ;cdq
+
                 ;sign extend eax into edx:eax
                 ;idiv 32-bit combo
 
                 mov eax, 1
                 mov edx, 0
                 cdq
-                mov eax, edx
-                assert_eq 0
+                assert_eq edx, 0
 
                 mov eax, -1
                 mov edx, 0
                 cdq
-                mov eax, edx
-                assert_eq 0FFFFFFFFh
+                assert_eq edx, 0FFFFFFFFh
 
             ;idiv
 
@@ -413,16 +498,14 @@ asm_main:
                 mov ecx, -2
                 idiv ecx
                 assert_eq 2
-                mov eax, edx
-                assert_eq -1
+                assert_eq edx, -1
 
                 mov eax, 1
                 mov edx, 1
                 mov ecx, 4
                 idiv ecx
                 assert_eq 40000000h
-                mov eax, edx
-                assert_eq 1
+                assert_eq edx, 1
 
                 ;mov eax, 1
                 ;mov edx, 1
@@ -459,27 +542,24 @@ asm_main:
                     ;applicaition:
                     ;- quick unsigned multiply and divide by powers of 2
 
-                    mov eax, 0
-                    mov ax, 8001h
+                    mov eax, 81h
 
-                    shl ax, 1
+                    shl al, 1
+                    assert_flag jc
                     assert_eq 2
-                    ;assert_flag jc
-                        ;TODO
 
-                    shl ax, 1 ;ax <<= 1, CF = 0
+                    shl al, 1
                     assert_eq 4
                     assert_flag jnc
 
-                    shr ax, 1
+                    shr al, 1
                     assert_eq 2
                     assert_flag jnc
 
                     mov cl, 2
-                    shr ax, cl   ;ax <<= cl
+                    shr al, cl
+                    assert_flag jc
                     assert_eq 0
-                    ;assert_flag jc
-                        ;TODO
 
                     ;mov bl, 2
                     ;shr ax, bl
@@ -493,59 +573,176 @@ asm_main:
 
                     mov eax, -1 ;negative number
                     sal eax, 1  ;ax = -2, CF = 1
+                    assert_flag jc
                     assert_eq -2
 
-                    mov eax, 8002h
-                    sar eax, 1      ;ax < 0, CF = 0
+                    sar eax, 1          ;ax < 0, CF = 0
+                    assert_eq -1
 
                 ;rotate
+
                     ;no corresponding c intruction
 
                     ;insert 0
-                        mov al, 81h
-                        rol al, 1    ;axl = 03h, CF = 1
-                        rol al, 1    ;axl = 04h, CF = 0
-                        ror al, 1    ;axl = 03h, CF = 0
-                        ror al, 1    ;axl = 81h, CF = 1
 
-                    ;rotate with cf added
-                        mov al, 81h
+                        mov eax, 81h
+
+                        rol al, 1    ;axl = 03h, CF = 1
+                        assert_flag jc
+                        assert_eq al, 3
+
+                        rol al, 1    ;axl = 04h, CF = 0
+                        assert_eq al, 6
+                        assert_flag jnc
+
+                        ror al, 2    ;axl = 03h, CF = 0
+                        assert_flag jc
+                        assert_eq al, 81h
+
+                        ror al, 1    ;axl = 81h, CF = 1
+                        assert_flag jc
+                        assert_eq al, 0C0h
+
+                    ;rotate with cf inserted
+
+                        mov eax, 81h
                         clc
-                        rcr al, 1
-                        rcr al, 1
+
                         rcl al, 1
+                        assert_eq al, 2
+                        assert_flag jc
+
                         rcl al, 1
+                        assert_eq al, 5
+                        assert_flag jnc
+
+                        rcr al, 2
+                        assert_eq al, 81h
+                        assert_flag jnc
+
+                        rcr al, 1
+                        assert_eq al, 40h
+                        assert_flag jc
 
             ;bool
 
                 ;not
+
                     mov al, 0F0h
                     not al
+                    assert_eq al, 0Fh
 
                 ;and
-                    mov al, 0F0h
-                    and al, 0FFh ;al &&= FFh
+
+                    mov ax, 00FFh
+                    and ax, 0F0Fh
+                    assert_eq ax, 000Fh
 
                 ;test
-                    test al, 0
+
                     ;ZF = ( al && bl == 0 ) ? 1 : 0
 
-                ;or
                     mov al, 0F0h
-                    or  al,  00h
+                    test al, 0
+                    assert_flag jz
+                    assert_eq al, 0F0h
+
+                    mov al, 0F0h
+                    assert_eq al, 0F0h
+                    test al, 0F0h
+                    assert_flag jnz
+                    assert_eq al, 0F0h
+
+                ;or
+
+                    mov ax, 00FFh
+                    or  ax, 0F0Fh
+                    assert_eq ax, 0FFFh
 
                 ;xor
-                    mov al, 0F0h
-                    or  al,  00h
+
+                    mov ax, 00FFh
+                    xor ax, 0F0Fh
+                    assert_eq ax, 0FF0h
+
+            ;bit
+
+                ;bt
+
+                    ;bt ax, i
+                    ;CF = ( ax[i] == 1 ) ? 1 : 0
+
+                    mov ax, 0Ah
+
+                    bt ax, 0
+                    assert_flag jnc
+
+                    bt ax, 1
+                    assert_flag jc
+
+                    bt ax, 2
+                    assert_flag jnc
+
+                    bt ax, 3
+                    assert_flag jc
+
+                    assert_eq ax, 0Ah
+                        ;unchanged
+
+                    ;bt al, 0
+                        ;not for bytes
+
+                ;bts set
+                ;btr reset
+                ;btc complement
+
+                    ;bt + op
+
+                    ;bts
+
+                        mov ax, 0Ah
+                        bts ax, 0
+                        assert_eq ax, 0Bh
+                        assert_flag jnc
+
+                        mov ax, 0Ah
+                        bt ax, 1
+                        assert_flag jc
+                        assert_eq ax, 0Ah
+
+                    ;btr
+
+                        mov ax, 0Ah
+                        btr ax, 1
+                        assert_eq ax, 8
+                        assert_flag jc
+
+                    ;btc
+
+                        mov ax, 0Ah
+                        btc ax, 0
+                        assert_eq ax, 0Bh
+                        assert_flag jnc
+
+                        mov ax, 0Ah
+                        btc ax, 1
+                        assert_eq ax, 08h
+                        assert_flag jc
 
     ;labels
 
         ;adresses in RAM memory
 
         mov al, [b0]  ;al = b0
+        assert_eq al, [b0]
+
         mov eax, b0   ;eax = &b0
-        mov eax, [eax];eax = *eax
-        mov [b0], ah  ;b0 = ah
+        mov al,  [eax];al = *eax
+        assert_eq al, [b0]
+
+        mov byte [b0], 0  ;b0 = 0
+        cmp byte [b0], 0
+        assert_flag jz
 
         mov eax, [d0] ;copy double word at d0 into EAX
         add eax, [d0] ;EAX = EAX + double word at d0
@@ -557,9 +754,10 @@ asm_main:
             ;should overwrite how many bytes of d0?
         mov dword [d0], 1
 
-        mov al, [bs4]
-        mov al, [bs4 + 1]
-        mov al, [bs4 + ebx]
+        mov byte [bs4], 0
+        mov byte [bs4 + 1], 1
+        mov ebx, 2
+        mov byte [bs4 + ebx], 2
         ;mov al, [bs4 + bx]
             ;WARN
             ;must use 32-bit var
@@ -575,155 +773,217 @@ asm_main:
             call print_nl
             mov eax, $ + 1
 
-            mov ebx, $
-            mov eax, $
-            sub eax, ebx
-            call print_int
-            call print_nl
-              ;5
-                ;1 byte for the instruction
-                ;4 bytes for the expanded '$' (4 byte adress)
+            ;instructoin lengths
 
-        mov ebx, $
-        call print_ebx_call_ret
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
+                mov ebx, $
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;5
+                    ;1 byte for the instruction
+                    ;4 bytes for the expanded '$' (4 byte adress)
 
-        mov ebx, $
-        mov edx, ecx
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;7
-            ;mov edx, ecx  :  2 bytes
+                mov ebx, $
+                call print_ebx_call_ret
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
 
-        mov ebx, $
-        sub edx, ecx
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;7
-            ;sub edx, ecx : 2 bytes
+                mov ebx, $
+                mov edx, ecx
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;7
+                    ;mov edx, ecx  :  2 bytes
 
-        mov ebx, $
-        mov dl, 0
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;7
-            ;sub edx, 0
-            ;2 bytes
-              ;1 for mov edx
-              ;2 for the 0 (dl contains 2 bytes)
+                mov ebx, $
+                sub edx, ecx
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;7
+                    ;sub edx, ecx : 2 bytes
 
-        mov ebx, $
-        jmp short jmp_short_len_lbl
-        jmp_short_len_lbl:
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;7
-
-        mov ebx, $
-        jmp jmp_len_lbl
-        jmp_len_lbl:
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;7
-            ;TODO
-            ;why not 8?
-            ;compiler automatically sees this?
-
-        mov ebx, $
-        mov dx, 0
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-          ;9
-            ;TODO
-            ;why not 8 ?
-            ;1 mov dx + 2 0
-
-        mov ebx, $
-        mov edx, 0
-        mov eax, $
-        sub eax, ebx
-        call print_int
-        call print_nl
-            ;10
-                ;sub edx, 0
-                ;5 bytes
+                mov ebx, $
+                mov dl, 0
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;7
+                    ;sub edx, 0
+                    ;2 bytes
                     ;1 for mov edx
-                    ;4 for the 0 (edx contains 4 bytes)
+                    ;2 for the 0 (dl contains 2 bytes)
+
+                mov ebx, $
+                jmp short jmp_short_len_lbl
+                jmp_short_len_lbl:
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;7
+
+                mov ebx, $
+                jmp jmp_len_lbl
+                jmp_len_lbl:
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;7
+                    ;TODO
+                    ;why not 8?
+                    ;compiler automatically sees this?
+
+                mov ebx, $
+                mov dx, 0
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                ;9
+                    ;TODO
+                    ;why not 8 ?
+                    ;1 mov dx + 2 0
+
+                mov ebx, $
+                mov edx, 0
+                mov eax, $
+                sub eax, ebx
+                call print_int
+                call print_nl
+                    ;10
+                        ;sub edx, 0
+                        ;5 bytes
+                            ;1 for mov edx
+                            ;4 for the 0 (edx contains 4 bytes)
 
     ;stack
 
         ;allocate data on execution
-        ;also useful for functions parameter passing
+        ;useful to pass parameter to function
         ;this is how c variables inside functions are implemented
             ;uses memory only while necessary on cur function
 
         ;push pop
+
+            ;always dwords (4 bytes)
+
             mov eax, ss
             call print_int
             call print_nl
+                ;start of stack segment
 
             mov eax, esp
-            call print_int
-            call print_nl
-                ;esp points to the last item added to stack
-            
             push dword 1
-            mov eax, esp
-            call print_int
-            call print_nl
-                ;push at bottom of stack ()
+            sub eax, esp
+            assert_eq 4
+            mov eax, [esp]
+            assert_eq 1
 
-            push dword eax
             mov eax, esp
+            push byte 2
+                ;BAD
+                ;still added 1 dword
+            sub eax, esp
             call print_int
-            call print_nl
+            assert_eq 4
+            mov eax, [esp]
+            assert_eq 2
 
-            pop ebx
-            mov eax, esp
-            call print_int
-            call print_nl
+            pop eax
+            assert_eq 2
 
-            pop ecx
-            mov eax, esp
-            call print_int
-            call print_nl
-                ;ebx = eax
-                ;ecx = 1
+            pop eax
+            assert_eq 1
+
+            ;manual equivalent
+
+                sub esp, 8
+                mov dword [esp], 2
+                mov dword [esp + 4], 1
+
+                mov eax, [esp]
+                assert_eq 2
+                mov eax, [esp + 4]
+                assert_eq 1
+                add esp, 8
 
         ;pusha, popa
-            ;save all registers and restore them later
 
-            mov eax, 0
+            ;push/pop to stack in order EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
+
             mov ebx, 0
             mov ecx, 0
-            mov edx, 0
+
+            mov eax, esp
             pusha
-            mov eax, 1
+            sub eax, esp
+            assert_eq 32        ;8x 4bytes
+
             mov ebx, 1
             mov ecx, 1
-            mov edx, 1
             popa
-            ;all == 0
+            assert_eq ebx, 0
+            assert_eq ecx, 0
+        
+        ;pushf, popf, pushdf
+
+            ;push /pop  FLAGS
+            ;pushd/popd EFLAGS
+
+            clc
+
+            mov eax, esp
+            pushf
+            sub eax, esp
+            assert_eq 4        ;needs 2 bytes, stack min 1 dword
+
+            stc
+            popf
+            assert_flag jnc
+
+            clc
+            pushfd
+            stc
+            popfd
+            assert_flag jnc
 
         ;enter, leave
 
-            enter 2,0
+            ;usefull for functions
+            ;must allow recursion
+
+            ;why push ebp?
+            ;- because pushing local memory won't change the location of args
+
+            mov eax, esp
+            enter 8, 0
+                ;enter A, B
+                ;==
+                ;push ebp
+                ;mov ebp, esp
+                ;sub esp, A
+                ;==
+                ;allocate 2 local dwords
+            sub eax, esp
+            assert_eq 12
+
+            mov dword [ebp - 4], 1  ;modify 1st local var
+            mov dword [ebp - 8], 2  ;modify 2nd local var
+
             leave
+                ;mov esp, ebp
+                ;pop ebp
+                ;==
+                ;delocate 2 dwords
 
     ;branch
       
@@ -802,7 +1062,7 @@ asm_main:
                     ;1) it works well
                     ;2) it allows you to interface with c code
 
-                ;rules:
+                ;cdecl:
                     ;- use call/ret instructions
                     ;- args are passed on stack
                     ;- always pass dword args
@@ -817,16 +1077,25 @@ asm_main:
                         ;if 64-bit, put in edx:eax
                     ;- EBX, ESI, EDI, EBP, CS, DS, SS, ES remain unchanged on return
                         ;- they may be temporaly changed inside
-                    ;- some compilers will append underline to func names '_'
-                        ;not the case for ELF output
                     ;- parameters are put on stack in inverse order from declaration
                         ;this allows for funcs with arbitrary numbers of args such as ``printf``:
                         ;like this the format string will always be on the same position
+                    ;- the caller clears the argument heap
+                        ;this generates more code (several calls, single def)
+                        ;but allows for functions with variable number or arguments (``printf``)
+                        ;because then only the caller knows how many args he put on the stack
+                        ;PASCAL for example follows a fuction clear argument stack convention
+                    ;- some compilers will append underline to func names '_'
+                        ;not the case for ELF output
                     ;- watch out for compiler dependant conventions!
                         ;gcc allows to specify caling convention explicitly as:
                         ;``void f ( int ) __attribute__ ((cdecl ));``
                         ;``cdecl`` is the name of the calling convention
                         ;it is widely default across current compilers
+
+                ;stdcall:
+                    ;no variable number of args
+                    ;slightly smaller code, and potentially faster
 
                 mov  eax, bs4n
                 call print_string       ;printf("%s")
@@ -841,6 +1110,30 @@ asm_main:
                 ;mov  [input], eax
                 ;call print_int
                 ;call print_nl          ;scanf("%d")
+                
+                ;factorial
+
+                    ;recursive
+                        push dword 5
+                        call factorial_rec
+                        add esp, 4
+                        assert_eq 120
+
+                        push dword 1
+                        call factorial_rec
+                        add esp, 4
+                        assert_eq 1
+
+                    ;non recursive
+                        push dword 5
+                        call factorial_norec
+                        add esp, 4
+                        assert_eq 120
+
+                        push dword 1
+                        call factorial_norec
+                        add esp, 4
+                        assert_eq 1
 
       ;conditional
 
@@ -872,8 +1165,19 @@ asm_main:
                       call print_int
                       call print_nl
                   loop loop_lbl
+                      ;3, 2, 1
                       ;ecx--; if( ecx != 0 ) goto lbl
                       ;single instruction
+
+                  mov ecx, 3
+                  mov ebx, ecx
+                  loop_lbl_2:
+                      mov eax, ebx
+                      sub eax, ecx
+                      call print_int
+                      call print_nl
+                  loop loop_lbl_2
+                      ;0, 1, 2
 
               ;loope lbl
                   ;ecx--; if( ecx != 0 && ZF == 0 ), goto lbl
@@ -922,7 +1226,7 @@ asm_main:
     leave
     ret
 
-.data:
+.data:          ;can have multiple data
 
     assert_fail_str db 'assert failed', 10, 0
 
@@ -964,3 +1268,31 @@ print_ebx_call_ret:
     call print_nl
     ret
         ;jumps to first adress on the stack
+
+;some algorithms
+factorial_rec:
+    enter 0, 0
+    cmp dword [ebp + 8], 1
+    je factorial_rec_base
+        mov ebx, [ebp + 8]
+        dec ebx
+        push ebx
+        call factorial_rec
+        add esp, 4
+        mul dword [ebp + 8]
+    jmp factorial_rec_return
+    factorial_rec_base:
+        mov eax, 1
+    factorial_rec_return:
+    leave
+    ret
+
+factorial_norec:
+    enter 0, 0
+    mov ecx, [ebp + 8]
+    mov eax, 1
+    factorial_norec_loop:
+        mul ecx
+    loop factorial_norec_loop
+    leave
+    ret

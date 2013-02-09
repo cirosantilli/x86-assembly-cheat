@@ -104,6 +104,10 @@ simple assembler scripts and cheatsheets
 
         AMD also has compatible cpus
 
+        cisc
+
+        backwards compatible to the 1970s !
+
         #history
         {
             #intel 8080
@@ -202,6 +206,9 @@ simple assembler scripts and cheatsheets
                 #1 flags register
                 {
                     each bit means some boolean
+
+                    FLAGS: 16 lower bits
+                    EFLAGS: (extended) 16 upper bits, or all of them
 
                     #0 CF (carry flag)
                 }
