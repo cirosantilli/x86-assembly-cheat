@@ -1,3 +1,4 @@
+override DEFINES?=-DLINUX
 override GAS?=as
 override GCC?=gcc -Wall -ansi -pedantic
 override LIB_DIR?=lib/
@@ -33,7 +34,7 @@ $(OUT_DIR)%$(OUT_EXT): $(OUT_DIR)%.o
 	#$(LN) -o "$@" "$<" 
 
 $(OUT_DIR)%.o: $(IN_DIR)%.asm
-	$(NASM) -o "$@" "$<"
+	$(NASM) $(DEFINES) -o "$@" "$<"
 
 mkdir:
 	mkdir -p "$(OUT_DIR)"

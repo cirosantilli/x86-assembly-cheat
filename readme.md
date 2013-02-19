@@ -96,8 +96,10 @@ simple assembler scripts and cheatsheets
         #MIMD
     }
 
-    #intel x86
+    #intel IA-32
     {
+        commonly known as x86 or x86-32 or x386
+
         <http://en.wikipedia.org/wiki/X86_instruction_listings>
 
         majority of pcs today
@@ -363,26 +365,175 @@ simple assembler scripts and cheatsheets
 
 #system calls
 {
+    #what is
     {
         tell your os to do things which program can't such as:
 
         #write to stdout, stderr, files
         #access devices
+        #process/threading
+        #exit a program
 
         ultra os dependant. to work around, you can inerface with c stdlib.
     }
 
     #linux
     {
-        <http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html>
+        full call table: <http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html>
+        full list with manpages <http://man7.org/linux/man-pages/dir_section_2.html>
 
         196 commands total
 
         ``int	$0x80`` calls
 
-        ``%eax`` holds what command
+        ``%eax`` holds what command. each call has a number
 
         ``%ebx``, ``%ecx``, ``%edx``, ``%esx``, ``%edi`` are the params
+
+        all can be accessed by POSIX c functions.
+
+        #listof
+        {
+            #reboot {reboots or enables/disables ctrl+alt+del reboot}
+
+            #file descriptors
+            {
+                #open
+                #close
+                #write
+                #read
+                #lseek {reposition read/write}
+                #dup
+            }
+
+            #dirs
+            {
+                #getcwd {processes have working info associated}
+                #chdir
+                #fchdir {using a file descriptor instead of string}
+                #chroot
+                #creat {create file or device. TODO: what is a device}
+                #mknod {create a directory or special or ordinary file}
+                #link {create new name for file}
+                #unlink {delete link, and possibly file it refers to. TODO when deletes?}
+                #mkdir
+                #rmdir
+                #rename
+                #access {check real user's permissions for a file}
+                #chmod
+
+                #chown
+                #fhown {by file descriptor}
+                #lchown {no sym links}
+            }
+            #sethostname {process have associated hostname info}
+
+            #time
+            {
+                #time {since January 1, 1970}
+                #stime {set system time}
+                #times {process and waitee for time}
+                #nanosleep
+                #utime {change access and modification time of files}
+            }
+
+            #process
+            {
+                #exit
+                #fork
+                #kill
+                #waitpid
+                #clone
+                #execve
+                #priority
+                {
+                    process have a priority number from -20 to 19
+
+                    lower number means higher priority
+
+                    #nice
+                    #getpriority
+                    #setpriority
+                }
+                #ptrace {TODO ?}
+            }
+
+
+            #data segment size
+            {
+                #brk {set}
+                #sbrk {increment. called if heap is not large enough on ``malloc``}
+            }
+
+            #getppid {process parent id}
+            #getpgid {process group id}
+
+            #getuid, setuid, geteuid, seteuid
+            {
+                gets/sets user who is running the process
+
+                each process has calling user information associated to it
+            }
+
+            #getgroups setgroups
+            {
+                get/set suplementary group ids of calling process
+
+                each process has group information associated to it
+            }
+
+            #mount
+            #umount
+
+
+            #ipc
+            {
+                #signals
+                {
+                    #signal
+                    #sigaction {handler gets more info than with signal}
+                    #sys_pause {wait for signal}
+                    #alarm {send alarm signal in n secs}
+                }
+
+                #pipe {create pipe}
+
+                #flock {advisory file lock}
+
+                #sockets
+                {
+                    #accept
+                    #bind
+                    #socket
+                    #socketcall
+                    #socketpair
+                    #listen
+                }
+            }
+
+            #memory
+            {
+                #cacheflush {flush instruction or data cache contents}
+                #getpagesize {get memory page size}
+            }
+        }
+    }
+}
+
+#signals
+{
+    simple/fast/limited IPC: send a byte to another process
+
+    part of the core's process model
+
+    signals can be caught by the program and dealt with (except for STOP and KILL)
+
+    to catch a signal, a process has to register a signal handler function with a system call
+    which in linux can be done with the ``sys_signal`` family
+
+    #linux
+    {
+        <http://www.kernel.org/doc/man-pages/online/pages/man7/signal.7.html>
     }
 }
 

@@ -57,7 +57,7 @@ section .data
     ;initialized data
 
     b0 db 0        ;byte labeled b0 with initial value 0
-    b1: db 110101b  ;byte initialized to binary 110101 (53 in decimal)
+    b1: db 110101b ;byte initialized to binary 110101 (53 in decimal)
     b2 db 12h      ;byte initialized to hex 12 (18 in decimal)
     b3 db 17o      ;byte initialized to octal 17 (15 in decimal)
     b4 db "A"      ;byte initialized to ASCII code for A (65)
@@ -67,13 +67,37 @@ section .data
 
     w0 dw 1000     ;word labeled w0 with initial value 1000
     d0 dd 1A92h    ;double word initialized to hex 1A92
+    d1 dd 1A92h    ;double word initialized to hex 1A92
+
+;float
+
+    f0    dd 0.0       ;float
+    ;f0    dd 0.0b
+        ;ERROR
+        ;no binary float notation
+    f1    dd 1.0       ;float
+    fm1   dd -1.0      ;float
+    f1d1  dd 1.5       ;float
+    f1d01 dd 1.25      ;float
+    f10   dd 2.0       ;float
+    f100  dd 4.0       ;float
+    do0   dq 1.0       ;double
+
+    ;some integer conts on memory for convenience
+    i0    dd 0
+    i1    dd 1
 
 ;arrays
 
     bs4  db 0, 1, 2, 3
+    bs4_2  db 0, 0, 0, 0
         ; defines 4 bytes
-    b10 times 10 db 0
-        ; equivalent to 10 (db 0)’s
+    bs10 times 10 db 0
+    
+    bs20 times 10 db 0
+         times 10 db 1
+         ; equivalent to 10 (db 0)’s
+         ; and 10 db 1
 
 ;strings
 
@@ -94,12 +118,13 @@ section .data
 section .bss
     ;unitialized data
 
-    bu resb 1
-        ;1 uninitialized byte
-    ws10 resw 10
-        ;reserves room for 10 words
+    bu resb 1           ;1 uninitialized byte
+    ws10 resw 10        ;10 uninitialized words
 
     input resd 1
+
+    fx    resd 1        ;float
+    ix    resd 1        ;int
 
 section .text
     ;instructions
@@ -274,11 +299,11 @@ asm_main:
                     xadd eax, ebx
                     assert_eq 3
                     assert_eq ebx, 1
-
-
+        
         ;arithmetic
 
             ;add
+
                 mov eax, 0
                 add eax, 1
                 assert_eq 1
@@ -514,11 +539,10 @@ asm_main:
                     ;RUNTIME ERROR
                     ;result must fit into signed dword
 
-            ;cmp
-                ;comparisons
+            ;compare
 
-                cmp eax, 0
-                cmp eax, ebx
+                ;cmp
+
                     ;cmp does eax - ebx
                     ;ignores results
                     ;but sets all flags
@@ -531,7 +555,274 @@ asm_main:
                         ;if( eax < ebx )
                         ;  assert( OF == SF )
                         ;else if( eax > ebx )
-                        ;  assert( OF != SF )
+                            ;  assert( OF != SF )
+
+                    mov eax, 0
+                    cmp eax, 0
+                    assert_flag je
+                    assert_eq 0
+
+                    mov eax, 2
+                    cmp eax, 1
+                    assert_flag jne
+                    assert_eq 2
+
+                    ;valid operands
+
+                        cmp eax, 0
+                        cmp eax, ebx
+                        cmp eax, [d0]
+                        ;cmp [d1], [d0]
+                            ;ERROR
+                            ;you can only interact with memory with a register
+                            ;not another memory location
+                        cmp dword [d0], 0
+                            ;OK
+                            ;the 0 is part of the instruction
+
+                ;cmpxchg
+
+                    ;cmpxchg x y
+                    ;if( x == eax )
+                    ;{
+                    ;   x = y
+                    ;}
+
+                    mov eax, 0
+                    mov ebx, 1
+                    mov ecx, 2
+                    cmpxchg ebx, ecx
+                    assert_flag jnz
+                    ;assert_eq eax, 0
+                        ;TODO
+                    assert_eq ebx, 1
+                    assert_eq ecx, 2
+
+                    mov eax, 0
+                    mov ebx, 0
+                    mov ecx, 2
+                    cmpxchg ebx, ecx
+                    assert_flag jz
+                    assert_eq eax, 0
+                    assert_eq ebx, 2
+                    assert_eq ecx, 2
+
+            ;floating point
+
+                    ;understand IEEE floating point format
+                        ;converter: <http://babbage.cs.qc.cuny.edu/IEEE-754.old/Decimal.html>
+                    
+                    ;st[0-7] is a stack
+                        ;st0 is always the top of the stack!
+
+                    ;many operations have a P version that pops stack
+
+
+                    ;NOTE
+
+                        ;you can only communicate with st. from memory, not registers
+
+                        ;fld eax
+                        ;fld __float32__(1.5)
+                            ;ERROR
+                            ;must load from memory
+
+                    ;mov eax, 1.1
+                         ;ERROR
+                    mov eax, __float32__(1.5)
+
+                    ;load on stack
+
+                        ;fldz
+
+                            ;st0 = 0
+
+                            fldz
+                            fld dword [f0]
+                            fcomip st1
+                            assert_flag je
+                            finit
+
+                        ;fld1
+
+                            ;st0 = 1
+
+                            fld1
+                            fld dword [f1]
+                            fcomip st1
+                            assert_flag je
+                            finit
+
+                        ;FLDL2E  ;log_2(e)
+                        ;FLDL2T  ;log_2(10)
+                        ;FLDLG2  ;log_10(2)
+                        ;FLDLN2  ;ln(2)
+                        ;FLDPI   ;PI!
+
+                        ;fild
+
+                            ;load integer
+
+                            fldz
+                            fild dword [i0]
+                            fcomip st1
+                            assert_flag je
+                            finit
+
+                    ;stack order
+
+                        ;fxch
+                        
+                            ;change st0 and another register
+
+                            fldz
+                            fld1
+
+                            fxch st1
+                            fld dword [f0]
+                            fcomip st1
+                            assert_flag je
+
+                            fxch st1
+                            fld dword [f1]
+                            fcomip st1
+                            assert_flag je
+
+                            finit
+
+                        ;ffree
+
+                            ;removes from stack
+
+                            fldz
+                            fld1
+                            ffree st0
+                            fld dword [f0]
+                            fcomip st1
+                            assert_flag je
+                            finit
+
+                            fldz
+                            fld1
+                            ffree st1
+                            fld dword [f1]
+                            fcomip st1
+                            assert_flag je
+                            
+                    ;stack -> memory
+
+                        ;fst(p|)
+
+                            ;load integer
+
+                            fldz
+                            fld dword [f0]
+                            fstp dword [fx]
+                            mov eax, [f0]
+                            assert_eq [fx]
+
+                    ;fcomip
+
+                        ;pentium+
+
+                        ;compare and pop
+                        ;set integer compare flags
+
+                        fld1
+                        fldz
+                        fcomip st1
+                        assert_flag jb
+                        ;assert_flag jl
+                            ;BAD
+                            ;must use a b with fcomip
+                            ;TODO why?
+                        finit
+
+                        fldz
+                        fld1
+                        fcomip st1
+                        assert_flag ja
+                        finit
+                            
+                        ;fcomip [f1]
+                            ;ERROR
+                            ;must compare two registers
+
+                ;operations
+
+                    ;fchs
+
+                        ;st0 *= -1
+
+                        fld dword [f1]
+                        fchs
+                        fld dword[fm1]
+                        fcomip st1
+                        assert_flag je
+                        fchs
+                        fld dword [f1]
+                        assert_flag je
+                        finit
+
+                    ;fabs
+
+                        ;st0 = |st0|
+
+                        fld dword [fm1]
+                        fabs
+                        fld dword[f1]
+                        fcomip st1
+                        assert_flag je
+                        fld dword[f1]
+                        fcomip st1
+                        assert_flag je
+                        finit
+
+                    ;fsqrt
+
+                        fld dword [f100]
+
+                        fsqrt
+                        fld dword [f10]
+                        fcomip st1
+                        assert_flag je
+
+                        fsqrt
+                        mov dword [fx], __float32__(1.41)
+                        fld dword [fx]
+                        fcomip st1
+                        assert_flag jbe
+
+                        mov dword [fx], __float32__(1.42)
+                        fld dword [fx]
+                        fcomip st1
+                        assert_flag jae
+
+                    ;fscale
+
+                        fld dword [f1]
+                        fld dword [f1]
+
+                        fscale
+                        fld dword [f10]
+                        fcomip st1
+                        assert_flag je
+
+                        fscale
+                        fld dword [f100]
+                        fcomip st1
+                        assert_flag je
+
+                    ;FSIN
+                    ;FCOS
+                    ;FSINCOS    ;calc both sin and cos
+                    ;FPATAN
+                    ;FPTAN
+
+                    ;FPREM      ;remainder
+                    ;FPREM1     ;remainder
+
+                    ;FRNDINT    ;rounds to integer depending on rounding mode
 
         ;bitwise
 
@@ -865,6 +1156,237 @@ asm_main:
                             ;1 for mov edx
                             ;4 for the 0 (edx contains 4 bytes)
 
+    ;array
+
+        ;also called string instructions
+
+        ;c insight: this is why memcpy and memcmp may be faster than for loops
+        ;it is easier for compiler to use these faster string commands
+
+        mov eax, 0
+        mov ebx, 0
+        assert_eq [bs10 + eax + 1*ebx + 0], 0, dword
+            ;single cycle instruction
+
+            ;called *indirect* addressing
+
+            ;most general form:
+            ;ptr + reg + c1*reg + c2
+                ;regs are 32 bit registers
+                ;c1 \in {1,2,4,8}
+                ;c2 is any other constant
+        
+        ;lea
+
+            ;load effective address
+            ;puts the result of indirect address calculation in var
+            ;can be used as shortcut to certain operations
+
+            mov ebx, 2
+            lea eax, [3*ebx + 1]
+            assert_eq 7
+
+        ;lods[bwd]
+
+            ;load into a and move esi
+
+            mov esi, bs4
+            mov byte [bs4], 0
+            mov byte [bs4 + 1], 1
+
+            cld
+                ;increase esi
+            lodsb
+            assert_eq al, 0
+            mov eax, esi
+            sub eax, bs4
+            assert_eq 1
+
+            std
+                ;decrease esi
+            lodsb
+            assert_eq al, 1
+            mov eax, esi
+            sub eax, bs4
+            assert_eq 0
+
+            cld
+                ;shouldn't be necessary, but some badly written func afterwards is not clearing this value?
+
+        ;stos[bwd]
+
+            ;store from a and move edi
+
+            mov edi, bs4
+
+            cld
+            mov bl, 1
+            mov al, bl
+            stosb
+            assert_eq [bs4], bl
+            mov eax, edi
+            sub eax, bs4
+            assert_eq 1
+
+            std
+            mov bl, 2
+            mov al, bl
+            stosb
+            assert_eq [bs4 + 1], bl
+            mov eax, edi
+            sub eax, bs4
+            assert_eq 0
+
+            cld
+
+        ;movs[bwd]
+
+            ;copy one string into another
+
+            mov edi, bs4_2
+            mov esi, bs4
+            mov byte [bs4], 0
+            mov byte [bs4 + 1], 1
+
+            cld
+            movsb
+            assert_eq [bs4_2], 0, byte
+            mov eax, esi
+            sub eax, bs4
+            assert_eq 1
+            mov eax, edi
+            sub eax, bs4_2
+            assert_eq 1
+
+            std
+            movsb
+            assert_eq [bs4_2 + 1], 1, byte
+            mov eax, esi
+            sub eax, bs4
+            assert_eq 0
+            mov eax, edi
+            sub eax, bs4_2
+            assert_eq 0
+
+            cld
+
+        ;compare
+
+            ;scas[bwd]
+
+                ;compare array and a
+
+                mov edi, bs4
+                mov byte [bs4], 0
+                mov byte [bs4 + 1], 1
+
+                cld
+                mov al, 0
+                scasb
+                assert_flag jz
+                mov eax, edi
+                sub eax, bs4
+                assert_eq 1
+
+                std
+                mov al, 2
+                scasb
+                assert_flag jnz
+                mov eax, edi
+                sub eax, bs4
+                assert_eq 0
+
+                cld
+
+            ;cmps[bwd]
+
+                ;compare two arrays
+
+                mov esi, bs4
+                mov byte [bs4], 0
+                mov byte [bs4 + 1], 1
+
+                mov edi, bs4_2
+                mov byte [bs4_2], 0
+                mov byte [bs4_2 + 1], 2
+
+                cld
+                cmpsb
+                assert_flag jz
+                mov eax, esi
+                sub eax, bs4
+                assert_eq 1
+                mov eax, edi
+                sub eax, bs4_2
+                assert_eq 1
+                assert_eq [bs4], 0, byte
+                assert_eq [bs4_2], 0, byte
+
+                std
+                movsb
+                assert_flag jnz
+                mov eax, esi
+                sub eax, bs4
+                assert_eq 0
+                mov eax, edi
+                sub eax, bs4_2
+                assert_eq 0
+                assert_eq [bs4 + 1], 1, byte
+                ;assert_eq [bs4_2 + 1], 2, byte
+                    ;TODO why fail?
+
+                cld
+
+            ;rep
+
+                ;rep
+
+                    ;repeat string instruction ecx times
+
+                    ;application:
+                        ;- copy arrays
+
+                        cld
+                        mov edi, bs4
+                        mov ecx, 2
+                        mov eax, 0
+                        rep stosb
+                        assert_eq [bs4], 0, byte
+                        assert_eq [bs4+1], 0, byte
+                        mov eax, edi
+                        sub eax, bs4
+                        assert_eq 2
+                        assert_eq ecx, 0
+
+                ;rep(n|)[ze]
+
+                    ;repeat at most ecx times, if jnz break
+
+                    ;application:
+                        ;- test arrays equal
+                        ;- search for element
+
+                    cld
+
+                    mov esi, bs4
+                    mov byte [bs4], 0
+                    mov byte [bs4 + 1], 1
+
+                    mov edi, bs4_2
+                    mov byte [bs4_2], 0
+                    mov byte [bs4_2 + 1], 1
+
+                    mov ecx, 2
+                    repz cmpsb
+                    assert_flag jz
+                    assert_eq ecx, 0
+
+                    mov ecx, 2
+                    mov byte [bs4_2 + 1], 2
+                    repz cmpsb
+                    assert_flag jnz
+                    assert_eq ecx, 1
+
     ;stack
 
         ;allocate data on execution
@@ -1099,6 +1621,7 @@ asm_main:
 
                 mov  eax, bs4n
                 call print_string       ;printf("%s")
+                    ;calls for this may be flushed after direct sys_write calls
                 call print_nl           ;puts("")
 
                 mov  eax, 13
@@ -1135,26 +1658,36 @@ asm_main:
                         add esp, 4
                         assert_eq 1
 
-      ;conditional
+        ;conditional
 
-          ;jX and jnX mentioned in ;flags section
+            ;jX and jnX mentioned in ;flags section
 
-          ;signed:
-              ;je, jg, jge, jl, jle
-              ;jne, jng, jnge, jnl, jnle
-          ;unsigned verions:
-              ;je, ja, jae, jb, jbe
-              ;jne, jna, jnae, jnb, jnbe
-          ;mnemonics:
-              ;g : greater
-              ;l : less
-              ;a : above
-              ;b : below
+            ;signed:
+                ;jg, jge, jl, jle
+                ;jng, jnge, jnl, jnle
+            ;unsigned verions:
+                ;ja, jae, jb, jbe
+                ;jna, jnae, jnb, jnbe
+            ;mnemonics:
+                ;g : greater
+                ;l : less
+                ;a : above
+                ;b : below
 
-              cmp eax, 5
-              jge jge_lbl
-                  ;if( eax <= 5 ) goto jge_lbl
-              jge_lbl:
+            mov eax, 0
+            cmp eax, 1
+            assert_flag jl
+            assert_flag jle
+
+            mov eax, 1
+            cmp eax, 0
+            assert_flag jg
+            assert_flag jge
+
+            mov eax, 0
+            cmp eax, 0
+            assert_flag jle
+            assert_flag jge
 
           ;loops
 
@@ -1197,6 +1730,42 @@ asm_main:
                     je all_zero 
                     all_zero:
 
+    ;SIMD
+
+        ;<http://en.wikibooks.org/wiki/X86_Assembly/SSE>
+        ;<http://www.songho.ca/misc/sse/sse.html
+
+        ;MMX, SSE, SSE2, SSE3, SSSE3, SSE4 are the version names
+
+        ;there are 8 128bit registers: xmm[0-7]
+        ;in this way you can add, subtract, multiply, etc 4 floats/2 doubles at once
+        ;disconsidering overeads you can go up to 4x faster
+
+        ;as all of assembler, you will have a hard time beating modern compiler optimizers
+        ;with this, so beawere... still lots of fun though!
+
+        ;you have to try to align data on 16 bytes to make instructions go faster
+        ;this is done with the align directive
+
+    ;CPUID
+
+        mov eax, 0
+        cpuid
+            ;fills eax, ebx, ecx and edx with cpu information
+            ;eax in [0,1,2] gives different information
+            ;info include:
+                ;vendor
+                ;version
+                ;features (mmx, simd)
+                ;caches
+                ;tlbs <http://en.wikipedia.org/wiki/Translation_lookaside_buffer>
+
+
+
+    ;hlt
+        ;halts, until interrupt or reset
+        ;giving me seg fault
+
     ;directives
         ;do not translate directy into cpu
 
@@ -1205,24 +1774,33 @@ asm_main:
         mov eax,SIZE
 
     ;linux system calls
+%ifdef LINUX
 
         ;sys_write
-            mov eax,4         ;sys_write
-            mov ebx,1         ;file descriptor 1
-            mov ecx,bs5       ;pointer to string
-            mov edx,bs5l      ;string len
-            int 80h         
+            mov eax, 4         ;sys_write
+            mov ebx, 1         ;file descriptor 1
+            mov ecx, bs5       ;pointer to string
+            mov edx, bs5l      ;string len
+            int 80h          
+
+            mov eax, 4         
+            mov ebx, 2         ;stderr
+            mov ecx, bs5       
+            mov edx, bs5l      
+            int 80h          
 
         ;sys_exit
             ;mov eax,1        ;sys_exit
             ;mov ebx,0        ;exit status
             ;int 80h
 
+%endif
+
     mov eax, all_asserts_passed_str
     call print_string
 
     popa
-    mov eax,0
+    mov eax, 0
     leave
     ret
 
@@ -1270,6 +1848,8 @@ print_ebx_call_ret:
         ;jumps to first adress on the stack
 
 ;some algorithms
+
+;recursive factorial
 factorial_rec:
     enter 0, 0
     cmp dword [ebp + 8], 1
@@ -1287,6 +1867,7 @@ factorial_rec:
     leave
     ret
 
+;non_recursive factorial
 factorial_norec:
     enter 0, 0
     mov ecx, [ebp + 8]
