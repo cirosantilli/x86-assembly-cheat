@@ -379,8 +379,18 @@ simple assembler scripts and cheatsheets
 
     #linux
     {
-        full call table: <http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html>
-        full list with manpages <http://man7.org/linux/man-pages/dir_section_2.html>
+        #<http://syscalls.kernelgrok.com/>
+        {
+            full list
+            c manpage links
+            register args mnemonic
+            likss to online source cde 
+        }
+
+        #<http://www.lxhp.in-berlin.de/lhpsysc0.html>
+        {
+            contains actual binary values of constants!
+        }
 
         196 commands total
 
