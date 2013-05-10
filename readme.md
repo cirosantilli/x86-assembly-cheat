@@ -69,7 +69,7 @@ simple assembler scripts and cheatsheets
 #instruction set architectures (ISA)
 {
     list of operations the processor can do. obvioustly, ultra processor dependant.
-    
+
     <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
     #CISC vs RISC
@@ -150,7 +150,7 @@ simple assembler scripts and cheatsheets
             #intel 8087
             {
                 1987
-                
+
                 external floating point coprocessor
 
                 added more f point operations:
@@ -260,10 +260,10 @@ simple assembler scripts and cheatsheets
         even for a given architecture!
 
         therefore, each assemble has its own language
-        
+
         luckly, this language often based on the manual syntax
     }
-    
+
     directive: not machine language, assembler programming
 
     #two main branches
@@ -285,10 +285,10 @@ simple assembler scripts and cheatsheets
 #assemblers
 {
     #definition
-    { 
+    {
         programs that transform text in computer code
     }
-    
+
     #listof
     {
         #nasm
@@ -350,7 +350,7 @@ simple assembler scripts and cheatsheets
 #gcc
 {
     you can generate gcc assembler code via:
-    
+
     ``
         gcc -S a.c -o a.s
         gcc -masm=att -S a.c -o a.s
@@ -367,7 +367,7 @@ simple assembler scripts and cheatsheets
 {
     #what is
     {
-        tell your os to do things which program can't such as:
+        tell your os to do things which programs can't do directly such as:
 
         #write to stdout, stderr, files
         #access devices
@@ -375,158 +375,8 @@ simple assembler scripts and cheatsheets
         #exit a program
 
         ultra os dependant. to work around, you can inerface with c stdlib.
-    }
 
-    #linux
-    {
-        #<http://syscalls.kernelgrok.com/>
-        {
-            full list
-            c manpage links
-            register args mnemonic
-            likss to online source cde 
-        }
-
-        #<http://www.lxhp.in-berlin.de/lhpsysc0.html>
-        {
-            contains actual binary values of constants!
-        }
-
-        196 commands total
-
-        ``int	$0x80`` calls
-
-        ``%eax`` holds what command. each call has a number
-
-        ``%ebx``, ``%ecx``, ``%edx``, ``%esx``, ``%edi`` are the params
-
-        all can be accessed by POSIX c functions.
-
-        #listof
-        {
-            #reboot {reboots or enables/disables ctrl+alt+del reboot}
-
-            #file descriptors
-            {
-                #open
-                #close
-                #write
-                #read
-                #lseek {reposition read/write}
-                #dup
-            }
-
-            #dirs
-            {
-                #getcwd {processes have working info associated}
-                #chdir
-                #fchdir {using a file descriptor instead of string}
-                #chroot
-                #creat {create file or device. TODO: what is a device}
-                #mknod {create a directory or special or ordinary file}
-                #link {create new name for file}
-                #unlink {delete link, and possibly file it refers to. TODO when deletes?}
-                #mkdir
-                #rmdir
-                #rename
-                #access {check real user's permissions for a file}
-                #chmod
-
-                #chown
-                #fhown {by file descriptor}
-                #lchown {no sym links}
-            }
-            #sethostname {process have associated hostname info}
-
-            #time
-            {
-                #time {since January 1, 1970}
-                #stime {set system time}
-                #times {process and waitee for time}
-                #nanosleep
-                #utime {change access and modification time of files}
-            }
-
-            #process
-            {
-                #exit
-                #fork
-                #kill
-                #waitpid
-                #clone
-                #execve
-                #priority
-                {
-                    process have a priority number from -20 to 19
-
-                    lower number means higher priority
-
-                    #nice
-                    #getpriority
-                    #setpriority
-                }
-                #ptrace {TODO ?}
-            }
-
-
-            #data segment size
-            {
-                #brk {set}
-                #sbrk {increment. called if heap is not large enough on ``malloc``}
-            }
-
-            #getppid {process parent id}
-            #getpgid {process group id}
-
-            #getuid, setuid, geteuid, seteuid
-            {
-                gets/sets user who is running the process
-
-                each process has calling user information associated to it
-            }
-
-            #getgroups setgroups
-            {
-                get/set suplementary group ids of calling process
-
-                each process has group information associated to it
-            }
-
-            #mount
-            #umount
-
-
-            #ipc
-            {
-                #signals
-                {
-                    #signal
-                    #sigaction {handler gets more info than with signal}
-                    #sys_pause {wait for signal}
-                    #alarm {send alarm signal in n secs}
-                }
-
-                #pipe {create pipe}
-
-                #flock {advisory file lock}
-
-                #sockets
-                {
-                    #accept
-                    #bind
-                    #socket
-                    #socketcall
-                    #socketpair
-                    #listen
-                }
-            }
-
-            #memory
-            {
-                #cacheflush {flush instruction or data cache contents}
-                #getpagesize {get memory page size}
-            }
-        }
+        see docs on your os for the details.
     }
 }
 

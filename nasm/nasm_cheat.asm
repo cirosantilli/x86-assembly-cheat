@@ -1760,11 +1760,9 @@ asm_main:
             ;info include:
                 ;vendor
                 ;version
-                ;features (mmx, simd)
+                ;features (mmx, simd) <http://en.wikipedia.org/wiki/CPUID#EAX.3D1:_Processor_Info_and_Feature_Bits>
                 ;caches
                 ;tlbs <http://en.wikipedia.org/wiki/Translation_lookaside_buffer>
-
-
 
     ;hlt
         ;halts, until interrupt or reset
