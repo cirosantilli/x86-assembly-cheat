@@ -63,7 +63,7 @@ section .data
     b4 db "A"      ;byte initialized to ASCII code for A (65)
 
     ;b5 db A0h     ;ERROR: num cannot start with letter
-    b5 db 0A0h     
+    b5 db 0A0h
 
     w0 dw 1000     ;word labeled w0 with initial value 1000
     d0 dd 1A92h    ;double word initialized to hex 1A92
@@ -93,7 +93,7 @@ section .data
     bs4_2  db 0, 0, 0, 0
         ; defines 4 bytes
     bs10 times 10 db 0
-    
+
     bs20 times 10 db 0
          times 10 db 1
          ; equivalent to 10 (db 0)’s
@@ -133,11 +133,7 @@ section .bss
 section .text
     ;instructions
 
-    ;global _start
     global asm_main
-        ;allows simbols to be seen by linker
-        ;not possible by default
-        ;at least the first symbol must be visible to the linker
 
     extern external_label, external_label2
         ;same as c extern: label is defined outside this file
@@ -217,7 +213,7 @@ asm_main:
                 movzx ebx, al
                 mov eax, ebx
                 assert_eq 10h
-                
+
                 mov eax, 0
                 mov ax, -1
                 movzx eax, ax
@@ -276,7 +272,7 @@ asm_main:
             ;exchange
 
                 ;xchg
-                    
+
                     mov eax, 0
                     mov ebx, 1
 
@@ -297,13 +293,13 @@ asm_main:
                     assert_eq 44332211h
 
                 ;xadd
-                
+
                     mov eax, 1
                     mov ebx, 2
                     xadd eax, ebx
                     assert_eq 3
                     assert_eq ebx, 1
-        
+
         ;arithmetic
 
             ;add
@@ -422,18 +418,18 @@ asm_main:
 
             ;imul
                 ;signed multiply
-                ;edx:eax = 
+                ;edx:eax =
 
                 mov eax, 2
                 mov ebx, 2
                 imul ebx
                 assert_eq 4
                 assert_eq ebx, 2
-                
+
                 mov eax, -2
                 imul eax
                 assert_eq 4
-                
+
                 mov eax, 2
                 imul eax, 2
                 assert_eq 4
@@ -446,7 +442,7 @@ asm_main:
                 ;imul eax, 2, 2
                     ;ERROR
                     ;second must be register
-            
+
             ;neg
 
                 mov eax, 2
@@ -489,7 +485,7 @@ asm_main:
                         assert_eq 8000h
                         assert_eq edx, 1
 
-                    ;32 
+                    ;32
                         mov eax, 1
                         mov edx, 1
                         mov ecx, 2
@@ -615,7 +611,7 @@ asm_main:
 
                     ;understand IEEE floating point format
                         ;converter: <http://babbage.cs.qc.cuny.edu/IEEE-754.old/Decimal.html>
-                    
+
                     ;st[0-7] is a stack
                         ;st0 is always the top of the stack!
 
@@ -676,7 +672,7 @@ asm_main:
                     ;stack order
 
                         ;fxch
-                        
+
                             ;change st0 and another register
 
                             fldz
@@ -712,7 +708,7 @@ asm_main:
                             fld dword [f1]
                             fcomip st1
                             assert_flag je
-                            
+
                     ;stack -> memory
 
                         ;fst(p|)
@@ -747,7 +743,7 @@ asm_main:
                         fcomip st1
                         assert_flag ja
                         finit
-                            
+
                         ;fcomip [f1]
                             ;ERROR
                             ;must compare two registers
@@ -860,7 +856,7 @@ asm_main:
                     ;shr ax, bl
                         ;ERROR:
                         ;shift must be either const or in ``cl``
-                
+
                 ;arithmetic
 
                     ;signed multiply and divide by powers of 2
@@ -1179,7 +1175,7 @@ asm_main:
                 ;regs are 32 bit registers
                 ;c1 \in {1,2,4,8}
                 ;c2 is any other constant
-        
+
         ;lea
 
             ;load effective address
@@ -1459,7 +1455,7 @@ asm_main:
             popa
             assert_eq ebx, 0
             assert_eq ecx, 0
-        
+
         ;pushf, popf, pushdf
 
             ;push /pop  FLAGS
@@ -1512,7 +1508,7 @@ asm_main:
                 ;delocate 2 dwords
 
     ;branch
-      
+
         ;unconditional
 
             ;jmp
@@ -1637,7 +1633,7 @@ asm_main:
                 ;mov  [input], eax
                 ;call print_int
                 ;call print_nl          ;scanf("%d")
-                
+
                 ;factorial
 
                     ;recursive
@@ -1727,11 +1723,11 @@ asm_main:
                     mov bx, -1
                     loope_lbl:
                         inc ebx
-                        ;cmp byte [bs4 + ebx], 0 
+                        ;cmp byte [bs4 + ebx], 0
                             ;TODO
                             ;seg fault, why?
                     loope loope_lbl
-                    je all_zero 
+                    je all_zero
                     all_zero:
 
     ;SIMD
@@ -1774,118 +1770,6 @@ asm_main:
     %define SIZE 10
         ;#define  SIZE 10
         mov eax,SIZE
-
-%ifdef LINUX
-    ;linux system calls
-
-        ;sys_write sys_read sys_open sys_close
-
-            ;file descriptor is an int
-            ;it represents a file that is open to read/write
-            ;once you close a fd, the int is freed
-            ;in linux, devices and pipes are treated as files and thus get fds
-            ;you can only tell you have read all the bytes of a fd when it
-                ;reads less than you asked
-                ;the exception to this are regular files,
-                ;where you can use the ``sys_stat``
-                ;that amongs other things returns the filesize info
-
-            ;stdout/err
-
-                mov eax, 4         ;sys_write
-                mov ebx, 1         ;file descriptor 1
-                mov ecx, bs5       ;pointer to string
-                mov edx, bs5l      ;string len
-                int 80h          
-
-                mov eax, 4         
-                mov ebx, 2         ;stderr
-                mov ecx, bs5       
-                mov edx, bs5l      
-                int 80h          
-
-            ;file
-
-                ;write
-
-                    ;open
-
-                        mov eax, 5         ;sys_open
-                        mov ebx, filepath  ;null terminated
-                        mov ecx, 0101
-                            ;acess
-                            ;1: O_WRONLY
-                            ;0100: O_CREAT. create if non-existent
-                        mov edx, 0600
-                            ;permissions
-                                ;04000: set user id
-                                ;02000: set group id
-                                ;01000: set sticky bit
-                                ;0400: read by user
-                                ;0200: write by user
-                                ;0100: exec by user
-                                    ;TODO not getting perms right... why??
-                        int 80h            
-                        test eax, eax      ;-1 if error, else the file descriptor
-                        ;js sys_open_error
-
-                    ;open
-
-                        mov eax, 6              ;sys_close
-                        ;mov ebx, fd            ;fd, ebx already contains it
-                        int 80h     
-
-                    ;close
-
-                        mov eax, 6              ;sys_close
-                        ;mov ebx, fd            ;fd, ebx already contains it
-                        int 80h     
-
-                ;read
-
-                    ;open
-
-                        ;mov eax, 5
-                        ;mov ebx, filepath
-                        ;mov ecx, 0         ;O_RDONLY
-                        ;int 80h            
-                        ;test eax, eax
-
-                    ;;read
-
-                        ;mov dword [bytesRead], 0    ;assign address of end of input
-
-                        ;mov ebx, eax            ;fd
-                        ;mov eax, 3              ;sys_read
-                        ;mov ecx, bs5_2          ;buffer to read into
-                        ;mov edx, 2              ;bytes to read. this is just a test: normally if you can allocate 5 bytes, you should just read 5 bytes!
-                        ;int 80h
-                        ;test eax, eax           ;nb of bytes read
-                        ;;js sys_read_error      ;if eax is negative then error
-                        ;;jz no_bytes_read
-                        ;add [bytesRead], eax    ;assign address of end of input
-
-                        ;mov eax, 3
-                        ;mov ecx, bs5_2
-                        ;add ecx, [bytesRead]    ;start from correct position
-                        ;mov edx, 2
-                        ;int 80h
-
-                        ;mov eax, bs5_2
-                        ;call print_string
-
-                    ;;close
-
-                        ;mov eax, 6              ;sys_close
-                        ;int 80h     
-
-        ;sys_exit
-
-            ;mov eax,1        ;sys_exit
-            ;mov ebx,0        ;exit status
-            ;int 80h
-
-%endif
 
     mov eax, all_asserts_passed_str
     call print_string

@@ -1,5 +1,8 @@
 simple assembler scripts and cheatsheets
 
+platform specific code such as linux sytem calls
+may be located in repositories specific to the platform ( like a linux repository )
+
 #sources
 {
     #<http://www.tldp.org/HOWTO/Assembly-HOWTO/index.html>
