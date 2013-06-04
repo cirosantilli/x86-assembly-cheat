@@ -1,7 +1,15 @@
 simple assembler scripts and cheatsheets
 
-platform specific code such as linux sytem calls
-may be located in repositories specific to the platform ( like a linux repository )
+topics not covered here:
+
+- OS specific such as linux sytem calls
+
+	search for those under their own plaftorm (ex: a linux repo)
+
+- compiler specific topics which cannot be done in a portable way
+	such as inline assembly ( assembly in the middle of c code )
+
+	look for this info under extensions for each compiler.
 
 # sources
 
