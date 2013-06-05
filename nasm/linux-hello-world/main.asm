@@ -1,6 +1,12 @@
 ;minimal program for compilation test
-
 ;simply returns exit status 0
+
+section .data
+
+	;10 = \n in ascii:
+    hello_world db "hello world", 10
+	;does an address offset:
+	hello_world_len  equ $ - hello_world
 
 section .text
 
@@ -14,7 +20,14 @@ section .text
 
 _start:
 
+    ;call linux write system call
+	mov eax, 4         ;sys_write call number
+	mov ebx, 1         ;file descriptor 1 = stdout
+	mov ecx, hello_world		;string to write
+	mov edx, hello_world_len	;number of bytes to write
+	int 80h
+
     ;call linux exit system call
+    mov eax, 1  ;sys_exit call number
 	mov	ebx, 0	;exit status
-    mov eax, 1  ;system call number (sys_exit)
     int 0x80	;call kernel

@@ -101,6 +101,9 @@ section .data
 
 ;strings
 
+	;unlike the c stdlib convention, they do not to end in '\0'
+	;but you will then have to specify how many bytes to write
+
     bs5 db "a", "b", "c", 'd', 0
         ; "abcd\n"
 		bs5l  equ $ - bs5
