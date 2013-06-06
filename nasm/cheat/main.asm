@@ -120,6 +120,7 @@ section .data
     filepath db './_out/out.tmp', 0
 
 section .bss
+
     ;unitialized data
 
     bu resb 1           ;1 uninitialized byte
@@ -130,7 +131,8 @@ section .bss
     fx    resd 1        ;float
     ix    resd 1        ;int
 
-    ;for later use
+    ;for later use:
+
     bytesRead resd 1
 
 section .text
@@ -142,12 +144,14 @@ section .text
         ;same as c extern: label is defined outside this file
 
 asm_main:
+
     ;simply executes the first label found in text
 
-    enter 0,0
-    pusha
+		enter 0,0
+		pusha
 
     ;registers
+
         inc eax
         inc ax
         inc al
@@ -157,6 +161,7 @@ asm_main:
         inc edx
 
     ;flags
+
         ;single 32 bit register
         ;each bit is a bool
         ;those bools are set by other operations
@@ -172,21 +177,23 @@ asm_main:
             ;AF adjust
 
         ;flage usage
+
             ;not all flags have direct clear/set methods
-            stc
-            assert_flag jc
-            clc
-            assert_flag jnc
-            cmc
-            assert_flag jc
-            cmc
-            assert_flag jnc
 
-            jc jclabel
-            jclabel:
+				stc
+				assert_flag jc
+				clc
+				assert_flag jnc
+				cmc
+				assert_flag jc
+				cmc
+				assert_flag jnc
 
-            jnc jnclabel
-            jnclabel:
+				jc jclabel
+				jclabel:
+
+				jnc jnclabel
+				jnclabel:
 
     ;instructions
 
@@ -376,6 +383,7 @@ asm_main:
                     assert_eq 0
 
             ;mul
+
                 ;unsigned multiply
 
                 mov eax, 2
@@ -420,6 +428,7 @@ asm_main:
                     ;must be register
 
             ;imul
+
                 ;signed multiply
                 ;edx:eax =
 
@@ -613,9 +622,11 @@ asm_main:
             ;floating point
 
                     ;understand IEEE floating point format
+
                         ;converter: <http://babbage.cs.qc.cuny.edu/IEEE-754.old/Decimal.html>
 
                     ;st[0-7] is a stack
+
                         ;st0 is always the top of the stack!
 
                     ;many operations have a P version that pops stack
@@ -632,6 +643,7 @@ asm_main:
 
                     ;mov eax, 1.1
                          ;ERROR
+
                     mov eax, __float32__(1.5)
 
                     ;load on stack
@@ -1027,25 +1039,28 @@ asm_main:
 
         ;adresses in RAM memory
 
-        mov al, [b0]  ;al = b0
-        assert_eq al, [b0]
+		mov al, [b0]  ;al = b0
+		assert_eq al, [b0]
 
-        mov eax, b0   ;eax = &b0
-        mov al,  [eax];al = *eax
-        assert_eq al, [b0]
+		mov eax, b0   ;eax = &b0
+		mov al,  [eax];al = *eax
+		assert_eq al, [b0]
 
-        mov byte [b0], 0  ;b0 = 0
-        cmp byte [b0], 0
-        assert_flag jz
+		mov byte [b0], 0  ;b0 = 0
+		cmp byte [b0], 0
+		assert_flag jz
 
-        mov eax, [d0] ;copy double word at d0 into EAX
-        add eax, [d0] ;EAX = EAX + double word at d0
-        add [d0], eax ;double word at d0 += EAX
-        mov al, [d0]  ;copy first byte of double word at d0 into AL
+		mov eax, [d0] ;copy double word at d0 into EAX
+		add eax, [d0] ;EAX = EAX + double word at d0
+		add [d0], eax ;double word at d0 += EAX
+		mov al, [d0]  ;copy first byte of double word at d0 into AL
 
-        ;mov [d0], 1
-            ;ERROR
-            ;should overwrite how many bytes of d0?
+		;ERROR:
+
+			;mov [d0], 1
+
+		;should overwrite how many bytes of d0?
+
         mov dword [d0], 1
 
         mov byte [bs4], 0

@@ -4,7 +4,7 @@ override LN		?= ld -s
 override IN_DIR		?= ./
 override OUT_DIR	?= _out/
 override OUT_EXT	?=
-override RUN		?= hello_world
+override RUN		?= main
 
 EXT		:= .s
 INS		:= $(wildcard $(IN_DIR)*$(EXT))
