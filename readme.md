@@ -284,10 +284,16 @@ allows you to to understand gcc generated code!
 
 at&t based syntax
 
-outputs to lots of architectures
+outputs to lots of different architectures:
+
+- i386
+- sparc
+- arm
+
+and more
 
 nasm manual says it is inconvenient to write by hand,
-because meant to be a gcc. I agree it is uglier to write.
+because meant to be a gcc backend. I agree it is uglier to write.
 
 ### gcc
 
