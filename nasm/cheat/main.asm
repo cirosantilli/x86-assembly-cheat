@@ -1,5 +1,11 @@
+;include:
+
 %include "lib/asm_io.inc"
-    ;#include
+
+;c compilers automatically link to libc, so all we need to use
+;c stdlib functions is to declare them extern and then follow
+;the c calling convention.
+extern  exit
 
 ;default args
 ;%macro assert_eq 1-2 eax
@@ -13,8 +19,8 @@
 
 ;asserts eax eq %1
 ;eflags and registers are put on stack and restored afterwards
-    ;as a consequence, stack pointer comparisons such as ``assert_eq [ESP], 1`` will fail!
-    ;workaround: ``mov eax, [ESP]``, ``assert_eq 1``
+    ;as a consequence, stack pointer comparisons such as `assert_eq [ESP], 1` will fail!
+    ;workaround: `mov eax, [ESP]`, `assert_eq 1`
 %macro assert_eq 3       ;multiline macro
     pushf
     cmp %3 %1, %2
@@ -353,6 +359,7 @@ asm_main:
                     assert_eq edx, 1
 
                 ;inc eax++
+
                     mov eax, 0
                     inc eax
                     assert_eq 1
@@ -621,34 +628,34 @@ asm_main:
 
             ;floating point
 
-                    ;understand IEEE floating point format
+                    ;before reading this, you should understand IEEE floating point format
 
                         ;converter: <http://babbage.cs.qc.cuny.edu/IEEE-754.old/Decimal.html>
+
+                    ;floating point was done on a separate processor,
+                    ;and even on later integrated architectures you still need to use the special `stX` 
+                    ;registers for the floating point operations.
 
                     ;st[0-7] is a stack
 
                         ;st0 is always the top of the stack!
 
-                    ;many operations have a P version that pops stack
+                    ;many operations have a `P` version that pops stack
 
+                    ;to create a constant you need to use the `__float32__` macro:
 
-                    ;NOTE
+                        mov eax, __float32__(1.5)
 
-                        ;you can only communicate with st. from memory, not registers
+                    ;you can only communicate with `stX` from memory, not registers
+
+                    ;for example, the following are errors:
 
                         ;fld eax
                         ;fld __float32__(1.5)
-                            ;ERROR
-                            ;must load from memory
-
-                    ;mov eax, 1.1
-                         ;ERROR
-
-                    mov eax, __float32__(1.5)
 
                     ;load on stack
 
-                        ;fldz
+                        ;fldz: Float LoaD Zero
 
                             ;st0 = 0
 
@@ -658,7 +665,7 @@ asm_main:
                             assert_flag je
                             finit
 
-                        ;fld1
+                        ;fld1: Float LoaD 1
 
                             ;st0 = 1
 
@@ -724,11 +731,9 @@ asm_main:
                             fcomip st1
                             assert_flag je
 
-                    ;stack -> memory
+                    ;st0 -> ram
 
-                        ;fst(p|)
-
-                            ;load integer
+                        ;fst(p|): Floating STore 
 
                             fldz
                             fld dword [f0]
@@ -870,7 +875,7 @@ asm_main:
                     ;mov bl, 2
                     ;shr ax, bl
                         ;ERROR:
-                        ;shift must be either const or in ``cl``
+                        ;shift must be either const or in `cl`
 
                 ;arithmetic
 
@@ -1564,7 +1569,7 @@ asm_main:
                     ;seg fault
                     ;stops in the middle of next instruction
 
-        ;functions
+        ;#functions
 
             ;like a branch, but in addition must know
                 ;1) what adress to return to
@@ -1598,43 +1603,72 @@ asm_main:
             ;c calling conventions
 
                 ;each lang may have a different one
+
                 ;it is good to learn this because:
-                    ;1) it works well
-                    ;2) it allows you to interface with c code
+
+                    ;1. it works well
+                    ;2. it allows you to interface with c code
 
                 ;cdecl:
-                    ;- use call/ret instructions
+
+                    ;- use call/ret instructions.
+
                     ;- args are passed on stack
+
                     ;- always pass dword args
+
                         ;if you want to pass a single byte,
+
                         ;first convert to dword
+
                     ;- are not poped before return
+
                         ;if you want to use their values, use ESP pointer
                         ;why?
+
                         ;- avoid moving them around for reuse multiple times in func
                         ;- the return value is pushed last, so would have to be poped before args!
+
                     ;- return value is put in eax
+
                         ;if 64-bit, put in edx:eax
+
                     ;- EBX, ESI, EDI, EBP, CS, DS, SS, ES remain unchanged on return
+
                         ;- they may be temporaly changed inside
+
                     ;- parameters are put on stack in inverse order from declaration
-                        ;this allows for funcs with arbitrary numbers of args such as ``printf``:
+
+                        ;this allows for funcs with arbitrary numbers of args such as `printf`:
+
                         ;like this the format string will always be on the same position
+
                     ;- the caller clears the argument heap
                         ;this generates more code (several calls, single def)
-                        ;but allows for functions with variable number or arguments (``printf``)
+                        ;but allows for functions with variable number or arguments (`printf`)
                         ;because then only the caller knows how many args he put on the stack
                         ;PASCAL for example follows a fuction clear argument stack convention
+
                     ;- some compilers will append underline to func names '_'
+
                         ;not the case for ELF output
+
                     ;- watch out for compiler dependant conventions!
+
                         ;gcc allows to specify caling convention explicitly as:
-                        ;``void f ( int ) __attribute__ ((cdecl ));``
-                        ;``cdecl`` is the name of the calling convention
+
+                            ;void f ( int ) __attribute__ ((cdecl ));
+
+                        ;`cdecl` is the name of the calling convention
+
                         ;it is widely default across current compilers
 
                 ;stdcall:
+
+                    ;a calling convention, less used than cdecl.
+
                     ;no variable number of args
+
                     ;slightly smaller code, and potentially faster
 
                 mov  eax, bs4n
@@ -1655,6 +1689,7 @@ asm_main:
                 ;factorial
 
                     ;recursive
+
                         push dword 5
                         call factorial_rec
                         add esp, 4
@@ -1803,15 +1838,14 @@ asm_main:
 
 .text:
 
-;ends program
+;print error message and end program
 assert_fail:
     mov eax, assert_fail_str
     call print_string
 
-    ;exit exit status 1
-        mov eax,1        ;sys_exit
-        mov ebx,1        ;exit status
-        int 80h
+    ;call libc exit with exit status 1:
+    push dword 1
+    call exit
 
 ;print ebx \n
 ;eax is destroyed

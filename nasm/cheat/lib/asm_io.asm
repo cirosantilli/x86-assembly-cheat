@@ -1,5 +1,3 @@
-;author:  Paul A. Carter
-
 ;
 ; file: asm_io.asm
 ; Assembly I/O routines
@@ -28,7 +26,6 @@
 %define SF_MASK 00000080h
 %define DF_MASK 00000400h
 %define OF_MASK 00000800h
-
 
 ;
 ; Linux C doesn't put underscores on labels
@@ -91,7 +88,7 @@ segment text public align=1 class=code use32
 %else
 segment .text
 %endif
-	global	read_int, print_int, print_string, read_char
+	global	read_int, print_int, print_string, read_char,
 	global  print_char, print_nl, sub_dump_regs, sub_dump_mem
         global  sub_dump_math, sub_dump_stack
         extern  _scanf, _printf, _getchar, _putchar
@@ -107,7 +104,7 @@ read_int:
 	call	_scanf
 	pop	ecx
 	pop	ecx
-	
+
 	popf
 	popa
 	mov	eax, [ebp-4]
