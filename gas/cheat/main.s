@@ -1,7 +1,8 @@
 /*
 gas syntax cheat
 
-focus is on differences from nasm
+focus is on differences from nasm, so for a more complete cheat on x86 assmebly,
+look for nams cheats
 
 # sources
 
@@ -52,8 +53,9 @@ suffixes are added to instrucions to specify length:
 these are separate words in nasm TODO can those be specified in macros? in nasm yes because they are separate words
 */
 
+.extern exit, puts
+
 /*
-TODO implement assert_eq
 .macro assert_eq
     pushf
     cmp %3 %1, %2
@@ -80,21 +82,33 @@ TODO implement assert_eq
 
     s:
         .ascii	"abcd\n"
-        len = . - s
+        s_len = . - s
+
+    assert_fail_str:
+
+    	.asciz "assert failed\n"
+
+    	/*
+
+		#asciz
+
+		like `.ascii` but adds null char to string
+
+		same as:
+
+    		.ascii "assert failed\n\x00"
+
+    		.ascii "assert failed\n\000"
+    	*/
 
 .text
 
-    .global _start
+    .global asm_main
 
-    _start:
+    asm_main:
 
-        # sys_write:
-
-            movl	$4,     %eax
-            movl	$1,     %ebx
-            movl	$s,     %ecx
-            movl	$len,   %edx
-            int	    $0x80
+		pusha
+		enter $0, $0
 
         # ram memory:
 
@@ -104,14 +118,33 @@ TODO implement assert_eq
 
         # float:
 
-            fld1
-            fldl (f1)
-            fchs
-            fstpl (f)
-            movl (f), %eax
+#            fld1
+#            fldl (f1)
+#            fchs
+#            fstpl (f)
+#            movl (f), %eax
+#
 
-        # sys_exit:
+		#TODO this segfaults, why??
+		pushl assert_fail_str
+		call puts
 
-            movl	$1, %eax	#sys_exit
-            movl	$0, %ebx	#exit code
-            int		$0x80
+		#TODO stop seg faults. The problem is here: if there was a system exist before the return, no problem:
+
+			#pushl $1
+			#call exit
+
+		movl 0, %eax
+		leave
+		popa
+		ret
+
+	/* print error message and exit program with status 1 */
+	assert_fail:
+
+		pushl assert_fail_str
+		call puts
+
+		/* call libc exit with exit status 1 */
+		pushl $1
+		call exit

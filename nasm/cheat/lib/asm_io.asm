@@ -27,6 +27,10 @@
 %define DF_MASK 00000400h
 %define OF_MASK 00000800h
 
+; for compiler portability, you must use macros
+; to decide the actual name of
+; stdlib functions inside the object files
+
 ;
 ; Linux C doesn't put underscores on labels
 ;

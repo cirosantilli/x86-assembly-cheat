@@ -1,17 +1,8 @@
-# gas syntax cheat
-
-# focus is on differences from nasm
-
-# sources:
-
-# - <http://www.ibm.com/developerworks/library/l-gas-nasm/>
-
 .data
 
     s:
         .ascii	"hello world\n"
         len = . - s
-
 
 .global _start
 
@@ -28,5 +19,5 @@ _start:
     # sys_exit:
 
         movl	$1, %eax	#sys_exit
-        movl	$0, %ebx	#exit code
+        movl	$0, %ebx	#exit status
         int		$0x80

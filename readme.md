@@ -11,6 +11,9 @@ topics not covered here:
 
 	look for this info under extensions for each compiler.
 
+the focus for now is x86, but I'd love to get my hands on some
+other architecture ot try it out.
+
 # sources
 
 - <http://www.tldp.org/HOWTO/Assembly-HOWTO/index.html>
@@ -65,7 +68,7 @@ and only then, using assembly may stand a change to speeding thing up.
 
 # instruction set architectures (ISA)
 
-list of operations the processor can do. obvioustly, ultra processor dependant.
+list of operations the processor can do. obvioustly ultra processor dependant.
 
 <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
@@ -79,7 +82,9 @@ performs each one very fast
 
 ### CISC
 
-lots of operations
+lots of operations.
+
+is the case of x86 family
 
 ## flynn's taxonomy
 
@@ -91,7 +96,7 @@ lots of operations
 
 ## intel IA-32
 
-commonly known as x86 or x86-32 or x386
+commonly known as x86 or x86-32 or i386
 
 <http://en.wikipedia.org/wiki/X86_instruction_listings>
 
@@ -133,19 +138,7 @@ inside the processors
 instructions include:
 
 - FSQRT
-- FPTAN
-- FPATAN
-
-#### intel 8087
-
-1987
-
-external floating point coprocessor
-
-added more f point operations:
-
 - FSIN
-- FSINCOS
 
 #### intel 80486
 
