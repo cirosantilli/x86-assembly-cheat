@@ -72,9 +72,24 @@ list of operations the processor can do. obvioustly ultra processor dependant.
 
 <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
+## common architectures
+
+some of the major architectures are:
+
+- x86 family
+- arm
+
+    great majority of mobile phones
+
+    low power consumption
+
+- sparc
+
 ## CISC vs RISC
 
 ### RISC
+
+Reduced Instruction set
 
 a minimum of operations
 
@@ -82,9 +97,11 @@ performs each one very fast
 
 ### CISC
 
-lots of operations.
+Complex instruction set
 
-is the case of x86 family
+lots of operations
+
+it is the case of the x86 family
 
 ## flynn's taxonomy
 
@@ -94,161 +111,24 @@ is the case of x86 family
 - SIMD
 - MIMD
 
-## intel IA-32
-
-commonly known as x86 or x86-32 or i386
-
-<http://en.wikipedia.org/wiki/X86_instruction_listings>
-
-majority of pcs today
-
-AMD also has compatible cpus
-
-cisc
-
-backwards compatible to the 1970s !
-
-### history
-
-#### intel 8080
-
-1974, 8 bit, 2Mhz, very popular
-
-#### intel 8086
-
-1976, 16 bit, very popular, base to x86 language
-
-#### intel 80386
-
-aka i386
-
-1985, 32 bit word register
-
-#### intel 8087
-
-1980
-
-external floating point coprocessor for 8086
-
-included inside cpus starting from hte 80436
-
-x87 often used to describe the floating point operations
-inside the processors
-
-instructions include:
-
-- FSQRT
-- FSIN
-
-#### intel 80486
-
-1989
-
-includes floating point unity
-
-### registers
-
-suffixes:
-
-- B: byte
-- W: word = 2 bytes
-- D: double word = 2 words (a c ``int``)
-- Q: quad word
-- T: ten bytes
-
-acess modes:
-
-- 32 bit. extended. eax
-- 16 bit. ax
-- 8 bit lower. al
-- 8 bit upper. au
-
-list of all registers:
-
-- 8 general-purpose registers (gpr)
-
-- 6 segment registers:
-
-    - SS: start of stack
-    - DS: start of data
-    - CS: start of code
-    - ES, FG, GS: TODO far pointer
-
-- index and pointers
-
-    - ESI
-    - EDI
-    - EBP
-    - EIP
-    - ESP
-
-#### flags register
-
-each bit means some boolean
-
-types:
-
-- FLAGS: 16 lower bits
-- EFLAGS: (extended) 16 upper bits, or all of them
-
-bits:
-
-- 0: CF (carry flag)
-
-#### instruction pointer
-
-adress of instruction to execute
-
-### instructions
-
-<http://en.wikipedia.org/wiki/X86_instruction_listings>
-
-## arm
-
-great majority of mobile phones
-
-low power consumption
-
 ## SIMD instructions
 
-more and more, SIMD instructions are being added
+sincle instruction, multiple data, for example,
+making 4 multiplications on a single cpu cycle
 
-for some time now intel has been grouping those instructions under the ``SSE`` name
+more and more, SIMD instructions are being added on different processors
 
-<http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
+for some time now intel has been grouping those instructions under the `SSE` name
 
-TODO
-
-# language syntax
-
-## standardization
-
-there is de facto standard (even if there is an IEEE one)
-even for a given architecture!
-
-therefore, each assemble has its own language
-
-luckly, this language often based on the manual syntax
-
-directive: not machine language, assembler programming
-
-## two main branches
-
-### intel
-
-used to document intel x86 at first
-
-more popular on windows
-
-### at&t
-
-more popular for linux, since unix was created at bell labs
+see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
 
 # assemblers
 
 programs that transform text in computer code
 
 ## nasm
+
+netwide assembler (what netwide means, I don't know TODO)
 
 one of the most popular for linux
 
@@ -268,9 +148,9 @@ output formats:
 
 ## gas
 
-gnu
+gnu assembler
 
-executable name: ``as``
+executable name: `as`
 
 gcc backend. point up to learning its syntax:
 allows you to to understand gcc generated code!
@@ -306,13 +186,6 @@ x86
 
 borland
 
-stands for ``turbo`` assembler lol, why not ``basm`` =) ?
+stands for `turbo` assembler lol, why not `basm` =) ?
 
 windows only
-
-# TODO
-
-- interfacing with c
-    - intrinsics
-- protected vs real mode
-- segments/flat memory model TODO ?
