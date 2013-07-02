@@ -1,11 +1,11 @@
-override GAS		?= as
-override GCC		?= gcc -Wall -std=c99 -pedantic-errors
-override LIB_DIR	?= lib/
-override LN		?= ld -s
-override IN_DIR		?= ./
-override OUT_DIR	?= _out/
-override OUT_EXT	?=
-override RUN		?= main
+GAS		?= as
+GCC		?= gcc -Wall -std=c99 -pedantic-errors
+LIB_DIR	?= lib/
+LN		?= ld -s
+IN_DIR		?= ./
+OUT_DIR	?= _out/
+OUT_EXT	?=
+RUN		?= main
 
 EXT			:= .s
 INS			:= $(wildcard $(IN_DIR)*$(EXT))

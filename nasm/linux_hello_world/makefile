@@ -1,17 +1,17 @@
 #compiles all asm files in current dir
 #with nasm into separate executables
 
-override DEFINES?=#-DNAME -DNAME2=VALUE
-override GAS?=as
-override GCC?=gcc -Wall -ansi -pedantic
-override LIB_DIR?=lib/
-override LN?=ld -s
-override IN_DIR?=
-override IN_EXT?=.asm
-override NASM?=nasm -w+all -f elf
-override OUT_DIR?=_out/
-override OUT_EXT?=.elf
-override OUT_BASENAME_NOEXT?=main
+DEFINES?=#-DNAME -DNAME2=VALUE
+GAS?=as
+GCC?=gcc -Wall -ansi -pedantic
+LIB_DIR?=lib/
+LN?=ld -s
+IN_DIR?=
+IN_EXT?=.asm
+NASM?=nasm -w+all -f elf
+OUT_DIR?=_out/
+OUT_EXT?=.elf
+OUT_BASENAME_NOEXT?=main
 
 INS:=$(wildcard $(IN_DIR)*$(IN_EXT))
 INS_NODIR:=$(notdir $(INS))

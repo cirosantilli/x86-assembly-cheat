@@ -1,13 +1,13 @@
-override DEFINES		?= #-DNAME -DNAME2=VALUE
-override GAS			?= as
-override GCC			?= gcc -Wall -std=c99 -pedantic-errors
-override LIB_DIR		?= lib/
-override LN			?= ld -s
-override IN_DIR			?=
-override NASM			?= nasm -w+all -f elf
-override OUT_DIR		?= _out/
-override OUT_EXT		?= .elf
-override OUT_BASENAME_NOEXT	?= main
+DEFINES		?= #-DNAME -DNAME2=VALUE
+GAS			?= as
+GCC			?= gcc -Wall -std=c99 -pedantic-errors
+LIB_DIR		?= lib/
+LN			?= ld -s
+IN_DIR			?=
+NASM			?= nasm -w+all -f elf
+OUT_DIR		?= _out/
+OUT_EXT		?= .elf
+OUT_BASENAME_NOEXT	?= main
 
 EXT		:= .asm
 INS		:= $(wildcard $(IN_DIR)*$(EXT))
