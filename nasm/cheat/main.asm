@@ -183,6 +183,8 @@ asm_main:
     enter 0,0
     pusha
 
+    ;#registers
+
         inc eax
         inc ax
         inc al
@@ -190,6 +192,29 @@ asm_main:
         inc ebx
         inc ecx
         inc edx
+
+        ;#segment registers
+
+            mov eax, 0
+            mov eax, cs
+            call print_int
+            call print_nl
+
+            mov eax, 0
+            mov eax, ds
+            call print_int
+            call print_nl
+
+            mov eax, 0
+            mov eax, ss
+            call print_int
+            call print_nl
+
+            ;the following generates an SIGILL on linux x86:
+
+                ;mov cs, 0
+
+    ;illegal:
 
     ;#flags register and instructions
 
@@ -1100,6 +1125,7 @@ asm_main:
             ;must use 32-bit var
 
         ;$
+
             ;adress of cur instruction
 
             mov eax, $
@@ -1135,7 +1161,7 @@ asm_main:
                 call print_int
                 call print_nl
                 ;7
-                    ;mov edx, ecx  :  2 bytes
+                    ;mov edx, ecx  :  2 bytes + 5 for the mov ebx, $
 
                 mov ebx, $
                 sub edx, ecx
