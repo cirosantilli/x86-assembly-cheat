@@ -1,13 +1,11 @@
 ;
-;main cheat on the x86 architecture and on nasm
+;Main cheat on the x86 architecture and on nasm.
 ;
-;instructions which cannot be explained in this file for some reason
-;may be put elsewhere
+;Instructions which cannot be explained in this file for some reason
+;may be put elsewhere. This includes:
 ;
-;this includes:
-;
-;- functions which require kernel priviledges such as `cli` or `in`
-;- functions which are OS dependant such as `int`
+;- require kernel priviledges such as `cli` or `in`
+;- have OS dependant effects such as `int` on Linux
 ;
 ;#sources
 ;
