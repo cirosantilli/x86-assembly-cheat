@@ -1,6 +1,6 @@
-simple assembler scripts and cheatsheets
+Assembler scripts and cheatsheets.
 
-topics not covered here:
+Topics not covered here:
 
 - OS specific such as linux sytem calls
 
@@ -11,12 +11,13 @@ topics not covered here:
 
 	look for this info under extensions for each compiler.
 
-the focus for now is x86, but I'd love to get my hands on some
+The focus for now is x86, but I'd love to get my hands on some
 other architecture ot try it out.
 
-# sources
+#sources
 
 - <http://www.tldp.org/HOWTO/Assembly-HOWTO/index.html>
+
 - <http://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture>
 
 - programming from the ground up
@@ -31,50 +32,51 @@ other architecture ot try it out.
 
     nasm
 
-# pros and cons
+#pros and cons
 
 <www.tldp.org/HOWTO/Assembly-HOWTO/x120.html>
 
-## pros
+##pros
 
-### speed
-
-it gets harder and harder to make code more efficient using assembler
-because compilers are smarter and smarter
+###speed
 
 - use instructions that are so cpu specific and useful for your needs
 that compilers don't implement
 
 - use instructions in a way that is smarter than any compiler is likely to do
 
-### do the impossible
+Note however that it gets harder and harder to make code more efficient using assembler
+because compilers are smarter and smarter.
 
-access low level hardware which is so hardware specific it is not implemented in standard c
+###do the impossible
 
-## cons
+Access low level hardware which is so hardware specific it is not implemented in standard C.
 
-### os/processor dependant
+##cons
 
-### hard to read/write
+###os/processor dependant
 
-other things are much more likelly to speed up your code
+You write for a single CPU architecture only.
+
+###hard to read/write
+
+Other things are much more likely to speed up your code
 if that's what you want, namely:
 
-#### better algorithms
-
-#### better cache usage
+- better algorithms
+- better cache usage
 
 and only then, using assembly may stand a change to speeding thing up.
 
-# instruction set architectures (ISA)
+#instruction set architectures (ISA)
 
-list of operations the processor can do. obvioustly ultra processor dependant.
+List of operations the processor can do. Obvioustly ultra processor dependant.
 
 <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
-## common architectures
+##common architectures
 
-some of the major architectures are:
+Some of the major architectures are:
 
 - x86 family
 - arm
@@ -85,9 +87,9 @@ some of the major architectures are:
 
 - sparc
 
-## CISC vs RISC
+##CISC vs RISC
 
-### RISC
+###RISC
 
 Reduced Instruction set
 
@@ -95,7 +97,7 @@ a minimum of operations
 
 performs each one very fast
 
-### CISC
+###CISC
 
 Complex instruction set
 
@@ -103,7 +105,7 @@ lots of operations
 
 it is the case of the x86 family
 
-## flynn's taxonomy
+##flynn's taxonomy
 
 <http://en.wikipedia.org/wiki/Flynn%27s_taxonomy>
 
@@ -111,7 +113,7 @@ it is the case of the x86 family
 - SIMD
 - MIMD
 
-## SIMD instructions
+##SIMD instructions
 
 sincle instruction, multiple data, for example,
 making 4 multiplications on a single cpu cycle
@@ -122,53 +124,53 @@ for some time now intel has been grouping those instructions under the `SSE` nam
 
 see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
 
-# assemblers
+#assemblers
 
-programs that transform text in computer code
+Programs that transform text in computer code.
 
-## nasm
+##nasm
 
-netwide assembler (what netwide means, I don't know TODO)
+Netwide assembler (what netwide means, I don't know TODO).
 
-one of the most popular for linux
+One of the most popular for linux.
 
-open source
+Open source.
 
-intel like syntax
+Intel like syntax.
 
-input formats:
+Input formats:
 
 - `.asm`, intel like syntax
 
-output formats:
+Output formats:
 
 - elf
 - pe
 - mach-o
 
-## gas
+##gas
 
-gnu assembler
+Gnu assembler.
 
-executable name: `as`
+Executable name: `as`.
 
 gcc backend. point up to learning its syntax:
 allows you to to understand gcc generated code!
 
-at&t based syntax
+at&t based syntax.
 
-outputs to lots of different architectures:
+Outputs to lots of different architectures:
 
 - i386
 - sparc
 - arm
 
-and more
+and more.
 
 nasm manual says it is inconvenient to write by hand,
-because meant to be a gcc backend. I agree it is uglier to write.
+maybe because is is meant to be a gcc backend.
 
-### gcc
+###gcc
 
 gcc can be used as a frontend for gas:
 
@@ -176,13 +178,13 @@ gcc can be used as a frontend for gas:
     gcc -masm=att -S a.c -o a.s
     gcc -masm=intel -S a.c -o a.s
 
-## masm
+##masm
 
 microsoft
 
 x86
 
-## tasm
+##tasm
 
 borland
 

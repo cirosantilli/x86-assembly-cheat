@@ -1696,7 +1696,9 @@ asm_main:
                 ;- ret pops the stack and jumps to the stored address
 
                 ;best way
+
                 ;now you don't have to manually estimate adress delta!
+
                 ;uses the stack
 
                 ;sample calls of simple calling conventions:
@@ -1718,74 +1720,7 @@ asm_main:
                 ;call print_int
                 ;call print_nl          ;scanf("%d")
 
-            ;#c calling conventions
-
-                ;each lang may have a different one
-
-                ;it is good to learn this because:
-
-                ;1. it is a good convention that works well, so you can follow it in your assembly code
-                ;2. it allows you to interface with c code
-
-                ;#cdecl
-
-                    ;- return address is put on the stack (just use call/ret instructions )
-
-                    ;- args are passed on stack
-
-                    ;- always pass dword args
-
-                        ;if you want to pass a single byte,
-
-                        ;first convert to dword
-
-                    ;- args are put on stack in inverse order from declaration
-
-                        ;this allows for funcs with arbitrary numbers of args such as `printf`:
-
-                        ;like this the format string will always be on the same position (at the end)
-
-                    ;- are not poped before return
-
-                        ;if you want to use their values, use ESP pointer
-                        ;TODO why?
-
-                        ;- avoid moving them around for reuse multiple times in func
-
-                        ;- the return value is pushed last, so would have to be poped before args!
-
-                    ;- return value is put in eax
-
-                        ;if 64-bit, put in edx:eax
-
-                    ;- EBX, ESI, EDI, EBP, CS, DS, SS, ES remain unchanged on return
-
-                        ;- they may be temporaly changed inside
-
-                        ;- this can be done with `pusha` and `popa`
-
-                    ;- the caller clears the argument heap
-                        ;this generates more code (several calls, single def)
-                        ;but allows for functions with variable number or arguments (`printf`)
-                        ;because then only the caller knows how many args he put on the stack
-                        ;PASCAL for example follows a fuction clear argument stack convention
-
-                    ;- some compilers will append underline to func names '_'
-
-                        ;not the case for gcc ELF output. This is not specified in ansi c.
-
-                    ;- how to fix calling convention on c
-
-                        ;gcc allows to specify caling convention explicitly as:
-
-                            ;void f ( int ) __attribute__ ((cdecl ));
-
-                        ;`cdecl` is the name of the calling convention
-
-                        ;it is widely default across current compilers,
-                        ;but does not seem to be specified in ansi c
-
-                    ;sample call of cdecl functions:
+                ;sample call of cdecl functions:
 
                     ;recursive factorial:
 
@@ -1810,16 +1745,6 @@ asm_main:
                         call factorial_norec
                         add esp, 4
                         assert_eq 1
-
-                    ;#call c functions
-
-                        ;if you use the corrent c calling convention,
-                        ;you can just call functions from libc.
-
-                        ;just define them as extern, and gcc will automatically link to libc.
-                        ;make sure you use the correct naming convention: `exit` may be called
-                        ;`_exit` on certain compilers: this is not specified by ansi c.
-                        ;the best solution is to define it as a macro
 
                         ;TODO get working:
 
