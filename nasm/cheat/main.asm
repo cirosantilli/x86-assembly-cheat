@@ -4,8 +4,15 @@
 ;Instructions which cannot be explained in this file for some reason
 ;may be put elsewhere. This includes:
 ;
-;- require kernel priviledges such as `cli` or `in`
-;- have OS dependant effects such as `int` on Linux
+; #instructions that require kernel priviledges
+;
+;    #cli
+;    #in
+;
+; #have OS dependant effects
+;
+;    #int
+;    #brk
 ;
 ;#sources
 ;
@@ -119,7 +126,7 @@ section .data
     f1d01 dd 1.25      ;float
     f10   dd 2.0       ;float
     f100  dd 4.0       ;float
-    do0   dq 1.0       ;double
+    do0   dq 1.0       ;#double
 
     ;some integer conts on memory for convenience
     i0    dd 0
@@ -719,8 +726,6 @@ asm_main:
 
                 ;Before reading this, you should understand IEEE floating point format
 
-                    ;converter: <http://babbage.cs.qc.cuny.edu/IEEE-754.old/Decimal.html>
-
                 ;Floating point was done on a separate processor,
                 ;and even on later integrated architectures you still need to use the special `stX` 
                 ;registers for the floating point operations.
@@ -741,6 +746,10 @@ asm_main:
 
                     ;fld eax
                     ;fld __float32__(1.5)
+
+                ;#double precision
+
+                    ;TODO how to use double precision?
 
                 ;#load on floating point stack
 
@@ -826,7 +835,7 @@ asm_main:
 
                 ;fst
 
-                    ;Floating STore 
+                    ;Floating STore
 
                     ;Move st0 to RAM.
 
