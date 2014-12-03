@@ -1,20 +1,20 @@
-#Assembler Cheatsheet
+#Assembly Cheat
 
-Assembler scripts and cheatsheets.
+Assembly information and cheatsheets.
 
 Topics not covered here:
 
--   OS specific such as linux sytem calls.
+-   OS specific such as Linux system calls.
 
-	Search for those under their own plaftorm (ex: a linux repo)
+	Search for those under their own plaftorm (e.g.: a linux repo)
 
 -   Compiler specific topics which cannot be done in a portable way
 	such as inline assembly (assembly in the middle of c code).
 
 	Look for this info under extensions for each compiler.
 
-The focus for now is x86, but I'd love to get my hands on some
-other architecture ot try it out.
+This repository contains mostly x86 information now,
+but I'd love to try out other architectures.
 
 ##Sources
 
@@ -43,7 +43,7 @@ other architecture ot try it out.
 
 ##Pros and cons
 
-<www.tldp.org/HOWTO/Assembly-HOWTO/x120.html>
+<http://www.tldp.org/HOWTO/Assembly-HOWTO/x120.html>
 
 ###Pros
 
@@ -95,25 +95,23 @@ Some of the major architectures are:
 
     Low power consumption.
 
--   sparc
+-   SPARC
 
 ###CISC vs RISC
 
 ####RISC
 
-Reduced Instruction set
+Reduced Instruction set.
 
-a minimum of operations
-
-performs each one very fast
+Has few operations, but performs each one very fast.
 
 ####CISC
 
-Complex instruction set
+Complex instruction set.
 
-lots of operations
+Lots of operations.
 
-it is the case of the x86 family
+It is the case of the x86 family.
 
 ###Flynn's taxonomy
 
@@ -125,12 +123,12 @@ it is the case of the x86 family
 
 ###SIMD instructions
 
-sincle instruction, multiple data, for example,
-making 4 multiplications on a single cpu cycle
+Single instruction, multiple data, for example,
+making 4 multiplications on a single CPU cycle.
 
-more and more, SIMD instructions are being added on different processors
+More and more, SIMD instructions are being added on different processors.
 
-for some time now intel has been grouping those instructions under the `SSE` name
+For some time now Intel has been grouping those instructions under the `SSE` name.
 
 see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
 
@@ -140,9 +138,9 @@ Programs that transform text in computer code.
 
 ###NASM
 
-Netwide assembler (what netwide means, I don't know TODO).
+Netwide assembler. TODO what does Netwide mean?
 
-One of the most popular for linux.
+One of the most popular for Linux.
 
 Open source.
 
@@ -150,7 +148,7 @@ Intel like syntax.
 
 Input formats:
 
-- `.asm`, intel like syntax
+- `.asm`, Intel like syntax
 
 Output formats:
 
@@ -164,15 +162,15 @@ GNU assembler.
 
 Executable name: `as`.
 
-GCC backend. point up to learning its syntax:
-allows you to to understand gcc generated code!
+GCC backend. Point up to learning its syntax:
+allows you to to understand GCC generated code!
 
 AT&T based syntax.
 
 Outputs to lots of different architectures:
 
 - i386
-- sparc
+- SPARC
 - arm
 
 and more.
