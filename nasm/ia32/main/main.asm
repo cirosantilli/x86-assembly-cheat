@@ -952,9 +952,12 @@ asm_main:
 
             ;#shift
 
-                ;#shl #shr
+                ;#shl
+
+                ;#shr
 
                     ;applicaition:
+
                     ;- quick unsigned multiply and divide by powers of 2
 
                     mov eax, 81h
@@ -976,15 +979,22 @@ asm_main:
                     assert_flag jc
                     assert_eq 0
 
+                    ;ERROR:
+                    ;shift must be either const or in `cl`
                     ;mov bl, 2
                     ;shr ax, bl
-                        ;ERROR:
-                        ;shift must be either const or in `cl`
 
-                ;#arithmetic
+                ;#arithmetic shift
 
-                    ;signed multiply and divide by powers of 2
-                    ;keeps correct sign, and carries rest
+                ;#signed shift
+
+                    ;Signed multiply and divide by powers of 2.
+
+                    ;Keeps correct sign, and carries rest
+
+                    ;Does not exist in C, for which signed shift is undetermined behavior.
+                    ;But does exist in Java via the `>>>` operator.
+
 
                     mov eax, -1 ;negative number
                     sal eax, 1  ;ax = -2, CF = 1
@@ -996,7 +1006,7 @@ asm_main:
 
                 ;#rotate
 
-                    ;no corresponding c intruction
+                    ;No corresponding C intruction.
 
                     ;insert 0
 
@@ -1018,7 +1028,7 @@ asm_main:
                         assert_flag jc
                         assert_eq al, 0C0h
 
-                    ;rotate with cf inserted
+                    ;Rotate with cf inserted
 
                         mov eax, 81h
                         clc

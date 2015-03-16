@@ -1,6 +1,12 @@
-#Assembly Cheat
+# Assembly Cheat
 
 Assembly information and cheatsheets.
+
+Most important files:
+
+- [nasm/ia32/main/main.asm](nasm/ia32/main/main.asm): main IA-32 and NASM syntax cheatsheet
+
+## Scope
 
 Topics not covered here:
 
@@ -8,15 +14,13 @@ Topics not covered here:
 
 	Search for those under their own plaftorm (e.g.: a linux repo)
 
--   Compiler specific topics which cannot be done in a portable way
-	such as inline assembly (assembly in the middle of c code).
+-   Compiler specific topics which cannot be done in a portable way, such as inline assembly (assembly in the middle of C code).
 
 	Look for this info under extensions for each compiler.
 
-This repository contains mostly x86 information now,
-but I'd love to try out other architectures.
+This repository contains mostly x86 information now, but I'd love to try out other architectures.
 
-##Sources
+## Sources
 
 -   <http://www.tldp.org/HOWTO/Assembly-HOWTO/index.html>
 
@@ -38,16 +42,15 @@ but I'd love to try out other architectures.
 
     Reverse engineering for beginners.
 
-    Lots of info on what C code maps to in assembly,
-    and how to look for what matters to reverse engineer stuff.
+    Lots of info on what C code maps to in assembly, and how to look for what matters to reverse engineer stuff.
 
-##Pros and cons
+## Pros and cons
 
 <http://www.tldp.org/HOWTO/Assembly-HOWTO/x120.html>
 
-###Pros
+### Pros
 
-####Speed
+#### Speed
 
 -   Use instructions that are so cpu specific and useful for your needs
     that compilers don't implement.
@@ -57,17 +60,17 @@ but I'd love to try out other architectures.
 Note however that it gets harder and harder to make code more efficient using assembler
 because compilers are smarter and smarter.
 
-####Do the impossible
+#### Do the impossible
 
 Access low level hardware which is so hardware specific it is not implemented in standard C.
 
-###Cons
+### Cons
 
-####OS/processor dependant
+#### OS/processor dependant
 
 You write for a single CPU architecture only.
 
-####Hard to read/write
+#### Hard to read/write
 
 Other things are much more likely to speed up your code
 if that's what you want, namely:
@@ -77,13 +80,13 @@ if that's what you want, namely:
 
 and only then, using assembly may stand a change to speeding thing up.
 
-##Instruction set architectures (ISA)
+## Instruction set architectures (ISA)
 
 List of operations the processor can do. Obvioustly ultra processor dependant.
 
 <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
-###Popular architectures
+### Popular architectures
 
 Some of the major architectures are:
 
@@ -97,15 +100,15 @@ Some of the major architectures are:
 
 -   SPARC
 
-###CISC vs RISC
+### CISC vs RISC
 
-####RISC
+#### RISC
 
 Reduced Instruction set.
 
 Has few operations, but performs each one very fast.
 
-####CISC
+#### CISC
 
 Complex instruction set.
 
@@ -113,7 +116,7 @@ Lots of operations.
 
 It is the case of the x86 family.
 
-###Flynn's taxonomy
+### Flynn's taxonomy
 
 <http://en.wikipedia.org/wiki/Flynn%27s_taxonomy>
 
@@ -121,7 +124,7 @@ It is the case of the x86 family.
 - SIMD
 - MIMD
 
-###SIMD instructions
+### SIMD instructions
 
 Single instruction, multiple data, for example,
 making 4 multiplications on a single CPU cycle.
@@ -132,11 +135,11 @@ For some time now Intel has been grouping those instructions under the `SSE` nam
 
 see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
 
-##Assemblers
+## Assemblers
 
 Programs that transform text in computer code.
 
-###NASM
+### NASM
 
 Netwide assembler. TODO what does Netwide mean?
 
@@ -156,7 +159,7 @@ Output formats:
 - pe
 - mach-o
 
-###GAS
+### GAS
 
 GNU assembler.
 
@@ -178,7 +181,7 @@ and more.
 NASM manual says it is inconvenient to write by hand,
 maybe because is is meant to be a gcc backend.
 
-####GCC
+#### GCC
 
 GCC can be used as a frontend for gas:
 
@@ -186,13 +189,13 @@ GCC can be used as a frontend for gas:
     gcc -masm=att -S a.c -o a.s
     gcc -masm=intel -S a.c -o a.s
 
-###MASM
+### MASM
 
 Microsoft.
 
 x86.
 
-###TASM
+### TASM
 
 Borland.
 
