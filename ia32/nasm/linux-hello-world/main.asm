@@ -4,7 +4,7 @@
 section .data
 
 	;10 = \n in ascii:
-    hello_world db "hello world", 10
+    hello_world db "Hello world!", 10
 	;does an address offset:
 	hello_world_len  equ $ - hello_world
 

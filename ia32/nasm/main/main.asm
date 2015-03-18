@@ -2000,6 +2000,9 @@ asm_main:
         ;#define  SIZE 10
         mov eax,SIZE
 
+    mov eax, assert_pass_str
+    call print_string
+
     mov eax, 0
     leave
     ret
@@ -2008,6 +2011,7 @@ asm_main:
 .data:
 
     assert_fail_str db 10, 'ASSERT FAILED', 10, 0
+    assert_pass_str db 10, 'ALL ASSERTS PASSED', 10, 0
 
 .text:
 
