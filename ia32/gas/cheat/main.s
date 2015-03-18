@@ -1,4 +1,6 @@
 /*
+TODO broken.
+
 GAS syntax cheat.
 
 Focus is on differences from nasm, so for a more complete cheat on x86 assmebly,

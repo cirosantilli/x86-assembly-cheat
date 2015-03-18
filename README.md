@@ -4,7 +4,12 @@ Assembly information and cheatsheets.
 
 Most important files:
 
-- [nasm/ia32/main/main.asm](nasm/ia32/main/main.asm): main IA-32 and NASM syntax cheatsheet
+-   [Pros and cons](pros-and-cons.md)
+-   [IA-32](ia32.md): IA-32 information
+    - [ia32/nasm/main/main.asm](ia32/nasm/main/main.asm): main IA-32 and NASM syntax cheatsheet
+    - [x86 paging tutorial](http://stackoverflow.com/questions/18431261/how-does-x86-paging-work)
+-   [C calling conventions](c-calling-conventions.md)
+    - [cdecl](cdecl.md)
 
 ## Scope
 
@@ -12,7 +17,7 @@ Topics not covered here:
 
 -   OS specific such as Linux system calls.
 
-	Search for those under their own plaftorm (e.g.: a linux repo)
+	Search for those under their own plaftorm (e.g.: a Linux repo)
 
 -   Compiler specific topics which cannot be done in a portable way, such as inline assembly (assembly in the middle of C code).
 
@@ -44,45 +49,9 @@ This repository contains mostly x86 information now, but I'd love to try out oth
 
     Lots of info on what C code maps to in assembly, and how to look for what matters to reverse engineer stuff.
 
-## Pros and cons
-
-<http://www.tldp.org/HOWTO/Assembly-HOWTO/x120.html>
-
-### Pros
-
-#### Speed
-
--   Use instructions that are so cpu specific and useful for your needs
-    that compilers don't implement.
-
--   Use instructions in a way that is smarter than any compiler is likely to do.
-
-Note however that it gets harder and harder to make code more efficient using assembler
-because compilers are smarter and smarter.
-
-#### Do the impossible
-
-Access low level hardware which is so hardware specific it is not implemented in standard C.
-
-### Cons
-
-#### OS/processor dependant
-
-You write for a single CPU architecture only.
-
-#### Hard to read/write
-
-Other things are much more likely to speed up your code
-if that's what you want, namely:
-
-- better algorithms
-- better cache usage
-
-and only then, using assembly may stand a change to speeding thing up.
-
 ## Instruction set architectures (ISA)
 
-List of operations the processor can do. Obvioustly ultra processor dependant.
+List of operations the processor can do. Obviously ultra processor dependant.
 
 <http://en.wikipedia.org/wiki/Comparison_of_CPU_architectures>
 
@@ -98,7 +67,7 @@ Some of the major architectures are:
 
     Low power consumption.
 
--   SPARC
+-   SPARC.
 
 ### CISC vs RISC
 
@@ -126,8 +95,7 @@ It is the case of the x86 family.
 
 ### SIMD instructions
 
-Single instruction, multiple data, for example,
-making 4 multiplications on a single CPU cycle.
+Single instruction, multiple data, for example, making 4 multiplications on a single CPU cycle.
 
 More and more, SIMD instructions are being added on different processors.
 
@@ -139,25 +107,7 @@ see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
 
 Programs that transform text in computer code.
 
-### NASM
-
-Netwide assembler. TODO what does Netwide mean?
-
-One of the most popular for Linux.
-
-Open source.
-
-Intel like syntax.
-
-Input formats:
-
-- `.asm`, Intel like syntax
-
-Output formats:
-
-- elf
-- pe
-- mach-o
+See also: NASM.
 
 ### GAS
 
@@ -165,8 +115,7 @@ GNU assembler.
 
 Executable name: `as`.
 
-GCC backend. Point up to learning its syntax:
-allows you to to understand GCC generated code!
+GCC backend. Point up to learning its syntax: allows you to to understand GCC generated code!
 
 AT&T based syntax.
 
@@ -178,8 +127,7 @@ Outputs to lots of different architectures:
 
 and more.
 
-NASM manual says it is inconvenient to write by hand,
-maybe because is is meant to be a gcc backend.
+NASM manual says it is inconvenient to write by hand, maybe because is is meant to be a GCC backend.
 
 #### GCC
 
