@@ -1,6 +1,6 @@
 DEFINES ?= #-DNAME -DNAME2=VALUE
 GAS ?= as
-GCC ?= gcc -Wall -std=c99 -pedantic-errors -m32
+GCC ?= gcc -Wall -std=c99 -pedantic-errors
 LIB_DIR ?= lib/
 LN ?= ld -s
 IN_DIR ?=

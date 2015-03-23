@@ -12,13 +12,16 @@ Input formats:
 
 - `.asm`, Intel like syntax
 
-Output formats:
-
-- elf
-- pe
-- mach-o
-
 Most useful command line options:
 
 - `-w+all`: enable all warnings
-- `-f`: output format
+
+## f
+
+Output format:
+
+    nasm -f elf32 main.asm
+
+List all formats:
+
+    nasm -hf

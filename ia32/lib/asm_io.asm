@@ -199,10 +199,10 @@ print_nl:
 
 
 sub_dump_regs:
-	enter   4,0
+	enter 4,0
 	pusha
 	pushf
-	mov     eax, [esp]      ; read FLAGS back off stack
+	mov eax, [esp]      ; read FLAGS back off stack
 	mov	[ebp-4], eax    ; save flags
 
 ;
