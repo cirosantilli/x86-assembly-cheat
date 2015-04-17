@@ -25,3 +25,12 @@ Output format:
 List all formats:
 
     nasm -hf
+
+You should always use this flag.
+
+The default format of a default compilation (and that of Ubuntu 14.04) is `bin`, which is not very useful <http://stackoverflow.com/questions/2427011/what-is-the-difference-between-elf-files-and-bin-files> There seems to be no way to automatically decide a good choice: the default is a compilation option.
+
+The following formats work:
+
+- `elf32`: Linux 32-bit
+- `elf64`: Linux 64-bit

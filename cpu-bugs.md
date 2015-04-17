@@ -1,4 +1,4 @@
-# Bugs
+# Bugs TODO
 
 CPU bugs are obviously super serious to the company, as things may get super serious as users may ask for refunds on an expensive product.
 

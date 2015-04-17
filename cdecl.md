@@ -4,11 +4,11 @@ De facto standard C calling convention used by GCC.
 
 Does not have a formal standard, so different compilers may have incompatible versions of cdecl.
 
--   return address is put on the stack (usually via call/ret instructions)
+-   return address is put on the stack (usually via `call`/`ret` instructions)
 
 -   arguments are passed on stack
 
-    -   always pass dword arguments
+    -   always pass `dword` arguments
 
         If you want to pass a single byte, first convert to dword
 

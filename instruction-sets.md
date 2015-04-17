@@ -19,13 +19,19 @@ Some of the major architectures are:
 
     Low power consumption.
 
+-   PowerPC
+
+    Created by IBM, Motorola and Apple. But IBM and Motorola are dying, Apple moved to Intel in 2005, Xbox One and PlayStation 4 moved to x86-64 in 2013.
+
+    Used on Nintendo GameCube (2001) up to Wii U (2012), PlayStation 3 and Xbox 360.
+
 -   SPARC
 
     Created by Sun for its operating system Solaris. Now owned and used by Oracle. Not used much by anyone else.
 
--   PowerPC
+-   <http://en.wikipedia.org/wiki/MIPS_instruction_set>
 
-    Created by IBM, Motorola and Apple. But IBM and Motorola are dying, and Apple moved to Intel in 2005.
+    Used mostly on embedded systems, and notably video game consoles: Nintendo 64, Sony PlayStation, PlayStation 2.
 
 Linux supports all the above. TODO Windows and Mac OS? Likely they support only x86 on desktop, and have separate ARM portable versions.
 
@@ -61,5 +67,4 @@ More and more, SIMD instructions are being added on different processors.
 
 For some time now Intel has been grouping those instructions under the `SSE` name.
 
-see: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
-
+See: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>

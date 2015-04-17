@@ -1,4 +1,10 @@
-# C calling convention
+# Calling convention
+
+<https://en.wikipedia.org/wiki/X86_calling_conventions>
+
+The calling convention specifies how exactly function call and return are implemented in assembly.
+
+## C calling conventions
 
 ANSI C does not specify assembly level calling convention to be used by implementations nor means to control actual calling conventions.
 
@@ -6,11 +12,16 @@ Some compilers do however contain extensions that allow to fix a given calling c
 
 GCC allows to specify calling convention explicitly as:
 
-    void f ( int ) __attribute__ ((cdecl ));
+    void f (int i) __attribute__ ((cdecl));
 
 where `cdecl` is the name of the calling convention.
 
-As of 2013, [cdecl](cdecl.md) is widely used as default across many compilers.
+In IA32, [cdecl](cdecl.md) is the most popular in Linux, and stdcall the most popular in Windows, but there exist many others.
+
+In x86-64, the number of calling conventions was reduced, with:
+
+- [System V AMD64 ABI][] dominating in Linux and other UNIX systems
+- Microsoft x64 calling convention and its 2013 extension `__vectorcall` for Windows,
 
 ## Call C function form assembly
 

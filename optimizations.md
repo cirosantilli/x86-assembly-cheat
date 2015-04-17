@@ -1,5 +1,7 @@
 # Optimizations
 
+WIP
+
 ## Instruction pipelining
 
 <http://en.wikipedia.org/wiki/Instruction_pipeline>
@@ -26,3 +28,11 @@ Mysterious Intel internal stuff that allows CPUs to be updated.
 Exact format is kept a secret: the only documented thing is how to update it.
 
 <http://stackoverflow.com/questions/4366837/what-is-intel-microcode>
+
+## Megahertz myth
+
+- <http://en.wikipedia.org/wiki/Megahertz_myth>
+
+## Superscalar architecture
+
+- <http://en.wikipedia.org/wiki/Superscalar>

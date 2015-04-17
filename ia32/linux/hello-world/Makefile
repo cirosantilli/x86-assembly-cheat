@@ -1,7 +1,7 @@
 .PHONY: clean run
 
 main.out: main.asm
-	nasm -w+all -f elf32 -o main.o main.asm
+	nasm -f elf32 -w+all -o main.o main.asm
 	ld -o main.out -s main.o
 
 clean:
