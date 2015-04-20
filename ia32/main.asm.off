@@ -2171,6 +2171,17 @@ asm_main:
             call print_int
             call print_nl
 
+    ; # AES
+
+        ; https://en.wikipedia.org/wiki/AES_instruction_set
+
+        ; Intel has extended x86 to add instructions to accelerate AES encryption since 2008,
+        ; AMD followed. For this reason, the Linux kernel implements AES itself, which allows for hardware acceleration,
+        ; and OpenSSL can use the API for it: <https://en.wikipedia.org/wiki/AES_instruction_set>.
+        ; `/proc/cpuinfo` must have the `aes` `CPUID` flag.
+
+        ; TODO example.
+
     ; # lfence
 
         ; TODO something to do with out of order

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int asm_main( void ) __attribute__((cdecl));
+int asm_main(void) __attribute__((cdecl));
 
 int main() {
     int ret_status;

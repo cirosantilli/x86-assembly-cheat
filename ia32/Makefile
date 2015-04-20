@@ -4,7 +4,7 @@ GCC ?= gcc -Wall -std=c99 -pedantic-errors
 LIB_DIR ?= lib/
 LN ?= ld -s
 IN_DIR ?=
-NASM ?= nasm -w+all -f elf32
+NASM ?= nasm -w+all -f elf64
 OUT_EXT ?= .out
 RUN ?= main
 
