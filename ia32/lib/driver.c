@@ -1,6 +1,10 @@
 #if defined(__GNUC__)
 #  define PRE_CDECL
-#  define POST_CDECL __attribute__((cdecl))
+#  ifdef __i386__
+#    define POST_CDECL __attribute__((cdecl))
+#  else
+#    define POST_CDECL
+#  endif
 #else
 #  define PRE_CDECL __cdecl
 #  define POST_CDECL

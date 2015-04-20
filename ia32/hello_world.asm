@@ -13,7 +13,6 @@ asm_main:
 
     mov  eax, hello_world
     call print_string
-    call print_nl
 
     mov eax, 0
     leave

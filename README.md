@@ -30,10 +30,11 @@ x86 only for now, but we'd love to try out other architectures.
 
 ## WIP
 
--   [GAS](ia32/gas/)
--   [CPU bugs](cpu-bugs.md)
--   [Compiler generated](compiler-generated/)
--   Binutils
-    - [ar](ar.md)
-    - [elfedit](elfedit.md)
-    - [nm](nm.md)
+1.  [Instruction encoding](instruction-encoding.md)
+1.  [GAS](ia32/gas/)
+1.  [CPU bugs](cpu-bugs.md)
+1.  [Compiler generated](compiler-generated/)
+1.  Binutils
+    1. [ar](ar.md)
+    1. [elfedit](elfedit.md)
+    1. [nm](nm.md)

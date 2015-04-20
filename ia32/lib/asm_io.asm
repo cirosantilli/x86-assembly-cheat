@@ -1,20 +1,25 @@
 ; Assembly I/O routines
-; To assemble for DJGPP
-; nasm -f coff -d COFF_TYPE asm_io.asm
-; To assemble for Borland C++ 5.x
-; nasm -f obj -d OBJ_TYPE asm_io.asm
-; To assemble for Microsoft Visual Studio
-; nasm -f win32 -d COFF_TYPE asm_io.asm
-; To assemble for Linux
+;
+; Linux:
 ; nasm -f elf -d ELF_TYPE asm_io.asm
-; To assemble for Watcom
+;
+; DJGPP:
+; nasm -f coff -d COFF_TYPE asm_io.asm
+;
+; Borland C++ 5.x:
+; nasm -f obj -d OBJ_TYPE asm_io.asm
+;
+; Microsoft Visual Studio:
+; nasm -f win32 -d COFF_TYPE asm_io.asm
+;
+; Watcom:
 ; nasm -f obj -d OBJ_TYPE -d WATCOM asm_io.asm
+;
 ; IMPORTANT NOTES FOR WATCOM
 ; The Watcom compiler's C library does not use the
 ; standard C calling convention. For example, the
 ; putchar() function gets its argument from the
 ; the value of EAX, not the stack.
-
 
 %define NL 10
 %define CF_MASK 00000001h
@@ -49,11 +54,29 @@
   %define _putchar putchar_
 %endif
 
-%macro pusha
-    pushf
-    popf
-%endmacro
+;%macro _pusha 0
+    ;Temp ← (ESP)
+    ;push eax
+    ;push ecx
+    ;push edx
+    ;push ebx
+    ;push temp
+    ;push ebp
+    ;push esi
+    ;push edi
+;%endmacro
 
+%macro _popa 0
+    pop edi
+    pop esi
+    pop ebp
+    ; Skip next 4 bytes of stack.
+    pop ebx
+    pop ebx
+    pop edx
+    pop ecx
+    pop eax
+%endmacro
 
 %ifdef OBJ_TYPE
 segment .data public align=4 class=data use32
@@ -111,7 +134,7 @@ segment .text
         pop ecx
 
         popf
-        popa
+        _popa
         mov eax, [ebp-4]
         leave
         ret
@@ -128,7 +151,7 @@ segment .text
         pop ecx
 
         popf
-        popa
+        _popa
         leave
         ret
 
@@ -144,7 +167,7 @@ segment .text
         pop ecx
 
         popf
-        popa
+        _popa
         leave
         ret
 
@@ -157,7 +180,7 @@ segment .text
         mov [ebp-4], eax
 
         popf
-        popa
+        _popa
         mov eax, [ebp-4]
         leave
         ret
@@ -176,7 +199,7 @@ segment .text
     %endif
 
         popf
-        popa
+        _popa
         leave
         ret
 
@@ -196,7 +219,7 @@ segment .text
         pop ecx
     %endif
         popf
-        popa
+        _popa
         leave
         ret
 
@@ -292,7 +315,7 @@ segment .text
         call _printf
         add esp, 76
         popf
-        popa
+        _popa
         leave
         ret 4
 
@@ -339,7 +362,7 @@ segment .text
         loop stack_line_loop
 
         popf
-        popa
+        _popa
         leave
         ret 12
 
@@ -406,7 +429,7 @@ segment .text
         loop mem_outer_loop
 
         popf
-        popa
+        _popa
         leave
         ret 12
 
@@ -501,6 +524,6 @@ segment .text
 
         frstor [ebp-108] ; restore coprocessor state
         popf
-        popa
+        _popa
         leave
         ret 4

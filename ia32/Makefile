@@ -4,7 +4,7 @@ GCC ?= gcc -Wall -std=c99 -pedantic-errors
 LIB_DIR ?= lib/
 LN ?= ld -s
 IN_DIR ?=
-NASM ?= nasm -w+all -f elf64
+NASM ?= nasm -w+all -f $(shell if [ "`uname -m`" = 'x86_64' ]; then printf 'elf64'; else printf 'elf32'; fi )
 OUT_EXT ?= .out
 RUN ?= main
 
@@ -20,7 +20,7 @@ OUT_BNAME := $(RUN)$(OUT_EXT)
 all: driver $(OUTS)
 
 %$(OUT_EXT): $(OUT_DIR)%.o
-	$(GCC) -o "$@" "$<" driver.o asm_io.o
+	$(GCC) -o '$@' '$<' driver.o asm_io.o
 
 %.o: $(IN_DIR)%.asm
 	$(NASM) $(DEFINES) -o '$@' '$<'

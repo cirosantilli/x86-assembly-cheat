@@ -8,19 +8,19 @@
 ;     # cli
 ;     # in
 ;
-;  # have OS dependant effects
+;  # Have OS dependant effects
 ;
 ;     # int
 ;     # brk
 ;
-; # sources
+; # Sources
 ;
 ; - <http://en.wikipedia.org/wiki/X86_instruction_listings>
 
 
 ; # include
 
-    ; same as c include
+    ; Same as C include.
 
 %include "lib/asm_io.inc"
 
@@ -79,7 +79,7 @@ extern exit
     %endmacro
 
     ; asserts eax neq %1
-    %macro assert_dif 2
+    %macro assert_neq 2
         pushfd
         pusha
         cmp %1, %2
@@ -174,6 +174,9 @@ section .data
     cpuid_str db 10, 'CPUID', 10, 0
     rdtsc_str db 10, 'RDTSC', 10, 0
     rdrand_str db 10, 'RDRAND', 10, 0
+    ss_str db 10, 'SS register', 10, 0
+    ds_str db 10, 'DS register', 10, 0
+    cs_str db 10, 'CS register', 10, 0
 
 section .bss
 
@@ -206,65 +209,115 @@ asm_main:
 
     enter 0,0
 
+    ; # Detect architecture at compile time
+
+        ; Not possible:
+        ; http://stackoverflow.com/questions/24124484/how-to-detect-architecture-in-nasm-so-that-i-could-have-one-source-code-for-both
+
     ; # Registers
 
-        ; In IA32 all GP registers have 4 bytes.
+        ; Intel puts the registers in the following groups:
 
-        ; For each of the main purpose registers it is possible to access different parts
-        ; of the register.
+        ; - General-purpose registers
+        ; - Segment registers
+        ; - EFLAGS (program status and control) register
+        ; - EIP (instruction pointer)
 
-        ; For register Y, the following are possible:
+        ; # General purpose reigisters
 
-        ; - Yl
-        ; - Yh
-        ; - Yx
-        ; - eYx
+            ; There are 8:
 
-        ; The parts of the register can be visualized as:
+                mov eax, 0xFFFFFFFF
+                mov ebx, 0xFFFFFFFF
+                mov ecx, 0xFFFFFFFF
+                mov edx, 0xFFFFFFFF
+                mov esi, 0xFFFFFFFF
+                mov edi, 0xFFFFFFFF
+                ; SEGFAULT
+                ; We could compile and run the following,
+                ; but that would segfault us later
+                ; since those are used on calling conventions:
+                ;mov ebp, 0xFFFFFFFF
+                ;mov esp, 0xFFFFFFFF
 
-            ; | 1    | 2    | 3    | 4    |
-            ; |---------------------------|
-            ; | eax                       |
-            ; |             | ax          |
-            ; |             | ah   | al   |
+            ; In theory, those can be used freely for many computations such as sums, subtractions, etc.
 
-        ; x86_64 adds 8 byte long registers.
+            ; However, many instructions make extensive use
+            ; of certain of those registers such as `ESP` which keeps track of the stack.
 
-        ; Many instructions do different things
-        ; depending on the size of the register passed.
+            ; Therefore, you should rely primarily on `eax`, `ebx`, `ecx` and `edx`
+            ; as actually being general purpose, and even for those you should check often
+            ; if each operation will not take input/output from them without you knowing it.
 
-            inc eax
-            inc ax
-            inc al
-            inc ah
-            inc ebx
-            inc ecx
-            inc edx
+            ; x86_64 adds 8 byte long versions of the IA32 registers
+            ; and 8 more plain new 8 byte registers: r8 to r16.
+
+            ; # Register parts
+
+                ; - Yl
+                ; - Yh
+                ; - Yx
+                ; - eYx
+
+                ; The parts of the register can be visualized as:
+
+                    ; | 1    | 2    | 3    | 4    |
+                    ; |---------------------------|
+                    ; | eax                       |
+                    ; |             | ax          |
+                    ; |             | ah   | al   |
+
+                ; Many instructions do different things
+                ; depending on the size of the register passed.
+
+                    mov eax, 0x01020304
+                    mov ebx, 0x00000004
+                    assert_eq al, bl
+                    assert_neq ax, bx
+
+                    mov eax, 0x01020304
+                    mov ebx, 0x00000304
+                    assert_eq ax, bx
+                    assert_neq eax, ebx
+
+        ; # Initial register state
+
+            ; Finally, no more programming languages getting in our way with definite assignment.
+
+            ; - http://stackoverflow.com/questions/1802783/initial-state-of-program-registers-and-stack-on-linux-arm
+            ; - http://stackoverflow.com/questions/9147455/what-is-default-register-state-when-program-launches-asm-linux
+
+            ; Mentioned on major ABI specs, e.g. AMD64: http://www.x86-64.org/documentation/abi-0.99.pdf
 
         ; # Segment registers
 
-                mov eax, 0
+        ; # SS register
+
+        ; # DS register
+
+        ; # CS register
+
+            ; TODO interpret.
+
+                mov eax, cs_str
+                call print_string
                 mov eax, cs
                 call print_int
-                call print_nl
 
-                mov eax, 0
+                mov eax, ds_str
+                call print_string
                 mov eax, ds
                 call print_int
-                call print_nl
 
-                mov eax, 0
+                mov eax, ss_str
+                call print_string
                 mov eax, ss
                 call print_int
-                call print_nl
 
-            ; The following generates an SIGILL on Linux x86 because the OS
-            ; does not allow non OS internal programs to alter CS because
-            ; that would be a security breach:
+            ; SEGFAULT: can't write to them in user mode.
 
-                ; mov cs, 0
-
-            ;To understand this, it is necessary to go into OS specific internals.
+                ;mov eax, 0
+                ;mov ss, eax
 
     ; # Flag registers and instructions
 
@@ -322,7 +375,7 @@ asm_main:
                 mov eax, 0
                 mov ax, -1
                 movzx eax, ax
-                assert_dif eax, -1
+                assert_neq eax, -1
 
             ; ERROR: operands have the same size. Fist must be larger.
 
@@ -1618,12 +1671,9 @@ asm_main:
 
         ; # pop
 
-            ; Always dwords (4 bytes)
+            ; - increment / decrement esp by 4
 
-                mov eax, ss
-                call print_int
-                call print_nl
-                ; Start of stack segment
+            ; Always dwords (4 bytes)
 
                 mov eax, esp
                 push dword 1
@@ -1634,9 +1684,9 @@ asm_main:
 
                 mov eax, esp
                 push byte 2
-                ; BAD: still added 1 dword
                 sub eax, esp
                 call print_int
+                ; Still added 1 dword.
                 assert_eq 4
                 mov eax, [esp]
                 assert_eq 2
@@ -1668,7 +1718,7 @@ asm_main:
                 ; EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
 
             ; This is important for example in the C calling convention,
-            ; where certain registers must not be changed by functions
+            ; where certain registers must not be changed by functions.
 
                 mov ebx, 0
                 mov ecx, 0
@@ -1717,7 +1767,7 @@ asm_main:
 
         ; # leave
 
-            ; Usefull for functions when they must allow for recursion
+            ; Useful for functions when they must allow for recursion.
 
             ; The idea that when you enter a function you store the top of the stack in `ebp`
             ; and do no change `ebp` inside the function, only when leaving it.
