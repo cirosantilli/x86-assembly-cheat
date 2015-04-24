@@ -1,5 +1,5 @@
 GAS ?= as
-GCC ?= gcc -Wall -std=c99 -pedantic-errors
+GCC ?= gcc -m32 -std=c89 -pedantic-errors -Wall
 LIB_DIR ?= lib/
 LN ?= ld -s
 IN_DIR ?= ./

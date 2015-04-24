@@ -14,8 +14,7 @@
 ;
 ; Watcom:
 ; nasm -f obj -d OBJ_TYPE -d WATCOM asm_io.asm
-;
-; IMPORTANT NOTES FOR WATCOM
+
 ; The Watcom compiler's C library does not use the
 ; standard C calling convention. For example, the
 ; putchar() function gets its argument from the
@@ -38,45 +37,21 @@
 ; Linux C doesn't put underscores on labels
 ;
 %ifdef ELF_TYPE
-  %define _scanf scanf
-  %define _printf printf
-  %define _getchar getchar
-  %define _putchar putchar
+    %define _scanf scanf
+    %define _printf printf
+    %define _getchar getchar
+    %define _putchar putchar
 %endif
 
 ;
 ; Watcom puts underscores at end of label
 ;
 %ifdef WATCOM
-  %define _scanf scanf_
-  %define _printf printf_
-  %define _getchar getchar_
-  %define _putchar putchar_
+    %define _scanf scanf_
+    %define _printf printf_
+    %define _getchar getchar_
+    %define _putchar putchar_
 %endif
-
-;%macro _pusha 0
-    ;Temp ← (ESP)
-    ;push eax
-    ;push ecx
-    ;push edx
-    ;push ebx
-    ;push temp
-    ;push ebp
-    ;push esi
-    ;push edi
-;%endmacro
-
-%macro _popa 0
-    pop edi
-    pop esi
-    pop ebp
-    ; Skip next 4 bytes of stack.
-    pop ebx
-    pop ebx
-    pop edx
-    pop ecx
-    pop eax
-%endmacro
 
 %ifdef OBJ_TYPE
 segment .data public align=4 class=data use32
@@ -134,7 +109,7 @@ segment .text
         pop ecx
 
         popf
-        _popa
+        popa
         mov eax, [ebp-4]
         leave
         ret
@@ -151,7 +126,7 @@ segment .text
         pop ecx
 
         popf
-        _popa
+        popa
         leave
         ret
 
@@ -167,7 +142,7 @@ segment .text
         pop ecx
 
         popf
-        _popa
+        popa
         leave
         ret
 
@@ -180,7 +155,7 @@ segment .text
         mov [ebp-4], eax
 
         popf
-        _popa
+        popa
         mov eax, [ebp-4]
         leave
         ret
@@ -199,7 +174,7 @@ segment .text
     %endif
 
         popf
-        _popa
+        popa
         leave
         ret
 
@@ -219,7 +194,7 @@ segment .text
         pop ecx
     %endif
         popf
-        _popa
+        popa
         leave
         ret
 
@@ -315,7 +290,7 @@ segment .text
         call _printf
         add esp, 76
         popf
-        _popa
+        popa
         leave
         ret 4
 
@@ -362,7 +337,7 @@ segment .text
         loop stack_line_loop
 
         popf
-        _popa
+        popa
         leave
         ret 12
 
@@ -376,7 +351,7 @@ segment .text
         push dword [ebp+16]
         push dword mem_format1
         call _printf
-        add esp, 12 
+        add esp, 12
         mov esi, [ebp+12] ; address
         and esi, 0FFFFFFF0h ; move to start of paragraph
         mov ecx, [ebp+8]
@@ -429,7 +404,7 @@ segment .text
         loop mem_outer_loop
 
         popf
-        _popa
+        popa
         leave
         ret 12
 
@@ -524,6 +499,6 @@ segment .text
 
         frstor [ebp-108] ; restore coprocessor state
         popf
-        _popa
+        popa
         leave
         ret 4

@@ -7,15 +7,12 @@ section .data
 section .text
 
     ; We must use gcc to link instead of ld because otherwise we won't see the stdlib.
-    ; But wen we use gcc, the entry point must be called `main` and not `_start`.
+    ; But when we use gcc, the entry point must be called `main` and not `_start`.
     global main
+    main:
 
-main:
+        push hello_world
+        call puts
 
-    push hello_world
-    call puts
-    pop ecx
-    pop ecx
-
-    mov eax, 0
-    call exit
+        mov eax, 0
+        call exit

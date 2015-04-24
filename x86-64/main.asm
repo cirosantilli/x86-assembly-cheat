@@ -6,34 +6,60 @@ section .data
 section .text
 
     global _start
+    _start:
 
-_start:
+        ; # syscall
 
-    ; # Registers
+            ; Custom system call instruction added.
 
-        ; General purpose registers got longer versions,
-        ; and 8 new ones were extended: r8 through r15.
+            ; Preferred way over int, may be faster.
 
-            mov rax, 0xFFFFFFFFFFFFFFFF
-            mov rbx, 0xFFFFFFFFFFFFFFFF
-            mov rcx, 0xFFFFFFFFFFFFFFFF
-            mov rdx, 0xFFFFFFFFFFFFFFFF
-            mov rsi, 0xFFFFFFFFFFFFFFFF
-            mov rdi, 0xFFFFFFFFFFFFFFFF
-            ;mov ebp, 0xFFFFFFFFFFFFFFFF
-            ;mov esp, 0xFFFFFFFFFFFFFFFF
-            mov r8,  0xFFFFFFFFFFFFFFFF
-            mov r9,  0xFFFFFFFFFFFFFFFF
-            mov r15, 0xFFFFFFFFFFFFFFFF
+            ; Used by Linux.
 
-    ; write
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, hello_world
-    mov edx, hello_world_len
-    int 80h
+            ; Will not be further commented here as OS specific.
 
-    ; exit
-    mov eax, 1
-    mov ebx, 0
-    int 0x80
+        ; # Registers
+
+            ; General purpose registers got longer versions,
+            ; and 8 new ones were extended: r8 through r15.
+
+                mov rax, 0xFFFFFFFFFFFFFFFF
+                mov rbx, 0xFFFFFFFFFFFFFFFF
+                mov rcx, 0xFFFFFFFFFFFFFFFF
+                mov rdx, 0xFFFFFFFFFFFFFFFF
+                mov rsi, 0xFFFFFFFFFFFFFFFF
+                mov rdi, 0xFFFFFFFFFFFFFFFF
+                ;mov ebp, 0xFFFFFFFFFFFFFFFF
+                ;mov esp, 0xFFFFFFFFFFFFFFFF
+                mov r8,  0xFFFFFFFFFFFFFFFF
+                mov r9,  0xFFFFFFFFFFFFFFFF
+                mov r15, 0xFFFFFFFFFFFFFFFF
+
+        ; # PUSHA
+
+        ; # POPA
+
+            ; `PUSHA` and `POPA` were removed from x86-64:
+            ; <http://stackoverflow.com/questions/6837392/how-to-save-the-registers-on-x86-64-for-an-interrupt-service-routine>
+
+                ; ERROR
+                ;pusha
+                ;popa
+
+        ; # pop only works with quadwords
+
+            ; Some instructions do not work with operand sizes for which they work in 32 bit mode.
+            ; E.g., you cannot do `pop eax`, only `pop rax`.
+
+                ; ERROR
+                ;pop eax
+
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, hello_world
+        mov rdx, hello_world_len
+        syscall
+
+        mov rax, 60
+        mov rdi, 0
+        syscall

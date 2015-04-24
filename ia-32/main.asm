@@ -3,19 +3,16 @@
 ; Instructions which cannot be explained in this file for some reason
 ; may be put elsewhere. This includes:
 ;
-;  # instructions that require kernel priviledges
+; Instructions that require kernel priviledges
 ;
-;     # cli
-;     # in
+; - cli
+; - in
 ;
-;  # Have OS dependant effects
+; Have OS dependant effects
 ;
-;     # int
-;     # brk
-;
-; # Sources
-;
-; - <http://en.wikipedia.org/wiki/X86_instruction_listings>
+; - int
+; - brk
+; - sysenter
 
 
 ; # include
@@ -2135,26 +2132,41 @@ asm_main:
                 nop
                 nop
 
-    ; # rdrand
+    ; # cryptography
 
-        ; True random number generator!
+        ; https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/crypto?id=refs/tags/v4.0
 
-        ; This Intel egineer says its based on quantum effects:
-        ; http://stackoverflow.com/a/18004959/895245
+        ; # rdrand
 
-        ; Generated some polemic when kernel devs wanted to use it as part of `/dev/random`,
-        ; because it could be used as a cryptographic backdoor by Intel since it is a black box.
+            ; True random number generator!
 
-            mov eax, rdrand_str
-            call print_string
+            ; This Intel engineer says its based on quantum effects:
+            ; http://stackoverflow.com/a/18004959/895245
 
-            rdrand eax
-            call print_int
-            call print_nl
+            ; Generated some polemic when kernel devs wanted to use it as part of `/dev/random`,
+            ; because it could be used as a cryptographic backdoor by Intel since it is a black box.
 
-            rdrand eax
-            call print_int
-            call print_nl
+                mov eax, rdrand_str
+                call print_string
+
+                rdrand eax
+                call print_int
+                call print_nl
+
+                rdrand eax
+                call print_int
+                call print_nl
+
+        ; # AES
+
+            ; https://en.wikipedia.org/wiki/AES_instruction_set
+
+            ; Intel has extended x86 to add instructions to accelerate AES encryption since 2008,
+            ; AMD followed. For this reason, the Linux kernel implements AES itself, which allows for hardware acceleration,
+            ; and OpenSSL can use the API for it: <https://en.wikipedia.org/wiki/AES_instruction_set>.
+            ; `/proc/cpuinfo` must have the `aes` `CPUID` flag.
+
+            ; TODO example.
 
     ; # popcnt
 
@@ -2176,7 +2188,7 @@ asm_main:
 
         ; http://en.wikipedia.org/wiki/Cyclic_redundancy_check
 
-        ; Pretty specific stuff. Cool. Used by Ethernet.
+        ; Pretty specific stuff. Cool. Used by Ethernet for error checking.
 
     ; # RDTSC
 
@@ -2220,17 +2232,6 @@ asm_main:
             mov eax, ebx
             call print_int
             call print_nl
-
-    ; # AES
-
-        ; https://en.wikipedia.org/wiki/AES_instruction_set
-
-        ; Intel has extended x86 to add instructions to accelerate AES encryption since 2008,
-        ; AMD followed. For this reason, the Linux kernel implements AES itself, which allows for hardware acceleration,
-        ; and OpenSSL can use the API for it: <https://en.wikipedia.org/wiki/AES_instruction_set>.
-        ; `/proc/cpuinfo` must have the `aes` `CPUID` flag.
-
-        ; TODO example.
 
     ; # lfence
 

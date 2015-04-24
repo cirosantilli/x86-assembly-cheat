@@ -2,6 +2,8 @@
 
 Formats that contain assembly.
 
+Elf is the most popular format on Linux.
+
 ### bin
 
 <http://stackoverflow.com/questions/2427011/what-is-the-difference-between-elf-files-and-bin-files>
