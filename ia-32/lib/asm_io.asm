@@ -21,13 +21,13 @@
 ; the value of EAX, not the stack.
 
 %define NL 10
-%define CF_MASK 00000001h
-%define PF_MASK 00000004h
-%define AF_MASK 00000010h
-%define ZF_MASK 00000040h
-%define SF_MASK 00000080h
-%define DF_MASK 00000400h
-%define OF_MASK 00000800h
+%define CF_MASK 0x00000001
+%define PF_MASK 0x00000004
+%define AF_MASK 0x00000010
+%define ZF_MASK 0x00000040
+%define SF_MASK 0x00000080
+%define DF_MASK 0x00000400
+%define OF_MASK 0x00000800
 
 ; for compiler portability, you must use macros
 ; to decide the actual name of
@@ -74,7 +74,7 @@ segment .data
     dir_flag db "DF", 0
     aux_carry_flag db "AF", 0
     unset_flag db " ", 0
-    mem_format1 db "Memory Dump # %d Address = %.8X", NL, 0
+    mem_format1 db "Memory Dump: Address = %.8X", NL, 0
     mem_format2 db "%.8X ", 0
     mem_format3 db "%.2X ", 0
     stack_format db "Stack Dump # %d", NL
@@ -341,22 +341,33 @@ segment .text
         leave
         ret 12
 
-
+    ; Make an od-like output of a memory section.
+    ;
+    ;     void (uint32 initial_memory, uint32 length) __attribute__((cdecl))
+    ;
+    ; `length` is in multiples of 16 bytes.
+    ;
+    ; Sample output:
+    ;
+    ;   FFDC2AF0 50 A0 04 08 00 00 00 00 00 00 00 00 83 CA 5B 55 "P?????????????[U"
+    ;   FFDC2B00 01 00 00 00 94 2B DC FF 9C 2B DC FF EA 3C 56 55 "?????+???+???<VU"
+    ;
     sub_dump_mem:
         enter 0,0
         pusha
         pushf
 
-        push dword [ebp+12]
-        push dword [ebp+16]
+        push dword [ebp+8]
         push dword mem_format1
         call _printf
-        add esp, 12
-        mov esi, [ebp+12] ; address
-        and esi, 0FFFFFFF0h ; move to start of paragraph
-        mov ecx, [ebp+8]
+        add esp, 8
+
+        mov esi, [ebp+8]
+        and esi, 0xFFFF_FFF0
+        mov ecx, [ebp+12]
         inc ecx
     mem_outer_loop:
+
         push ecx
         push esi
         push dword mem_format2
@@ -367,10 +378,12 @@ segment .text
     mem_hex_loop:
         xor eax, eax
         mov al, [esi + ebx]
+
         push eax
         push dword mem_format3
         call _printf
         add esp, 8
+
         inc ebx
         cmp ebx, 16
         jl mem_hex_loop
@@ -406,7 +419,7 @@ segment .text
         popf
         popa
         leave
-        ret 12
+        ret
 
     ; function sub_dump_math
     ; prints out state of math coprocessor without modifying the coprocessor
@@ -433,10 +446,10 @@ segment .text
 
         fsave [ebp-108] ; save coprocessor state to memory
         mov eax, [ebp-104] ; status word
-        and eax, 0FFFFh
+        and eax, 0x0FFFF
         push eax
         mov eax, [ebp-108] ; control word
-        and eax, 0FFFFh
+        and eax, 0x0FFFF
         push eax
         push dword [ebp+8]
         push dword math_format1

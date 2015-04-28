@@ -6,7 +6,7 @@ GAS syntax cheat.
 Focus is on differences from nasm, so for a more complete cheat on x86 assmebly,
 look for nams cheats.
 
-#sources
+## Sources
 
     - <http://www.ibm.com/developerworks/library/l-gas-nasm/>:
 
@@ -16,27 +16,27 @@ look for nams cheats.
 
         gas doc. Part of binutils.
 
-#comments
+## Comments
 
     Multiline comments are like C comments.
 
     Single line comments vary with language.
 
-    For x86, they are `#` and **not** `;`!
+    For x86, they are `# ` and **not** `;`!
 
-#registers
+## Registers
 
     Registers are prefixed by a percent sign `%`. Ex:
 
         movl %eax, %ebx
 
-#integer constants
+## Integer constants
 
     Contants are prefixed by a dollar sign `$`. Ex:
 
         movl $1, %eax
 
-#order
+## Order
 
     Operator order is different from intel syntax:
 
@@ -49,7 +49,7 @@ look for nams cheats.
 
         ebx = eax
 
-#instruction lengths
+## Instruction lengths
 
     Suffixes are added to instrucions to specify length:
 
@@ -58,12 +58,17 @@ look for nams cheats.
     - w = word (16 bit)
     - l = long (32 bit integer or 64-bit floating point)
     - q = quad (64 bit)
+    - dq = double quad (128 bit)
     - t = ten bytes (80-bit floating point)
 
     These are separate words in NASM.
     TODO can those be specified in macros? in NASM yes because they are separate words
 
-#directives
+    If you add two suffixes to an instruciton, it means that it should zero extend, e.g.: `movbl`.
+
+    In Intel, it is called `MOVSX`.
+
+## Directives
 
     Stuff that starts with a dot `.` and does not specify machine instructions directly
     but rather gives information to GAS.
@@ -77,7 +82,7 @@ look for nams cheats.
     - .zero:
     - .macro: macros
 
-##cfi directives
+### cfi directives
 
     Call frame information.
 
@@ -86,7 +91,7 @@ look for nams cheats.
     <http://stackoverflow.com/questions/2529185/what-are-cfi-directives-in-gnu-assembler-gas-used-for>
 */
 
-##macro
+## macro
 
     .macro assert_eq a, b=%eax, size=l
         cmp\size \a, \b
@@ -121,9 +126,9 @@ look for nams cheats.
     f1:
         .float 1.0
 
-    ##strings
+    ## strings
 
-        ##asci
+        ## asci
 
                 s:
                     .ascii	"abcd\n"
@@ -134,7 +139,7 @@ look for nams cheats.
                     s_len = . - s
 
     	/*
-		##asciz
+		## asciz
 
             Like `.ascii` but adds null char to string
 
@@ -152,38 +157,37 @@ look for nams cheats.
 .text
 
     .global asm_main
-
     asm_main:
 
 		enter $0, $0
 
-        ##ram memory
+        ## ram memory
 
-            #Values:
+            # Values:
 
                 mov $0, %eax
                 movl $1, (i)
                 mov (i), %eax
                 assert_eq $1
 
-            #Adresses are prefixed by `$`:
+            # Adresses are prefixed by `$`:
 
-                mov $i, %ebx       #ebx = &i
-                mov (%ebx), %eax   #eax = *ebx
+                mov $i, %ebx       # ebx = &i
+                mov (%ebx), %eax   # eax = *ebx
                 assert_eq (i)
 
-        ##float
+        ## float
 
-                #fld1
-                #fldl (f1)
-                #fchs
-                #fstpl (f)
-                #movl (f), %eax
+                # fld1
+                # fldl (f1)
+                # fchs
+                # fstpl (f)
+                # movl (f), %eax
 
-        /* #macro */
+        /* # macro */
 
             /*
-            #labels in macros
+            # labels in macros
 
                 If you are going to use a macro with a label inside it many time you need some way of 
                 ensuring that this label will be unique for each macro invocation.
@@ -201,7 +205,7 @@ look for nams cheats.
                     local_at
 
                 /*
-                ##altmacro
+                ## altmacro
 
                     Enables the alternate macro mode from now on.
 
@@ -212,7 +216,7 @@ look for nams cheats.
                 */
 
                     /*
-                    ##LOCAL
+                    ## LOCAL
 
                         Impossible to clash.
 
@@ -237,7 +241,7 @@ look for nams cheats.
                         local_keyword
 
                     /*
-                    ##% string evaluation
+                    ## % string evaluation
 
                         TODO how to use this?
 
@@ -252,7 +256,7 @@ look for nams cheats.
                         */
 
             /*
-            #\@
+            # \@
 
                 Stores the total number of any macro executed up to now.
 
@@ -271,7 +275,7 @@ look for nams cheats.
                 sub %ebx, %eax
                 assert_eq $1
 
-            /* #irp
+            /* # irp
 
                 The macro below generates:
 

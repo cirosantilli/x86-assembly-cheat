@@ -9,7 +9,9 @@
 
 **You can run this even if you are on x86-64 Linux!** x86-64 Linux is able to run IA-32 code out of the box.
 
-You only have to make sure that `gcc -m32 hello_world.c` compiles correctly. In particular, the hard part is ensuring that the linker is able to find the 32-bit version of the glibc used by the driver: any GCC installation can do the compilation correctly. On Ubuntu, all you need to do is:
+You only have to make sure that `gcc -m32 hello_world.c` compiles correctly.
+
+In particular, the hard part is ensuring that the linker is able to find the 32-bit version of the glibc used by the driver: any GCC installation can do the compilation correctly. On Ubuntu, all you need to do is:
 
     sudo apt-get install gcc-multilib
 

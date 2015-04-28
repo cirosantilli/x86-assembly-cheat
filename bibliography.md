@@ -16,6 +16,12 @@
 
     Get yourself the 3 volume IA documentation and the optimization manual and sleep with them.
 
+    Interesting chapters:
+
+    -   Volume 1 chapter 5: list of instructions grouped by type, good to find new instructions to play with
+
+    -   Volume 2 chapter 3: full alphabetic list of all instructions
+
 -   [System V Application Binary Interface v0.99.7][]
 
 ## Tutorials

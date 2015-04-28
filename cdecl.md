@@ -1,5 +1,7 @@
 # cdecl
 
+TODO move in with the code.
+
 De facto standard C calling convention used by GCC.
 
 Does not have a formal standard, so different compilers may have incompatible versions of cdecl.
@@ -14,7 +16,7 @@ Does not have a formal standard, so different compilers may have incompatible ve
 
     -   arguments are put on stack in inverse order from declaration
 
-        This allows for funcs with arbitrary numbers of args such as `printf`:
+        This allows for functions with arbitrary numbers of args such as `printf`:
 
         Like this the format string will always be on the same position (at the end).
 
@@ -47,4 +49,3 @@ Does not have a formal standard, so different compilers may have incompatible ve
     This allows for functions with variable number or arguments such as `printf`, because then only the caller knows how many args he put on the stack.
 
     PASCAL for example follows a function clear argument stack convention.
-

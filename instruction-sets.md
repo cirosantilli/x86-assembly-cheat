@@ -68,3 +68,19 @@ More and more, SIMD instructions are being added on different processors.
 For some time now Intel has been grouping those instructions under the `SSE` name.
 
 See: <http://neilkemp.us/src/sse_tutorial/sse_tutorial.html>
+
+## System programming vs application instructions
+
+Most architectures provide two general sets of instructions:
+
+-   system programming: instructions that only operating system writers will need.
+
+    Application programs are generally forbidden from even using such instructions by security measures.
+
+    This allows for example for process separation: preventing one process from seeing the other's memory, reducing the impact of bugs and malicious attacks.
+
+-   application programming. Instructions that any program can use.
+
+    Those will be usually packaged inside executable wrappers of some sort, e.g. ELF, which add required metadata to the instructions, e.g. where to find shared libraries.
+
+It is common for manuals to separate those into separate chapters.

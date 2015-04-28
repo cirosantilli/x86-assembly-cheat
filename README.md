@@ -8,6 +8,7 @@ x86 only for now, but we'd love to try out other architectures.
     1. [ia-32/main.asm](ia32/main.asm)
     1. [x86 paging tutorial](http://stackoverflow.com/questions/18431261/how-does-x86-paging-work)
 1.  Introduction
+    1. [How to learn](how-to-learn.md)
     1. [Instruction sets](instruction-sets.md)
     1. [Assemblers](assemblers.md)
     1. [Pros and cons](pros-and-cons.md)
