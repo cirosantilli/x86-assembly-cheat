@@ -14,7 +14,7 @@ OUT_BNAME := $(RUN)$(OUT_EXT)
 
 all: driver $(OUTS)
 
-%$(OUT_EXT): $(OUT_DIR)%.o
+%$(OUT_EXT): %.o
 	$(GCC) -o '$@' '$<' driver.o asm_io.o
 
 %.o: %.asm
@@ -25,7 +25,7 @@ clean:
 
 driver:
 	$(NASM) -dELF_TYPE -o asm_io.o $(LIB_DIR)asm_io.asm
-	$(GCC) -o $(OUT_DIR)driver.o -c $(LIB_DIR)driver.c
+	$(GCC) -o driver.o -c $(LIB_DIR)driver.c
 
 run: all
 	./$(OUT_BNAME)

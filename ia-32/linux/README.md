@@ -1,5 +1,11 @@
 # Linux
 
+1. [hello_world.asm](hello_world.asm)
+1. [stack_top.asm](stack_top.asm)
+1. [C from assembly](c-from-assembly/)
+
+## Introduction
+
 Linux-specific IA-32 examples without external libraries like libc.
 
 Use a libc for OS-portable code instead.

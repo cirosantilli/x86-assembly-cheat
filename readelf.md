@@ -10,5 +10,12 @@ TODO understand all the information, and therefore the entire elf format.
 
 To show only specific informations:
 
-- `-s`: symtable (defined stuff) of elf, `.o` or `.so`
-- `-d`: dependencies of an executable (symbols and shared libs)
+## s
+
+Symtable of elf, `.o` or `.so`.
+
+## d
+
+Show only dependencies of an executable (symbols and shared libraries).
+
+- `NEEDED`: direct `.so` dependencies <http://stackoverflow.com/questions/6242761/how-do-i-find-the-direct-shared-object-dependencies-of-a-linux-elf-binary>. `.so` can also depend on other `.so`. To recursively list all dependencies, use `ldd`.

@@ -76,10 +76,12 @@
             assert_eq %1, %2, %3
         %endmacro
 
-        ;macro overload
-        ;assert_eq eax
         %macro assert_eq 1
             assert_eq eax, %1
+        %endmacro
+
+        %macro assert_eq 0
+            assert_eq eax, ebx
         %endmacro
 
         ; asserts eax neq %1
@@ -397,7 +399,6 @@ asm_main:
         ; - General-purpose registers
         ; - Segment registers
         ; - EFLAGS (program status and control) register
-        ; - EIP (instruction pointer)
 
         ; # General purpose reigisters
 
@@ -455,6 +456,48 @@ asm_main:
                     mov ebx, 0x0000_0304
                     assert_eq ax, bx
                     assert_neq eax, ebx
+
+            ; # esi
+
+            ; # edi
+
+                ; Automatically incremented by the string instructions.
+
+                ; Whenever you are not dealing with string instructions,
+                ; those registers are useful for general purpose.
+
+            ; # ebp
+
+                ; Stack base.
+
+                ; Modified by `enter` and `leave`.
+
+                ; You can almost never use it as a general purpose register because of that.
+
+            ; # ESP
+
+                ; Stack Pointer.
+
+                ; Modified by `push` and `pop`.
+
+                ; You can almost never use it as a general purpose register because of that.
+
+            ; # EIP
+
+                ; Instruction Pointer.
+
+                ; Address of the current instruction to be executed.
+
+                ; Cannot be retrieved directly: `mov` cannot be encoded to output to EIP:
+                ; http://stackoverflow.com/questions/599968/reading-program-counter-directly
+
+                ; There are however indirect techniques, and NASM offers `$`.
+
+            ; # PC
+
+                ; Another name for the IP.
+
+                ; https://en.wikipedia.org/wiki/Program_counter
 
         ; # Initial register state
 
@@ -677,12 +720,96 @@ asm_main:
             add [d0], eax ; double word at d0 += EAX
             mov al, [d0]  ; copy first byte of double word at d0 into AL
 
-        mov byte [bs4], 0
-        mov byte [bs4 + 1], 1
-        mov ebx, 2
-        mov byte [bs4 + ebx], 2
-        ; WARNING: must use 32-bit var
-        ;mov al, [bs4 + bx]
+        ; # Indirect addressing
+
+        ; # Effective address
+
+        ; # Addressing modes
+
+            ; x86 allows encoding address operations of the following form on a single instruction:
+
+                ; [a + b*c + d]
+
+            ; Where the instruction encoding allows for:
+
+            ; - `a`: any general purpose register
+            ; - `a`: any general purpose register
+            ; - `b`: any general purpose register except `ESP`
+            ; - `c`: 1, 2, 4 or 8
+            ; - `d`: a constant
+
+            ; https://en.wikipedia.org/wiki/X86#Addressing_modes
+
+            ; Major application: manipulation of an array of structs:
+
+            ; - `a`: start of the array in memory
+            ; - `b`: index of the element
+            ; - `c`: size of each element. Known at compile time. TODO what gets compiled if >8 ?
+            ; - `d`: field of the array to be accessed. It is known at compile time, thus the constant.
+
+            ; http://stackoverflow.com/questions/1658294/whats-the-purpose-of-the-lea-instruction
+
+            ; The simplest way to try them out is with `lea`.
+
+            ; Full form:
+
+                mov eax, 1
+                mov ebx, 3
+                lea eax, [eax + 2*ebx + 4]
+                assert_eq 11
+
+            ; NASM is quite flexible about the ordering of operands:
+
+                mov eax, 1
+                mov ebx, 3
+                lea eax, [4 + eax + 2*ebx]
+                assert_eq 11
+
+            ; but avoid that and use the `[a + b*c + d]` form proposed,
+            ; as that is the simplest one to interpret as array of struct + field access.
+
+            ; NASM can also do pure magic like:
+
+                mov eax, 1
+                lea eax, [3*eax]
+                assert_eq 3
+
+            ; which compiles like:
+
+                mov eax, 1
+                lea eax, [eax + 2*eax]
+                assert_eq 3
+
+            ; since `b` must be a power of 2.
+            ; This is documented at: http://www.nasm.us/doc/nasmdoc3.html#section-3.3
+
+            ; # Segment register form
+
+                ; It is also possible to specify the segment register to use with:
+
+                    ; [ed:a + b*c + d]
+
+                ; TODO expand on that. See also:
+                ; http://stackoverflow.com/questions/18736663/what-does-the-colon-mean-in-x86-assembly-gas-syntax-as-in-dsbx
+
+            ; # lea
+
+                ; Load Effective Address
+
+                ; Do an addressing calculation, and store the **address**,
+                ; not the value at that memory location as would be done with `mov`.
+
+                ; Often used in an attempt to speed up arithmetic operations.
+
+                ; # lea vs add
+
+                ; # lea vs mov
+
+                    ; http://stackoverflow.com/questions/6323027/lea-or-add-instruction
+
+                    ; http://stackoverflow.com/questions/1699748/what-is-the-difference-between-mov-and-lea
+
+                    ; GCC 4.8 uses lea by default.
 
         ; # Instruction size
 
@@ -744,7 +871,7 @@ asm_main:
                 call print_nl
                 mov eax, $ + 1
 
-            ; Instructoin lengths
+            ; Instruction lengths
 
                 mov ebx, $
                 mov eax, $
@@ -1264,7 +1391,7 @@ asm_main:
                     assert_flag jne
                     assert_eq 2
 
-                ;Valid operands:
+                ; Valid operands:
 
                     cmp eax, 0
                     cmp eax, ebx
@@ -1820,7 +1947,7 @@ asm_main:
 
                 ; Variants: `rep(n|)[ze]`
 
-                ; # memcmp
+                ; # memcpy
 
                     cld
                     mov edi, bs4
@@ -2009,28 +2136,6 @@ asm_main:
                 ;assert_eq [bs4_2 + 1], 2, byte
 
                 cld
-
-    ; # lea
-
-        ; Load Effective Address
-
-        ; Single cycle instruction.
-
-        ; Most general form:
-
-            ; ptr + reg + c1*reg + c2
-
-        ; - regs are 32 bit registers
-        ; - c1 \in {1,2,4,8}
-        ; - c2 is any other constant
-
-        ; Major application: array instruction offsets.
-
-        ; But can be used as a shortcut to arithmetic operations that fit its form.
-
-            mov ebx, 2
-            lea eax, [3*ebx + 1]
-            assert_eq 7
 
     ; # stack
 

@@ -18,10 +18,27 @@ where `cdecl` is the name of the calling convention.
 
 In IA32, [cdecl](cdecl.md) is the most popular in Linux, and stdcall the most popular in Windows, but there exist many others.
 
-In x86-64, the number of calling conventions was reduced, with:
+## x86-64 calling conventions
 
-- [System V AMD64 ABI][] dominating in Linux and other UNIX systems
-- Microsoft x64 calling convention and its 2013 extension `__vectorcall` for Windows,
+In x86-64, the number of calling conventions was greatly reduced.
+
+### System V AMD64 ABI
+
+[System V AMD64 ABI][] dominating in Linux and other UNIX systems.
+
+Uses CPU registers for the first 6 parameters, XMM if floating point, and the following on stack, thus much faster! This was made possible by the large amount of CPU registers added.
+
+XMM passing is possible because SSE and SSE2 are part of the x86-64 core.
+
+Register order is: RDI, RSI, RDX, RCX, R8, and R9
+
+For system calls, R10 is used instead of RCX.
+
+### Microsoft x64
+
+Obviously they could not be compatible with the rest.
+
+Microsoft x64 calling convention and its 2013 extension `__vectorcall` for Windows,
 
 ## Call C function form assembly
 

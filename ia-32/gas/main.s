@@ -5,91 +5,10 @@ GAS syntax cheat.
 
 Focus is on differences from nasm, so for a more complete cheat on x86 assmebly,
 look for nams cheats.
-
-## Sources
-
-    - <http://www.ibm.com/developerworks/library/l-gas-nasm/>:
-
-        gas differences from nasm. Great intro if you already know nasm.
-
-    - <http://sourceware.org/binutils/docs/as/>:
-
-        gas doc. Part of binutils.
-
-## Comments
-
-    Multiline comments are like C comments.
-
-    Single line comments vary with language.
-
-    For x86, they are `# ` and **not** `;`!
-
-## Registers
-
-    Registers are prefixed by a percent sign `%`. Ex:
-
-        movl %eax, %ebx
-
-## Integer constants
-
-    Contants are prefixed by a dollar sign `$`. Ex:
-
-        movl $1, %eax
-
-## Order
-
-    Operator order is different from intel syntax:
-
-    For example, the following moves `eax` to `ebx`:
-
-        movl %eax %ebx
-
-    Which is kind of logical because it is in the order in which we say it: "move eax to ebx"
-    however is different from the usual c `=` operator which would be something like
-
-        ebx = eax
-
-## Instruction lengths
-
-    Suffixes are added to instrucions to specify length:
-
-    - b = byte (8 bit)
-    - s = short (16 bit integer) or single (32-bit floating point)
-    - w = word (16 bit)
-    - l = long (32 bit integer or 64-bit floating point)
-    - q = quad (64 bit)
-    - dq = double quad (128 bit)
-    - t = ten bytes (80-bit floating point)
-
-    These are separate words in NASM.
-    TODO can those be specified in macros? in NASM yes because they are separate words
-
-    If you add two suffixes to an instruciton, it means that it should zero extend, e.g.: `movbl`.
-
-    In Intel, it is called `MOVSX`.
-
-## Directives
-
-    Stuff that starts with a dot `.` and does not specify machine instructions directly
-    but rather gives information to GAS.
-
-    - .text: text segment
-    - .data: data segment
-    - .global: data segment
-    - .globl: same as global
-    - .loc: debuging info
-    - .align:
-    - .zero:
-    - .macro: macros
-
-### cfi directives
-
-    Call frame information.
-
-    Appear all over gcc generated code for C sources.
-
-    <http://stackoverflow.com/questions/2529185/what-are-cfi-directives-in-gnu-assembler-gas-used-for>
 */
+
+# TODO port .inc from NASM or find a better solution.
+#.include "lib/asm_io.inc"
 
 ## macro
 
@@ -111,7 +30,7 @@ look for nams cheats.
     .endm
 */
 
-.extern exit, puts
+.extern exit, puts, print_string
 
 .data
 
@@ -126,7 +45,7 @@ look for nams cheats.
     f1:
         .float 1.0
 
-    ## strings
+    ## Strings
 
         ## asci
 
@@ -154,6 +73,12 @@ look for nams cheats.
                     .asciz	"abcd"
                     s_len = . - s
 
+        /*
+        For later use.
+        */
+        assert_pass_str:
+            .asciz "\nALL ASSERTS PASSED\n"
+
 .text
 
     .global asm_main
@@ -161,16 +86,36 @@ look for nams cheats.
 
 		enter $0, $0
 
-        ## ram memory
+        ## RAM memory
 
-            # Values:
+            ## Indirect addressing
+
+                # Of form:
+
+                    # a(b, c, d)
+
+                # is the same as Intel notation:
+
+                    # [a + b * c + d]
+
+                # Documented at:
+                # https://sourceware.org/binutils/docs-2.18/as/i386_002dMemory.html#i386_002dMemory
+
+            # basic usage:
 
                 mov $0, %eax
                 movl $1, (i)
                 mov (i), %eax
                 assert_eq $1
 
-            # Adresses are prefixed by `$`:
+            # `(i)` is the same as `i`: if the label is the only thing
+            # inside the parenthesis, those can be omited.
+
+                movl $2, i
+                mov i, %eax
+                assert_eq $2
+
+            # To get the actual adress instead of the data, use `$`:
 
                 mov $i, %ebx       # ebx = &i
                 mov (%ebx), %eax   # eax = *ebx
@@ -256,7 +201,11 @@ look for nams cheats.
                         */
 
             /*
-            # \@
+            ## \@
+
+            ## @
+
+            ## at sign
 
                 Stores the total number of any macro executed up to now.
 
@@ -275,6 +224,18 @@ look for nams cheats.
                 sub %ebx, %eax
                 assert_eq $1
 
+            /*
+            ## $
+
+            ## Dollar sign
+
+                Immediates:
+
+                -  constants `$0x1F`
+                - label addresses `$label`. Without dollar, it means the data itself!
+            */
+
+
             /* # irp
 
                 The macro below generates:
@@ -290,8 +251,11 @@ look for nams cheats.
                 .endr
                 assert_eq $6
 
-        movl $0, %eax
+        mov $assert_pass_str, %eax
+        call print_string
+
 		leave
+        movl $0, %eax
 		ret
 
 .data

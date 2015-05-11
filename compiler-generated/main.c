@@ -4,7 +4,6 @@ One example pre function so that it is easy to find on the outputs.
 Each function must have a side effect
 */
 
-#include <stdio.h>
 #include <string.h>
 
 int memcmp_test(char* s, char* t, int n) {

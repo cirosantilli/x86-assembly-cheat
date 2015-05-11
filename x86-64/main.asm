@@ -29,11 +29,33 @@ section .text
                 mov rdx, 0xFFFFFFFFFFFFFFFF
                 mov rsi, 0xFFFFFFFFFFFFFFFF
                 mov rdi, 0xFFFFFFFFFFFFFFFF
-                ;mov ebp, 0xFFFFFFFFFFFFFFFF
-                ;mov esp, 0xFFFFFFFFFFFFFFFF
+                ;mov rbp, 0xFFFFFFFFFFFFFFFF
+                ;mov rsp, 0xFFFFFFFFFFFFFFFF
                 mov r8,  0xFFFFFFFFFFFFFFFF
                 mov r9,  0xFFFFFFFFFFFFFFFF
                 mov r15, 0xFFFFFFFFFFFFFFFF
+
+        ; # RIP
+
+            ; EIP in x86-64.
+
+            ; New register TODO or just a magical part of the address?,
+            ; which allows a completely new addressing mode,
+            ; that is specially useful for position independent code.
+
+            ; It may also generate smaller code, and GCC seems to use it for that reason.
+
+            ; It does not seem to be possible to use it with Intel syntax directly:
+
+                ;lea rax, [rip]
+                ;lea rax, [rip + 4]
+
+            ; Instead, it seems that you must use the `rel` or `abs` keyword,
+            ; and possibly set their defaults http://www.nasm.us/doc/nasmdoc6.html#section-6.2.1 :
+
+                lea rax, [rel _start]
+                lea rax, [abs _start]
+                lea rax, $
 
         ; # PUSHA
 

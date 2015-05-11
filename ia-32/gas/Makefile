@@ -1,31 +1,32 @@
-GAS ?= as
-GCC ?= gcc -m32 -std=c89 -pedantic-errors -Wall
+GAS ?= as --32 -g
+CCC ?= gcc -ggdb -m32 -std=c89 -pedantic-errors -Wall
+IN_EXT := .s
 LIB_DIR ?= lib/
 LN ?= ld -s
-IN_DIR ?= ./
-OUT_EXT ?=
+NASM ?= nasm -w+all -f elf32
+OUT_EXT ?= .out
 RUN ?= main
 
-EXT := .s
-INS := $(wildcard $(IN_DIR)*$(EXT))
-INS_NODIR := $(notdir $(INS))
-OUTS := $(patsubst %$(EXT),%$(OUT_EXT),$(INS_NODIR))
+INS := $(wildcard *$(IN_EXT))
+OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 
+.PRECIOUS: %.o
 .PHONY: all clean driver
 
 all: driver $(OUTS)
 
 %$(OUT_EXT): %.o
-	$(GCC) -o "$@" "$<" driver.o
+	$(CCC) -o '$@' '$<' driver.o asm_io.o
 
-%.o: $(IN_DIR)%.s
-	$(GAS) -o "$@" "$<"
+%.o: %.s
+	$(GAS) -o '$@' '$<'
 
 clean:
-	rm -f *.o *.out
+	rm -f *.o *$(OUT_EXT)
 
 driver:
-	$(GCC) -o driver.o -c driver.c
+	$(NASM) -dELF_TYPE -o asm_io.o $(LIB_DIR)asm_io.asm
+	$(CCC) -o $(OUT_DIR)driver.o -c $(LIB_DIR)driver.c
 
 run: all
-	./$(RUN)$(OUT_EXT)
+	./'$(RUN)$(OUT_EXT)'
