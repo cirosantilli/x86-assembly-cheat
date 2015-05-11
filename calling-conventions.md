@@ -69,3 +69,7 @@ To call a C function from assembly you need to:
         gcc -o main a.o c.o
 
     You can also call stdlib functions if you want, since GCC links to them for you.
+
+## AMD64 System V ABI
+
+Unchanged registers: RBX, RBP, R12-R15 <http://stackoverflow.com/questions/9603003/what-registers-are-restored-after-a-x86-function-call-in-c>

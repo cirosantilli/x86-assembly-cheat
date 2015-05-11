@@ -1,12 +1,14 @@
+%include "lib/asm_io.inc"
+
 section .data
 
-    hello_world db "Hello world!", 10
-    hello_world_len  equ $ - hello_world
+    asserts_passed_str db "ALL ASSERTS PASSED", 10, 0
+    asserts_passed_str_len  equ $ - asserts_passed_str
 
 section .text
 
-    global _start
-    _start:
+    global asm_main
+    asm_main:
 
         ; # syscall
 
@@ -53,16 +55,16 @@ section .text
             ; Instead, it seems that you must use the `rel` or `abs` keyword,
             ; and possibly set their defaults http://www.nasm.us/doc/nasmdoc6.html#section-6.2.1 :
 
-                lea rax, [rel _start]
-                lea rax, [abs _start]
-                lea rax, $
+                ;lea rax, [rel _start]
+                ;lea rax, [abs _start]
+                ;lea rax, $
 
         ; # PUSHA
 
         ; # POPA
 
             ; `PUSHA` and `POPA` were removed from x86-64:
-            ; <http://stackoverflow.com/questions/6837392/how-to-save-the-registers-on-x86-64-for-an-interrupt-service-routine>
+            ; http://stackoverflow.com/questions/6837392/how-to-save-the-registers-on-x86-64-for-an-interrupt-service-routine
 
                 ; ERROR
                 ;pusha
@@ -76,12 +78,14 @@ section .text
                 ; ERROR
                 ;pop eax
 
-        mov rax, 1
-        mov rdi, 1
-        mov rsi, hello_world
-        mov rdx, hello_world_len
-        syscall
+        mov rax, asserts_passed_str
+        call print_string
 
-        mov rax, 60
-        mov rdi, 0
-        syscall
+        ;mov rax, 1
+        ;mov rdi, 1
+        ;mov rsi, asserts_passed_str
+        ;mov rdx, asserts_passed_str_len
+        ;syscall
+
+        mov rax, 0
+        ret
