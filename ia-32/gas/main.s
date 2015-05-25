@@ -1,14 +1,8 @@
 /*
-TODO broken.
-
 GAS syntax cheat.
-
-Focus is on differences from nasm, so for a more complete cheat on x86 assmebly,
-look for nams cheats.
 */
 
-# TODO port .inc from NASM or find a better solution.
-#.include "lib/asm_io.inc"
+# TODO create a `.inc` to factor out the externs.
 
 ## macro
 
@@ -30,7 +24,8 @@ look for nams cheats.
     .endm
 */
 
-.extern exit, puts, print_string
+# TODO are externs needed? Compiles fine without.
+.extern exit, print_string
 
 .data
 
@@ -267,8 +262,8 @@ look for nams cheats.
 	/* Print error message and exit program with status 1 */
 	assert_fail:
 
-		pushl $assert_fail_str
-		call puts
+		mov $assert_fail_str, %eax
+		call print_string
 
 		/* call libc exit with exit status 1 */
 		pushl $1

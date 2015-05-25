@@ -21,3 +21,11 @@ When using external libraries like libc, you also have to take care to link to t
 We mostly use `int 0x80` system calls here for their simplicity.
 
 However, the best way to do system calls in IA-32 Linux is through `sysenter` as it is faster. But user applications don't use `sysenter` directly, but rather `VDSO` should be used.
+
+## VDSO
+
+## vsyscall
+
+The kernel just maps and maintains a magic memory area to every process which contains fast versions of certain functions.
+
+<http://stackoverflow.com/questions/19938324/what-are-vdso-and-vsyscall>

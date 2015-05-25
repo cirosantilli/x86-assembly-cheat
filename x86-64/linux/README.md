@@ -1,9 +1,11 @@
 # Linux
 
-1. [hello_world.asm](hello_world.asm)
-1. [min.asm](min.asm)
-1. [int_system_call.asm](int_system_call.asm)
-1. [stack_top.asm](stack_top.asm)
+1.  [hello_world.asm](hello_world.asm)
+1.  [min.asm](min.asm)
+1.  [int_system_call.asm](int_system_call.asm)
+1.  [memory_layout.asm](memory_layout.asm)
+    1. [stack_top.asm](stack_top.asm)
+    1. [initial_state.asm](initial_state.asm)
 
 ## System calls
 

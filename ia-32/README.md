@@ -7,7 +7,7 @@
 1.  [gas/](gas/)
 1.  [Vagrantfile](Vagrantfile)
 
-**You can run this even if you are on x86-64 Linux!** x86-64 Linux is able to run IA-32 code out of the box.
+**You can run this even if you are on x86-64 Linux!** x86-64 Linux is able to run IA-32 code out of the box if compiled with `CONFIG_IA32_EMULATION=y`, which is the default in any sane distro.
 
 You only have to make sure that `gcc -m32 hello_world.c` compiles correctly.
 

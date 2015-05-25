@@ -1,5 +1,5 @@
 ASM_EXT ?= .s
-CCC ?= gcc -pedantic-errors -std=c89 -Wall -O3
+CCC ?= gcc -ggdb -pedantic-errors -std=c89 -Wall
 IN_EXT ?= .c
 OBJ_EXT ?= .o
 OUT_EXT ?= .out

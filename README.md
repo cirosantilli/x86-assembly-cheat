@@ -23,18 +23,19 @@ x86 only for now, but we'd love to try out other architectures.
     1. [cdecl](cdecl.md)
 1.  [Containers](containers.md)
     1. [ELF](elf.md)
+    1. [Library](library/)
+1.  [ldd](ldd.md)
 1.  [Binutils](binutils.md)
     1. [ld](ld.md)
     1. [readelf](readelf.md)
     1. [objdump](objdump.md)
     1. [size](size.md)
-    1. [ldd](ldd.md)
 1.  [Bibliography](bibliography.md)
     1. Related repositories
        1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
        1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
 
-## WIP
+WIP
 
 1.  [Instruction encoding](instruction-encoding/)
 1.  [GAS](ia32/gas/)
@@ -44,4 +45,7 @@ x86 only for now, but we'd love to try out other architectures.
     1. [ar](ar.md)
     1. [elfedit](elfedit.md)
     1. [nm](nm.md)
+    1. [strip](strip.md)
+    1. [objcopy](objcopy.md)
 1.  [DWARF](dwarf.md)
+1.  [Symbol Versioning](symbol-versioning.md)

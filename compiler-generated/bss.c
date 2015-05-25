@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-int my_var;
+/* Contrast with the Common and Data section outputs. */
+int my_var = 0;
 
 int main() {
-    my_var = 0;
     printf("%d\n", my_var + 1);
     return 0;
 }

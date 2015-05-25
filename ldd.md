@@ -20,7 +20,7 @@ You can also add to path with environment variables.
 
 Don't rely on this method for production.
 
-    export LD_LIBRARY_PATH="/path/to/link"
+    export LD_LIBRARY_PATH='/path/to/link'
 
 ## Interpreter
 

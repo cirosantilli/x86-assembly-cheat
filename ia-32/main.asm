@@ -64,7 +64,7 @@
             popf
         %endmacro
 
-        ; # innner labels
+        ; # innner macro labels
 
             ; Labels inside macros prefixed by `%%` are special:
             ; for each macro invocation they generate a new unique label,
@@ -474,7 +474,7 @@ asm_main:
 
                 ; You can almost never use it as a general purpose register because of that.
 
-            ; # ESP
+            ; # esp
 
                 ; Stack Pointer.
 
@@ -482,7 +482,7 @@ asm_main:
 
                 ; You can almost never use it as a general purpose register because of that.
 
-            ; # EIP
+            ; # eip
 
                 ; Instruction Pointer.
 
@@ -493,7 +493,7 @@ asm_main:
 
                 ; There are however indirect techniques, and NASM offers `$`.
 
-            ; # PC
+            ; # pc
 
                 ; Another name for the IP.
 
@@ -2304,6 +2304,20 @@ asm_main:
                     ;seg fault
                     ;stops in the middle of next instruction
 
+        ; # Labels
+
+            ; # Local labels
+
+                ; http://www.nasm.us/doc/nasmdoc3.html#section-3.9
+
+                ; Labels that start with a period get the previous label prepended to them,
+                ; which may give them unicity.
+
+                ; Those are still present on the output `.o` however.
+
+                ; GAS has a related convention which hides `.L` prefixed labels
+                ; completely from the output `.o`.
+
         ; # Conditional branches
 
             ; # jz
@@ -2930,7 +2944,6 @@ print_ebx_call_ret:
     call print_int
     call print_nl
     ret
-        ;jumps to first adress on the stack
 
 ; # Algorithms
 

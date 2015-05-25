@@ -73,3 +73,5 @@ To call a C function from assembly you need to:
 ## AMD64 System V ABI
 
 Unchanged registers: RBX, RBP, R12-R15 <http://stackoverflow.com/questions/9603003/what-registers-are-restored-after-a-x86-function-call-in-c>
+
+Variable length argument lists pass the number of arguments on AL: <http://stackoverflow.com/questions/6212665/why-is-eax-zeroed-before-a-call-to-printf/6212835#6212835>

@@ -2,7 +2,7 @@
 
 section .data
 
-    asserts_passed_str db "ALL ASSERTS PASSED", 10, 0
+    asserts_passed_str db "ALL ASSERTS PASSED", 0
     asserts_passed_str_len  equ $ - asserts_passed_str
 
 section .text

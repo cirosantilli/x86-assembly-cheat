@@ -2,6 +2,8 @@
 
 GNU assembler syntax cheatsheet.
 
+Supposes that you already know IA-32 and NASM.
+
 Documentation: <https://sourceware.org/binutils/docs-2.18/as/>
 
 Used by the kernel, GCC and glibc... so just learn it.

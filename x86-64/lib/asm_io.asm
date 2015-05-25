@@ -3,8 +3,8 @@ extern _printf
 
 segment .data
 
-    long_format db "%ld", 0
-    string_format db "%s", 0
+    long_format db "%ld", 10, 0
+    string_format db "%s", 10, 0
 
 segment .text
 

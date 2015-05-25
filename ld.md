@@ -20,3 +20,9 @@
     i386pe
 
 TODO meaning of each type?
+
+## Standard library
+
+`ld` does not link to the standard library by default.
+
+<http://stackoverflow.com/questions/3577922/how-to-link-a-gas-assembly-file-as-a-c-program-with-ld-without-using-gcc>

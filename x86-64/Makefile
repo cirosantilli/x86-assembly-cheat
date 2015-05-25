@@ -1,3 +1,5 @@
+.POSIX:
+
 GCC ?= gcc -ggdb -m64 -pedantic-errors -std=c89 -Wall
 LIB_DIR ?= lib/
 NASM ?= nasm  -f elf64 -g -w+all

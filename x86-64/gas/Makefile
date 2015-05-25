@@ -1,11 +1,11 @@
 .POSIX:
 
-GAS ?= as --32 -g
-CCC ?= gcc -ggdb -m32 -std=c89 -pedantic-errors -Wall
+GAS ?= as --64 -g
+CCC ?= gcc -ggdb -m64 -std=c89 -pedantic-errors -Wall
 IN_EXT := .s
 LIB_DIR ?= lib/
 LN ?= ld -s
-NASM ?= nasm -w+all -f elf32
+NASM ?= nasm -w+all -f elf64
 OUT_EXT ?= .out
 RUN ?= main
 

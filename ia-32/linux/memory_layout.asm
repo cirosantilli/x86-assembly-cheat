@@ -1,6 +1,6 @@
 ; See what `esp` is worth at initialization.
 ;
-; Pass the output of this through hd to see it.
+; Pass the output of this through `hd` to see it.
 ;
 ; Expected outcome: two ints, 4 bytes apart, close to 4Gb.
 ;
@@ -15,10 +15,11 @@
     mov eax, 4
     mov ebx, 1
     mov ecx, %1
+    ; Little endian is easier for humans to read.
     bswap ecx
     mov [resd0], ecx
     mov ecx, resd0
-    mov edx, 4
+    mov rdx, 4
     int 80h
 %endmacro
 
