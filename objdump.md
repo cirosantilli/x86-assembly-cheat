@@ -1,5 +1,14 @@
 # objdump
 
+`objdump` shows a weird view of ELF files: use `readelf` whenever possible:
+
+- <http://stackoverflow.com/questions/22160621/objdump-not-showing-all-sections>
+- <http://stackoverflow.com/questions/8979664/readelf-vs-objdump-why-are-both-needed>
+
+Things which it can do that `readelf` cannot:
+
+- disassemble
+
 ## d
 
 See assembler instructions of object file or executable:

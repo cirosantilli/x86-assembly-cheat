@@ -26,3 +26,8 @@ TODO meaning of each type?
 `ld` does not link to the standard library by default.
 
 <http://stackoverflow.com/questions/3577922/how-to-link-a-gas-assembly-file-as-a-c-program-with-ld-without-using-gcc>
+
+## Library and weak TODOs
+
+- <http://stackoverflow.com/questions/24390267/why-redefinition-of-a-function-which-is-already-present-in-dynamic-or-static-lib>
+- <http://stackoverflow.com/questions/13089166/how-to-make-gcc-link-strong-symbol-in-static-library-to-overwittren-weak-symbol>
