@@ -48,5 +48,9 @@
 
     Lots of info on what C code maps to in assembly, and how to look for what matters to reverse engineer stuff.
 
+-   <http://www.agner.org/optimize/>
+
+    Highly regarded optimization guidelines for x86 and C++.
+
 [Itanium C++ ABI]: http://mentorembedded.github.io/cxx-abi/abi.html
 [System V ABI AMD64]: http://www.x86-64.org/documentation_folder/abi-0.99.pdf

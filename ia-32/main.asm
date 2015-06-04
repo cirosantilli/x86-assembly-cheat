@@ -297,6 +297,7 @@ section .bss
         resb0 resb 1
         resw0 resw 1
         resd0 resd 1
+        resd1 resd 1
         resq0 resq 1
         rest0 rest 1
         reso0 reso 1
@@ -373,14 +374,14 @@ asm_main:
 
         ; # rodata
 
-            assert_eq dword [rodata_dd], 1
+            assert_eq [rodata_dd], 1, dword
 
             ; SEGFAULT
             ;mov dword [rodata_dd], 2
 
         ; # Custom sections
 
-            assert_eq dword [mycustomsection_dd], 1
+            assert_eq [mycustomsection_dd], 1, dword
 
             ; SEGFAULT
             ;mov dword [mycustomsection_dd], 2
@@ -470,9 +471,18 @@ asm_main:
 
                 ; Stack base.
 
+                ; Why it exists:
+                ; http://stackoverflow.com/questions/579262/what-is-the-purpose-of-the-ebp-frame-pointer-register
+
+                ; - tell the debugger where the current frame starts
+                ; - facilitate VLA and alloca
+
                 ; Modified by `enter` and `leave`.
 
                 ; You can almost never use it as a general purpose register because of that.
+
+                ; It's usage on high level languages can be optimized away
+                ; e.g. with `-fomit-frame-pointer` in GCC 4.8.
 
             ; # esp
 
@@ -1317,6 +1327,12 @@ asm_main:
                 ;mov ecx, 2
                 ;div ecx
 
+        ; # Modulo
+
+            ; div can be used to calculate modulus, but GCC does not use it becaues it is slow,
+            ; and choses alternative techniques instead instead:
+            ; http://stackoverflow.com/questions/4361979/how-does-the-gcc-implementation-of-module-work-and-why-does-it-not-use-the
+
         ; # cdq
 
             ;Sign extend eax into `edx:eax`.
@@ -1440,263 +1456,6 @@ asm_main:
                     assert_eq ebx, 2
                     assert_eq ecx, 2
 
-        ; # floating point
-
-            ; Before reading this, you should understand IEEE floating point format.
-
-            ; Floating point was done on a separate processor,
-            ; and even on later integrated architectures you still need to use the special `stX` 
-            ; registers for the floating point operations.
-
-            ; # st0
-
-            ; # stX
-
-                ; Stack in which floating operations are carried out.
-
-                ; `st[0-7]` is a stack
-
-                ; `st0` is always the top of the stack.
-
-                ; You can only communicate with `stX` from memory,
-                ; not diretly from registers.
-
-                ; For example, the following are errors:
-
-                    ;fld eax
-                    ;fld __float32__(1.5)
-
-            ; Many operations have a `P` version that pops stack
-
-            ; # floating point literals in .text
-
-            ; # __float32__
-
-                ; To create a constant you need to use the `__float32__` macro.
-                ; TODO why? http://stackoverflow.com/questions/29925432/nasm-why-must-float32-1-5-be-used-for-floating-point-literals-instead-of-j
-
-                    mov eax, __float32__(1.5)
-
-            ; # double precision
-
-                ; TODO how to use double precision?
-
-            ; Load on floating point stack
-
-                ; # fldz
-
-                    ; Float LoaD Zero
-
-                    ; st0 = 0
-
-                        fldz
-                        mov dword [resd0], __float32__(0.0)
-                        fld dword [resd0]
-                        fcomip st1
-                        assert_flag je
-                        finit
-
-                ; # fld1
-
-                    ; Float Load 1
-
-                    ; st0 = 1
-
-                        fld1
-                        mov dword [resd0], __float32__(1.0)
-                        fld dword [resd0]
-                        fcomip st1
-                        assert_flag je
-                        finit
-
-                ; # fldl2e
-
-                    ; log_2(e)
-
-                ; # fldl2t
-
-                    ; log_2(10)
-
-                ; # fldlg2
-
-                    ; log_10(2)
-
-                ; # fldln2
-
-                    ; ln(2)
-
-                ; # fldpi
-
-                    ; Pi
-
-                ; # fild
-
-                    ; Integer Load.
-
-                        fldz
-                        mov dword [resd0], 0
-                        fld dword [resd0]
-                        fcomip st1
-                        assert_flag je
-                        finit
-
-            ; FPU Stack order operations
-
-                ; # fxch
-
-                    ; Swap st0 and another register.
-
-                        fldz
-                        fld1
-
-                        fxch st1
-                        fld dword [f0]
-                        fcomip st1
-                        assert_flag je
-
-                        fxch st1
-                        fld dword [f1]
-                        fcomip st1
-                        assert_flag je
-
-                        finit
-
-                ; # ffree
-
-                    ; Remove from stack.
-
-                        fldz
-                        fld1
-                        ffree st0
-                        fld dword [f0]
-                        fcomip st1
-                        assert_flag je
-                        finit
-
-                        fldz
-                        fld1
-                        ffree st1
-                        fld dword [f1]
-                        fcomip st1
-                        assert_flag je
-
-            ; # fst
-
-                ; Floating STore
-
-                ; Move st0 to RAM.
-
-                    fldz
-                    fld dword [f0]
-                    fstp dword [resd0]
-                    mov eax, [f0]
-                    assert_eq [resd0]
-
-            ; # fcomip
-
-                ; pentium+
-
-                ; Compare STX with ST0 and pop ST0.
-
-                ; Set integer compare flags.
-
-                    fld1
-                    fldz
-                    fcomip st1
-                    assert_flag jb
-                    ; BAD: must use a b with fcomip
-                    ; TODO why?
-                    ;assert_flag jl
-                    finit
-
-                    fldz
-                    fld1
-                    fcomip st1
-                    assert_flag ja
-                    finit
-
-                ; ERROR: can only compare two registers
-
-                    ;fcomip [f1]
-
-        ; # Operations
-
-            ; # fchs
-
-                ; Change Sign.
-
-                ; st0 *= -1
-
-                    fld dword [f1]
-                    fchs
-                    fld dword[fm1]
-                    fcomip st1
-                    assert_flag je
-                    fchs
-                    fld dword [f1]
-                    assert_flag je
-                    finit
-
-            ; # fabs
-
-                ; st0 = |st0|
-
-                    fld dword [fm1]
-                    fabs
-                    fld dword[f1]
-                    fcomip st1
-                    assert_flag je
-                    fld dword[f1]
-                    fcomip st1
-                    assert_flag je
-                    finit
-
-            ; # fsqrt
-
-                    fld dword [f100]
-
-                    fsqrt
-                    fld dword [f10]
-                    fcomip st1
-                    assert_flag je
-
-                    fsqrt
-                    mov dword [resd0], __float32__(1.41)
-                    fld dword [resd0]
-                    fcomip st1
-                    assert_flag jbe
-
-                    mov dword [resd0], __float32__(1.42)
-                    fld dword [resd0]
-                    fcomip st1
-                    assert_flag jae
-
-            ; # fscale
-
-                    fld dword [f1]
-                    fld dword [f1]
-
-                    fscale
-                    fld dword [f10]
-                    fcomip st1
-                    assert_flag je
-
-                    fscale
-                    fld dword [f100]
-                    fcomip st1
-                    assert_flag je
-
-            ;FSIN
-            ;FCOS
-            ;FSINCOS    ;calc both sin and cos
-            ;FPATAN
-            ;FPTAN
-
-            ;FPREM      ;remainder
-            ;FPREM1     ;remainder
-
-            ;FRNDINT    ;rounds to integer depending on rounding mode
-
         ; # bitwise
 
             ; # shift
@@ -1705,9 +1464,9 @@ asm_main:
 
                 ; # shr
 
-                    ;applicaition:
+                    ; Applicaition:
 
-                    ;- quick unsigned multiply and divide by powers of 2
+                    ; - quick unsigned multiply and divide by powers of 2
 
                     mov eax, 0x81
 
@@ -1737,6 +1496,12 @@ asm_main:
 
                 ; # Signed shift
 
+                ; # sal
+
+                ; # sar
+
+                    ; Mnemonics: Shift Arithmetic Left and Right
+
                     ; Signed multiply and divide by powers of 2.
 
                     ; Keeps correct sign, and carries rest
@@ -1745,12 +1510,13 @@ asm_main:
                     ; But does exist in Java via the `>>>` operator.
 
 
-                        mov eax, -1 ; negative number
-                        sal eax, 1  ; ax = -2, CF = 1
+                        mov eax, -1
+                        ; eax = -2, CF = 1
+                        sal eax, 1
                         assert_flag jc
                         assert_eq -2
 
-                        sar eax, 1          ;ax < 0, CF = 0
+                        sar eax, 1 ;ax < 0, CF = 0
                         assert_eq -1
 
                 ; # rotate
@@ -2217,9 +1983,7 @@ asm_main:
                 assert_eq ebx, 0
                 assert_eq ecx, 0
 
-        ; # enter
-
-        ; # leave
+        ; # Stack manipulation intstructions
 
             ; Useful for functions when they must allow for recursion.
 
@@ -2234,6 +1998,8 @@ asm_main:
 
             ; Then, when you leave the function, you restore `esp` ebp, deallocating the local memory.
 
+        ; # enter
+
             ; `enter A, B` is basically equivalent to:
 
                 ;push ebp
@@ -2244,6 +2010,12 @@ asm_main:
 
             ; - one dword to remember `ebp`
             ; - `A` dwords for local function variables,
+
+            ; Enter is almost never used by GCC as it is slower than `push`:
+            ; http://stackoverflow.com/questions/26323215/do-any-languages-compilers-utilize-the-x86-enter-instruction-with-a-nonzero-ne?lq=1
+            ; `leave` is used.
+
+        ; # leave
 
             ; `leave` is equivalent to:
 
@@ -2568,6 +2340,286 @@ asm_main:
 
                 ; - it is not possible to pass variable number of arguments.
 
+    ; # floating point
+
+        ; Before reading this, you should understand IEEE floating point formats.
+
+        ; Modern x86 has two main ways of doing floating point operations:
+
+        ; - FPU
+        ; - SSE
+
+        ; http://stackoverflow.com/questions/1844669/benefits-of-x87-over-sse
+
+        ; Advantages of FPU:
+
+        ; - present in old CPUs, while SSE2 is only required in x86-64
+        ; - contains some instructions no present in SSE, e.g. trigonometric
+        ; - higher precision: FPU holds 80 bit Intel extension,
+            ; while SSE2 only does up to 64 bit operations despite having the 128-bit register
+
+        ; In GCC, you can choose between them with `-mfpmath=`.
+
+    ; # FPU unit
+
+        ; Used to be a separate optional processor called the Floating Point Unit,
+        ; later integrated into the CPU.
+
+        ; # st0
+
+        ; # stX
+
+            ; Stack in which floating operations are carried out.
+
+            ; `st[0-7]` is a stack
+
+            ; `st0` is always the top of the stack.
+
+            ; You can only communicate with `stX` from memory,
+            ; not diretly from registers.
+
+            ; For example, the following are errors:
+
+                ;fld eax
+                ;fld __float32__(1.5)
+
+        ; # P suffix
+
+            ; Many operation mnemonics have an optional `P` version that also pops the stack.
+
+        ; # floating point literals in .text
+
+        ; # __float32__
+
+            ; To create a constant you need to use the `__float32__` macro.
+            ; TODO why? http://stackoverflow.com/questions/29925432/nasm-why-must-float32-1-5-be-used-for-floating-point-literals-instead-of-j
+
+                mov eax, __float32__(1.5)
+
+        ; # double precision
+
+            ; TODO how to use double precision?
+
+        ; Load on floating point stack
+
+            ; # fldz
+
+                ; Float LoaD Zero
+
+                ; st0 = 0
+
+                    fldz
+                    mov dword [resd0], __float32__(0.0)
+                    fld dword [resd0]
+                    fcomip st1
+                    assert_flag je
+                    finit
+
+            ; # fld1
+
+                ; Float Load 1
+
+                ; st0 = 1
+
+                    fld1
+                    mov dword [resd0], __float32__(1.0)
+                    fld dword [resd0]
+                    fcomip st1
+                    assert_flag je
+                    finit
+
+            ; # fldl2e
+
+                ; log_2(e)
+
+            ; # fldl2t
+
+                ; log_2(10)
+
+            ; # fldlg2
+
+                ; log_10(2)
+
+            ; # fldln2
+
+                ; ln(2)
+
+            ; # fldpi
+
+                ; Pi
+
+            ; # fild
+
+                ; Integer Load.
+
+                    fldz
+                    mov dword [resd0], 0
+                    fld dword [resd0]
+                    fcomip st1
+                    assert_flag je
+                    finit
+
+        ; FPU Stack order operations
+
+            ; # fxch
+
+                ; Swap ST0 and another register.
+
+                    fldz
+                    fld1
+
+                    fxch st1
+                    fld dword [f0]
+                    fcomip st1
+                    assert_flag je
+
+                    fxch st1
+                    fld dword [f1]
+                    fcomip
+                    assert_flag je
+
+                    finit
+
+            ; # ffree and Pop.
+
+                ; Remove from stack.
+
+                    fldz
+                    fld1
+                    ffree st0
+                    fld dword [f0]
+                    fcomip st1
+                    assert_flag je
+                    finit
+
+                    fldz
+                    fld1
+                    ffree st1
+                    fld dword [f1]
+                    fcomip st1
+                    assert_flag je
+
+        ; # fst
+
+        ; # fstp
+
+            ; Floating STore
+
+            ; Floating STore and Pop.
+
+            ; Move st0 to RAM.
+
+                fldz
+                fld dword [f0]
+                fstp dword [resd0]
+                mov eax, [f0]
+                assert_eq [resd0]
+
+        ; # fcomip
+
+            ; pentium+
+
+            ; Compare STX with ST0 and Pop ST0.
+
+            ; Set integer compare flags.
+
+                fld1
+                fldz
+                fcomip st1
+                assert_flag jb
+                ; BAD: must use a b with fcomip
+                ; TODO why?
+                ;assert_flag jl
+                finit
+
+                fldz
+                fld1
+                fcomip st1
+                assert_flag ja
+                finit
+
+            ; ERROR: can only compare two registers
+
+                ;fcomip [f1]
+
+        ; # Operations
+
+            ; # fchs
+
+                ; Change Sign.
+
+                ; st0 *= -1
+
+                    fld dword [f1]
+                    fchs
+                    fld dword[fm1]
+                    fcomip st1
+                    assert_flag je
+                    fchs
+                    fld dword [f1]
+                    assert_flag je
+                    finit
+
+            ; # fabs
+
+                ; st0 = |st0|
+
+                    fld dword [fm1]
+                    fabs
+                    fld dword[f1]
+                    fcomip st1
+                    assert_flag je
+                    fld dword[f1]
+                    fcomip st1
+                    assert_flag je
+                    finit
+
+            ; # fsqrt
+
+                    fld dword [f100]
+
+                    fsqrt
+                    fld dword [f10]
+                    fcomip st1
+                    assert_flag je
+
+                    fsqrt
+                    mov dword [resd0], __float32__(1.41)
+                    fld dword [resd0]
+                    fcomip st1
+                    assert_flag jbe
+
+                    mov dword [resd0], __float32__(1.42)
+                    fld dword [resd0]
+                    fcomip st1
+                    assert_flag jae
+
+            ; # fscale
+
+                    fld dword [f1]
+                    fld dword [f1]
+
+                    fscale
+                    fld dword [f10]
+                    fcomip st1
+                    assert_flag je
+
+                    fscale
+                    fld dword [f100]
+                    fcomip st1
+                    assert_flag je
+
+            ;FSIN
+            ;FCOS
+            ;FSINCOS    ;calc both sin and cos
+            ;FPATAN
+            ;FPTAN
+
+            ;FPREM      ;remainder
+            ;FPREM1     ;remainder
+
+            ;FRNDINT    ;rounds to integer depending on rounding mode
+
     ; # SIMD
 
         ; https://www.kernel.org/pub/linux/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html
@@ -2585,69 +2637,78 @@ asm_main:
 
             ; # XMM
 
-            ; # movups
+                ; # movss
 
-                ; Move Unaligned Parallel Single-precision float
+                    ; Move Scalar Single precision 32 bits to or from memory.
 
-                ; From SSE extensions.
+                        mov dword [resd0], __float32__(0.1)
+                        movss xmm0, [resd0]
+                        movss xmm1, xmm0
+                        movss [resd1], xmm1
+                        assert_eq [resd0], __float32__(0.1), dword
 
-                ; 16 bytes.
+                ; # movups
 
-                    mov4 reso0, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
+                    ; Move Unaligned Parallel Single-precision float
 
-                    movups xmm0, [reso0]
-                    ; Can also move between two xmm.
-                    ; But in this case we can use movaps.
-                    movaps xmm1, xmm0
-                    movups [reso1], xmm1
+                    ; From SSE extensions.
 
-                    assert_eq4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
+                    ; 16 bytes.
 
-                ; ERROR: invalid combination of opcode and operands.
+                        mov4 reso0, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
 
-                    ;movups xmm0, 0
-                    ;mov xmm0, [reso0]
+                        movups xmm0, [reso0]
+                        ; Can also move between two xmm.
+                        ; But in this case we can use movaps.
+                        movaps xmm1, xmm0
+                        movups [reso1], xmm1
 
-                ; Can only move data between RAM and XMM, no literals.
+                        assert_eq4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
 
-                ; movups must be used, mov does not work
+                    ; ERROR: invalid combination of opcode and operands.
 
-            ; # movaps
+                        ;movups xmm0, 0
+                        ;mov xmm0, [reso0]
 
-                ; Aligned.
+                    ; Can only move data between RAM and XMM, no literals.
 
-                ; May be faster.
+                    ; movups must be used, mov does not work
 
-                ; If you attempt to use it on unaligned memory,
-                ; raises a general-protection exception (#GP).
-                ; Let's do that now. One of the following must be misaligned:
+                ; # movaps
 
-                    ;movaps xmm0, [reso0]
-                    ;movaps xmm0, [reso0 + 1]
+                    ; Aligned.
 
-                ; Linux gives a segmentation fault.
+                    ; May be faster.
 
-                ; # aligned
+                    ; If you attempt to use it on unaligned memory,
+                    ; raises a general-protection exception (#GP).
+                    ; Let's do that now. One of the following must be misaligned:
 
-                ; # unaligned
+                        ;movaps xmm0, [reso0]
+                        ;movaps xmm0, [reso0 + 1]
 
-                    ; TODO why is aligned faster?
+                    ; Linux gives a segmentation fault.
 
-                    ; TODO how to align?
+                    ; # aligned
 
-                    ; http://stackoverflow.com/questions/381244/purpose-of-memory-alignment
+                    ; # unaligned
 
-            ; # MOVHPS - Move 64bits to upper bits of an SIMD register (high).
+                        ; TODO why is aligned faster?
 
-            ; # MOVLPS - Move 64bits to lowe bits of an SIMD register (low).
+                        ; TODO how to align?
 
-            ; # MOVHLPS - Move upper 64bits of source  register to the lower 64bits of destination register.
+                        ; http://stackoverflow.com/questions/381244/purpose-of-memory-alignment
 
-            ; # MOVLHPS - Move lower 64bits of source register  to the upper 64bits of destination register.
 
-            ; # MOVMSKPS - Move sign bits of each of the 4 packed scalars to an x86 integer register.
+                ; # MOVHPS - Move 64bits to upper bits of an SIMD register (high).
 
-            ; # MOVSS - Move 32bits to an SIMD register from memory or SIMD register.
+                ; # MOVLPS - Move 64bits to lowe bits of an SIMD register (low).
+
+                ; # MOVHLPS - Move upper 64bits of source  register to the lower 64bits of destination register.
+
+                ; # MOVLHPS - Move lower 64bits of source register  to the upper 64bits of destination register.
+
+                ; # MOVMSKPS - Move sign bits of each of the 4 packed scalars to an x86 integer register.
 
             ; # AVX
 
@@ -2665,13 +2726,19 @@ asm_main:
 
             ; TODO
 
-        ; # parallel
+        ; # packed
 
         ; # scalar
 
+            ; http://stackoverflow.com/questions/16218665/simd-and-difference-between-packed-and-scalar-double-precision
+
             ; Many SIMD instructions have two versions: parallel and scalar.
 
-            ; TODO what is the difference?
+            ; - scalar only acts on the first bytes, doing a single value operation.
+
+                ; It likely exists to allow FPU replacement.
+
+            ; - packed: the more interesting method, which operates on multiple data at once (4 floats or 2 doubles)
 
         ; # SSE2
 
@@ -2679,19 +2746,19 @@ asm_main:
 
                 ; Packed Add Quadwords (integers).
 
-                mov4 reso0, 0x0000_0000, 0x0000_0001, 0x0000_0002, 0x0000_0003
-                mov4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
+                    mov4 reso0, 0x0000_0000, 0x0000_0001, 0x0000_0002, 0x0000_0003
+                    mov4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
 
-                movups xmm0, [reso0]
-                movups xmm1, [reso1]
-                paddq xmm0, xmm1
-                movups [reso0], xmm0
+                    movups xmm0, [reso0]
+                    movups xmm1, [reso1]
+                    paddq xmm0, xmm1
+                    movups [reso0], xmm0
 
-                assert_eq4 reso0, 0x0000_0000, 0x1000_0001, 0x2000_0002, 0x3000_0003
+                    assert_eq4 reso0, 0x0000_0000, 0x1000_0001, 0x2000_0002, 0x3000_0003
 
             ; # addps
 
-                ; Add Parallel Single Precision.
+                ; Add Packed Single precision float.
 
                     mov4 reso0, __float32__(0.0), __float32__(0.5), __float32__(0.25), __float32__(0.125)
                     mov4 reso1, __float32__(0.0), __float32__(1.0), __float32__(2.0), __float32__(4.0)
@@ -2702,6 +2769,18 @@ asm_main:
                     movups [reso0], xmm0
 
                     assert_eq4 reso0, __float32__(0.0), __float32__(1.5), __float32__(2.25), __float32__(4.125)
+
+            ; # cvttss2si
+
+                ; Convert with Truncation Scalar Single-Precision FP Value to Dword Integer.
+
+                ; Typecast float to int.
+
+                    mov dword [resd0], __float32__(1.5)
+                    movss xmm0, [resd0]
+                    cvttss2si eax, xmm0
+                    call print_int
+                    assert_eq eax, 1
 
         ; # SSSE3
 
@@ -2821,21 +2900,27 @@ asm_main:
 
         ; Read Time Stamp Counter
 
-        ; Counts the number of CPU cycles run.
-
-        ; Used to be a very good time measure, until SMP came into play.
-
         ; Stores the output to EDX:EAX
 
+        ; Counts the number of CPU cycles run.
+
         ; `RDTSCP` is the serialized version. TODO what does that mean.
+
+        ; Used to be a very good time measure, until SMP came into play.
 
         ; It is normal that the outputs below differ by much more than 1:
         ; I get differences between 10 / 100.
 
-        ; The deltas are not predicatable because of compile optimizations
-        ; such as branch prediction and pipelining.
-        ; http://stackoverflow.com/questions/692718/how-to-find-cpu-cycle-for-an-assembly-instruction
-        ; http://stackoverflow.com/questions/12065721/why-isnt-rdtsc-a-serializing-instruction
+        ; # Number of cycles for each instruction
+
+            ; A single instruction can take many cycles,
+            ; so the number of instructions alone is not a good measure of speed.
+
+            ; The deltas are not predicatable because of compile optimizations
+            ; such as branch prediction and pipelining.
+
+            ; - http://stackoverflow.com/questions/692718/how-to-find-cpu-cycle-for-an-assembly-instruction
+            ; - http://stackoverflow.com/questions/12065721/why-isnt-rdtsc-a-serializing-instruction
 
             mov eax, rdtsc_str
             call print_string

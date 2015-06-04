@@ -103,9 +103,7 @@ Gives:
 
 ### Executable hd
 
-We don't use a C program as that would complicate the analysis, that will be level 2 :-)
-
-    hd hello_world.o
+    hd hello_world.out
 
 Gives:
 
@@ -365,7 +363,7 @@ Breakdown of the first one:
 - 40 4: `p_flags` = `05 00 00 00` = `PT_LOAD`: execute and read permissions, no write TODO 
 - 40 8: `p_offset` = 8x `00` TODO why 0?
 - 50 0: `p_vaddr` = `00 00 40 00 00 00 00 00`: initial virtual memory address to load this segment to
-- 50 8: `p_paddr` = `00 00 40 00 00 00 00 00` = initial physical address to load in memory. Only matters for systems in which the program can set it's physical address. Otherwise, as in System V like systems, can be anything. NASM seems to just copy `p_vaddrr`
+- 50 8: `p_paddr` = `00 00 40 00 00 00 00 00`: initial physical address to load in memory. Only matters for systems in which the program can set it's physical address. Otherwise, as in System V like systems, can be anything. NASM seems to just copy `p_vaddrr`
 - 60 0: `p_filesz` = `d7 00 00 00 00 00 00 00`: TODO vs `p_memsz`
 - 60 8: `p_memsz` = `d7 00 00 00 00 00 00 00`: TODO
 - 70 0: `p_align` =  `00 00 20 00 00 00 00 00`: 0 or 1 mean no alignment required TODO what does that mean? otherwise redundant with other fields
@@ -413,7 +411,7 @@ Some section names are reserved for certain section types: <http://www.sco.com/d
       I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
       O (extra OS processing required) o (OS specific), p (processor specific)
 
-`e_shoff`, `e_shentsize` and `e_shnum` from the ELF header for the object file say that we have 7 entries, each `0x40` bytes long, starting at offset `0x40` (immediately after the elf header).
+`e_shoff`, `e_shentsize` and `e_shnum` from the ELF header for the object file say that we have 7 entries, each `0x40` bytes long, starting at offset `0x40` (immediately after the elf header):
 
     000000c0  07 00 00 00 01 00 00 00  06 00 00 00 00 00 00 00  |................|
     000000d0  00 00 00 00 00 00 00 00  10 02 00 00 00 00 00 00  |................|
@@ -522,7 +520,7 @@ In index 0, `SHT_NULL` is mandatory. Are there any other uses for it: <http://st
 
 -   b0 0: `sh_addralign` = `04` = TODO: why is this alignment necessary? Is it only for `sh_addr`, or also for symbols inside `sh_addr`?
 
--   b0 8: `sh_entsize` = `00` = the section does not contain a table. If != 0, it means that the section contains a table of fixed size entries. In this file, we see from the `readelf` output that this is the case for `SYMTAB` and `ENTSIZE` sections.
+-   b0 8: `sh_entsize` = `00` = the section does not contain a table. If != 0, it means that the section contains a table of fixed size entries. In this file, we see from the `readelf` output that this is the case for the `.symtab` and `.rela.text` sections.
 
 #### Text section
 
@@ -756,6 +754,8 @@ Is also of type `STRTAB`, so it has the same structure of `.shstrtab`.
 
 This implies that it is an ELF level limitation that global variables cannot contain NUL characters.
 
+## Relocation sections
+
 ## SHT_RELA
 
 ### .rela.text
@@ -806,9 +806,26 @@ So:
 
     The AMD64 ABI says that type `1` is called `R_X86_64_64` and that it represents the operation `S + A` where:
 
-    - `S` is TODO
-    - `A` is the addend, present in field `r_added`
+    - `S`: the address of the section pointed to by `ELF64_R_SYM`, thus `.data`
+    - `A`: the addend, present in field `r_added`
 
     This relocation operation acts on a total 8 bytes.
 
--   380 0: `r_addend` = 0: TODO
+-   380 0: `r_addend` = 0
+
+So in our example we conclude that the new address will be: `S + A` = `.data + 0`, and thus the first thing in the data section.
+
+#### R_X86_64_PC32
+
+This is another common relocation method that does:
+
+    S + A - P
+
+on 4 bytes, where `P` is the current position of the Program Counter on the text segment, thus the `PC` on the name, A.K.A. the `RIP` register.
+
+This method is common in x86-64 because `RIP` relative addressing is very popular, and for it to work, the relocation must subtract the position `P`.
+
+Note that `%RIP` points to the *next* instruction: so it is common to use `A = -4` to remove the offset of the 4 byte address which is at the end of the instruction encoding:
+
+    X Y A A A A
+    Next insruction <-- RIP

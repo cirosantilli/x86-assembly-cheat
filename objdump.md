@@ -41,3 +41,13 @@ Similar to `-d`, but also intermingle original C code with disassembly if there 
 
     gcc -ggdb3 -o a.o a.c
     objdump -S a.o
+
+## j
+
+Select which section to act on.
+
+## Disassemble a single function
+
+Seems impossible, use GDB instead.
+
+<http://stackoverflow.com/questions/22769246/disassemble-one-function-using-objdump>

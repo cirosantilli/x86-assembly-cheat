@@ -41,11 +41,21 @@ section .text
 
             ; EIP in x86-64.
 
-            ; New register TODO or just a magical part of the address?,
-            ; which allows a completely new addressing mode,
-            ; that is specially useful for position independent code.
+        ; # RIP relative addressing
 
-            ; It may also generate smaller code, and GCC seems to use it for that reason.
+            ; New addressing mode in which addresses are encoded relative to the RIP.
+
+            ; Advantages:
+
+            ; - easier to write RIP code for shared libraries: with RIP you can just dump
+                ; the `.text` and `.data` anywhere without rewritting all data accesses beforehand
+
+            ; - genrates shorter instructions, using 4 bytes to encode the address instead of 8.
+
+                ; This seems to be the main reason why GCC 4.8 uses it by default everywhere.
+
+                ; Downside of this: `.data` and `.text` must be withing 4Gb of each other.
+                ; But that should be fine.
 
             ; It does not seem to be possible to use it with Intel syntax directly:
 

@@ -33,7 +33,7 @@ The LSB basically links to other standards with minor extensions, in particular:
 
 -   architecture specific:
 
-    - IA32:  <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-IA32/LSB-Core-IA32/elf-ia32.html>
+    - IA-32:  <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-IA32/LSB-Core-IA32/elf-ia32.html>
     - AMD64: <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-AMD64/LSB-Core-AMD64/elf-amd64.html>, points mostly to <http://www.x86-64.org/documentation/abi.pdf>
 
 The LSB basically extends other standards, e.g. [System V ABI AMD64][] for x86-64.
