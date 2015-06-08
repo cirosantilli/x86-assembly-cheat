@@ -9,6 +9,10 @@ Things which it can do that `readelf` cannot:
 
 - disassemble
 
+Most useful command `objdump` command:
+
+    objdump -Sr
+
 ## d
 
 See assembler instructions of object file or executable:

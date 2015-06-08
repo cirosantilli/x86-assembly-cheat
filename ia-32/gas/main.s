@@ -45,15 +45,15 @@ GAS syntax cheat.
         ## asci
 
                 s:
-                    .ascii	"abcd\n"
+                    .ascii  "abcd\n"
                     s_len = . - s
 
                 s0:
-                    .ascii	"abcd\0"
+                    .ascii  "abcd\0"
                     s_len = . - s
 
-    	/*
-		## asciz
+        /*
+        ## asciz
 
             Like `.ascii` but adds null char to string
 
@@ -62,10 +62,10 @@ GAS syntax cheat.
                 .ascii "assert failed\n\x00"
 
                 .ascii "assert failed\n\000"
-    	*/
+        */
 
                 sz:
-                    .asciz	"abcd"
+                    .asciz  "abcd"
                     s_len = . - s
 
         /*
@@ -79,7 +79,7 @@ GAS syntax cheat.
     .global asm_main
     asm_main:
 
-		enter $0, $0
+        enter $0, $0
 
         ## RAM memory
 
@@ -249,9 +249,9 @@ GAS syntax cheat.
         mov $assert_pass_str, %eax
         call print_string
 
-		leave
+        leave
         movl $0, %eax
-		ret
+        ret
 
 .data
 
@@ -259,12 +259,12 @@ GAS syntax cheat.
 
 .text
 
-	/* Print error message and exit program with status 1 */
-	assert_fail:
+    /* Print error message and exit program with status 1 */
+    assert_fail:
 
-		mov $assert_fail_str, %eax
-		call print_string
+        mov $assert_fail_str, %eax
+        call print_string
 
-		/* call libc exit with exit status 1 */
-		pushl $1
-		call exit
+        /* call libc exit with exit status 1 */
+        pushl $1
+        call exit

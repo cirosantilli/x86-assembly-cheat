@@ -8,6 +8,7 @@ int main() {
     GCC 4.8:
 
     - fpmath=sse: addsd (default)
+    - fpmath=387: faddp
     */
     f += 0.5;
     printf("%f\n", f);

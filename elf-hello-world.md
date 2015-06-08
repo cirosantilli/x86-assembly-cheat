@@ -8,9 +8,7 @@ Have a look at for some cool attempts: <http://www.muppetlabs.com/~breadbox/soft
 
 In this example we will consider a saner `hello world` example that will better capture real life cases.
 
-## Hello world example analysis
-
-### Generate the example
+## Generate the example
 
 Let's break down a minimal runnable Linux x86-64 example:
 
@@ -38,7 +36,7 @@ and NASM version 2.10.09.
 
 We don't use a C program as that would complicate the analysis, that will be level 2 :-)
 
-### Object hd
+## Object hd
 
     hd hello_world.o
 
@@ -101,7 +99,7 @@ Gives:
     00000380  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     00000390
 
-### Executable hd
+## Executable hd
 
     hd hello_world.out
 
@@ -170,7 +168,7 @@ Gives:
     000003e0  65 6e 64 00                                       |end.|
     000003e4
 
-### Global file structure
+## Global file structure
 
 - ELF header
 - `e_phnum` program headers
@@ -178,7 +176,7 @@ Gives:
 - N sections, with `N <= e_shnum` (TODO check)
 - Section header table
 
-### ELF header
+## ELF header
 
 `readelf -h hello_world.o`:
 
@@ -305,7 +303,7 @@ Manual breakdown:
 
 -   3 E: `e_shstrndx` (`Section Header STRing iNDeX`) = `03 00`: entry of the section header table which corresponds to the string table, which is a magic section for the ELF. This table holds symbol and section names.
 
-### Program header table
+## Program header table
 
 Only appears in the executable.
 
@@ -381,7 +379,7 @@ section of the `readelf` tells us that:
 
 TODO where does this information comes from.
 
-### Section header table
+## Section header table
 
 Some section names are reserved for certain section types: <http://www.sco.com/developers/gabi/2003-12-17/ch4.sheader.html#special_sections> e.g. `.text` requires a `SHT_PROGBITS` type and `SHF_ALLOC` + `SHF_EXECINSTR`
 
@@ -458,7 +456,7 @@ Section 0: `SH_NULLL`:
     00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
 
-#### Index 0 section
+### Index 0 section
 
 The first section is magic: <http://www.sco.com/developers/gabi/2003-12-17/ch4.sheader.html> says:
 
@@ -466,11 +464,11 @@ The first section is magic: <http://www.sco.com/developers/gabi/2003-12-17/ch4.s
 
 There are also other magic sections detailed in `Figure 4-7: Special Section Indexes`
 
-##### SHT_NULL
+#### SHT_NULL
 
 In index 0, `SHT_NULL` is mandatory. Are there any other uses for it: <http://stackoverflow.com/questions/26812142/what-is-the-use-of-the-sht-null-section-in-elf> ?
 
-#### .data section analysis
+### .data section analysis
 
 `.data` is section 1:
 
@@ -522,9 +520,9 @@ In index 0, `SHT_NULL` is mandatory. Are there any other uses for it: <http://st
 
 -   b0 8: `sh_entsize` = `00` = the section does not contain a table. If != 0, it means that the section contains a table of fixed size entries. In this file, we see from the `readelf` output that this is the case for the `.symtab` and `.rela.text` sections.
 
-#### Text section
+### Text section
 
-#### .text
+### .text
 
 Now that we've done one section manually, let's graduate and use the `readelf -S` of the other sections.
 
@@ -569,7 +567,7 @@ to pass the address of the string to the system call. Currently, the `0x0` is ju
 
 This modification is possible because of the data of the `.rela.text` section.
 
-### _start
+## _start
 
 [System V ABI AMD64][] says that `_start` is the entry point:
 
@@ -579,11 +577,11 @@ so the `_start` symbol is magic.
 
 TODO where is it mentioned in the arch agnostic standards?
 
-### Section header string table
+## Section header string table
 
-### STRTAB
+## STRTAB
 
-### .shstrtab
+## .shstrtab
 
 This section name is predefined and the description says:
 
@@ -607,11 +605,11 @@ If we look at the names of other sections, we see that they all contain numbers,
 
 Then each string ends when the first NUL character is found, e.g. character `12` is `\0` just after `.text\0`.
 
-### Symbol table
+## Symbol table
 
-### SHT_SYMTAB
+## SHT_SYMTAB
 
-### .symtab
+## .symtab
 
 First the we note that:
 
@@ -683,7 +681,7 @@ The entries are of type:
 
 Like in the section table, the first entry is magical and set to a fixed meaningless values.
 
-### STT_FILE
+## STT_FILE
 
 Entry 1 is as follows:
 
@@ -703,7 +701,7 @@ Entry 1 is as follows:
 
 Now from the readelf, we interpret the others quickly.
 
-#### STT_SECTION
+### STT_SECTION
 
 There are two such entries, one pointing to `.data` and the other to `.text` (section indexes `1` and `2`).
 
@@ -712,7 +710,7 @@ There are two such entries, one pointing to `.data` and the other to `.text` (se
 
 TODO what is their purpose?
 
-#### Other symbols
+### Other symbols
 
 Then come the most important symbols which `nm` shows us:
 
@@ -730,11 +728,11 @@ Then come the most important symbols which `nm` shows us:
 
 in NASM. This is necessary since it must be seen as the entry point. Unlike in C, by default NASM labels are local.
 
-#### SHT_SYMTAB on the executable
+### SHT_SYMTAB on the executable
 
 By default, NASM places a `.symtab` on the executable as well. TODO why is that needed outside of dynamic linking?
 
-### .strtab
+## .strtab
 
 Holds names for the symbol table.
 
@@ -754,11 +752,11 @@ Is also of type `STRTAB`, so it has the same structure of `.shstrtab`.
 
 This implies that it is an ELF level limitation that global variables cannot contain NUL characters.
 
-## Relocation sections
+# Relocation sections
 
-## SHT_RELA
+# SHT_RELA
 
-### .rela.text
+## .rela.text
 
 `.rela.text` holds relocation data which says how the address should be modified when the final executable is linked. This points to bytes of the text area that must be modified when linking happens to point to the correct memory locations.
 
@@ -815,7 +813,7 @@ So:
 
 So in our example we conclude that the new address will be: `S + A` = `.data + 0`, and thus the first thing in the data section.
 
-#### R_X86_64_PC32
+### R_X86_64_PC32
 
 This is another common relocation method that does:
 

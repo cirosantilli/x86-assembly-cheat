@@ -1519,11 +1519,15 @@ asm_main:
                         sar eax, 1 ;ax < 0, CF = 0
                         assert_eq -1
 
-                ; # rotate
+                ; # Rotate
+
+                ; # ror
+
+                ; # rol
 
                     ; No corresponding C intruction.
 
-                    ; insert 0
+                    ; The bit that exists enters from the other side.
 
                         mov eax, 0x81
 
