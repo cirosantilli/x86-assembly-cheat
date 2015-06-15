@@ -1,8 +1,11 @@
 .POSIX:
 
+-include Makefile_params
+
 ASM_EXT ?= .s
 O ?= 0
-CCC ?= gcc -pedantic-errors -std=c99 -Wextra -ggdb -O$(O) #-mfpmath=387
+STD ?= c99
+CCC ?= gcc -pedantic-errors -std=$(STD) -Wextra -ggdb -O$(O) #-mfpmath=387
 CCC_CPP ?= g++ -pedantic-errors -std=c++11 -Wextra
 IN_EXT ?= .c
 IN_EXT_CPP ?= .cpp

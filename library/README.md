@@ -54,9 +54,19 @@ Since the disadvantages are so minor, it is almost always better to use dynamic 
 
 ## ld.so
 
+## ld-linux.so
+
     man ld.so
 
-TODO.
+`ld-linux.so*` is the program that does the dynamic loading for every executable.
+
+Its path is specified in the `.interp` section of ELF files, which Linux reads and uses to call `ld-linux`.
+
+The default on Ubuntu 14.04 is `/lib64/ld-linux-x86-64.so.2`.
+
+The program to be run is passed as an argument to `ld-linux`:
+
+    /lib64/ld-linux-x86-64.so.2 a.out
 
 ## Search path
 
@@ -211,6 +221,11 @@ It must be in the load path.
     env LIBRARY_PATH=$LIBRARY_PATH:/path/to/ gcc a.c -o a.out -llib
 
 `LIBRARY_PATH` is different from `LD_LIBRARY_PATH`! `LIBRARY_PATH` is only used at compile time while `LD_LIBRARY_PATH` is only used at load time.
+
+A leading or trailing colon `:` implies that the current directory is included!
+
+    :/some/path
+    /some/path:
 
 ### Use so at runtime
 

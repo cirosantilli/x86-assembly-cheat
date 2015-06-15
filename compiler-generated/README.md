@@ -17,5 +17,6 @@ Let's see what our compilers are compiling to.
     [sqrt.c](sqrt.c)
 1.  Optimization
     1. [use_rax_return.c](use_rax_return.c)
+    1. [restrict.c](restrict.c)
 1.  libc
     1. [memcmp.c](memcmp.c)

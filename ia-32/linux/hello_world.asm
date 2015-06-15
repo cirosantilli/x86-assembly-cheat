@@ -8,7 +8,7 @@ section .text
         mov ebx, 1
         mov ecx, hello_world
         mov edx, hello_world_len
-        int 80h
+        int 0x80
         mov eax, 1
         mov ebx, 0
         int 0x80
