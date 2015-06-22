@@ -1,11 +1,12 @@
 .POSIX:
 
-CCC ?= gcc -ggdb3 -m32 -O0 -std=c89 -pedantic-errors -Wall
-GAS ?= as --32 -g
-IN_EXT := .S
+-include params.makefile
+
+BITS ?= 32
+CCC ?= gcc -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
+IN_EXT ?= .asm
 LIB_DIR ?= lib/
-LN ?= ld -s
-NASM ?= nasm -w+all -f elf32
+NASM ?= nasm -g -w+all -f elf$(BITS)
 OBJ_EXT ?= .o
 OUT_EXT ?= .out
 RUN ?= main
@@ -16,7 +17,7 @@ INS := $(wildcard *$(IN_EXT))
 OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 
 .PRECIOUS: %$(OBJ_EXT)
-.PHONY: all clean driver
+.PHONY: all clean driver run
 
 all: driver $(OUTS)
 
@@ -24,7 +25,7 @@ all: driver $(OUTS)
 	$(CCC) -o '$@' '$<' $(LIB_DIR)*$(OBJ_EXT)
 
 %$(OBJ_EXT): %$(IN_EXT)
-	$(CCC) -c '$<'
+	$(NASM) -o '$@' '$<'
 
 clean:
 	rm -f *$(OBJ_EXT) *$(OUT_EXT)

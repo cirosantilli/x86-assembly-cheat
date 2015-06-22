@@ -1,9 +1,8 @@
-#include <cstdio>
+#include <iostream>
 
-/* .rodata, not SHN_ABS */
+/* .rodata, not SHN_ABS. */
 constexpr int my_var = 1;
 
 int main() {
-    std::printf("%d\n", my_var);
-    return 0;
+    std::cout << my_var << std::endl;
 }

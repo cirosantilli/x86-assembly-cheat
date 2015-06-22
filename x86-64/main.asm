@@ -1,10 +1,5 @@
 %include "lib/asm_io.inc"
 
-section .data
-
-    asserts_passed_str db "ALL ASSERTS PASSED", 0
-    asserts_passed_str_len  equ $ - asserts_passed_str
-
 section .text
 
     global asm_main
@@ -87,9 +82,6 @@ section .text
 
                 ; ERROR
                 ;pop eax
-
-        mov rax, asserts_passed_str
-        call print_string
 
         ;mov rax, 1
         ;mov rdi, 1

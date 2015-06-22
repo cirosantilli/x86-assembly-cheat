@@ -14,12 +14,19 @@
 ;
 ; Watcom:
 ; nasm -f obj -d OBJ_TYPE -d WATCOM asm_io.asm
-
+;
 ; The Watcom compiler's C library does not use the
 ; standard C calling convention. For example, the
 ; putchar() function gets its argument from the
 ; the value of EAX, not the stack.
+;
+; We prefer to implement as much routines as possible in here
+; instead of macros so that they become less NASM specific
+; and may be used through the compiiled object file.
 
+; String terminator.
+%define TERM 0
+; New line character.
 %define NL 10
 %define CF_MASK 0x00000001
 %define PF_MASK 0x00000004
@@ -41,6 +48,7 @@
     %define _printf printf
     %define _getchar getchar
     %define _putchar putchar
+    %define _exit exit
 %endif
 
 ;
@@ -51,6 +59,7 @@
     %define _printf printf_
     %define _getchar getchar_
     %define _putchar putchar_
+    %define _exit exit_
 %endif
 
 %ifdef OBJ_TYPE
@@ -59,8 +68,6 @@ segment .data public align=4 class=data use32
 segment .data
 %endif
 
-    int_format db "%i", 0
-    string_format db "%s", 0
     reg_format db "Register Dump # %d", NL
             db "EAX = %.8X EBX = %.8X ECX = %.8X EDX = %.8X", NL
                         db "ESI = %.8X EDI = %.8X EBP = %.8X ESP = %.8X", NL
@@ -87,14 +94,14 @@ segment .data
     empty_st_format db "ST%d: Empty", NL, 0
 
 %ifdef OBJ_TYPE
-segment text public align=1 class=code use32
+section text public align=1 class=code use32
 %else
-segment .text
+section .text
 %endif
-    global read_int, print_int, print_string, read_char,
+    global read_int, read_char,
     global print_char, print_nl, sub_dump_regs, sub_dump_mem
     global sub_dump_math, sub_dump_stack
-    extern _scanf, _printf, _getchar, _putchar
+    extern _scanf, _printf, _getchar, _putchar, _exit
 
     read_int:
         enter 4,0
@@ -111,38 +118,6 @@ segment .text
         popf
         popa
         mov eax, [ebp-4]
-        leave
-        ret
-
-    print_int:
-        enter 0,0
-        pusha
-        pushf
-
-        push eax
-        push dword int_format
-        call _printf
-        pop ecx
-        pop ecx
-
-        popf
-        popa
-        leave
-        ret
-
-    print_string:
-        enter 0,0
-        pusha
-        pushf
-
-        push eax
-        push dword string_format
-        call _printf
-        pop ecx
-        pop ecx
-
-        popf
-        popa
         leave
         ret
 
@@ -515,3 +490,88 @@ segment .text
         popa
         leave
         ret 4
+
+; Print error message and exit program with status 1.
+;
+; Usually called with the `assert_fail` macro,
+; which also prepares the line number.
+;
+; The line number must be set in a macro
+; otherwise it would always point to this function.
+;
+; eax: line of the failure
+;
+section .data
+assert_fail_str db 10, 'ASSERT FAILED AT LINE: ', 0
+section .text
+global assert_fail
+assert_fail:
+    mov ebx, eax
+    mov eax, assert_fail_str
+    call print_string
+    mov eax, ebx
+    call print_int
+
+    ; Call libc exit with exit status 1:
+    push dword 1
+    call exit
+
+section .data
+int_format db "%i", NL, TERM
+section .text
+global print_int
+print_int:
+    enter 0,0
+    pusha
+    pushf
+
+    push eax
+    push dword int_format
+    call _printf
+    pop ecx
+    pop ecx
+
+    popf
+    popa
+    leave
+    ret
+
+section .data
+int_format_hex db "%x", NL, TERM
+section .text
+global print_int_hex
+print_int_hex:
+    enter 0,0
+    pusha
+    pushf
+
+    push eax
+    push dword int_format_hex
+    call _printf
+    pop ecx
+    pop ecx
+
+    popf
+    popa
+    leave
+    ret
+
+section .data
+string_format db "%s", NL, TERM
+section .text
+global print_string
+print_string:
+    enter 0,0
+    pusha
+    pushf
+
+    push eax
+    push dword string_format
+    call _printf
+    pop ecx
+    pop ecx
+
+    popf
+    popa
+    leave
+    ret

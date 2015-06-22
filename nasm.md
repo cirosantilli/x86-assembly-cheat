@@ -16,6 +16,12 @@ Most useful command line options:
 
 - `-w+all`: enable all warnings
 
+## Downsides
+
+NASM is way too gentle on input validation, even on `-w+all`.
+
+In particular, anything unknown is happily treated as label, even if it does not have colon `:`.
+
 ## f
 
 Output format:

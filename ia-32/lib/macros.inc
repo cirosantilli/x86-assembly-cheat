@@ -1,24 +1,3 @@
-; Extern definitions and macros to be included source files.
-;
-; Many macros are just helpers to call library functions more easily.
-; Many of them set-up arguments, e.g. prepare EAX for a call.
-;
-; Macros here do not preserve registers as their contract.
-
-extern \
-    assert_fail, \
-    print_char, \
-    print_int, \
-    print_int_hex, \
-    print_nl, \
-    print_string, \
-    read_char, \
-    read_int, \
-    sub_dump_math, \
-    sub_dump_mem, \
-    sub_dump_regs, \
-    sub_dump_stack
-
 ; Structure macros
 
     %macro TEXT 0
@@ -60,19 +39,11 @@ extern \
         call print_int
     %endmacro
 
-    %macro PRINT_INT_HEX 1
-        mov eax, %1
-        call print_int_hex
-    %endmacro
-
     %macro PRINT_STRING 1
         mov eax, %1
         call print_string
     %endmacro
 
-    ; Usage:
-    ;
-    ;     PRINT_STRING_LITERAL 'My string literal!'
     %macro PRINT_STRING_LITERAL 1
         RODATA
         %%str db %1, 0

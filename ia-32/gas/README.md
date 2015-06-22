@@ -1,5 +1,12 @@
 # GAS
 
+1. [main.s](main.s)
+1. [Hello world](hello_world.s)
+1. [jmp indirect](hello_world.s)
+1. [Local label](local_label.s)
+1. [Preprocessor](preprocessor.md)
+1. [Comments](comments.md)
+
 GNU assembler syntax cheatsheet.
 
 Supposes that you already know IA-32 and NASM.

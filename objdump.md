@@ -55,3 +55,9 @@ Select which section to act on.
 Seems impossible, use GDB instead.
 
 <http://stackoverflow.com/questions/22769246/disassemble-one-function-using-objdump>
+
+## M
+
+Disassemble with Intel syntax:
+
+    objdump -M intel -d main.o
