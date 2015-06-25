@@ -15,6 +15,10 @@ Use cpp because GAS macros are too limted.
     mov $0, %eax ;\
     ret
 
+#define PRINT_INT_HEX(x) \
+    mov x, %eax ;\
+    call print_int_hex
+
 #define PRINT_INT(x) \
     mov x, %eax ;\
     call print_int
@@ -46,7 +50,20 @@ http://stackoverflow.com/questions/30958595/is-there-a-line-macro-for-gas-assemb
     call assert_fail
 
 #define ASSERT_EQ(x) \
-    cmpl x, %eax ;\
+    ASSERT_EQ2(x, %eax)
+
+/*
+TODO factor out with ASSERT_EQ3.
+Did not do it becase it would require an empty macro which is C99.
+*/
+#define ASSERT_EQ2(x, y) \
+    cmp x, y ;\
+    je  1f ;\
+        ASSERT_FAIL ;\
+    1:
+
+#define ASSERT_EQ3(x, y, size) \
+    cmp ## size x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\
     1:

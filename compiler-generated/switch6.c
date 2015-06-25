@@ -6,6 +6,9 @@ GCC 4.8: jump table
 
 Basically becomes something like:
 
+    400661:       83 7d fc 05             cmpl   $0x5,-0x4(%rbp)
+    400665:       77 42                   ja     4006a9 <main+0x8c>
+    400667:       8b 45 fc                mov    -0x4(%rbp),%eax
     40066a:       48 8b 04 c5 60 07 40    mov    0x400760(,%rax,8),%rax
     400671:       00 
     400672:       ff e0                   jmpq   *%rax
@@ -14,7 +17,8 @@ Basically becomes something like:
     40067d:       c7 45 f8 01 00 00 00    movl   $0x1,-0x8(%rbp)
     400684:       eb 23                   jmp    4006a9 <main+0x8c>
 
-Where `0x400760(,%rax,8)` is the address of the jump table on `.rodata`.
+which checks if `i > 5`, and if not uses a jump table stored at
+`400760` in the `.rodata`, that contains the address of each case in an array.
 
 The `.rodata` is relocated to contain text addresses.
 */

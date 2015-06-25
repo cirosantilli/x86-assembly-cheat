@@ -31,10 +31,16 @@ ENTRY
 
             Enables the alternate macro mode from now on.
 
+            Can also be set as a command line option `--alternate`.
+
             This adds extra capabilities to macros:
 
             - LOCAL
             - % string evaluation
+
+        # noaltmacro
+
+            Turned off `.altmacro`.
         */
 
             /*
@@ -43,11 +49,6 @@ ENTRY
                 Impossible to clash.
 
                 Needs `.altmacro` to work.
-
-
-                Can be turned off with `.noaltmacro`.
-
-                Can also be set as a command line option `--alternate`.
             */
 
                 .altmacro

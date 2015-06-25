@@ -11,6 +11,8 @@ Let's see what our compilers are compiling to.
     1.  switch
         1.  [switch3.c](switch3.c)
         1.  [switch6.c](switch6.c)
+        1.  [switch6_spread.c](switch6_spread.c)
+        1.  [switch6_very_spread.c](switch16_very_spread.c)
     1.  Floating point
         [float_sum.c](float_sum.c)
         [float2int.c](float2int.c)

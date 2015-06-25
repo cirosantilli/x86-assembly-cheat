@@ -516,6 +516,7 @@ assert_fail:
     push dword 1
     call exit
 
+; Print 32 bit integer in decimal.
 section .data
 int_format db "%i", NL, TERM
 section .text
@@ -536,6 +537,7 @@ print_int:
     leave
     ret
 
+; Print 32 bit integer in hexadecimal.
 section .data
 int_format_hex db "%x", NL, TERM
 section .text

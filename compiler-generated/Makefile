@@ -31,7 +31,7 @@ all: $(OUTS) $(OUTS_CPP)
 
 %$(OUT_EXT): %$(IN_EXT)
 	$(CCC) -S '$<' -o '$(basename $@)$(ASM_EXT)' $(LIBS)
-	$(CCC) -c '$(basename $@)$(ASM_EXT)' -o '$(basename $@)$(OBJ_EXT)' $(LIBS)
+	$(CCC) -c '$(basename $@)$(ASM_EXT)' -fdump-final-insns -o '$(basename $@)$(OBJ_EXT)' $(LIBS)
 	readelf -W -a '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_READELF_EXT)'
 	$(OBJDUMP) '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_OBJDUMP_EXT)'
 	$(CCC) '$(basename $@)$(OBJ_EXT)' -o '$@' $(LIBS)
@@ -40,7 +40,7 @@ all: $(OUTS) $(OUTS_CPP)
 
 %$(OUT_EXT): %$(IN_EXT_CPP)
 	$(CCC_CPP) -S '$<' -o '$(basename $@)$(ASM_EXT)'
-	$(CCC_CPP) -c '$(basename $@)$(ASM_EXT)' -o '$(basename $@)$(OBJ_EXT)'
+	$(CCC_CPP) -c '$(basename $@)$(ASM_EXT)' -fdump-final-insns -o '$(basename $@)$(OBJ_EXT)'
 	readelf -W -a '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_READELF_EXT)'
 	$(OBJDUMP) '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_OBJDUMP_EXT)'
 	$(CCC_CPP) '$(basename $@)$(OBJ_EXT)' -o '$@'
@@ -48,7 +48,7 @@ all: $(OUTS) $(OUTS_CPP)
 	$(OBJDUMP) '$(basename $@)$(OUT_EXT)' > '$(basename $@)$(OUT_OBJDUMP_EXT)'
 
 clean:
-	rm -f  *'$(ASM_EXT)' *'$(OBJ_EXT)' *'$(OUT_EXT)' *'$(OBJ_OBJDUMP_EXT)' *'$(OUT_OBJDUMP_EXT)' *'$(OBJ_READELF_EXT)' *'$(OUT_READELF_EXT)'
+	rm -f  *'$(ASM_EXT)' *'$(OBJ_EXT)' *'$(OUT_EXT)' *'$(OBJ_OBJDUMP_EXT)' *'$(OUT_OBJDUMP_EXT)' *'$(OBJ_READELF_EXT)' *'$(OUT_READELF_EXT)' *.class
 
 run: all
 	./'$(RUN)$(OUT_EXT)'

@@ -1,8 +1,7 @@
 /*
-Spread out case numbers exponentially to see if the jump table table is still used.
+Spread switch numbers even more.
 
-GCC 4.8 -O0: creates 32 entries on the jump table,
-such that each entry that does not have a case jumps to the end of the switch.
+GCC 4.8 -O0: Seems to do binary search from some point onwards.
 */
 
 #include <stdio.h>
@@ -10,25 +9,25 @@ such that each entry that does not have a case jumps to the end of the switch.
 
 int main() {
     int i, j;
-    i = time(NULL) % 6;
+    i = time(NULL) % 1000000;
     j = -1;
     switch (i) {
-        case 1:
+        case 0:
             j = 0;
         break;
-        case 2:
+        case 1:
             j = 1;
         break;
-        case 4:
+        case 0x10:
             j = 2;
         break;
-        case 8:
+        case 0x100:
             j = 3;
         break;
-        case 16:
+        case 0x1000:
             j = 4;
         break;
-        case 32:
+        case 0xFFFFFFF:
             j = 5;
         break;
     };

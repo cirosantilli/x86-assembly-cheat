@@ -1473,7 +1473,11 @@ ENTRY
 
                 ; # test
 
-                        ; ZF = (!(al && bl)) ? 1 : 0
+                    ; `test X, Y` is like `and` but only sets flags:
+
+                        ; ZF = (!(X && Y)) ? 1 : 0
+
+                    ; Contrast this with `cmp` which does `sub` instead of `and.
 
                         mov al, 0x0F0
                         test al, 0
@@ -1485,6 +1489,10 @@ ENTRY
                         test al, 0x0F0
                         ASSERT_FLAG jnz
                         ASSERT_EQ al, 0x0F0
+
+                    ; `test %eax, %eax` is often used instead of `cmp %eax, 0`
+                    ; as it generates shorter instructions.
+                    ; http://stackoverflow.com/questions/147173/x86-assembly-testl-eax-against-eax
 
                 ; # or
 

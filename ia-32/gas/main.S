@@ -6,11 +6,6 @@ GAS syntax cheat.
 
 .data
 
-    /*
-    .int and .float are only mnemonics for data size,
-    they do not impose any compile size typechecking.
-    */
-
     i:
         .int 0
 
@@ -60,7 +55,7 @@ ENTRY
 
             Of form:
 
-                a(b, c, d)
+                s:a(b, c, d)
 
             is the same as Intel notation:
 
@@ -68,10 +63,13 @@ ENTRY
 
             with:
 
+            - `s`: segment
             - `a`: immediate
             - `b`: register
             - `c`: register
             - `d`: immmediate power of 2
+
+            Most of the parts are optional.
             */
 
         /* basic usage: */
@@ -81,11 +79,10 @@ ENTRY
             mov i, %eax
             ASSERT_EQ($1)
 
-        /* `(i)` is the same as `i`: if the label is the only thing */
-        /* inside the parenthesis, those can be omited. */
+        /* TODO why does `(i)` work? */
 
-            movl $2, i
-            mov i, %eax
+            movl $2, (i)
+            mov (i), %eax
             ASSERT_EQ($2)
 
         /* To get the actual adress instead of the data, use `$`: */
@@ -95,41 +92,5 @@ ENTRY
             /* eax = *ebx */
             mov (%ebx), %eax
             ASSERT_EQ(i)
-
-    /* float */
-
-            /* fld1 */
-            /* fldl (f1) */
-            /* fchs */
-            /* fstpl (f) */
-            /* movl (f), %eax */
-
-        /*
-        # $
-
-        # Dollar sign
-
-            Immediates:
-
-            -  constants `$0x1F`
-            - label addresses `$label`. Without dollar, it means the data itself!
-        */
-
-
-        /*
-        # irp
-
-            The macro below generates:
-
-                add $3, %eax
-                add $1, %eax
-                add $2, %eax
-        */
-
-            mov $0, %eax
-            .irp i, 3, 1, 2
-                add $\i, %eax
-            .endr
-            ASSERT_EQ($6)
 
     EXIT

@@ -36,4 +36,9 @@ ENTRY
     PRINT_INT(.Ls)
     PRINT_INT(g)
     PRINT_INT(l)
+
+    /* Same for labels. */
+    lbl:
+    .Llbl:
+
     EXIT

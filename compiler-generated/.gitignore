@@ -1,3 +1,5 @@
-*.s
-*.readelf
+# g++ -fdump-class-hierarchy
+*.class
 *.objdump
+*.readelf
+*.s
