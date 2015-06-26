@@ -18,6 +18,8 @@ Let's see what our compilers are compiling to.
         [float2int.c](float2int.c)
         [sqrt.c](sqrt.c)
     1.  Optimization
+        1. [for_empty.c](for_empty.c)
+        1. [while_infinite.c](while_infinite.c)
         1. [use_rax_return.c](use_rax_return.c)
         1. [restrict.c](restrict.c)
 1.  C++

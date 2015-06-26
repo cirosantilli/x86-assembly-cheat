@@ -1,5 +1,58 @@
-# g++ -fdump-class-hierarchy
-*.class
 *.objdump
 *.readelf
 *.s
+
+# gcc -fdump-tree-all
+*.cfg
+*.cplxlower0
+*.eh
+*.einline
+*.gimple
+*.inline_param1
+*.inline_param2
+*.lower
+*.omplower
+*.optimized
+*.original
+*.release_ssa
+*.ssa
+*.statistics
+*.tu
+*.veclower
+
+# g++ -fdump-tree-all
+*.ehcleanup2
+*.ehdisp
+*.ehopt
+*.resx
+
+# -fdump-rtl-all
+*.alignments
+*.asmcons
+*.barriers
+*.dfinish
+*.dfinit
+*.dwarf2
+*.eh_ranges
+*.expand
+*.final
+*.gkd
+*.into_cfglayout
+*.ira
+*.jump
+*.jump2
+*.mach
+*.mode_sw
+*.nothrow
+*.outof_cfglayout
+*.pro_and_epilogue
+*.reginfo
+*.reload
+*.shorten
+*.split1
+*.split2
+*.stack
+*.vregs
+
+# g++ -fdump-class-hierarchy
+*.class

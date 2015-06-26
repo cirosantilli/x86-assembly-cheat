@@ -5,7 +5,7 @@ Assembly information and cheatsheets.
 x86 only for now, but we'd love to try out other architectures.
 
 1.  Featured
-    1. [ia-32/main.asm](ia32/main.asm)
+    1. [IA-32](ia32/)
     1. [x86 paging tutorial](http://stackoverflow.com/questions/18431261/how-does-x86-paging-work)
 1.  Introduction
     1. [How to learn](how-to-learn.md)

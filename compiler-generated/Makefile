@@ -5,8 +5,8 @@
 ASM_EXT ?= .s
 O ?= 0
 STD ?= c99
-CCC     ?= gcc -ggdb3 -pthread -O$(O) -pedantic-errors -std=$(STD) -Wextra #-mfpmath=387
-CCC_CPP ?= g++ -ggdb3 -pthread -O$(O) -pedantic-errors -std=c++11  -Wextra
+CCC     ?= gcc -fdump-tree-all -fdump-rtl-all -fdump-final-insns -ggdb3 -pthread -O$(O) -pedantic-errors -std=$(STD) -Wextra #-mfpmath=387
+CCC_CPP ?= g++ -fdump-tree-all -fdump-rtl-all -fdump-final-insns -ggdb3 -pthread -O$(O) -pedantic-errors -std=c++11  -Wextra
 IN_EXT ?= .c
 IN_EXT_CPP ?= .cpp
 LIBS ?= -lm
@@ -30,8 +30,8 @@ OUTS_CPP := $(addsuffix $(OUT_EXT), $(basename $(INS_CPP)))
 all: $(OUTS) $(OUTS_CPP)
 
 %$(OUT_EXT): %$(IN_EXT)
-	$(CCC) -S '$<' -o '$(basename $@)$(ASM_EXT)' $(LIBS)
-	$(CCC) -c '$(basename $@)$(ASM_EXT)' -fdump-final-insns -o '$(basename $@)$(OBJ_EXT)' $(LIBS)
+	$(CCC) -o '$(basename $@)$(ASM_EXT)' $(LIBS) -S '$<'
+	$(CCC) -c '$(basename $@)$(ASM_EXT)' -o '$(basename $@)$(OBJ_EXT)' $(LIBS)
 	readelf -W -a '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_READELF_EXT)'
 	$(OBJDUMP) '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_OBJDUMP_EXT)'
 	$(CCC) '$(basename $@)$(OBJ_EXT)' -o '$@' $(LIBS)
@@ -39,8 +39,8 @@ all: $(OUTS) $(OUTS_CPP)
 	$(OBJDUMP) '$(basename $@)$(OUT_EXT)' > '$(basename $@)$(OUT_OBJDUMP_EXT)'
 
 %$(OUT_EXT): %$(IN_EXT_CPP)
-	$(CCC_CPP) -S '$<' -o '$(basename $@)$(ASM_EXT)'
-	$(CCC_CPP) -c '$(basename $@)$(ASM_EXT)' -fdump-final-insns -o '$(basename $@)$(OBJ_EXT)'
+	$(CCC_CPP) -o '$(basename $@)$(ASM_EXT)' -S '$<'
+	$(CCC_CPP) -c '$(basename $@)$(ASM_EXT)' -o '$(basename $@)$(OBJ_EXT)'
 	readelf -W -a '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_READELF_EXT)'
 	$(OBJDUMP) '$(basename $@)$(OBJ_EXT)' > '$(basename $@)$(OBJ_OBJDUMP_EXT)'
 	$(CCC_CPP) '$(basename $@)$(OBJ_EXT)' -o '$@'
@@ -48,7 +48,63 @@ all: $(OUTS) $(OUTS_CPP)
 	$(OBJDUMP) '$(basename $@)$(OUT_EXT)' > '$(basename $@)$(OUT_OBJDUMP_EXT)'
 
 clean:
-	rm -f  *'$(ASM_EXT)' *'$(OBJ_EXT)' *'$(OUT_EXT)' *'$(OBJ_OBJDUMP_EXT)' *'$(OUT_OBJDUMP_EXT)' *'$(OBJ_READELF_EXT)' *'$(OUT_READELF_EXT)' *.class
+	rm -f \
+		*'$(ASM_EXT)' \
+		*'$(OBJ_EXT)' \
+		*'$(OUT_EXT)' \
+		*'$(OBJ_OBJDUMP_EXT)' \
+		*'$(OUT_OBJDUMP_EXT)' \
+		*'$(OBJ_READELF_EXT)' \
+		*'$(OUT_READELF_EXT)' \
+		*.alignments \
+		*.asmcons \
+		*.barriers \
+		*.cfg \
+		*.class \
+		*.cplxlower0 \
+		*.dfinish \
+		*.dfinit \
+		*.dwarf2 \
+		*.eh \
+		*.eh_ranges \
+		*.ehcleanup2 \
+		*.ehdisp \
+		*.ehopt \
+		*.einline \
+		*.expand \
+		*.final \
+		*.gimple \
+		*.gkd \
+		*.gkd \
+		*.inline_param1 \
+		*.inline_param2 \
+		*.into_cfglayout \
+		*.ira \
+		*.jump \
+		*.jump2 \
+		*.lower \
+		*.mach \
+		*.mode_sw \
+		*.nothrow \
+		*.omplower \
+		*.optimized \
+		*.original \
+		*.outof_cfglayout \
+		*.pro_and_epilogue \
+		*.reginfo \
+		*.release_ssa \
+		*.reload \
+		*.resx \
+		*.shorten \
+		*.split1 \
+		*.split2 \
+		*.ssa \
+		*.stack \
+		*.statistics \
+		*.tu \
+		*.veclower \
+		*.vregs
+
 
 run: all
 	./'$(RUN)$(OUT_EXT)'

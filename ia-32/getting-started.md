@@ -19,3 +19,7 @@ Files in this directory are OS-portable because of the C driver under [lib/](lib
 If we assume a single OS, then simpler examples can be produced with direct system calls, e.g. [linux/](linux/)
 
 Beware that the virtual machine provided by [Vagrantfile](Vagrantfile) may have less features than you actual CPU. Check `cat /proc/cpuinfo` inside the VM.
+
+This is the default location for arch agnostic code, e.g.:
+
+- [gas](gas/): GAS syntax cheatsheet
