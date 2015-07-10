@@ -1,6 +1,6 @@
 extern puts, exit
 section .data
-    hello_world db "Hello world!", 0
+    hello_world db "hello world", 0
 section .text
     global main
     main:

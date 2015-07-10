@@ -19,6 +19,9 @@ ENTRY
     mov $1, %eax
     ASSERT_EQ($1)
 
+    mov $-1, %eax
+    ASSERT_EQ($-1)
+
     /*
     Without `$`, the data at given address is understood. Segfault:
     */

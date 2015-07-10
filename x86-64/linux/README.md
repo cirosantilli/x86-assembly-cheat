@@ -6,6 +6,7 @@
 1.  [memory_layout.asm](memory_layout.asm)
     1. [stack_top.asm](stack_top.asm)
     1. [initial_state.asm](initial_state.asm)
+1.  [C from assembly](c-from-assembly/)
 
 ## System calls
 

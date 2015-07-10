@@ -8,6 +8,12 @@
 
         ; if(flag) a = b
 
+    ; Compilers produce this instruction in branches if possible,
+    ; as it avoid the cost of branch misprediction:
+    ; https://software.intel.com/en-us/articles/branch-and-loop-reorganization-to-prevent-mispredicts
+    ; SETcc achieves a similar effect.
+
+
 %include "lib/asm_io.inc"
 
 ENTRY

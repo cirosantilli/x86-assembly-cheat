@@ -4,19 +4,20 @@
 
     ; Sign extend `eax` into `edx:eax`.
 
-    ; Common combo with idiv 32-bit.
+    ; Common combo with idiv 32-bit, which takes the input from `edx:eax`:
+    ; so you need to set up `edx` before calling it.
 
 %include "lib/asm_io.inc"
 
 ENTRY
     mov eax, 1
-    mov edx, 0
+    mov edx, 0x01234567
     cdq
     ASSERT_EQ edx, 0
 
     mov eax, -1
-    mov edx, 0
+    mov edx, 0x01234567
     cdq
-    ASSERT_EQ edx, 0x0FFFFFFFF
+    ASSERT_EQ edx, 0xFFFFFFFF
 
     EXIT

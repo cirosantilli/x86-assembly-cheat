@@ -13,16 +13,30 @@ Let's see what our compilers are compiling to.
         1.  [switch6.c](switch6.c)
         1.  [switch6_spread.c](switch6_spread.c)
         1.  [switch6_very_spread.c](switch16_very_spread.c)
+    1.  [Cast int to long](cast_int_long.c)
     1.  Floating point
         [float_sum.c](float_sum.c)
         [float2int.c](float2int.c)
         [sqrt.c](sqrt.c)
     1.  Optimization
-        1. [for_empty.c](for_empty.c)
-        1. [while_infinite.c](while_infinite.c)
-        1. [use_rax_return.c](use_rax_return.c)
-        1. [restrict.c](restrict.c)
+        1.  [for_empty.c](for_empty.c)
+        1.  [while_infinite.c](while_infinite.c)
+        1.  [use_rax_return.c](use_rax_return.c)
+        1.  [restrict.c](restrict.c)
+        1.  [builtin_no_side_effect.c](builtin_no_side_effect.c)
+        1.  [builtin_inline.c](builtin_inline.c)
+        1.  [CSE](cse.c)
+        1.  [CSE function](cse_function.c)
+        1.  [CSE large function](cse_large_function.c)
+        1.  Branch prediction
+            1.   [__builtin_expect](gcc/builtin_expect.c)
+            1.   [__builtin_expect off](gcc/builtin_expect_off.c)
+        1.  [Precalculate loop](precalculate_loop.c)
+        1.  [Precalculate loop without init](precalculate_loop_without_init.c)
+        1.  [Bound simplficiation](bound_simplification.c)
 1.  C++
+    [class](class.cpp)
+    [template](template.cpp)
     [constexpr.cpp](constexpr.cpp)
     [atomic.cpp](atomic.cpp)
     [this_method.cpp](this_method.cpp)
@@ -34,3 +48,8 @@ Let's see what our compilers are compiling to.
     1. [bss_static.c ](bss_static.c)
     1. [common.c](common.c)
     1. [data.c](data.c)
+
+TODO
+
+1.  Optimizations
+    1.  Strength reduction, like multiplication to lea <https://en.wikipedia.org/wiki/Strength_reduction>

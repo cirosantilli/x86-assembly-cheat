@@ -18,28 +18,6 @@ where `cdecl` is the name of the calling convention.
 
 In IA32, [cdecl](cdecl.md) is the most popular in Linux, and stdcall the most popular in Windows, but there exist many others.
 
-## x86-64 calling conventions
-
-In x86-64, the number of calling conventions was greatly reduced.
-
-### System V AMD64 ABI
-
-[System V AMD64 ABI][] dominating in Linux and other UNIX systems.
-
-Uses CPU registers for the first 6 parameters, XMM if floating point, and the following on stack, thus much faster! This was made possible by the large amount of CPU registers added.
-
-XMM passing is possible because SSE and SSE2 are part of the x86-64 core.
-
-Register order is: RDI, RSI, RDX, RCX, R8, and R9
-
-For system calls, R10 is used instead of RCX.
-
-### Microsoft x64
-
-Obviously they could not be compatible with the rest.
-
-Microsoft x64 calling convention and its 2013 extension `__vectorcall` for Windows,
-
 ## Call C function form assembly
 
 TODO link to example code.
@@ -69,9 +47,3 @@ To call a C function from assembly you need to:
         gcc -o main a.o c.o
 
     You can also call stdlib functions if you want, since GCC links to them for you.
-
-## AMD64 System V ABI
-
-Unchanged registers: RBX, RBP, R12-R15 <http://stackoverflow.com/questions/9603003/what-registers-are-restored-after-a-x86-function-call-in-c>
-
-Variable length argument lists pass the number of arguments on AL: <http://stackoverflow.com/questions/6212665/why-is-eax-zeroed-before-a-call-to-printf/6212835#6212835>

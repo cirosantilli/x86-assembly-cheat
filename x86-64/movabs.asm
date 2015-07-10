@@ -12,15 +12,13 @@
 
 %include "lib/asm_io.inc"
 
-section .text
-    global asm_main
-    asm_main:
-        ; Eror: dword exceeds bounds.
-        ; TODO what is the case where only rax works?
-        ; All of the below give the same error.
-        ;mov [0x8000_0000_0000_0000], rax
-        ;mov [0x8000_0000_0000_0000], rbx
-        ;mov rax, [0x8000_0000_0000_0000]
-        ;mov rbx, [0x8000_0000_0000_0000]
-        mov rax, 0
-        ret
+ENTRY
+    ; Eror: dword exceeds bounds.
+    ; TODO what is the case where only rax works?
+    ; All of the below give the same error.
+    ;mov [0x8000_0000_0000_0000], rax
+    ;mov [0x8000_0000_0000_0000], rbx
+    ;mov rax, [0x8000_0000_0000_0000]
+    ;mov rbx, [0x8000_0000_0000_0000]
+
+    EXIT

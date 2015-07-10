@@ -389,7 +389,7 @@ ENTRY
 
                 ; Stack Pointer.
 
-                ; Modified by `push` and `pop`.
+                ; Notably modified by `push`, `pop`, `enter`, `leave`, `call` and `ret`.
 
                 ; You can almost never use it as a general purpose register because of that.
 
@@ -1176,8 +1176,12 @@ ENTRY
             ; - `A` dwords for local function variables,
 
             ; Enter is almost never used by GCC as it is slower than `push`:
-            ; http://stackoverflow.com/questions/26323215/do-any-languages-compilers-utilize-the-x86-enter-instruction-with-a-nonzero-ne?lq=1
-            ; `leave` is used.
+            ; http://stackoverflow.com/questions/5959890/enter-vs-push-ebp-mov-ebp-esp-sub-esp-imm-and-leave-vs-mov-esp-ebp
+
+            ; `leave` is used however
+
+            ; B is very rarely not 0 in compiler output.
+            ; http://stackoverflow.com/questions/26323215/do-any-languages-compilers-utilize-the-x86-enter-instruction-with-a-nonzero-ne
 
         ; # leave
 

@@ -4,7 +4,7 @@ IN_EXT ?= .asm
 INC_EXT ?= .inc
 OUT_EXT ?= .out
 TMP_EXT ?= .o
-RUN ?= hello_world
+RUN ?= main
 
 OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(wildcard *$(IN_EXT)))
 INCS := $(wildcard *$(INC_EXT))
@@ -15,7 +15,7 @@ INCS := $(wildcard *$(INC_EXT))
 all: $(OUTS)
 
 %$(OUT_EXT): %$(TMP_EXT)
-	ld -o '$@' '$<'
+	gcc -m64 -pedantic-errors -o '$@' '$<'
 
 %$(TMP_EXT): %$(IN_EXT) $(INCS)
 	nasm -w+all -f elf64 -o '$@' '$<'

@@ -1,6 +1,6 @@
 # C from assembly
 
-Call C from assembly.
+Call the C standard library from assembly.
 
 This is not OS portable because ANSI C does not specify the ABI.
 
@@ -11,7 +11,8 @@ Things which may vary include:
 
 The only way to deal with that is by treating each implementation differently with macros.
 
-Two methods are covered:
+The following methods are covered:
 
-- `main` if you defined a main function in the assembly
-- `_start` if you defined a main function in the assembly
+- `main/`: `main` function in assembly
+- `start/`: `_start` function in assembly, and link with `ld`
+- `start-gcc/`: `_start` function in assembly, and link with `gcc`

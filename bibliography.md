@@ -52,5 +52,9 @@
 
     Highly regarded optimization guidelines for x86 and C++.
 
+-   <http://courses.cs.washington.edu/courses/cse471/12sp/lectures.html>
+
+    Washington university course that covers branch prediction, cache and other CPU internals
+
 [Itanium C++ ABI]: http://mentorembedded.github.io/cxx-abi/abi.html
 [System V ABI AMD64]: http://www.x86-64.org/documentation_folder/abi-0.99.pdf

@@ -153,14 +153,14 @@ extern \
         call assert_fail
     %endmacro
 
+; SIMD macros
+
     %macro ASSERT_EQ4 5
         ASSERT_EQ [%1], %2, dword
         ASSERT_EQ [%1 + 4], %3, dword
         ASSERT_EQ [%1 + 8], %4, dword
         ASSERT_EQ [%1 + 12], %5, dword
     %endmacro
-
-; SIMD macros
 
     ; Move 4 given dwords into the given memory location.
     ; The memory location should normally be 8 dwords long.

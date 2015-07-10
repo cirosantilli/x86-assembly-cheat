@@ -64,11 +64,15 @@ Why `--with-sysroot` is needed <https://sourceware.org/ml/binutils/2007-02/msg00
 
 -   `gdb`: GDB
 
--   `bfd`: object file library
+-   `bfd`: Binary File Descriptor?
 
     Contains a generic model that supports multiple output formats: ELF, Mach-O, PE, etc.
 
-    `gas` for example just fills in that model, and then uses it to output to anything.
+    Used by most utilities.
+
+-   `opcodes`: low-level CPU instruction descriptions.
+
+    Key to assembly and disassembly, used by many utilities.
 
 ### GAS
 
