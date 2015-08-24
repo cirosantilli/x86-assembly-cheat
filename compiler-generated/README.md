@@ -6,7 +6,8 @@ Let's see what our compilers are compiling to.
     1. [GCC](gcc.md)
 1.  C
     1.  [hello_world.c](hello_world.c)
-    1.  [function_int_int_int.c](function_int_int_int.c)
+    1.  Functions
+        1.  [function_int_int_int.c](function_int_int_int.c)
     1.  [return_struct.c](return_struct.c)
     1.  switch
         1.  [switch3.c](switch3.c)

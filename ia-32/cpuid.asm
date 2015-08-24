@@ -1,8 +1,9 @@
 ; # CPUID
 
-    ; Fills EAX, EBX, ECX and EDX with CPU information
+    ; Fills EAX, EBX, ECX and EDX with CPU information.
 
-    ; The exact data do show depends on the value of EAX.
+    ; The exact data do show depends on the value of EAX, and for a few cases instructions ECX.
+    ; When it depends on ECX, it is called a sub-leaf.
 
     ; Information available includes:
 
@@ -12,10 +13,15 @@
     ; - caches
     ; - tlbs <http://en.wikipedia.org/wiki/Translation_lookaside_buffer>
 
-    ; On Linux, part of this information is parsed and made available at `cat /proc/cpuinfo`.
-
     ; The cool thing about this instruction is that it allows you to check the CPU specs
     ; and take alternative actions based on that inside your program.
+
+
+    ; On Linux, capacity part of this information is parsed and made available at `cat /proc/cpuinfo`.
+    ; See: http://unix.stackexchange.com/questions/43539/what-do-the-flags-in-proc-cpuinfo-mean
+
+    ; There is also the `cpuinfo` command line tool that parses the CPUID instruction from the command line.
+    ; Source: http://www.etallen.com/cpuid.html
 
 %include "lib/asm_io.inc"
 

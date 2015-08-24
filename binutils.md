@@ -12,6 +12,7 @@ Also contains GDB.
 
 ## Makefile
 
+    sudo apt-get build-dep gdb
     mkdir binutils-gdb
     cd binutils-gdb
     git clone git://sourceware.org/git/binutils-gdb.git src
@@ -48,7 +49,6 @@ Try it out on Linux:
     ./as -o main.o main.S
     ./ld -o main.out main.o
     ./main.out
-
 
 Took 3 minutes in a 2013 computer.
 

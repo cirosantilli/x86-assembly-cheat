@@ -16,11 +16,9 @@ GCC allows to specify calling convention explicitly as:
 
 where `cdecl` is the name of the calling convention.
 
-In IA32, [cdecl](cdecl.md) is the most popular in Linux, and stdcall the most popular in Windows, but there exist many others.
+In IA32, cdecl is the most popular in Linux, and stdcall the most popular in Windows, but there exist many others.
 
-## Call C function form assembly
-
-TODO link to example code.
+## Call C function from assembly
 
 To call a C function from assembly you need to:
 
@@ -33,17 +31,3 @@ To call a C function from assembly you need to:
     For example, `exit` may be called `_exit` on certain compilers such as GCC elf format.
 
     This is not specified by ANSI C, so the only portable alternative is via macros.
-
--   declare the function you want to call as extern.
-
-    NASM for example has the `extern` directive.
-
--   compile into an object file and then compile that object file with the C object files.
-
-    For example with nasm:
-
-        nasm -o a.o a.asm
-        gcc -c c.c -o c.o
-        gcc -o main a.o c.o
-
-    You can also call stdlib functions if you want, since GCC links to them for you.

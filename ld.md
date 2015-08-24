@@ -59,6 +59,36 @@ If you program is compiled with `gcc`, it expects a few things from the linker w
 
 TODO meaning of each type?
 
+## verbose
+
+Print `ld` information, including the linker script used:
+
+    ld --verbose
+
+## T
+
+Replace the linker script with a custom one:
+
+    ld -T script a.o
+
+You will often use an existing script as the basis for this.
+
+## Ttext-segment
+
+Change the address of some predefined segments:
+
+    -Ttext-segment=0x80000
+
+## Linker scripts
+
+The linker scripts are built into the executable.
+
+Make install also generates an informational copy of the scripts at:
+
+    x86_64-unknown-linux-gnu/lib/ldscripts
+
+which some distributions provide. But those are only informational.
+
 ## Library and weak TODOs
 
 - <http://stackoverflow.com/questions/24390267/why-redefinition-of-a-function-which-is-already-present-in-dynamic-or-static-lib>

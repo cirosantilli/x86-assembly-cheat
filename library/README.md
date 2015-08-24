@@ -68,6 +68,18 @@ The program to be run is passed as an argument to `ld-linux`:
 
     /lib64/ld-linux-x86-64.so.2 a.out
 
+### LD_DEBUG
+
+TODO
+
+### LD_LIBRARY_PATH
+
+You can also add to path with environment variables.
+
+Don't rely on this method for production.
+
+    export LD_LIBRARY_PATH='/path/to/link'
+
 ## Search path
 
 Find where GCC search path for both `.a` and `.so`:

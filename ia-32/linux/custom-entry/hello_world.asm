@@ -2,8 +2,8 @@ section .data
     hello_world db "hello world", 10
     hello_world_len  equ $ - hello_world
 section .text
-    global _start
-    _start:
+    global _custom
+    _custom:
         mov eax, 4
         mov ebx, 1
         mov ecx, hello_world

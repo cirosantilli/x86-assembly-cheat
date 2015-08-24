@@ -303,82 +303,6 @@ Manual breakdown:
 
 -   3 E: `e_shstrndx` (`Section Header STRing iNDeX`) = `03 00`: entry of the section header table which corresponds to the string table, which is a magic section for the ELF. This table holds symbol and section names.
 
-## Program header table
-
-Only appears in the executable.
-
-Contains information of how the executable should be put into the process virtual memory.
-
-`readelf -l hello_world.out` gives:
-
-    Elf file type is EXEC (Executable file)
-    Entry point 0x4000b0
-    There are 2 program headers, starting at offset 64
-
-    Program Headers:
-      Type           Offset             VirtAddr           PhysAddr
-                     FileSiz            MemSiz              Flags  Align
-      LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
-                     0x00000000000000d7 0x00000000000000d7  R E    200000
-      LOAD           0x00000000000000d8 0x00000000006000d8 0x00000000006000d8
-                     0x000000000000000d 0x000000000000000d  RW     200000
-
-     Section to Segment mapping:
-      Segment Sections...
-       00     .text
-       01     .data
-
-On the ELF header, `e_phoff`, `e_phnum` and `e_phentsize` told us that there are 2 program headers, which start at `0x40` and are `0x38` bytes long each, so they are:
-
-    00000040  01 00 00 00 05 00 00 00  00 00 00 00 00 00 00 00  |................|
-    00000050  00 00 40 00 00 00 00 00  00 00 40 00 00 00 00 00  |..@.......@.....|
-    00000060  d7 00 00 00 00 00 00 00  d7 00 00 00 00 00 00 00  |................|
-    00000070  00 00 20 00 00 00 00 00                           |.. .....        |
-
-and:
-
-    00000070                           01 00 00 00 06 00 00 00  |        ........|
-    00000080  d8 00 00 00 00 00 00 00  d8 00 60 00 00 00 00 00  |..........`.....|
-    00000090  d8 00 60 00 00 00 00 00  0d 00 00 00 00 00 00 00  |..`.............|
-    000000a0  0d 00 00 00 00 00 00 00  00 00 20 00 00 00 00 00  |.......... .....|
-
-Structure represented <http://www.sco.com/developers/gabi/2003-12-17/ch5.pheader.html>:
-
-    typedef struct {
-        Elf64_Word  p_type;
-        Elf64_Word  p_flags;
-        Elf64_Off   p_offset;
-        Elf64_Addr  p_vaddr;
-        Elf64_Addr  p_paddr;
-        Elf64_Xword p_filesz;
-        Elf64_Xword p_memsz;
-        Elf64_Xword p_align;
-    } Elf64_Phdr;
-
-Breakdown of the first one:
-
-- 40 0: `p_type` = `01 00 00 00` = `PT_LOAD`: TODO
-- 40 4: `p_flags` = `05 00 00 00` = `PT_LOAD`: execute and read permissions, no write TODO 
-- 40 8: `p_offset` = 8x `00` TODO why 0?
-- 50 0: `p_vaddr` = `00 00 40 00 00 00 00 00`: initial virtual memory address to load this segment to
-- 50 8: `p_paddr` = `00 00 40 00 00 00 00 00`: initial physical address to load in memory. Only matters for systems in which the program can set it's physical address. Otherwise, as in System V like systems, can be anything. NASM seems to just copy `p_vaddrr`
-- 60 0: `p_filesz` = `d7 00 00 00 00 00 00 00`: TODO vs `p_memsz`
-- 60 8: `p_memsz` = `d7 00 00 00 00 00 00 00`: TODO
-- 70 0: `p_align` =  `00 00 20 00 00 00 00 00`: 0 or 1 mean no alignment required TODO what does that mean? otherwise redundant with other fields
-
-The second is analogous.
-
-Then the:
-
-     Section to Segment mapping:
-
-section of the `readelf` tells us that:
-
-- 0 is the `.text` segment. Aha, so this is why it is executable, and not writable
-- 1 is the `.data` segment.
-
-TODO where does this information comes from.
-
 ## Section header table
 
 Some section names are reserved for certain section types: <http://www.sco.com/developers/gabi/2003-12-17/ch4.sheader.html#special_sections> e.g. `.text` requires a `SHT_PROGBITS` type and `SHF_ALLOC` + `SHF_EXECINSTR`
@@ -752,11 +676,101 @@ Is also of type `STRTAB`, so it has the same structure of `.shstrtab`.
 
 This implies that it is an ELF level limitation that global variables cannot contain NUL characters.
 
-# Relocation sections
+## Program header table
 
-# SHT_RELA
+Only appears in the executable.
 
-## .rela.text
+Contains information of how the executable should be put into the process virtual memory.
+
+`readelf -l hello_world.out` gives:
+
+    Elf file type is EXEC (Executable file)
+    Entry point 0x4000b0
+    There are 2 program headers, starting at offset 64
+
+    Program Headers:
+      Type           Offset             VirtAddr           PhysAddr
+                     FileSiz            MemSiz              Flags  Align
+      LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                     0x00000000000000d7 0x00000000000000d7  R E    200000
+      LOAD           0x00000000000000d8 0x00000000006000d8 0x00000000006000d8
+                     0x000000000000000d 0x000000000000000d  RW     200000
+
+     Section to Segment mapping:
+      Segment Sections...
+       00     .text
+       01     .data
+
+On the ELF header, `e_phoff`, `e_phnum` and `e_phentsize` told us that there are 2 program headers, which start at `0x40` and are `0x38` bytes long each, so they are:
+
+    00000040  01 00 00 00 05 00 00 00  00 00 00 00 00 00 00 00  |................|
+    00000050  00 00 40 00 00 00 00 00  00 00 40 00 00 00 00 00  |..@.......@.....|
+    00000060  d7 00 00 00 00 00 00 00  d7 00 00 00 00 00 00 00  |................|
+    00000070  00 00 20 00 00 00 00 00                           |.. .....        |
+
+and:
+
+    00000070                           01 00 00 00 06 00 00 00  |        ........|
+    00000080  d8 00 00 00 00 00 00 00  d8 00 60 00 00 00 00 00  |..........`.....|
+    00000090  d8 00 60 00 00 00 00 00  0d 00 00 00 00 00 00 00  |..`.............|
+    000000a0  0d 00 00 00 00 00 00 00  00 00 20 00 00 00 00 00  |.......... .....|
+
+Structure represented <http://www.sco.com/developers/gabi/2003-12-17/ch5.pheader.html>:
+
+    typedef struct {
+        Elf64_Word  p_type;
+        Elf64_Word  p_flags;
+        Elf64_Off   p_offset;
+        Elf64_Addr  p_vaddr;
+        Elf64_Addr  p_paddr;
+        Elf64_Xword p_filesz;
+        Elf64_Xword p_memsz;
+        Elf64_Xword p_align;
+    } Elf64_Phdr;
+
+Breakdown of the first one:
+
+- 40 0: `p_type` = `01 00 00 00` = `PT_LOAD`: TODO
+- 40 4: `p_flags` = `05 00 00 00` = `PT_LOAD`: execute and read permissions, no write TODO 
+- 40 8: `p_offset` = 8x `00` TODO: what is this? Looks like offsets from the beginning of segments. But this would mean that some segments are intertwined? It is possible to play with it a bit with: `gcc -Wl,-Ttext-segment=0x400030 hello_world.c`
+- 50 0: `p_vaddr` = `00 00 40 00 00 00 00 00`: initial virtual memory address to load this segment to
+- 50 8: `p_paddr` = `00 00 40 00 00 00 00 00`: initial physical address to load in memory. Only matters for systems in which the program can set it's physical address. Otherwise, as in System V like systems, can be anything. NASM seems to just copy `p_vaddrr`
+- 60 0: `p_filesz` = `d7 00 00 00 00 00 00 00`: TODO vs `p_memsz`
+- 60 8: `p_memsz` = `d7 00 00 00 00 00 00 00`: TODO
+- 70 0: `p_align` =  `00 00 20 00 00 00 00 00`: 0 or 1 mean no alignment required TODO what does that mean? otherwise redundant with other fields
+
+The second is analogous.
+
+Then the:
+
+     Section to Segment mapping:
+
+section of the `readelf` tells us that:
+
+- 0 is the `.text` segment. Aha, so this is why it is executable, and not writable
+- 1 is the `.data` segment.
+
+TODO where does this information comes from.
+
+### Segment vs segment section
+
+TODO: confirm: each program header represents either a segment, or a segment section, which is a subdivision of segments.
+
+For instance, a C hello world contains the lines (order changed):
+
+    LOAD           0x000000 0x0000000000400000 0x0000000000400000 0x0006fc 0x0006fc R E 0x200000
+    PHDR           0x000040 0x0000000000400040 0x0000000000400040 0x0001f8 0x0001f8 R E 0x8
+    INTERP         0x000238 0x0000000000400238 0x0000000000400238 0x00001c 0x00001c R   0x1
+    NOTE           0x000254 0x0000000000400254 0x0000000000400254 0x000044 0x000044 R   0x4
+    GNU_EH_FRAME   0x0005d0 0x00000000004005d0 0x00000000004005d0 0x000034 0x000034 R   0x4
+
+so that the `LOAD` segment contains multiple segment sections `PHDR, INTERP, etc.`
+
+## Relocation sections
+
+## SHT_RELA
+
+### .rela.text
 
 `.rela.text` holds relocation data which says how the address should be modified when the final executable is linked. This points to bytes of the text area that must be modified when linking happens to point to the correct memory locations.
 

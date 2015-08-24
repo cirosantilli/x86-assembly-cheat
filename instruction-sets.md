@@ -43,6 +43,14 @@ Reduced Instruction set.
 
 Has few operations, but performs each one very fast.
 
+#### One instruction set compiler
+
+Takes it to the limit:
+
+<https://en.wikipedia.org/wiki/One_instruction_set_computer>
+
+Funny example implementation for C in x86 `mov`: <https://github.com/xoreaxeaxeax/movfuscator>
+
 ### CISC
 
 Complex instruction set.

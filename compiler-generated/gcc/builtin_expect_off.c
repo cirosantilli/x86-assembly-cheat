@@ -5,7 +5,6 @@ int main() {
     int i;
     i = !time(NULL);
     if (i)
-        printf("%d\n", i);
-    puts("a");
+        puts("a");
     return 0;
 }

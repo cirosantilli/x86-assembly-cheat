@@ -2,7 +2,7 @@
 
 1.  Featured
     1. [main.asm](main.asm)
-.  [Getting started](getting-started.md)
+1.  [Getting started](getting-started.md)
 1.  [hello_world.asm](hello_world.asm)
 1.  [lib/](lib/)
 1.  [linux/](linux/)
@@ -15,6 +15,7 @@
         1. [MOVSX](movsx.asm)
         1. [CMOVcc](cmovcc.asm)
         1. [XCHG](xchg.asm)
+        1. [LEA](lea.asm)
     1.  Flags
         1. [SETcc](setcc.asm)
     1.  Arithmetic
@@ -53,7 +54,10 @@
             [BTR](btr.asm)
             [BTC](btc.asm)
     1.  Branching
-        1. [JMP indirect](jmp_indirect.asm)
+        1.  [Jcc](jcc.asm)
+        1.  [JMP](jmp.asm)
+            1. [JMP indirect](jmp_indirect.asm)
+        1.  [LOOPcc](loopcc.asm)
     1.  Synchronization
         1. [XADD](xadd.asm)
         1. [CMPXCHG](cmpxchg)
@@ -63,6 +67,10 @@
         1. [RDTSC](rdtsc.asm)
         1. [NOP](nop.asm)
         1. [CPUID](cpuid.asm)
+1.  Calling conventions
+    1.  [cdecl](cdecl.md)
+    1.  [cdecl examples](cdecl.asm)
+    1.  [stdcall](stdcall.asm)
 
 WIP
 

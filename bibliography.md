@@ -56,5 +56,13 @@
 
     Washington university course that covers branch prediction, cache and other CPU internals
 
+## Libraries
+
+-   <https://github.com/aquynh/capstone>
+
+    Looks like the best free disassembly library out there.
+
+    Binutils cannot be used as a library to disassemble? Sad.
+
 [Itanium C++ ABI]: http://mentorembedded.github.io/cxx-abi/abi.html
 [System V ABI AMD64]: http://www.x86-64.org/documentation_folder/abi-0.99.pdf

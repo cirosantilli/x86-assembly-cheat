@@ -56,12 +56,7 @@ Interesting files in v4.0:
 - `include/uapi/linux/elf.h`: contains most of the format, which is natural since the format is needed from userland to implement compilers, and the most part if not arch dependent
 - `include/linux/elf.h`
 - `arch/x86/include/asm/elf.h`: x86 specifics described in the AMD64 ABI extension, e.g. the `R_X86_64_64` type
-- `fs/binfmt_elf.c`: this is where the real action happens. `do_execve` from the system call calls `load_elf_binary`, which prepares everything and culminates in a call to `start_thread`
-
-For instance under `include/uapi/linux/elf.h` we see the IA-32 ELF header `struct elf32_hdr` and  {
-which is a direct copy paste form the System V ABI 4.1, and:
-
-which is from the System V ABI Update DRAFT 17.
+- `fs/binfmt_elf.c`: this is where the real action happens. `do_execve` in `src/fs/exec.c` from the system call calls `load_elf_binary`, which prepares everything and culminates in a call to `start_thread`
 
 ### GCC
 

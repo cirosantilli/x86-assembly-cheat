@@ -19,7 +19,7 @@
     bswap ecx
     mov [resd0], ecx
     mov ecx, resd0
-    mov rdx, 4
+    mov edx, 4
     int 80h
 %endmacro
 

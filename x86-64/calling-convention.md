@@ -27,7 +27,11 @@ A simplified version of the most important points to keep in mind about the [Sys
 
         Linux system calls [use R10 is used instead of RCX](http://stackoverflow.com/questions/2535989/what-are-the-calling-conventions-for-unix-linux-system-calls-on-x86-64), Mac's [are unchanged](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/LowLevelABI/140-x86-64_Function_Calling_Conventions/x86_64.html)
 
-    -   variable argument functions like printf, `rax` must contain the number of varargs: <http://stackoverflow.com/questions/6212665/why-is-eax-zeroed-before-a-call-to-printf>
+    -   variable argument functions like printf, `rax` must contain the number of vector (SSE / AVX) varargs: <http://stackoverflow.com/questions/6212665/why-is-eax-zeroed-before-a-call-to-printf>
+
+        This includes for example `float` and `double` arguments, but not `int`.
+
+        TODO why is this needed?
 
 -   after return
 
@@ -42,6 +46,10 @@ A simplified version of the most important points to keep in mind about the [Sys
         - %st0 holds x87 80-bit floats (`long double)
 
         - %rdi holds the address of return values that went to memory
+
+Other surprising ABI points:
+
+- You can use up to 128 bytes below `RSP` without fear that it will be corrupted by signal or interrupt handlers: <http://stackoverflow.com/questions/13201644/why-does-the-x86-64-gcc-function-prologue-allocate-less-stack-than-the-local-var>. This is useful for leaf functions, which don't need to store arguments for further calls.
 
 Good article: <http://nickdesaulniers.github.io/blog/2014/04/18/lets-write-some-x86-64/>
 

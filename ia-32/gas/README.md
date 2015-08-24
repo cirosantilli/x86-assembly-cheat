@@ -10,6 +10,8 @@
     1. [movz](movz.S)
 1.  [Local label](local_label.S)
 1.  [Local symbol](local_symbol.S)
+1.  Directives
+    1. [.type](type.S)
 1.  [Preprocessor](preprocessor.md)
     1. [.macro](macro.S)
     1. [.irp](irp.S)
