@@ -924,7 +924,7 @@ ENTRY
                 sub eax, bs4
                 ASSERT_EQ 0
 
-                ; Shouldn't be necessary, but some badly written func afterwards is not clearing this value?
+                ; TODO: Shouldn't be necessary, but some badly written func afterwards is not clearing this value?
                 cld
 
         ; # stos

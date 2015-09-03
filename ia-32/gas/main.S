@@ -72,7 +72,7 @@ ENTRY
             Most of the parts are optional.
             */
 
-        /* basic usage: */
+        /* Basic usage: */
 
             mov $0, %eax
             movl $1, i

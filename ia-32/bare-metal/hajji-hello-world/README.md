@@ -1,5 +1,7 @@
 # Hajji hello world
 
+TODO broken
+
 Originally taken from <http://farid.hajji.name/blog/2010/05/25/hello-world-on-the-bare-metal/>
 
 Not working very well out of the box: output toggles randomly between printing:

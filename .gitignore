@@ -14,3 +14,8 @@ _tmp/
 *.a
 
 .vagrant
+
+# Image files
+*.bin
+*.img
+*.iso
