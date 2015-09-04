@@ -1,8 +1,8 @@
 .PHONY: clean run
 
-main.out: main.s
-	as -o main.o main.s
-	ld -o main.out -s main.o
+main.out: main.S
+	as --32 -o main.o main.S
+	ld -m elf_i386 -o main.out -s main.o
 
 clean:
 	rm -f *.o *.out

@@ -37,7 +37,6 @@ x86 only for now, but we'd love to try out other architectures.
 
 WIP
 
-1.  [Instruction encoding](instruction-encoding/)
 1.  [GAS](ia32/gas/)
 1.  [CPU bugs](cpu-bugs.md)
 1.  [Compiler generated](compiler-generated/)

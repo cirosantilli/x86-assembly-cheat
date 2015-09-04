@@ -841,3 +841,7 @@ Note that `%RIP` points to the *next* instruction: so it is common to use `A = -
 
     X Y A A A A
     Next insruction <-- RIP
+
+### Relocation methods
+
+GNU adds 8 and 16 bit relocations as an extension to the ELF extandard, which it calls with names like `R_X86_64_16`.

@@ -44,3 +44,4 @@ The following formats work:
 
 - `elf32`: Linux 32-bit
 - `elf64`: Linux 64-bit
+- `bin`: raw 16-bit. Useful to create boot setors. 32-bit memory addresses are encodable with the `66h` prefix.

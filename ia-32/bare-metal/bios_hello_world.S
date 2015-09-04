@@ -14,3 +14,4 @@ msg:
     .asciz "hello world"
 .org 510
 .word 0xaa55
+.byte

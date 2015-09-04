@@ -1,4 +1,8 @@
-# objcopy TODO
+# objcopy
+
+## Extract content from a section
+
+<http://stackoverflow.com/questions/3925075/how-do-you-extract-only-the-contents-of-an-elf-section>
 
 ## Separate debug information from executable
 

@@ -19,7 +19,7 @@ OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 all: $(OUTS)
 
 %$(OUT_EXT): %$(OBJ_EXT)
-	$(LD) --oformat binary -o '$@' '$<'
+	$(LD) -T a.ld --oformat binary -o '$@' '$<'
 
 %$(OBJ_EXT): %$(IN_EXT)
 	$(MYAS) -o '$@' '$<'

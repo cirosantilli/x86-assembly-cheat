@@ -1,6 +1,6 @@
 .data
     s:
-        .ascii "Hello world!\n"
+        .ascii "hello world\n"
         len = . - s
 .text
     .global _start
