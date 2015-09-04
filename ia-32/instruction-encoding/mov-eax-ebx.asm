@@ -1,1 +1,0 @@
-mov eax, ebx
