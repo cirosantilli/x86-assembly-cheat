@@ -33,7 +33,7 @@ The LSB basically links to other standards with minor extensions, in particular:
 
 -   architecture specific:
 
-    - IA-32:  <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-IA32/LSB-Core-IA32/elf-ia32.html>
+    - IA-32:  <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-IA32/LSB-Core-IA32/elf-ia32.html>, points mostly to <http://www.sco.com/developers/devspecs/abi386-4.pdf>
     - AMD64: <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-AMD64/LSB-Core-AMD64/elf-amd64.html>, points mostly to <http://www.x86-64.org/documentation/abi.pdf>
 
 A handy summary can be found at:
@@ -75,3 +75,32 @@ In 5.1, definitions are under various `config/` files.
 ## C++ ABI
 
 The [System V ABI AMD64][] links to the [Itanium C++ ABI][].
+
+## Relocation
+
+<http://stackoverflow.com/questions/12122446/how-does-c-linking-work-in-practice/30507725#30507725>
+
+### R_X86_64_16
+
+### R_X86_64_PC32
+
+This is another common relocation method that does:
+
+    S + A - P
+
+on 4 bytes, where `P` is the current position of the Program Counter on the text segment, thus the `PC` on the name, A.K.A. the `RIP` register.
+
+This method is common in x86-64 because `RIP` relative addressing is very popular, and for it to work, the relocation must subtract the position `P`.
+
+Note that `%RIP` points to the *next* instruction: so it is common to use `A = -4` to remove the offset of the 4 byte address which is at the end of the instruction encoding:
+
+    X Y A A A A
+    Next insruction <-- RIP
+
+### Value of the relocated memory before relocation
+
+Does the value of the address to be overwriten before linking matter at all?
+
+### 8 and 16 bit
+
+GNU adds 8 and 16 bit relocations as an extension to the ELF extandard, which it calls with names like `R_X86_64_16`.

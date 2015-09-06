@@ -1,4 +1,4 @@
-section .data
+section .rodata
     hello_world db "hello world", 10
     hello_world_len  equ $ - hello_world
 section .text

@@ -7,7 +7,8 @@
 1.  [lib/](lib/)
 1.  [linux/](linux/)
 1.  [gas/](gas/)
-1.  [Instruction encoding](instruction-encoding/)
+1.  [Instruction encoding](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
+1.  [Bare metal programming](https://github.com/cirosantilli/x86-bare-metal-examples)
 1.  [Vagrantfile](Vagrantfile)
 1.  Instructions
     1.  mov family

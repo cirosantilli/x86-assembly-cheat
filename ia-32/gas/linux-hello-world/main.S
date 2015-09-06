@@ -6,12 +6,12 @@
     .global _start
     _start:
 
-        movl $4, %eax
-        movl $1, %ebx
-        movl $s, %ecx
-        movl $len, %edx
+        mov $4, %eax
+        mov $1, %ebx
+        mov $s, %ecx
+        mov $len, %edx
         int $0x80
 
-        movl $1, %eax
-        movl $0, %ebx
+        mov $1, %eax
+        mov $0, %ebx
         int $0x80

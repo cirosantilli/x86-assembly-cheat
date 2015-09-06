@@ -730,8 +730,8 @@ Structure represented <http://www.sco.com/developers/gabi/2003-12-17/ch5.pheader
 
 Breakdown of the first one:
 
-- 40 0: `p_type` = `01 00 00 00` = `PT_LOAD`: TODO
-- 40 4: `p_flags` = `05 00 00 00` = `PT_LOAD`: execute and read permissions, no write TODO 
+- 40 0: `p_type` = `01 00 00 00` = `PT_LOAD`: TODO. I think it means it will be actually loaded into memory. Other types may not necessarily be.
+- 40 4: `p_flags` = `05 00 00 00` = execute and read permissions, no write TODO 
 - 40 8: `p_offset` = 8x `00` TODO: what is this? Looks like offsets from the beginning of segments. But this would mean that some segments are intertwined? It is possible to play with it a bit with: `gcc -Wl,-Ttext-segment=0x400030 hello_world.c`
 - 50 0: `p_vaddr` = `00 00 40 00 00 00 00 00`: initial virtual memory address to load this segment to
 - 50 8: `p_paddr` = `00 00 40 00 00 00 00 00`: initial physical address to load in memory. Only matters for systems in which the program can set it's physical address. Otherwise, as in System V like systems, can be anything. NASM seems to just copy `p_vaddrr`
@@ -826,22 +826,3 @@ So:
 -   380 0: `r_addend` = 0
 
 So in our example we conclude that the new address will be: `S + A` = `.data + 0`, and thus the first thing in the data section.
-
-### R_X86_64_PC32
-
-This is another common relocation method that does:
-
-    S + A - P
-
-on 4 bytes, where `P` is the current position of the Program Counter on the text segment, thus the `PC` on the name, A.K.A. the `RIP` register.
-
-This method is common in x86-64 because `RIP` relative addressing is very popular, and for it to work, the relocation must subtract the position `P`.
-
-Note that `%RIP` points to the *next* instruction: so it is common to use `A = -4` to remove the offset of the 4 byte address which is at the end of the instruction encoding:
-
-    X Y A A A A
-    Next insruction <-- RIP
-
-### Relocation methods
-
-GNU adds 8 and 16 bit relocations as an extension to the ELF extandard, which it calls with names like `R_X86_64_16`.
