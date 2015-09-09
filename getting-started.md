@@ -20,4 +20,6 @@ Each directory contains code for a single architecture.
 
 Note that you can run 32-bit code in a 64-bit Linux machine (if it is compiled to allow you, which it is by most distros).
 
-If you don't have a compatible CPU, use the `Vagrantfile`s provied in each directory or your favorit virtualization method.
+If you don't have a compatible CPU, use the `Vagrantfile`s provided in each directory or your favorite virtualization method.
+
+Tested on the latest Ubuntu LTS, but maximum portability is intended. OS specifics are clearly separated in sub-directories.

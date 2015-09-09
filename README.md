@@ -1,6 +1,6 @@
 # Assembly Cheat
 
-Assembly information and cheatsheets. Also includes: containers (ELF), linking (ld), calling conventions. x86 Linux focus for now, but more technologies may be added later.
+Assembly information and cheatsheets. x86 Linux focus. Containers (ELF), linking, calling conventions.
 
 1.  Featured
     1.  [Getting started](getting-started.md)
