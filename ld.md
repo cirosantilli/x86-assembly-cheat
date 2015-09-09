@@ -1,4 +1,4 @@
-# ld TODO
+# ld
 
 <https://sourceware.org/binutils/docs-2.25/ld/index.html>
 
@@ -64,34 +64,6 @@ TODO meaning of each type?
 Print `ld` information, including the linker script used:
 
     ld --verbose
-
-## Linker scripts
-
-The linker scripts are built into the executable.
-
-Make install also generates an informational copy of the scripts at:
-
-    x86_64-unknown-linux-gnu/lib/ldscripts
-
-which some distributions provide. But those are only informational.
-
-Minimal example: <http://stackoverflow.com/questions/7182409/how-to-correctly-use-a-simple-linker-script> TODO make into a repo.
-
-One case where linker scripts are needed is when building more "exotic" executables, e.g. a boot sector or a multiboot file. E.g.: <http://wiki.osdev.org/Bare_Bones>
-
-### T
-
-Replace the linker script with a custom one:
-
-    ld -T script a.o
-
-You will often use an existing script as the basis for this.
-
-### Ttext-segment
-
-Change the address of some predefined segments:
-
-    -Ttext-segment=0x80000
 
 ## Library and weak TODOs
 

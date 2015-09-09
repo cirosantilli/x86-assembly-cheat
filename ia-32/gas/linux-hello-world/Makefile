@@ -2,7 +2,7 @@
 
 main.out: main.S
 	as --32 -o main.o main.S
-	ld -m elf_i386 -o main.out -s main.o
+	ld -m elf_i386 -o main.out main.o
 
 clean:
 	rm -f *.o *.out
