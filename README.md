@@ -4,19 +4,8 @@ Assembly information and cheatsheets.
 
 x86 only for now, but we'd love to try out other architectures.
 
-Usage:
-
-    sudo apt-get install build-essential gcc-multilib nasm
-    # Choose any directory.
-    cd ia-32
-    # Run all programs in current directory.
-    make test
-    # Run cmp.asm.
-    make run RUN=cmp
-    # Run the default program.
-    make run
-
 1.  Featured
+    1.  [Getting started](getting-started.md)
     1.  [IA-32](ia-32/)
     1.  [x86 paging tutorial](http://stackoverflow.com/questions/18431261/how-does-x86-paging-work)
 1.  Introduction
