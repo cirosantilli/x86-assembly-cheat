@@ -1,8 +1,6 @@
 # Assembly Cheat
 
-Assembly information and cheatsheets.
-
-x86 only for now, but we'd love to try out other architectures.
+Assembly information and cheatsheets. Also includes: containers (ELF), linking (ld), calling conventions. x86 Linux focus for now, but more technologies may be added later.
 
 1.  Featured
     1.  [Getting started](getting-started.md)
@@ -34,9 +32,10 @@ x86 only for now, but we'd love to try out other architectures.
     1.  [size](size.md)
 1.  [in tel2gas](intel2gas)
 1.  [Bibliography](bibliography.md)
-    1. Related repositories
-       1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
-       1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
+    1.  Related repositories
+        1. [Bare metal programming](https://github.com/cirosantilli/x86-bare-metal-examples)
+        1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
+        1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
 
 WIP
 
