@@ -1,22 +1,8 @@
 ; TODO: this file is being split up into smaller files
 ;
-; TODO: split nasm concept from IA-32 concepts.
+; TODO: split nasm concepts from IA-32 concepts.
 ;
 ; Main cheat on the x86 architecture and on NASM.
-;
-; Instructions which cannot be explained in this file for some reason
-; may be put elsewhere. This includes:
-;
-; Instructions that require kernel privileges
-;
-; - cli
-; - in
-;
-; Have OS dependant effects:
-;
-; - int
-; - brk
-; - sysenter
 
 ; # extern
 
@@ -427,8 +413,11 @@ ENTRY
 
         ; # CS register
 
-            ; TODO interpret.
+            ; Those cannot be tested easily in userland.
 
+            ; We will just print them here.
+
+            ; http://reverseengineering.stackexchange.com/questions/2006/how-are-the-segment-registers-fs-gs-cs-ss-ds-es-used-in-linux
 
                 PRINT_STRING_LITERAL 'CS'
                 PRINT_INT cs

@@ -15,39 +15,20 @@ Supersedes `.coff`, which supersedes `a.out`.
 
 Dominates in Linux. Competes with Mach-O for OS X and PE for Windows.
 
-There is a common core for common for all architectures, but each architecture also has specific versions of it as well.
-
-## Standards
-
-ELF is specified by the LSB:
-
-- core generic: <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-generic/LSB-Core-generic/elf-generic.html>
-- core AMD64: <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-AMD64/LSB-Core-AMD64/book1.html>
-
-The LSB basically links to other standards with minor extensions, in particular:
-
--   generic (both by SCO):
-
-    - System V ABI 4.1 (1997) <http://www.sco.com/developers/devspecs/gabi41.pdf>, no 64 bit, although a magic number is reserved for it. Same for core files.
-    - System V ABI Update DRAFT 17 (2003) <http://www.sco.com/developers/gabi/2003-12-17/contents.html>, adds 64 bit. Only updates chapters 4 and 5 of the previous document: the others remain valid and are still referenced.
-
--   architecture specific:
-
-    - IA-32:  <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-IA32/LSB-Core-IA32/elf-ia32.html>, points mostly to <http://www.sco.com/developers/devspecs/abi386-4.pdf>
-    - AMD64: <http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-AMD64/LSB-Core-AMD64/elf-amd64.html>, points mostly to <http://www.x86-64.org/documentation/abi.pdf>
-
-A handy summary can be found at:
-
-    man elf
-
-Its structure can be examined in a human readable way via utilities like `readelf` and `objdump`.
-
 ## Implementations
 
-ELF has to be implemented by two types of system:
+-   compilers, which will generate it.
 
-- compilers, which will generate it
-- operating systems, which will run it
+    Sane compilers should use a separate standalone library. E.g., Binutils uses BFD (in-tree and canonical source).
+
+-   operating systems, which will run it.
+
+    Those obviously cannot link to a library nor use the C stlib, so they are more likely to implement it themselves. This is the case of the Linux kernel.
+
+-   specialized libraries
+
+    - <https://github.com/eliben/pyelftools>. By a hardcore Googler: <https://plus.google.com/+EliBenderskyGplus/posts>
+    - <https://sourceforge.net/projects/elftoolchain/files/Documentation/libelf-by-example/>
 
 ### Linux
 
@@ -68,9 +49,13 @@ In 5.1, definitions are under various `config/` files.
 
 ### Entry point
 
-[System V ABI AMD64][] says that `main` is the entry point of a C program, and it calls `_start`  which is the ELF entry point as mentione in the [System V ABI AMD64][]. `main` is not special in pure assembly 
+[System V ABI AMD64][] says that `main` is the entry point of a C program, and it calls `_start`  which is the ELF entry point as mentioned in the [System V ABI AMD64][]. `main` is not special in pure assembly 
+
+> The initial state of the process stack, i.e. when _start is called
 
 <http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html> describes the call sequence that actually happens on Linux.
+
+TODO where is it mentioned in the arch agnostic standards?
 
 ## C++ ABI
 
@@ -79,8 +64,6 @@ The [System V ABI AMD64][] links to the [Itanium C++ ABI][].
 ## Relocation
 
 <http://stackoverflow.com/questions/12122446/how-does-c-linking-work-in-practice/30507725#30507725>
-
-### R_X86_64_16
 
 ### R_X86_64_PC32
 
@@ -99,8 +82,28 @@ Note that `%RIP` points to the *next* instruction: so it is common to use `A = -
 
 ### Value of the relocated memory before relocation
 
-Does the value of the address to be overwriten before linking matter at all?
+Does the value of the address to be overwritten before linking matter at all?
+
+### R_X86_64_16
 
 ### 8 and 16 bit
 
-GNU adds 8 and 16 bit relocations as an extension to the ELF extandard, which it calls with names like `R_X86_64_16`.
+GNU adds 8 and 16 bit relocations as an extension to the ELF standard, which it calls with names like `R_X86_64_16`.
+
+### Segment vs segment section
+
+TODO: confirm: each program header represents either a segment, or a segment section, which is a subdivision of segments.
+
+For instance, a C hello world contains the lines (order changed):
+
+    LOAD           0x000000 0x0000000000400000 0x0000000000400000 0x0006fc 0x0006fc R E 0x200000
+    PHDR           0x000040 0x0000000000400040 0x0000000000400040 0x0001f8 0x0001f8 R E 0x8
+    INTERP         0x000238 0x0000000000400238 0x0000000000400238 0x00001c 0x00001c R   0x1
+    NOTE           0x000254 0x0000000000400254 0x0000000000400254 0x000044 0x000044 R   0x4
+    GNU_EH_FRAME   0x0005d0 0x00000000004005d0 0x00000000004005d0 0x000034 0x000034 R   0x4
+
+so that the `LOAD` segment contains multiple segment sections `PHDR, INTERP, etc.`
+
+## Alignment of global symbols
+
+TODO what are the alignment constraints of global symbols? I observe that 4 byte relocations align at 4 *bits*... what is going on?

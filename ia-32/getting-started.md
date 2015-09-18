@@ -20,6 +20,19 @@ If we assume a single OS, then simpler examples can be produced with direct syst
 
 Beware that the virtual machine provided by [Vagrantfile](Vagrantfile) may have less features than you actual CPU. Check `cat /proc/cpuinfo` inside the VM.
 
-This is the default location for arch agnostic code, e.g.:
+## Concepts that require OS priviledge
 
-- [gas](gas/): GAS syntax cheatsheet
+Concepts that require OS prividledge (ring 0) will not be explained here.
+
+Those include instructions like:
+
+- `cli` and `sti`
+- `hlt`
+- `inb`
+- `outb`
+
+And special registers like: `ds`, `cs`, `ss`, etc.
+
+Those concepts cannot be tried out while an OS is running without disrupting the OS.
+
+Therefore they should be tested on a bare metal environement, and will be explained at: <https://github.com/cirosantilli/x86-bare-metal-examples>

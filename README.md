@@ -5,7 +5,7 @@ Assembly information and cheatsheets. x86 Linux focus. Containers (ELF), linking
 1.  Featured
     1.  [Getting started](getting-started.md)
     1.  [IA-32](ia-32/)
-    1.  [x86 paging tutorial](http://stackoverflow.com/questions/18431261/how-does-x86-paging-work)
+    1.  [x86 paging tutorial](http://www.cirosantilli.com/x86-paging)
 1.  Introduction
     1.  [How to learn](how-to-learn.md)
     1.  [Instruction sets](instruction-sets.md)
@@ -21,7 +21,7 @@ Assembly information and cheatsheets. x86 Linux focus. Containers (ELF), linking
 1.  [Calling conventions](calling-conventions.md)
 1.  [Containers](containers.md)
     1.  [ELF](elf.md)
-        1. [ELF hello world](elf-hello-world.md)
+        1. [ELF Hello World Tutorial](http://www.cirosantilli.com/elf-hello-world)
     1.  [Library](library/)
 1.  [ldd](ldd.md)
 1.  [Binutils](binutils.md)
