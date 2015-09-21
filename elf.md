@@ -1,35 +1,5 @@
 # ELF
 
-## Introduction
-
-<https://en.wikipedia.org/wiki/Executable_and_Linkable_Format>
-
-Specifies format for:
-
-- object files (`.o`)
-- shared object files (`.so`)
-- archive files (`.a`)
-- executable files (no standard Linux extension) and core dumps.
-
-Supersedes `.coff`, which supersedes `a.out`.
-
-Dominates in Linux. Competes with Mach-O for OS X and PE for Windows.
-
-## Implementations
-
--   compilers, which will generate it.
-
-    Sane compilers should use a separate standalone library. E.g., Binutils uses BFD (in-tree and canonical source).
-
--   operating systems, which will run it.
-
-    Those obviously cannot link to a library nor use the C stlib, so they are more likely to implement it themselves. This is the case of the Linux kernel.
-
--   specialized libraries
-
-    - <https://github.com/eliben/pyelftools>. By a hardcore Googler: <https://plus.google.com/+EliBenderskyGplus/posts>
-    - <https://sourceforge.net/projects/elftoolchain/files/Documentation/libelf-by-example/>
-
 ### Linux
 
 Interesting files in v4.0:

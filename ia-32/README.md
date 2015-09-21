@@ -10,6 +10,8 @@
 1.  [Instruction encoding](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
 1.  [Vagrantfile](Vagrantfile)
 1.  Instructions
+    1.  Registers
+        1. [Segment registers](segment_registers.asm)
     1.  mov family
         1. [MOV](mov.asm)
         1. [MOVZX](movzx.asm)

@@ -11,8 +11,9 @@ ENTRY
     /*
     # Labels in macros
 
-        If you are going to use a macro with a label inside it many time you need some way of 
-        ensuring that this label will be unique for each macro invocation.
+        If you are going to use a macro with a label inside it many times
+        you need some way of ensuring that this label will be unique
+        for each macro invocation.
     */
 
         /* \@ technique. Not 100% safe, but good enough. */

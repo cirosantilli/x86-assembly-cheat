@@ -51,4 +51,7 @@ ENTRY
 
     ; TODO division by zero?
 
+    ; No immediate version:
+    ; http://stackoverflow.com/questions/4529260/mul-instruction-doesnt-support-an-immediate-value
+
     EXIT

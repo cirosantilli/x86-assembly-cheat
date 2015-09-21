@@ -405,36 +405,6 @@ ENTRY
 
             ; Mentioned on major ABI specs, e.g. AMD64: http://www.x86-64.org/documentation/abi-0.99.pdf
 
-        ; # Segment registers
-
-        ; # SS register
-
-        ; # DS register
-
-        ; # CS register
-
-            ; Those cannot be tested easily in userland.
-
-            ; We will just print them here.
-
-            ; http://reverseengineering.stackexchange.com/questions/2006/how-are-the-segment-registers-fs-gs-cs-ss-ds-es-used-in-linux
-
-                PRINT_STRING_LITERAL 'CS'
-                PRINT_INT cs
-
-                PRINT_STRING_LITERAL 'DS'
-                PRINT_INT ds
-
-                PRINT_STRING_LITERAL 'CS'
-                PRINT_INT ss
-
-                PRINT_INT 66666
-
-            ; SEGFAULT: can't write to them in user mode.
-
-                ;mov eax, 0
-                ;mov ss, eax
-
         ; # Flag registers and instructions
 
             ; Most flag are identified by one letter, and commonly denoted `XF` for "flag X".

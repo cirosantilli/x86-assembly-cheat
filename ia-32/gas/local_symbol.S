@@ -5,11 +5,11 @@
 
     Symbols that start with `.L` don't appear at all on the ELF output.
 
-    By default, symbols do apper on ELF, but are local.
+    By default, symbols do appear on ELF, but are local.
 
 # .global
 
-    To make symbols visible, you muse use `.global`.
+    To make symbols visible, you must use `.global`.
 
 # .local
 

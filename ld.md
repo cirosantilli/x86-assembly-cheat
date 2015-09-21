@@ -65,6 +65,28 @@ Print `ld` information, including the linker script used:
 
     ld --verbose
 
+## e
+
+Sets the ELF entry point to a given symbol or address.
+
+This determines `e_entry` of the ELF header.
+
+You can set it to any address, but keep in mind that sections have alignment constraints.
+
+So for example if you something like:
+
+    . = 0x4FFFFF;
+    .text :
+    {
+        *(*)
+    }
+
+and the page size is 2M, then your executable will be about 2M in size:
+
+- `.text` segment will go to `0x4FFFFF`
+- all bytes up to `0x4FFFFE` will be filled with zeroes
+- `e_entry` is set to `0x4FFFFF`
+
 ## Library and weak TODOs
 
 - <http://stackoverflow.com/questions/24390267/why-redefinition-of-a-function-which-is-already-present-in-dynamic-or-static-lib>

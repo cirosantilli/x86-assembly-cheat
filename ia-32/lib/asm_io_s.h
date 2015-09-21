@@ -49,6 +49,11 @@ http://stackoverflow.com/questions/30958595/is-there-a-line-macro-for-gas-assemb
     mov $__LINE__, %eax ;\
     call assert_fail
 
+#define ASSERT_FLAG(flag) \
+    flag 1f ;\
+    ASSERT_FAIL ;\
+    1:
+
 #define ASSERT_EQ(x) \
     ASSERT_EQ2(x, %eax)
 
