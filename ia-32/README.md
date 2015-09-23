@@ -3,15 +3,19 @@
 1.  Featured
     1. [main.asm](main.asm)
 1.  [Getting started](getting-started.md)
+1.  [Introduction](introduction.md)
+    1.  [Intel vs AT&T](intel-vs-atet.md)
+    1.  [Instruction encoding](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
 1.  [hello_world.asm](hello_world.asm)
 1.  [lib/](lib/)
 1.  [linux/](linux/)
 1.  [gas/](gas/)
-1.  [Instruction encoding](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
 1.  [Vagrantfile](Vagrantfile)
-1.  Instructions
+1.  Base concepts
     1.  Registers
         1. [Segment registers](segment_registers.asm)
+    1.  [Addressing](addressing.asm)
+1.  Instructions
     1.  mov family
         1. [MOV](mov.asm)
         1. [MOVZX](movzx.asm)

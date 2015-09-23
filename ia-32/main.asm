@@ -546,19 +546,6 @@ ENTRY
 
         ; Adresses in RAM memory.
 
-        ; -   if they are in the `.data` segment then you can modify them, so they are variables
-
-            ; You cannot jump to them, since the OS only allows us to execute
-            ; stuff inside the `.text` segment.
-
-        ; -  if they are in the `.text` segment then the OS may not allow you to modify them.
-
-            ; Anyways, you don't want to do that since `.text` if for your functions and that
-            ; would modify the code of your functions.
-
-            ; If they are on the `.text` segment your OS will allow you to execute them,
-            ; which is why you can jump to those instructions.
-
         ; Basic example:
 
             mov al, [resb0]  ;al = resb0
@@ -578,77 +565,6 @@ ENTRY
             add eax, [d0] ; EAX = EAX + double word at d0
             add [d0], eax ; double word at d0 += EAX
             mov al, [d0]  ; copy first byte of double word at d0 into AL
-
-        ; # Indirect addressing
-
-        ; # Effective address
-
-        ; # Addressing modes
-
-            ; x86 allows encoding address operations of the following form on a single instruction:
-
-                ; [a + b*c + d]
-
-            ; Where the instruction encoding allows for:
-
-            ; - `a`: any general purpose register
-            ; - `b`: any general purpose register except `ESP`
-            ; - `c`: 1, 2, 4 or 8
-            ; - `d`: an immediate constant
-
-            ; https://en.wikipedia.org/wiki/X86#Addressing_modes
-
-            ; Major application: manipulation of an array of structs:
-
-            ; - `a`: start of the array in memory
-            ; - `b`: index of the element
-            ; - `c`: size of each element. Known at compile time. TODO what gets compiled if >8 ?
-            ; - `d`: field of the array to be accessed. It is known at compile time, thus the constant.
-
-            ; http://stackoverflow.com/questions/1658294/whats-the-purpose-of-the-lea-instruction
-
-            ; The simplest way to try them out is with `lea`.
-
-            ; Full form:
-
-                mov eax, 1
-                mov ebx, 3
-                lea eax, [eax + 2*ebx + 4]
-                ASSERT_EQ 11
-
-            ; NASM is quite flexible about the ordering of operands:
-
-                mov eax, 1
-                mov ebx, 3
-                lea eax, [4 + eax + 2*ebx]
-                ASSERT_EQ 11
-
-            ; but avoid that and use the `[a + b*c + d]` form proposed,
-            ; as that is the simplest one to interpret as array of struct + field access.
-
-            ; NASM can also do pure magic like:
-
-                mov eax, 1
-                lea eax, [3*eax]
-                ASSERT_EQ 3
-
-            ; which compiles like:
-
-                mov eax, 1
-                lea eax, [eax + 2*eax]
-                ASSERT_EQ 3
-
-            ; since `b` must be a power of 2.
-            ; This is documented at: http://www.nasm.us/doc/nasmdoc3.html#section-3.3
-
-            ; # Segment register form
-
-                ; It is also possible to specify the segment register to use with:
-
-                    ; [ed:a + b*c + d]
-
-                ; TODO expand on that. See also:
-                ; http://stackoverflow.com/questions/18736663/what-does-the-colon-mean-in-x86-assembly-gas-syntax-as-in-dsbx
 
         ; # Instruction size
 

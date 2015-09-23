@@ -1,4 +1,4 @@
-# IA-32
+# Introduction
 
 Instruction set that dominates the desktop market on Windows, Mac and Linux.
 
@@ -45,26 +45,6 @@ Cyrix was an implementor before being bought by National Semiconductor, and VIA 
 
     Instruction list.
 
-## Syntaxes
-
-There is no de facto standard for the computer syntax
-
-### Intel
-
-Used to document Intel x86 at first
-
-More popular on windows
-
-Used by NASM and MASM.
-
-#### AT&T
-
-More popular for Linux, since UNIX was created at bell labs,
-
-Upsides:
-
-- registers are clearly marked with `%`. More verbose, but more precise: allows to differentiate label `ax` from register `ax`.
-
 ## Registers
 
 Registers store data in the processor.
@@ -81,7 +61,7 @@ Suffixes:
 - `Q`: quadword = 4 words = 8 bytes
 - ?: double quadword = 2 quadowrds = 16 bytes
 
-### access modes
+### Access modes
 
 For 32 bit registers, most instructions allow to operate on either:
 

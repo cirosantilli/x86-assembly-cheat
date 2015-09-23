@@ -16,91 +16,32 @@ ENTRY
         for each macro invocation.
     */
 
-        /* \@ technique. Not 100% safe, but good enough. */
+        /* # \@ technique. Not 100% safe, but good enough. */
 
-            .macro local_at
+            .macro LOCAL_AT
                 jmp _local_\@_ok
                     call assert_fail
                 _local_\@_ok:
             .endm
 
-            local_at
-            local_at
+            LOCAL_AT
+            LOCAL_AT
 
-        /*
-        # altmacro
-
-            Enables the alternate macro mode from now on.
-
-            Can also be set as a command line option `--alternate`.
-
-            This adds extra capabilities to macros:
-
-            - LOCAL
-            - % string evaluation
-
-        # noaltmacro
-
-            Turned off `.altmacro`.
-        */
-
-            /*
-            # LOCAL
-
-                Impossible to clash.
-
-                Needs `.altmacro` to work.
-            */
-
-                .altmacro
-                .macro local_keyword a="%eax"
-                    LOCAL ok
-                    mov $1, %eax
-                    jmp ok
-                        call assert_fail
-                    ok:
-                .endm
-
-                local_keyword
-                local_keyword
-
-            /*
-            # % string evaluation
-
-                TODO how to use this?
-
-            */
-
-                /*
-                .altmacro
-                .macro percent_eval
-                    mov %1+1, %eax
-                .endm
-                ASSERT_EQ($2)
-                */
+        /* The best technique is to use LOCAL from .altmacro. */
 
     /*
-    # \@
-
-    # @
-
-    # at sign
-
-        Stores the total number of any macro executed up to now.
-
-        Can only be used inside macros.
-
-        Application: create local labels inside macros.
+    Unlike the C preprocessor, GAS macros don't treat string literals
+    magically and expand inside them as well.
     */
 
-        .macro count
-            mov $\@, %eax
+        .macro STRING_EXPAND x
+            .ascii "\x"
         .endm
-
-        count
-        mov %eax, %ebx
-        count
-        sub %ebx, %eax
-        ASSERT_EQ($1)
+        mov s, %al
+        ASSERT_EQ2($0x61, %al)
 
     EXIT
+
+.data
+    s:
+        STRING_EXPAND a
