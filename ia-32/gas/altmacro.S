@@ -62,26 +62,28 @@ ENTRY
         LOCAL_KEYWORD
 
     /*
-    # % evaluation
+    # %
+
+    # Percent
 
         Appears to work only on argumetns passed or their default values.
     */
 
-        .macro PERCENT x
-            mov $\x, %eax
-        .endm
-        mov $0, %eax
-        PERCENT %1+1
-        ASSERT_EQ($2)
+            .macro PERCENT x
+                mov $\x, %eax
+            .endm
+            mov $0, %eax
+            PERCENT %1+1
+            ASSERT_EQ($2)
 
-        .macro PERCENT_DEFAULT x=%1+1
-            mov $\x, %eax
-        .endm
-        mov $0, %eax
-        PERCENT_DEFAULT 1
-        ASSERT_EQ($1)
-        PERCENT_DEFAULT
-        ASSERT_EQ($2)
+            .macro PERCENT_DEFAULT x=%1+1
+                mov $\x, %eax
+            .endm
+            mov $0, %eax
+            PERCENT_DEFAULT 1
+            ASSERT_EQ($1)
+            PERCENT_DEFAULT
+            ASSERT_EQ($2)
 
         /*
         This is a horrible feature as it makes it impossible to pass registers
@@ -106,6 +108,22 @@ ENTRY
             PERCENT_ESCAPE_DEFAULT
             ASSERT_EQ($1)
 
+        /*
+        One alternative if we are sure that the argument is a register,
+        is to put the percent inside the macro:
+        */
+
+            .macro PERCENT_ESCAPE_REG x
+                mov %x, %eax
+            .endm
+            mov $0, %eax
+            mov $1, %ebx
+            PERCENT_ESCAPE_REG ebx
+            ASSERT_EQ($1)
+
+        /* But this has the downside that we cannot pass immediates like `$1` anymore */
+
+            /*PERCENT_ESCAPE_REG $1*/
 
         /* TODO application? */
 

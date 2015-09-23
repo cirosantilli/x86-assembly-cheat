@@ -86,6 +86,14 @@ ENTRY
         ASSERT_EQ($14)
 
     /*
+    Impossible addressings.
+
+    AT&T syntax requires you to thing more about can or cannot be done.
+    */
+
+        lea (%bl), %eax
+
+    /*
     Now some examples with the label and actual memory movs just for concreteness.
     */
 

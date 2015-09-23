@@ -104,31 +104,15 @@ DATA
             d0 dd 1A92h    ; double word initialized to hex 1A92
             d1 dd 1A92h    ; double word initialized to hex 1A92
 
-        ; # float literals
-
-            ; Direct float literals can only be used with `dd` family instructions.
-
-            ; Immediates in the text section must use `__floatXX__()`.
-
-            f0 dd 0.0       ; float
-            ; ERROR: no binary float notation.
-            ;f0    dd 0.0b
-            f1  dd 1.0 ; float
-            fm1 dd -1.0 ; float
-            f1d1 dd 1.5  ; float
-            f1d01 dd 1.25 ; float
-            f10 dd 2.0 ; float
-            f100 dd 4.0 ; float
-
         ; # Array literals
 
             ; Cannot be put directly into the code, as they:
 
             ; - would take multiple instructions to load
-            ; - would occupy memory many times is used many times
+            ; - would occupy memory many times if used many times
 
-                bs4 db 0, 1, 2, 3
-                bs4_2 db 0, 0, 0, 0
+                bs4 db 0, 1, 2, 3 ; TODO Unused
+                bs4_2 db 0, 0, 0, 0 ; TODO Unused
                 bs10 times 10 db 0
                 bs20 times 10 db 0
                     times 10 db 1
@@ -512,36 +496,6 @@ ENTRY
 
                 ; Only works for those 8-lower bits.
 
-            ; # pushf
-
-            ; # pushfd
-
-            ; # pushfq
-
-            ; # popf
-
-                ; Like pusha and popa, but for flags:
-
-                ; - push/pop FLAGS
-                ; - pushd/popd EFLAGS
-
-                    clc
-                    mov eax, esp
-                    pushf
-                    sub eax, esp
-                    ; Needs 2 bytes, stack min 1 dword.
-                    ASSERT_EQ 4
-
-                    stc
-                    popf
-                    ASSERT_FLAG jnc
-
-                    clc
-                    pushfd
-                    stc
-                    popfd
-                    ASSERT_FLAG jnc
-
     ; # RAM memory
 
         ; Adresses in RAM memory.
@@ -705,842 +659,85 @@ ENTRY
                             ;1 for mov edx
                             ;4 for the 0 (edx contains 4 bytes)
 
-    ; # String instructions
+    ; # Functions
 
-    ; # Array instructions
+        ; A function is an unconditional branch, but in addition must know:
 
-        ; Instructions that deal with multiple bytes.
+        ; 1. what adress to return to
+        ; 2. how to pass arguments to the func
+        ; 3. how to get the return value
 
-        ; # rep prefix
+        ; These are called the `calling conventions`,
+        ; and they may vary with language and implementation.
 
-            ; Repeats a given instruction until something happens.
+        ; # Suboptimal calling conventions
 
-            ; Greate for array operations.
+            ;this shows how one could go about designing calling conventions,
+            ;only to understand that the call ret way is the best
 
-            ; Can only be used on certain operations:
+            ; # Simple calling convention
 
-            ; - REP prefix can be added to the INS, OUTS, MOVS, LODS, and STOS
-            ; - REPE, REPNE, REPZ, and REPNZ can be added to the CMPS and SCAS
+                ; You could use a calling convention like this
+                ; but this is too inconvenient:
 
-            ; C insight: this is why memcpy and memcmp may be faster than for loops
-            ; it is easier for compiler to use these faster string commands.
+                    ; mov ebx, 1
+                    ; mov ecx, $ + 7
+                    ; jmp print_ebx_simple_cc
 
-            ; But note that as of 2015, gcc compiles string structions to call the stdlib,
-            ; which is highly optimized, and may use SIMD.
+                ; which would have resd0 1 and would return to the address inside ecx
+                ; however this is inconvenient because:
 
-            ; # rep
+                ; 1. the max number of args is limited by the number of registers
+                ; 2. you have to manually calculate which address to return to
 
-                ; Repeat string instruction ecx times
+            ; # with stack
 
-                ; Variants: `rep(n|)[ze]`
+                ; Using the stack is the way to go for function calling
 
-                ; # memcpy
+                ; You could do:
 
-                    cld
-                    mov edi, bs4
-                    mov ecx, 2
-                    mov eax, 0
-                    rep stosb
-                    ASSERT_EQ [bs4], 0, byte
-                    ASSERT_EQ [bs4+1], 0, byte
-                    mov eax, edi
-                    sub eax, bs4
-                    ASSERT_EQ 2
-                    ASSERT_EQ ecx, 0
+                        ; push 1
+                        ; push $ + 7
+                        ; jmp print_ebx_stack
 
-                ; # memcmp
+                ; and expect the function to take arguments from the stack
+                ; and the address to return to from the stack
 
-                    ; TODO
+                ; However this is still inconvenient because you have to manually calculate
+                ; the address to come back to.
 
-                ; # memchr
+        ; # call
 
-                    cld
+        ; # ret
 
-                    mov esi, bs4
-                    mov byte [bs4], 0
-                    mov byte [bs4 + 1], 1
+            ; Since calling functions is so common,
+            ; there are two custom instructions just for that: `call` and `ret`
 
-                    mov edi, bs4_2
-                    mov byte [bs4_2], 0
-                    mov byte [bs4_2 + 1], 1
+            ; - `call` pushes adress of next instruction to stack and jumps to lbl.
 
-                    mov ecx, 2
-                    repz cmpsb
-                    ASSERT_FLAG jz
-                    ASSERT_EQ ecx, 0
+                ; As the name suggests, it is used outside of the functions to call them.
 
-                    mov ecx, 2
-                    mov byte [bs4_2 + 1], 2
-                    repz cmpsb
-                    ASSERT_FLAG jnz
-                    ASSERT_EQ ecx, 1
+            ; - `ret` pops the stack and jumps to the stored address. It therefore undoes `call`.
 
-        ; # lods
+            ; Using them is the best way to call and return from functions,
+            ; since you don't have to manually estimate address delta!
 
-            ; Load into a and move `esi`.
+            ; Sample calls of simple calling conventions:
 
-                mov esi, bs4
-                mov byte [bs4], 0
-                mov byte [bs4 + 1], 1
+                mov ebx, 19
+                call print_ebx_call_ret
 
-                cld
-                ; Increase ESI
-                lodsb
-                ASSERT_EQ al, 0
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 1
+                mov  eax, bs4n
+                call print_string
 
-                std
-                ; Decrease ESI
-                lodsb
-                ASSERT_EQ al, 1
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 0
+                mov  eax, 13
+                call print_int
 
-                ; TODO: Shouldn't be necessary, but some badly written func afterwards is not clearing this value?
-                cld
-
-        ; # stos
-
-            ; Store from `a` and move `edi`
-
-                mov edi, bs4
-
-                cld
-                mov bl, 1
-                mov al, bl
-                stosb
-                ASSERT_EQ [bs4], bl
-                mov eax, edi
-                sub eax, bs4
-                ASSERT_EQ 1
-
-                std
-                mov bl, 2
-                mov al, bl
-                stosb
-                ASSERT_EQ [bs4 + 1], bl
-                mov eax, edi
-                sub eax, bs4
-                ASSERT_EQ 0
-
-                cld
-
-        ; # movs
-
-            ; Copy one string into another.
-
-                mov edi, bs4_2
-                mov esi, bs4
-                mov byte [bs4], 0
-                mov byte [bs4 + 1], 1
-
-                cld
-                movsb
-                ASSERT_EQ [bs4_2], 0, byte
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 1
-                mov eax, edi
-                sub eax, bs4_2
-                ASSERT_EQ 1
-
-                std
-                movsb
-                ASSERT_EQ [bs4_2 + 1], 1, byte
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 0
-                mov eax, edi
-                sub eax, bs4_2
-                ASSERT_EQ 0
-
-                cld
-
-        ; # scas
-
-            ; Compare array and a.
-
-                mov edi, bs4
-                mov byte [bs4], 0
-                mov byte [bs4 + 1], 1
-
-                cld
-                mov al, 0
-                scasb
-                ASSERT_FLAG jz
-                mov eax, edi
-                sub eax, bs4
-                ASSERT_EQ 1
-
-                std
-                mov al, 2
-                scasb
-                ASSERT_FLAG jnz
-                mov eax, edi
-                sub eax, bs4
-                ASSERT_EQ 0
-
-                cld
-
-        ; # cmps
-
-            ; Compare two arrays
-
-                mov esi, bs4
-                mov byte [bs4], 0
-                mov byte [bs4 + 1], 1
-
-                mov edi, bs4_2
-                mov byte [bs4_2], 0
-                mov byte [bs4_2 + 1], 2
-
-                cld
-                cmpsb
-                ASSERT_FLAG jz
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 1
-                mov eax, edi
-                sub eax, bs4_2
-                ASSERT_EQ 1
-                ASSERT_EQ [bs4], 0, byte
-                ASSERT_EQ [bs4_2], 0, byte
-
-                std
-                movsb
-                ASSERT_FLAG jnz
-                mov eax, esi
-                sub eax, bs4
-                ASSERT_EQ 0
-                mov eax, edi
-                sub eax, bs4_2
-                ASSERT_EQ 0
-                ASSERT_EQ [bs4 + 1], 1, byte
-                ; TODO why fail?
-                ;ASSERT_EQ [bs4_2 + 1], 2, byte
-
-                cld
-
-    ; # stack
-
-        ; x86 gives instructions which allow for manipulating memory as a stack.
-
-        ; This is useful allocate memory statically.
-
-        ; It is also an important part of function calling conventions such as the C calling convention.
-
-        ; # pusha
-
-        ; # popa
-
-            ; Push and restore the following registers using the stack:
-            ; EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
-
-            ; This is important for example in the C calling convention,
-            ; where certain registers must not be changed by functions.
-
-                mov ebx, 0
-                mov ecx, 0
-
-                mov eax, esp
-                pusha
-                sub eax, esp
-                ; 8x 4 bytes
-                ASSERT_EQ 32
-
-                mov ebx, 1
-                mov ecx, 1
-                popa
-                ASSERT_EQ ebx, 0
-                ASSERT_EQ ecx, 0
-
-        ; # Stack manipulation intstructions
-
-            ; Useful for functions when they must allow for recursion.
-
-            ; The idea that when you enter a function you store the top of the stack in `ebp`
-            ; and do no change `ebp` inside the function, only when leaving it.
-
-            ; This way, the first variable will always be at ebp - 4,u
-            ; even if you allocate more data on stack for local variables, moving `esp`
-
-            ; If this were not done, allocating data would move `esp`, and the position of arguments
-            ; would depend on how much data was allocated, much more complicated to implement.
-
-            ; Then, when you leave the function, you restore `esp` ebp, deallocating the local memory.
-
-        ; # enter
-
-            ; `enter A, B` is basically equivalent to:
-
-                ;push ebp
-                ;mov ebp, esp
-                ;sub esp, A
-
-            ; Which implies an allocation of:
-
-            ; - one dword to remember `ebp`
-            ; - `A` dwords for local function variables,
-
-            ; Enter is almost never used by GCC as it is slower than `push`:
-            ; http://stackoverflow.com/questions/5959890/enter-vs-push-ebp-mov-ebp-esp-sub-esp-imm-and-leave-vs-mov-esp-ebp
-
-            ; `leave` is used however
-
-            ; B is very rarely not 0 in compiler output.
-            ; http://stackoverflow.com/questions/26323215/do-any-languages-compilers-utilize-the-x86-enter-instruction-with-a-nonzero-ne
-
-        ; # leave
-
-            ; `leave` is equivalent to:
-
-                ;mov esp, ebp
-                ;pop ebp
-
-            ; Which implies in the delocation of 2 dwords:
-
-                mov eax, esp
-                enter 8, 0
-                sub eax, esp
-                ASSERT_EQ 12
-
-                ; Modify 1st local var.
-                mov dword [ebp - 4], 1
-                ; Modify 2nd local var.
-                mov dword [ebp - 8], 2
-
-                leave
-
-    ; # Branching instructions
-
-        ; # Functions
-
-            ; A function is an unconditional branch, but in addition must know:
-
-            ; 1. what adress to return to
-            ; 2. how to pass arguments to the func
-            ; 3. how to get the return value
-
-            ; These are called the `calling conventions`,
-            ; and they may vary with language and implementation.
-
-            ; # Suboptimal calling conventions
-
-                ;this shows how one could go about designing calling conventions,
-                ;only to understand that the call ret way is the best
-
-                ; # Simple calling convention
-
-                    ; You could use a calling convention like this
-                    ; but this is too inconvenient:
-
-                        ; mov ebx, 1
-                        ; mov ecx, $ + 7
-                        ; jmp print_ebx_simple_cc
-
-                    ; which would have resd0 1 and would return to the address inside ecx
-                    ; however this is inconvenient because:
-
-                    ; 1. the max number of args is limited by the number of registers
-                    ; 2. you have to manually calculate which address to return to
-
-                ; # with stack
-
-                    ; Using the stack is the way to go for function calling
-
-                    ; You could do:
-
-                         ; push 1
-                         ; push $ + 7
-                         ; jmp print_ebx_stack
-
-                    ; and expect the function to take arguments from the stack
-                    ; and the address to return to from the stack
-
-                    ; However this is still inconvenient because you have to manually calculate
-                    ; the address to come back to.
-
-            ; # call
-
-            ; # ret
-
-                ; Since calling functions is so common,
-                ; there are two custom instructions just for that: `call` and `ret`
-
-                ; - `call` pushes adress of next instruction to stack and jumps to lbl.
-
-                    ; As the name suggests, it is used outside of the functions to call them.
-
-                ; - `ret` pops the stack and jumps to the stored address. It therefore undoes `call`.
-
-                ; Using them is the best way to call and return from functions,
-                ; since you don't have to manually estimate address delta!
-
-                ; Sample calls of simple calling conventions:
-
-                    mov ebx, 19
-                    call print_ebx_call_ret
-
-                    mov  eax, bs4n
-                    call print_string
-
-                    mov  eax, 13
-                    call print_int
-
-                    ;mov  eax, prompt_int
-                    ;call print_string
-                    ;call read_int
-                    ;mov  [resd0], eax
-                    ;call print_int
-
-    ; # floating point
-
-        ; Before reading this, you should understand IEEE floating point formats.
-
-        ; Modern x86 has two main ways of doing floating point operations:
-
-        ; - FPU
-        ; - SSE
-
-        ; http://stackoverflow.com/questions/1844669/benefits-of-x87-over-sse
-
-        ; Advantages of FPU:
-
-        ; - present in old CPUs, while SSE2 is only required in x86-64
-        ; - contains some instructions no present in SSE, e.g. trigonometric
-        ; - higher precision: FPU holds 80 bit Intel extension,
-            ; while SSE2 only does up to 64 bit operations despite having the 128-bit register
-
-        ; In GCC, you can choose between them with `-mfpmath=`.
-
-    ; # FPU unit
-
-        ; Used to be a separate optional processor called the Floating Point Unit,
-        ; later integrated into the CPU.
-
-        ; # st0
-
-        ; # stX
-
-            ; Stack in which floating operations are carried out.
-
-            ; `st[0-7]` is a stack
-
-            ; `st0` is always the top of the stack.
-
-            ; You can only communicate with `stX` from memory,
-            ; not diretly from registers.
-
-            ; For example, the following are errors:
-
-                ;fld eax
-                ;fld __float32__(1.5)
-
-        ; # P suffix
-
-            ; Many operation mnemonics have an optional `P` version that also pops the stack.
-
-        ; # floating point literals in .text
-
-        ; # __float32__
-
-            ; To create a constant you need to use the `__float32__` macro.
-            ; TODO why? http://stackoverflow.com/questions/29925432/nasm-why-must-float32-1-5-be-used-for-floating-point-literals-instead-of-j
-
-                mov eax, __float32__(1.5)
-
-        ; # double precision
-
-            ; TODO how to use double precision?
-
-        ; Load on floating point stack
-
-            ; # fldz
-
-                ; Float LoaD Zero
-
-                ; st0 = 0
-
-                    fldz
-                    mov dword [resd0], __float32__(0.0)
-                    fld dword [resd0]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    finit
-
-            ; # fld1
-
-                ; Float Load 1
-
-                ; st0 = 1
-
-                    fld1
-                    mov dword [resd0], __float32__(1.0)
-                    fld dword [resd0]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    finit
-
-            ; # fldl2e
-
-                ; log_2(e)
-
-            ; # fldl2t
-
-                ; log_2(10)
-
-            ; # fldlg2
-
-                ; log_10(2)
-
-            ; # fldln2
-
-                ; ln(2)
-
-            ; # fldpi
-
-                ; Pi
-
-            ; # fild
-
-                ; Integer Load.
-
-                    fldz
-                    mov dword [resd0], 0
-                    fld dword [resd0]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    finit
-
-        ; FPU Stack order operations
-
-            ; # fxch
-
-                ; Swap ST0 and another register.
-
-                    fldz
-                    fld1
-
-                    fxch st1
-                    fld dword [f0]
-                    fcomip st1
-                    ASSERT_FLAG je
-
-                    fxch st1
-                    fld dword [f1]
-                    fcomip
-                    ASSERT_FLAG je
-
-                    finit
-
-            ; # ffree and Pop.
-
-                ; Remove from stack.
-
-                    fldz
-                    fld1
-                    ffree st0
-                    fld dword [f0]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    finit
-
-                    fldz
-                    fld1
-                    ffree st1
-                    fld dword [f1]
-                    fcomip st1
-                    ASSERT_FLAG je
-
-        ; # fst
-
-        ; # fstp
-
-            ; Floating STore
-
-            ; Floating STore and Pop.
-
-            ; Move st0 to RAM.
-
-                fldz
-                fld dword [f0]
-                fstp dword [resd0]
-                mov eax, [f0]
-                ASSERT_EQ [resd0]
-
-        ; # fcomip
-
-            ; pentium+
-
-            ; Compare STX with ST0 and Pop ST0.
-
-            ; Set integer compare flags.
-
-                fld1
-                fldz
-                fcomip st1
-                ASSERT_FLAG jb
-                ; BAD: must use a b with fcomip
-                ; TODO why?
-                ;ASSERT_FLAG jl
-                finit
-
-                fldz
-                fld1
-                fcomip st1
-                ASSERT_FLAG ja
-                finit
-
-            ; ERROR: can only compare two registers
-
-                ;fcomip [f1]
-
-        ; # Operations
-
-            ; # fchs
-
-                ; Change Sign.
-
-                ; st0 *= -1
-
-                    fld dword [f1]
-                    fchs
-                    fld dword[fm1]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    fchs
-                    fld dword [f1]
-                    ASSERT_FLAG je
-                    finit
-
-            ; # fabs
-
-                ; st0 = |st0|
-
-                    fld dword [fm1]
-                    fabs
-                    fld dword[f1]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    fld dword[f1]
-                    fcomip st1
-                    ASSERT_FLAG je
-                    finit
-
-            ; # fsqrt
-
-                    fld dword [f100]
-
-                    fsqrt
-                    fld dword [f10]
-                    fcomip st1
-                    ASSERT_FLAG je
-
-                    fsqrt
-                    mov dword [resd0], __float32__(1.41)
-                    fld dword [resd0]
-                    fcomip st1
-                    ASSERT_FLAG jbe
-
-                    mov dword [resd0], __float32__(1.42)
-                    fld dword [resd0]
-                    fcomip st1
-                    ASSERT_FLAG jae
-
-            ; # fscale
-
-                    fld dword [f1]
-                    fld dword [f1]
-
-                    fscale
-                    fld dword [f10]
-                    fcomip st1
-                    ASSERT_FLAG je
-
-                    fscale
-                    fld dword [f100]
-                    fcomip st1
-                    ASSERT_FLAG je
-
-            ;FSIN
-            ;FCOS
-            ;FSINCOS    ;calc both sin and cos
-            ;FPATAN
-            ;FPTAN
-
-            ;FPREM      ;remainder
-            ;FPREM1     ;remainder
-
-            ;FRNDINT    ;rounds to integer depending on rounding mode
-
-    ; # SIMD
-
-        ; https://www.kernel.org/pub/linux/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html
-
-        ; SIMD came in multiple stages: first MMX, then XMM, then SSE[1-4], then AVX.
-
-        ; # SIMD Registers
-
-            ; # MMX
-
-                ; From the MMX extenion.
-
-                ; TODO. Not very useful after SSE: splits 32 bits into multiple sections,
-                ; but not any larger than EAX.
-
-            ; # XMM
-
-                ; # movss
-
-                    ; Move Scalar Single precision 32 bits to or from memory.
-
-                        mov dword [resd0], __float32__(0.1)
-                        movss xmm0, [resd0]
-                        movss xmm1, xmm0
-                        movss [resd1], xmm1
-                        ASSERT_EQ [resd0], __float32__(0.1), dword
-
-                ; # movups
-
-                    ; Move Unaligned Parallel Single-precision float
-
-                    ; From SSE extensions.
-
-                    ; 16 bytes.
-
-                        MOV4 reso0, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
-
-                        movups xmm0, [reso0]
-                        ; Can also move between two xmm.
-                        ; But in this case we can use movaps.
-                        movaps xmm1, xmm0
-                        movups [reso1], xmm1
-
-                        ASSERT_EQ4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
-
-                    ; ERROR: invalid combination of opcode and operands.
-
-                        ;movups xmm0, 0
-                        ;mov xmm0, [reso0]
-
-                    ; Can only move data between RAM and XMM, no literals.
-
-                    ; movups must be used, mov does not work
-
-                ; # movaps
-
-                    ; Aligned.
-
-                    ; May be faster.
-
-                    ; If you attempt to use it on unaligned memory,
-                    ; raises a general-protection exception (#GP).
-                    ; Let's do that now. One of the following must be misaligned:
-
-                        ;movaps xmm0, [reso0]
-                        ;movaps xmm0, [reso0 + 1]
-
-                    ; Linux gives a segmentation fault.
-
-                    ; # aligned
-
-                    ; # unaligned
-
-                        ; TODO why is aligned faster?
-
-                        ; TODO how to align?
-
-                        ; http://stackoverflow.com/questions/381244/purpose-of-memory-alignment
-
-
-                ; # MOVHPS - Move 64bits to upper bits of an SIMD register (high).
-
-                ; # MOVLPS - Move 64bits to lowe bits of an SIMD register (low).
-
-                ; # MOVHLPS - Move upper 64bits of source  register to the lower 64bits of destination register.
-
-                ; # MOVLHPS - Move lower 64bits of source register  to the upper 64bits of destination register.
-
-                ; # MOVMSKPS - Move sign bits of each of the 4 packed scalars to an x86 integer register.
-
-            ; # AVX
-
-                ; From AVX extensions.
-
-                ; 32 bytes.
-
-        ; # pcmpeqd
-
-            ; Compare each double word of the registers for equality.
-
-        ; # pmovmskb
-
-        ; # VEX prefix
-
-            ; TODO
-
-        ; # packed
-
-        ; # scalar
-
-            ; http://stackoverflow.com/questions/16218665/simd-and-difference-between-packed-and-scalar-double-precision
-
-            ; Many SIMD instructions have two versions: parallel and scalar.
-
-            ; - scalar only acts on the first bytes, doing a single value operation.
-
-                ; It likely exists to allow FPU replacement.
-
-            ; - packed: the more interesting method, which operates on multiple data at once (4 floats or 2 doubles)
-
-        ; # SSE2
-
-            ; # paddq
-
-                ; Packed Add Quadwords (integers).
-
-                    MOV4 reso0, 0x0000_0000, 0x0000_0001, 0x0000_0002, 0x0000_0003
-                    MOV4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
-
-                    movups xmm0, [reso0]
-                    movups xmm1, [reso1]
-                    paddq xmm0, xmm1
-                    movups [reso0], xmm0
-
-                    ASSERT_EQ4 reso0, 0x0000_0000, 0x1000_0001, 0x2000_0002, 0x3000_0003
-
-            ; # addps
-
-                ; Add Packed Single precision float.
-
-                    MOV4 reso0, __float32__(0.0), __float32__(0.5), __float32__(0.25), __float32__(0.125)
-                    MOV4 reso1, __float32__(0.0), __float32__(1.0), __float32__(2.0), __float32__(4.0)
-
-                    movups xmm0, [reso0]
-                    movups xmm1, [reso1]
-                    addps xmm0, xmm1
-                    movups [reso0], xmm0
-
-                    ASSERT_EQ4 reso0, __float32__(0.0), __float32__(1.5), __float32__(2.25), __float32__(4.125)
-
-            ; # cvttss2si
-
-                ; Convert with Truncation Scalar Single-Precision FP Value to Dword Integer.
-
-                ; Typecast float to int.
-
-                    mov dword [resd0], __float32__(1.5)
-                    movss xmm0, [resd0]
-                    cvttss2si eax, xmm0
-                    call print_int
-                    ASSERT_EQ eax, 1
-
-        ; # SSSE3
-
-        ; # SSE4
+                ;mov  eax, prompt_int
+                ;call print_string
+                ;call read_int
+                ;mov  [resd0], eax
+                ;call print_int
 
     ; # Cryptography
 
@@ -1568,12 +765,6 @@ ENTRY
     ; # lfence
 
         ; TODO something to do with out of order
-
-    ; # hlt
-
-        ; Halts, until interrupt or reset.
-
-        ; Giving me seg fault, likely not enough permissions?
 
     EXIT
 

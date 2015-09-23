@@ -65,6 +65,21 @@
         1.  [JMP](jmp.asm)
             1. [JMP indirect](jmp_indirect.asm)
         1.  [LOOPcc](loopcc.asm)
+    1.  [Stack instructions](stack-instructions.md)
+        1. [enter](enter.asm)
+        1. [leave](leave.asm)
+        1. [pusha](pusha.asm)
+        1. [pushf](pushf.asm)
+    1.  [String instructions](string-instructions.md)
+        1. [rep](rep.asm)
+        1. [cmps](cmps.asm)
+        1. [lods](lods.asm)
+        1. [movs](movs.asm)
+        1. [scas](scas.asm)
+        1. [stos](stos.asm)
+    1.  [Floating point](floating-point.md)
+        1.  [FPU](fpu.asm)
+        1.  [SIMD](simd.asm)
     1.  Synchronization
         1. [XADD](xadd.asm)
         1. [CMPXCHG](cmpxchg)
@@ -78,6 +93,7 @@
     1.  [cdecl](cdecl.md)
     1.  [cdecl examples](cdecl.asm)
     1.  [stdcall](stdcall.asm)
+1.  [Encoding](encoding.asm)
 
 WIP
 
