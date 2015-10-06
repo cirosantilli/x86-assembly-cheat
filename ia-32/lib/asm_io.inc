@@ -1,4 +1,4 @@
-; Extern definitions and macros to be included source files.
+; Extern definitions and macros to be included in NASM source files.
 ;
 ; Many macros are just helpers to call library functions more easily.
 ; Many of them set-up arguments, e.g. prepare EAX for a call.

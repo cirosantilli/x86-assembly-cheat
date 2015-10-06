@@ -4,7 +4,7 @@
 
         ; ZF = (!(X && Y)) ? 1 : 0
 
-    ; Contrast this with `cmp` which does `sub` instead of `and.
+    ; Contrast this with `cmp` which does `sub` instead of `and`.
 
     ; This file is named `test_instruction`
     ; so as to not conflict with the `test` make target.

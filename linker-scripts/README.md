@@ -30,7 +30,7 @@ which spits out the entire script, but not it's name. You can then match this ou
 
 Minimal example: <http://stackoverflow.com/questions/7182409/how-to-correctly-use-a-simple-linker-script> TODO make into a repo.
 
-One case where linker scripts are needed is when building more "exotic" executables, e.g. a boot sector or a multiboot file. E.g.: <http://wiki.osdev.org/Bare_Bones>
+The main case where linker scripts are needed is when building more "exotic" executables, typically boot sectors or a multiboot file. E.g.: <http://wiki.osdev.org/Bare_Bones>
 
 ## T
 
@@ -52,14 +52,80 @@ The default linker script reads:
 
 which chooses takes the value passed, or 4M by default.
 
-## SHORT
+## Directives
+
+### SECTIONS
+
+Most important directive: contains the section o segment mappings.
+
+#### Select by object file
+
+You can select sections by object file.
+
+For example, for a multiboot elf file, we must put the multiboot header before everything else.
+
+So if we had our header in the `.text` section of the `boot.o` file (bad practice, it would be better to have a specially named section), we could write:
+
+    .text 0x100000 :
+    {
+        boot.o(.text)
+        *(.text)
+    }
+
+This way, `boot.o(.text)` is guaranteed to put `boot.o` first, and `*(.text)` then matches the others.
+
+### BYTE
+
+### SHORT
+
+### LONG
+
+### QUAD
 
 Used to insert raw bytes directly into the output.
 
 Application: insert boot sector magic bytes: https://github.com/cirosantilli/x86-bare-metal-examples/blob/2b79ac21df801fbf4619d009411be6b9cd10e6e0/a.ld#L14
 
-## PROVIDE
+### SQUAD
 
-Provide new symbols to the program.
+Like `QUAD` but sign extends.
 
-http://stackoverflow.com/questions/1765969/where-are-the-symbols-etext-edata-and-end-defined/30533316#30533316
+### PROVIDE
+
+<https://sourceware.org/binutils/docs/ld/PROVIDE.html#index-PROVIDE-408>
+
+Make provided symbols weak: if they are defined by the object files, that definition wins.
+
+Without `PROVIDE`, a multiple definition error occurs.
+
+E.g.:
+
+    __symbol_weak = PROVIDE(.);
+    __symbol = .;
+
+Note that:
+
+    __symbol = .;
+
+sets the **address** of `__symbol`, relative to the current segment. `.` in this context is also relative to the current segment.
+
+To set the value of the symbol, you'd need:
+
+    __symbol = .;
+    DWORD
+
+Used on the default userland script for section position symbols like `etext` and `edata`: <http://stackoverflow.com/questions/1765969/where-are-the-symbols-etext-edata-and-end-defined>
+
+Those symbols are placed on the output right where they are defined, relative to other sections and symbols.
+
+### ALIGN
+
+Returns the address of the next multiple.
+
+Applications:
+
+Extend the output to be a multiple of 512 bytes:
+
+    . = ALIGN(512)
+
+This can be useful to generate boot sectors with multiple stages.

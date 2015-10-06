@@ -94,9 +94,7 @@ segment .data
     empty_st_format db "ST%d: Empty", NL, 0
 
 %ifdef OBJ_TYPE
-section text public align=1 class=code use32
 %else
-section .text
 %endif
     global read_int, read_char,
     global print_char, print_nl, sub_dump_regs, sub_dump_mem
@@ -501,9 +499,7 @@ section .text
 ;
 ; eax: line of the failure
 ;
-section .data
 assert_fail_str db 10, 'ASSERT FAILED AT LINE: ', 0
-section .text
 global assert_fail
 assert_fail:
     mov ebx, eax
@@ -517,9 +513,7 @@ assert_fail:
     call exit
 
 ; Print 32 bit integer in decimal.
-section .data
 int_format db "%i", NL, TERM
-section .text
 global print_int
 print_int:
     enter 0,0
@@ -538,9 +532,7 @@ print_int:
     ret
 
 ; Print 32 bit integer in hexadecimal.
-section .data
 int_format_hex db "%x", NL, TERM
-section .text
 global print_int_hex
 print_int_hex:
     enter 0,0
@@ -558,9 +550,7 @@ print_int_hex:
     leave
     ret
 
-section .data
 string_format db "%s", NL, TERM
-section .text
 global print_string
 print_string:
     enter 0,0

@@ -1,6 +1,6 @@
 section .rodata
     hello_world db "hello world", 10
-    hello_world_len  equ $ - hello_world
+    hello_world_len equ $ - hello_world
 section .text
     global _start
     _start:

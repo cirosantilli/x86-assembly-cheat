@@ -272,7 +272,7 @@ ENTRY
         ; - Segment registers
         ; - EFLAGS (program status and control) register
 
-        ; # General purpose reigisters
+        ; # General purpose registers
 
             ; There are 8:
 
@@ -300,6 +300,28 @@ ENTRY
 
             ; x86_64 adds 8 byte long versions of the IA32 registers
             ; and 8 more plain new 8 byte registers: r8 to r16.
+
+            ; #ax
+
+            ; #dx
+
+            ; #cx
+
+            ; #bx
+
+                ; Although they are called "general purpose", that is a lie
+                ; since they are still treated magically by a few operations.
+
+                ; `abcd` is just a coincidence: the letters are actually
+                ; mnemonics for their special side effects:
+
+                ; - AX = accumulator
+                ; - DX = double word accumulator
+                ; - CX = counter
+                ; - BX = base register
+
+                ; This is also reflected by the way that those registers are encoded,
+                ; which uses the order `acdb` instead of `abcd`.
 
             ; # Register parts
 
@@ -333,10 +355,14 @@ ENTRY
 
             ; # edi
 
+                ; http://stackoverflow.com/questions/1856320/purpose-of-esi-edi-registers
+
                 ; Automatically incremented by the string instructions.
 
                 ; Whenever you are not dealing with string instructions,
                 ; those registers are useful for general purpose.
+
+                ; On real mode, they have other segment related properties.
 
             ; # ebp
 
@@ -382,7 +408,7 @@ ENTRY
 
         ; # Initial register state
 
-            ; Finally, no more programming languages getting in our way with definite assignment.
+            ; Finally, no more programming languages getting in our way with definite assignment:
 
             ; - http://stackoverflow.com/questions/1802783/initial-state-of-program-registers-and-stack-on-linux-arm
             ; - http://stackoverflow.com/questions/9147455/what-is-default-register-state-when-program-launches-asm-linux

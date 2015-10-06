@@ -15,10 +15,19 @@
 s:
     .asciz  "abc"
     s_len = . - s
+cat:
+    .asciz  "a" "b"
 
 ENTRY
     mov s, %eax
     ASSERT_EQ($0x00636261)
+
+    /*
+    Concatenates literals somewhat like C does,
+    BUT adds a null after each one.
+    */
+    mov cat, %eax
+    ASSERT_EQ($0x00620061)
 
     mov $s_len, %eax
     ASSERT_EQ($4)

@@ -35,21 +35,3 @@ RIP addressing mode.
 <https://en.wikipedia.org/wiki/X86-64#Differences_between_AMD64_and_Intel_64>
 
 Mostly on the systems programming instructions, not application.
-
-## Long mode
-
-<https://en.wikipedia.org/wiki/Long_mode>
-
-Contains two sub-modes: 64-bit and compatibility.
-
-64-bit is the major mode of operation, compatibility mode emulates IA-32.
-
-The other mode is legacy mode, which as the name implies, should not be used on new programs.
-
-### Compatibility mode
-
-Controlled by the `CS.L` bit of the segment descriptor.
-
-It appears that it is possible for user programs to modify that during execution: <http://stackoverflow.com/questions/12716419/can-you-enter-x64-32-bit-long-compatibility-sub-mode-outside-of-kernel-mode>
-
-<http://stackoverflow.com/questions/27868394/switch-from-64-bit-long-mode-to-32-bit-compatibility-mode-on-x64>

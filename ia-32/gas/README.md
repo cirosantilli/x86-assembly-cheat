@@ -14,6 +14,9 @@
 1.  Directives
     1. [.ascii](ascii.S)
     1. [.asciz](asciz.S)
+    1. [.byte](byte.S)
+    1. [.equ](equ.S)
+    1. [.print](print.S)
     1. [.type](type.S)
 1.  [Preprocessor](preprocessor.md)
     1.  [.macro](macro.S)

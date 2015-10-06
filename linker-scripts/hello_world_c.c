@@ -1,7 +1,7 @@
 /*
 TODO: find the minimal linker script that makes this work.
 
-Current problem: puts not found. Likely because I don't understand dynamic linking.
+Current problem: puts not found. Likely because I don't understand dynamic linking?
 */
 
 #include <stdio.h>

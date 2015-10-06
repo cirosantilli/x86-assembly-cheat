@@ -1,4 +1,6 @@
 /*
+# ascii
+
 Create a byte string from ASCII characters.
 
 Not null terminated.
@@ -8,12 +10,18 @@ Not null terminated.
 
 .data
 s:
-    .ascii  "abc\0"
+    .ascii "abc\0"
     s_len = . - s
+cat:
+    .ascii  "ab" "cd"
 
 ENTRY
     mov s, %eax
     ASSERT_EQ($0x00636261)
+
+    /* Concatenates literals like C does. */
+    mov cat, %eax
+    ASSERT_EQ($0x64636261)
 
     mov $s_len, %eax
     ASSERT_EQ($4)
