@@ -4,7 +4,7 @@ GNU assembler syntax cheatsheet.
 
 Supposes that you already know IA-32 and NASM.
 
-Documentation: <https://sourceware.org/binutils/docs-2.18/as/>
+Documentation: <https://sourceware.org/binutils/docs-2.25/as/>
 
 Used by the kernel, GCC and glibc... so just learn it.
 
@@ -66,8 +66,7 @@ In Intel, it is called `MOVSX`.
 
 ## Directives
 
-Stuff that starts with a dot `.` and does not specify machine instructions directly
-but rather gives information to GAS.
+Stuff that starts with a dot `.` and does not specify machine instructions directly but rather gives information to GAS.
 
 - `.text`: text segment
 - `.data`: data segment

@@ -4,17 +4,18 @@
 
 BITS ?= 32
 CCC ?= gcc -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
-IN_EXT ?= .asm
+CCC_FLAGS ?=
+GAS_EXT ?= .S
 LIB_DIR ?= lib/
 NASM ?= nasm -g -w+all -f elf$(BITS)
+NASM_EXT ?= .asm
 OBJ_EXT ?= .o
 OUT_EXT ?= .out
 RUN ?= main
 TEST ?= test
 export
 
-INS := $(wildcard *$(IN_EXT))
-OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
+OUTS := $(foreach IN_EXT,$(GAS_EXT) $(NASM_EXT),$(patsubst %$(IN_EXT),%$(OUT_EXT),$(wildcard *$(IN_EXT))))
 
 .PRECIOUS: %$(OBJ_EXT)
 .PHONY: all clean driver run
@@ -22,10 +23,13 @@ OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 all: driver $(OUTS)
 
 %$(OUT_EXT): %$(OBJ_EXT)
-	$(CCC) -o '$@' '$<' $(LIB_DIR)*$(OBJ_EXT)
+	$(CCC) $(CCC_FLAGS) -o '$@' '$<' $(LIB_DIR)*$(OBJ_EXT)
 
-%$(OBJ_EXT): %$(IN_EXT)
+%$(OBJ_EXT): %$(NASM_EXT)
 	$(NASM) -o '$@' '$<'
+
+%$(OBJ_EXT): %$(GAS_EXT)
+	$(CCC) $(CCC_FLAGS) -c -o '$@' '$<'
 
 clean:
 	rm -f *$(OBJ_EXT) *$(OUT_EXT)

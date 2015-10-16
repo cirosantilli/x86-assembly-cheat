@@ -1,10 +1,15 @@
 # Linker scripts
 
-1. [hello_world.ld](hello_world.ld)
+1.  [Hello world](hello_world.ld)
+1.  [min](min.ld)
+1.  [Symbol](symbol.ld)
+    1. [edata](edata.ld)
+1.  [FLAGS](flags.ld)
+1.  [KEEP](keep.ld)
 
 ## Introduction
 
-This directory users IA-32.
+This directory must be run in Linux IA-32.
 
 Linker scripts determine how exactly `ld` is going to transform object files into the executable.
 
@@ -129,3 +134,13 @@ Extend the output to be a multiple of 512 bytes:
     . = ALIGN(512)
 
 This can be useful to generate boot sectors with multiple stages.
+
+## Segment flags
+
+## Segment permissions
+
+Some segment names are magic: `.text` and `.data`, and will have fixed permissions no matter what.
+
+If you use a non-magic name lie `.blurb`, the permission is the sum of the permissions of all sections that make up the segment.
+
+It is also possible to set the segment permissions with the `FLAGS` option of the `PHDRS` linker script command.

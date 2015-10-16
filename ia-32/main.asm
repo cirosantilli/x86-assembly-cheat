@@ -765,6 +765,14 @@ ENTRY
                 ;mov  [resd0], eax
                 ;call print_int
 
+            ; # far call
+
+            ; # far ret
+
+                ; Both call and ret have a form that jumps across segments.
+
+                ; It is analogous to far jumps, and can only be done in ring 0.
+
     ; # Cryptography
 
         ; https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/arch/x86/crypto?id=refs/tags/v4.0

@@ -6,9 +6,11 @@
 1.  [Addressing](addressing.S)
 1.  [Local label](local_label.S)
 1.  [Local symbol](local_symbol.S)
+1.  [Current address](current_address.S)
 1.  Instructions
     1. [cmp](cmp.S)
     1. [jmp indirect](jmp_indirect.S)
+    1. [ljmp](ljmp.md)
     1. [cbtw](cbtw.S)
     1. [movz](movz.S)
 1.  Directives

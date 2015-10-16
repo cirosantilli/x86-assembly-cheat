@@ -1,28 +1,25 @@
 .POSIX:
 
 IN_EXT ?= .S
-IN_EXT2 ?= .c
+LD_EXT ?= .ld
+LD_FLAGS ?= -T $(@:$(OUT_EXT)=.ld)
 # Use gcc so that the preprocessor will run first.
 OBJ_EXT ?= .o
 OUT_EXT ?= .out
 RUN ?= bios_hello_world
 
-INS := $(wildcard *$(IN_EXT)) $(wildcard *$(IN_EXT2))
-OUTS := $(patsubst %,%$(OUT_EXT),$(basename $(INS)))
+OUTS := $(patsubst %,%$(OUT_EXT),$(basename $(wildcard *$(IN_EXT))))
 
 .PRECIOUS: %$(OBJ_EXT)
 .PHONY: all clean run
 
 all: $(OUTS)
 
-%$(OUT_EXT): %$(OBJ_EXT)
-	ld -m elf_i386 -o '$@' -T $(@:$(OUT_EXT)=.ld) '$<'
+%$(OUT_EXT): %$(OBJ_EXT) %$(LD_EXT)
+	ld -m elf_i386 -o '$@' -T $(@:$(OUT_EXT)=$(LD_EXT)) '$<'
 
-%$(OBJ_EXT): %$(IN_EXT)
-	as --32 -o '$@' '$<'
-
-%$(OBJ_EXT): %$(IN_EXT2)
-	gcc -c -m32 -std=c99 -o '$@' '$<'
+%$(OBJ_EXT): %$(IN_EXT) common.h
+	gcc -c -m32 -o '$@' '$<'
 
 clean:
 	rm -f *$(OBJ_EXT) *$(OUT_EXT)

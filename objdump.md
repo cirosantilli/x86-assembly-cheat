@@ -39,6 +39,8 @@ Sample output on a x86_64 Linux hello world:
       20:       bf 00 00 00 00          mov    $0x0,%edi
       25:       0f 05                   syscall
 
+For executable files, it still writes `Disassembly of section .text:`, but it means *segment* `.text`, it is purely wrong.
+
 ## S
 
 Similar to `-d`, but also intermingle original C code with disassembly if there is debug information available for that: 

@@ -13,10 +13,10 @@
 
 .data
 s:
-    .asciz  "abc"
+    .asciz "abc"
     s_len = . - s
 cat:
-    .asciz  "a" "b"
+    .asciz "a" "b"
 
 ENTRY
     mov s, %eax

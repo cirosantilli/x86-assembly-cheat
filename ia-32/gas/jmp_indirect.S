@@ -2,6 +2,9 @@
 # jmp indirect
 
     The asterisk jumps to the data at the address pointed to.
+
+    Not very consistent syntax with default memory access like `mov x, %eax`,
+    which uses `$x` for the address, and `x` for indirection.
 */
 
 #include "lib/asm_io_s.h"

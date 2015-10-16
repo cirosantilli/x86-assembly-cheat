@@ -5,11 +5,17 @@
 
     `.equ` and `.set` are the same.
 
-    https://sourceware.org/binutils/docs/as/Equ.html
-    https://sourceware.org/binutils/docs/as/Set.html#Set
+    http://stackoverflow.com/questions/21624155/difference-between-equ-and-word-in-arm-assembly
+
+    - https://sourceware.org/binutils/docs/as/Equ.html
+    - https://sourceware.org/binutils/docs/as/Set.html
 */
 
 #include "lib/asm_io_s.h"
+
+.data
+
+    .equ asdf, 0x1234567
 
 ENTRY
 

@@ -22,7 +22,7 @@ Also contains GDB.
     mkdir build
     cd build
     ../src/configure --with-sysroot=/ --prefix="$(pwd)/../install"
-    make -j5
+    time make -j5
     make install
 
 Try it out on Linux:

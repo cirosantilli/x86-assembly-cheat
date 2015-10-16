@@ -2,6 +2,12 @@
 
 Important to understand instruction set names used until today.
 
+## Intel 4004
+
+<https://en.wikipedia.org/wiki/Intel_4004>
+
+The first.
+
 ## Intel 8080
 
 1974, 8 bit, 2MHz, very popular
