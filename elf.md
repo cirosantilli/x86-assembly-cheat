@@ -35,6 +35,35 @@ The [System V ABI AMD64][] links to the [Itanium C++ ABI][].
 
 <http://stackoverflow.com/questions/12122446/how-does-c-linking-work-in-practice/30507725#30507725>
 
+### R_386_32
+
+To test this one out, try use:
+
+    a: .long s
+    b: .long s + 0x12345678
+    s:
+
+then:
+
+    as --32 -o main.o main.S
+    objdump -dzr main.o
+
+on Binutils 2.24 gives:
+
+    00000000 <a>:
+    0:  08 00                   or     %al,(%eax)
+                0: R_386_32 .text
+    2:  00 00                   add    %al,(%eax)
+
+    00000004 <b>:
+    4:  80 56 34 12             adcb   $0x12,0x34(%esi)
+                4: R_386_32 .text
+
+This makes it really clear how:
+
+- `a` gets 8 added, which is the length of `a` + `b` (to reach `s`)
+- `b` gets `0x12345608` == `0x12345678 + 8`, where `8` is once again the position of `s`
+
 ### R_X86_64_PC32
 
 This is another common relocation method that does:

@@ -1,6 +1,9 @@
 ; # DIV
 
-    ; Signed division: edx:eax /= div
+    ; Signed division:
+
+    ; eax = edx:eax / SRC
+    ; edx = edx:eax % SRC
 
     ; # Modulo
 
@@ -43,15 +46,38 @@ ENTRY
     ASSERT_EQ 0x80000000
     ASSERT_EQ edx, 1
 
-    ; ERROR: output must fit into dword:
-    ;mov eax, 1
-    ;mov edx, 2
-    ;mov ecx, 2
-    ;div ecx
+    ; # Division by zero
 
-    ; TODO division by zero?
+    ; # Division overflow
 
-    ; No immediate version:
-    ; http://stackoverflow.com/questions/4529260/mul-instruction-doesnt-support-an-immediate-value
+        ; If either
+
+        ; - divisor == 0
+        ; - result > output register size
+
+        ; A divide error exception occurs.
+        ; It then gets handled by the interrupt service 0.
+
+        ; Both 0 division and overflow are treated exactly the same!
+
+        ; Linux treats this by sending a signal to the process and killing it.
+
+        ; Minimal 16-bit example of handling the interrupt:
+        ; https://github.com/cirosantilli/x86-bare-metal-examples/blob/9e58c1dc656dab54aa69daa38f84eb8c0aa6151e/idt_zero_divide.S
+
+            ; Output does not fit into edx.
+            ;mov eax, 0
+            ;mov edx, 1
+            ;mov ecx, 1
+            ;div ecx
+
+            ; Division by zero.
+            ;mov eax, 1
+            ;mov edx, 0
+            ;mov ecx, 0
+            ;div ecx
+
+        ; There is no immediate version:
+        ; http://stackoverflow.com/questions/4529260/mul-instruction-doesnt-support-an-immediate-value
 
     EXIT

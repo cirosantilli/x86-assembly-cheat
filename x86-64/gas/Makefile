@@ -6,6 +6,7 @@ IN_EXT := .S
 LIB_DIR ?= lib/
 LN ?= ld -s
 NASM ?= nasm -w+all -f elf64
+OBJ_EXT ?= .o
 OUT_EXT ?= .out
 RUN ?= main
 export

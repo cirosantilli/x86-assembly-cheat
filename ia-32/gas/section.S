@@ -36,9 +36,9 @@
 #include "lib/asm_io_s.h"
 
 .section .data
-    i: .int 1
+    i: .long 1
 .data
-    j: .int 1
+    j: .long 1
 ENTRY
     mov i, %eax
     ASSERT_EQ($1)

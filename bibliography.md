@@ -22,6 +22,13 @@
 
     -   Volume 2 chapter 3: full alphabetic list of all instructions
 
+    The version is given on the front page, e.g.:
+
+        Order Number: 325383-053US
+        January 2015
+
+    `325383` is the document (different for volumes 1-3), and 053 the version (TODO US is the language? Are there translations?)
+
 -   [System V Application Binary Interface v0.99.7][]
 
 ## Tutorials

@@ -4,6 +4,7 @@
 extern \
     assert_fail, \
     print_long, \
+    print_long_hex, \
     print_string
 
 ; Structure macros
@@ -30,6 +31,7 @@ extern \
     %macro ENTRY 0
         TEXT
         GLOBAL asm_main
+        ; To align stack so that calls can be made directly.
         sub rsp, 8
     %endmacro
 
@@ -59,7 +61,7 @@ extern \
     %endmacro
 
     %macro ASSERT_EQ 0
-        ASSERT_EQ rax, ebx
+        ASSERT_EQ rax, rbx
     %endmacro
 
     ; asserts rax neq %1
@@ -78,6 +80,6 @@ extern \
     %endmacro
 
     %macro ASSERT_FAIL 0
-        mov rax, __LINE__
+        mov rdi, __LINE__
         call assert_fail
     %endmacro

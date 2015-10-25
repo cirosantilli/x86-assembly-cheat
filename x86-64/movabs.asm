@@ -1,4 +1,5 @@
-; Most 64 bit instructions cannot take 64-bit immediates, including dereference.
+; Most 64 bit instructions cannot take 64-bit immediates,
+; including dereference.
 ;
 ; For mov, rax is the only register that accepts it.
 ;

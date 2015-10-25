@@ -1,8 +1,9 @@
 ; # IMUL
 
-    ; Signed multiply
+    ; Signed multiply.
 
-        ; edx:eax = TODO
+    ; Has many more forms than the unsigned version,
+    ; including immediate and up to three arguments.
 
 %include "lib/asm_io.inc"
 

@@ -20,7 +20,7 @@ It's a bit harder to remember than AT&T.
 
 .data
     i:
-        .int 0
+        .long 0
 ENTRY
 
     /*
@@ -31,7 +31,7 @@ ENTRY
     */
 
         /*
-        Full form (except no segment) with immediates:
+        Full form with immediates:
         ebx + ecx * 2 + 4 =
         3   + 4   * 2 + 4 =
         3   +       8 + 4 =
@@ -41,7 +41,7 @@ ENTRY
         mov $0, %eax
         mov $3, %ebx
         mov $4, %ecx
-        lea 4(%ebx, %ecx, 2), %eax
+        lea %ds:4(%ebx, %ecx, 2), %eax
         ASSERT_EQ($15)
 
         /*

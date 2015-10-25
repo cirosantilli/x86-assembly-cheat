@@ -1,15 +1,32 @@
 /*
 # byte
 
+1
+
+Write bytes to the object file.
+
 # word
+
+2
 
 # long
 
+4
+
+# int
+
+4, same as long.
+
+Use `.long` instead, as `int` is a C concept without fixed size,
+and `long` is short for `long` word, which means double word.
+
 # quad
+
+8
 
 # dquad
 
-Write bytes to the object file.
+16
 */
 
 #include "lib/asm_io_s.h"

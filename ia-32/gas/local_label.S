@@ -1,8 +1,13 @@
 /*
-Labels that contain only digits are magic and can be defined multiple times:
+# Local label
+
 https://sourceware.org/binutils/docs/as/Symbol-Names.html#Symbol-Names
 
+Labels that contain only digits are magic and can be defined multiple times:
+
 You can then write `1b` and `1f` to refer to the latest and next definition of such labels.
+
+Such labels don't appear on the output file.
 */
 
 #include "lib/asm_io_s.h"

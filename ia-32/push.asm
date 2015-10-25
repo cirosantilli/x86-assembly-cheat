@@ -2,14 +2,14 @@
 
 ; # pop
 
-    ; Decrement / increment `esp` by 4
+    ; Decrement / increment `esp` by 4, and then write something to memory.
 
     ; The stack grows down, so `push` decrements, and `pop` increments.
 
     ; The reason why the stack grows down is exactly because
     ; IA-32 implements those instructions and otherstack instructions like that.
 
-    ; Always move by dwords no matter (4 bytes) the suffix.
+    ; Always move by dwords (4 bytes) no matter the suffix.
 
 %include "lib/asm_io.inc"
 

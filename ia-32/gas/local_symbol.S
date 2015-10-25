@@ -3,42 +3,27 @@
 
 # .L
 
-    Symbols that start with `.L` don't appear at all on the ELF output.
+Symbols that start with `.L` don't appear at all on the ELF output.
 
-    By default, symbols do appear on ELF, but are local.
+By default, symbols do appear on ELF, but are local.
 
-# .global
-
-    To make symbols visible, you must use `.global`.
-
-# .local
-
-    TODO what is the effect of this?
-
-    Variables marked as such were no different than those without.
+Unlike NASM's `.label`, such labels are visible on the entire file,
+and cannot be redefined.
 */
 
 #include "lib/asm_io_s.h"
 
 .data
-    s:
-        .int 1
-    .Ls:
-        .int 2
-    .global g
-    g:
-        .int 3
-    .local l
-    l:
-        .int 4
-ENTRY
-    PRINT_INT(s)
-    PRINT_INT(.Ls)
-    PRINT_INT(g)
-    PRINT_INT(l)
+    not_local:
+        .long 1
 
-    /* Same for labels. */
-    lbl:
-    .Llbl:
+    .Lyes_local:
+        .long 2
+ENTRY
+    mov not_local, %eax
+    ASSERT_EQ($1)
+
+    mov .Lyes_local, %eax
+    ASSERT_EQ($2)
 
     EXIT

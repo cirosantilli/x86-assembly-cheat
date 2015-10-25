@@ -1,5 +1,9 @@
 /*
 # irp
+
+Macro for in loop.
+
+TODO: mnemonic?
 */
 
 #include "lib/asm_io_s.h"

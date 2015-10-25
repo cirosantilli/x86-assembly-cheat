@@ -4,7 +4,7 @@ GNU assembler syntax cheatsheet.
 
 Supposes that you already know IA-32 and NASM.
 
-Documentation: <https://sourceware.org/binutils/docs-2.25/as/>
+Documentation: <https://sourceware.org/binutils/docs-2.25/as/> Many questions can be answered directly via the index: <https://sourceware.org/binutils/docs/as/index.html>
 
 Used by the kernel, GCC and glibc... so just learn it.
 

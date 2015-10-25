@@ -4,8 +4,10 @@
 1.  [Hello world](hello_world.S)
 1.  [Immediate](immediate.S)
 1.  [Addressing](addressing.S)
-1.  [Local label](local_label.S)
-1.  [Local symbol](local_symbol.S)
+1.  [Char literal](char_literal.S)
+1.  Symbol scope
+    1.  [Local symbol](local_symbol.S)
+    1.  [Local label](local_label.S)
 1.  [Current address](current_address.S)
 1.  Instructions
     1. [cmp](cmp.S)
@@ -18,6 +20,7 @@
     1. [.asciz](asciz.S)
     1. [.byte](byte.S)
     1. [.equ](equ.S)
+    1. [.global](.global.S)
     1. [.print](print.S)
     1. [.type](type.S)
 1.  [Preprocessor](preprocessor.md)

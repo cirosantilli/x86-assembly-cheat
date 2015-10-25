@@ -10,7 +10,7 @@
 
 .data
 
-    symbol: .int 1
+    symbol: .long 1
 
 ENTRY
     /*

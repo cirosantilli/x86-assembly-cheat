@@ -1,19 +1,19 @@
 ; # lods
 
-    ; Load into a and move `esi`.
+    ; Load data a and move `esi`.
+
+    ; Does not touch edi.
 
 %include "lib/asm_io.inc"
 
-section .data
+DATA
 
-    bs4 db 0, 1, 2, 3
-    bs4_2 db 0, 0, 0, 0
+    bs4 db 0, 1
 
 ENTRY
 
     mov esi, bs4
-    mov byte [bs4], 0
-    mov byte [bs4 + 1], 1
+    mov edi, 0
 
     cld
     ; Increase ESI
@@ -22,6 +22,7 @@ ENTRY
     mov eax, esi
     sub eax, bs4
     ASSERT_EQ 1
+    ASSERT_EQ edi, 0
 
     std
     ; Decrease ESI
@@ -30,5 +31,6 @@ ENTRY
     mov eax, esi
     sub eax, bs4
     ASSERT_EQ 0
+    ASSERT_EQ edi, 0
 
     EXIT

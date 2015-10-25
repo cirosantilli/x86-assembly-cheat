@@ -19,7 +19,9 @@ A simplified version of the most important points to keep in mind about the [Sys
 
         If this fails, segfault is common outcome.
 
-        The most common action then is to just store `rsp` on the stack to even things out.
+        The most common action then is to just store `rsp` on the stack to even things out. That also allows for recursion.
+
+        <http://stackoverflow.com/questions/8691792/how-to-write-assembly-language-hello-world-program-for-64-bit-mac-os-x-using-pri>
 
     -   parameter order is: %rdi, %rsi, %rdx, %rcx, %r8, %r9, then push the rest on the stack in reverse order
 

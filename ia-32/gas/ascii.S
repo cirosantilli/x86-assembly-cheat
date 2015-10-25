@@ -1,9 +1,13 @@
 /*
 # ascii
 
+https://sourceware.org/binutils/docs/as/Ascii.html#Ascii
+
 Create a byte string from ASCII characters.
 
 Not null terminated.
+
+TODO vs string? https://sourceware.org/binutils/docs/as/String.html
 */
 
 #include "lib/asm_io_s.h"
@@ -25,4 +29,12 @@ ENTRY
 
     mov $s_len, %eax
     ASSERT_EQ($4)
+
+    mov $0, %edx
+    mov $30, %eax
+    mov $25, %ecx
+    div %ecx
+    mov %edx, %eax
+    ASSERT_EQ($5)
+
     EXIT
