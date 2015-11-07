@@ -20,7 +20,7 @@ OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 all: driver $(OUTS)
 
 %$(OUT_EXT): %.o
-	$(CCC) -o '$@' '$<' driver.o asm_io.o
+	$(CCC) -o '$@' '$<' $(LIB_DIR)driver.o $(LIB_DIR)asm_io.o
 
 %.o: %$(IN_EXT)
 	$(GAS) -o '$@' '$<'

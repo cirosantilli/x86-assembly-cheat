@@ -1,3 +1,5 @@
+# TODO Dry this out with 32-bit code.
+
 .POSIX:
 
 IN_EXT ?= .asm

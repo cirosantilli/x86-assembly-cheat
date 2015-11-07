@@ -20,8 +20,8 @@
         ; A single instruction can take many cycles,
         ; so the number of instructions alone is not a good measure of speed.
 
-        ; The deltas are not predictable because of compile optimizations
-        ; such as branch prediction and pipelining.
+        ; The deltas are not predictable because of optimizations
+        ; like branch prediction and pipelining.
 
         ; - http://stackoverflow.com/questions/692718/how-to-find-cpu-cycle-for-an-assembly-instruction
         ; - http://stackoverflow.com/questions/12065721/why-isnt-rdtsc-a-serializing-instruction

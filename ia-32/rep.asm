@@ -2,6 +2,11 @@
 
     ; Repeat string instruction ecx times
 
+    ; As the repetitions happen:
+
+    ; - ecx decreases
+    ; - edi and esi increase
+
     ; Variants: `rep(n|)[ze]`
 
     ; Repeats a given instruction until something happens.
@@ -17,57 +22,83 @@
     ; But note that as of 2015, gcc compiles string structions to call the stdlib,
     ; which is highly optimized, and may use SIMD.
 
+    ; Note that this is not the most efficient implementation possible
+    ; of the C string instructions: like memset and memcmp: modern glibc uses SIMD.
+
 %include "lib/asm_io.inc"
 
-section .data
+section .bss
 
-    bs4 db 0, 1, 2, 3
-    bs4_2 db 0, 0, 0, 0
+    src resb 4
+    dest resb 4
 
 ENTRY
 
-    ; # memcpy
+    cld
 
-        ; Note that this is not the most efficient implementation possible:
-        ; modern glibc uses SIMD.
+    ; # memset
 
-        cld
-        mov edi, bs4
+        ; Set memory to `al`.
+
+        mov byte [dest], 0
+        mov byte [dest + 1], 0
+
+        mov edi, dest
         mov ecx, 2
-        mov eax, 0
+        mov al, 1
         rep stosb
-        ASSERT_EQ [bs4], 0, byte
-        ASSERT_EQ [bs4+1], 0, byte
+        ASSERT_EQ [dest], 1, byte
+        ASSERT_EQ [dest + 1], 1, byte
+
+        ; edi and ecx move as well.
         mov eax, edi
-        sub eax, bs4
+        sub eax, dest
         ASSERT_EQ 2
         ASSERT_EQ ecx, 0
 
-    ; # memcmp
+    ; # memchr
 
         ; TODO
 
-    ; # memchr
+    ; # memcpy
 
-        cld
+        mov byte [src], 1
+        mov byte [src + 1], 2
+        mov byte [src + 2], 3
+        mov byte [dest], 0
+        mov byte [dest + 1], 0
+        mov byte [dest + 1], 0
 
-        mov esi, bs4
-        mov byte [bs4], 0
-        mov byte [bs4 + 1], 1
+        mov esi, src
+        mov edi, dest
+        mov ecx, 3
+        rep movsb
 
-        mov edi, bs4_2
-        mov byte [bs4_2], 0
-        mov byte [bs4_2 + 1], 1
+        ASSERT_EQ [dest + 0], 1, byte
+        ASSERT_EQ [dest + 1], 2, byte
+        ASSERT_EQ [dest + 2], 3, byte
 
+    ; # memcmp
+
+        mov byte [src], 0
+        mov byte [src + 1], 1
+        mov byte [src + 2], 2
+        mov byte [dest], 0
+        mov byte [dest + 1], 1
+        mov byte [dest + 1], 3
+
+        ; Compare 2 bytes. They are equal.
+        mov esi, src
+        mov edi, dest
         mov ecx, 2
         repz cmpsb
-        ASSERT_FLAG jz
         ASSERT_EQ ecx, 0
 
-        mov ecx, 2
-        mov byte [bs4_2 + 1], 2
+        ; Compare 3 bytes. Last byte differs.
+        mov esi, src
+        mov edi, dest
+        mov ecx, 3
         repz cmpsb
-        ASSERT_FLAG jnz
         ASSERT_EQ ecx, 1
 
     EXIT

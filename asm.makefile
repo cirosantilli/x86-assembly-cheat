@@ -43,7 +43,7 @@ run: all
 
 test: all
 	@\
-	if [ -x $(TEST)  ]; then \
+	if [ -x $(TEST) ]; then \
 	  ./$(TEST) '$(OUT_EXT)' ;\
 	else\
 	  fail=false ;\

@@ -13,6 +13,7 @@ Assembly information and cheatsheets. x86 Linux focus. Containers (ELF), linking
     1.  [Pros and cons](pros-and-cons.md)
     1.  [Intel processor history](intel-processor-history.md)
     1.  [CPU Architecture](cpu-architecture.md)
+        1. [Optimizations](optimizations.md)
     1.  [CPU bugs](cpu-bugs.md)
     1.  [Calling conventions](calling-conventions.md)
 1.  [IA-32](ia-32.md)

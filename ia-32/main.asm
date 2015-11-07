@@ -241,14 +241,6 @@ ENTRY
 
         ; But you can use `__OUTPUT_FORMAT__` to get the value of `-f`.
 
-        ; # $
-
-            ; Address of current instruction.
-
-                PRINT_INT $
-                PRINT_INT $
-                mov eax, $ + 1
-
     ; # Functions
 
         ; A function is an unconditional branch, but in addition must know:

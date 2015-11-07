@@ -11,6 +11,9 @@
 
     ; Always move by dwords (4 bytes) no matter the suffix.
 
+    ; Those instructions exist because function arguments and variables are organized like a stack,
+    ; which prevents memory fragmentation.
+
 %include "lib/asm_io.inc"
 
 ENTRY

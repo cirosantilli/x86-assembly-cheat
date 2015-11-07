@@ -181,7 +181,10 @@ TODO confirm: GCC does not resolve the conventional versioning names automatical
 
 ### Compile executable that depends on an so
 
-You must tell `gcc` which libraries to use with the `-l` flag.
+You must either:
+
+- tell `gcc` which libraries to use with the `-l` flag. This is usually the best method, as it only stores the basename of the shared library on the executable.
+- pass the full path to the library to GCC. This is bad because it hard-codes the full path on the executable, making it less portable.
 
 The linker will check that the library is there and that it contains the necessary definitions.
 
@@ -191,6 +194,8 @@ How this information is represented is a part of the `.elf` format definition.
 
 *Remember*: when the program will run, it must be able to find that `.so` again on the load path!
 
+#### l option
+
 #### What can be passed to -l
 
 The name given to `-l` must be either:
@@ -199,7 +204,7 @@ The name given to `-l` must be either:
 
     Ex: `m`, for `libm.so`. *will not work for `libm.so.1` !!!!!
 
--   colon + `:`full basename. Ex: `-l:libm.so.1`
+-   colon `:` + full basename. Ex: `-l:libm.so.1`
 
 You need to compile like this so GCC can tell if all your functions are defined.
 

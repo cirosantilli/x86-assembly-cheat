@@ -15,6 +15,7 @@
     1.  [Registers](registers.asm)
         1. [Segment registers](segment_registers.asm)
     1.  [Addressing](addressing.asm)
+    1.  [Endianess](endianess.asm)
 1.  Instructions
     1.  mov family
         1. [MOV](mov.asm)

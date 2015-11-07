@@ -41,7 +41,9 @@ ENTRY
         mov $0, %eax
         mov $3, %ebx
         mov $4, %ecx
-        lea %ds:4(%ebx, %ecx, 2), %eax
+        /* GAS 2.24 Warning: segment override on `lea' is ineffectual. */
+        /*lea %ds:4(%ebx, %ecx, 2), %eax*/
+        lea 4(%ebx, %ecx, 2), %eax
         ASSERT_EQ($15)
 
         /*
@@ -84,6 +86,14 @@ ENTRY
         mov $3, %ebx
         lea 2(,%ebx,4), %eax
         ASSERT_EQ($14)
+
+        /*
+        Expressions like (1 + 1) or more commonly (label + 1)
+        can be used like anywhere else.
+        */
+        mov $1, %eax
+        lea (1 + 1)(%eax), %eax
+        ASSERT_EQ($3)
 
     /*
     Impossible addressings.

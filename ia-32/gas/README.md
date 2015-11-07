@@ -10,11 +10,13 @@
     1.  [Local label](local_label.S)
 1.  [Current address](current_address.S)
 1.  Instructions
-    1. [cmp](cmp.S)
-    1. [jmp indirect](jmp_indirect.S)
-    1. [ljmp](ljmp.md)
-    1. [cbtw](cbtw.S)
-    1. [movz](movz.S)
+    1.  [cmp](cmp.S)
+    1.  [jmp indirect](jmp_indirect.S)
+    1.  [ljmp](ljmp.md)
+    1.  [cbtw](cbtw.S)
+    1.  [movz](movz.S)
+    1.  Similar to asm
+        1. [push](push.S)
 1.  Directives
     1. [.ascii](ascii.S)
     1. [.asciz](asciz.S)
