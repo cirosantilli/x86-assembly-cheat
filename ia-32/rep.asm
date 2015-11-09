@@ -40,14 +40,14 @@ ENTRY
 
         ; Set memory to `al`.
 
-        mov byte [dest], 0
+        mov byte [dest + 0], 0
         mov byte [dest + 1], 0
 
         mov edi, dest
         mov ecx, 2
         mov al, 1
         rep stosb
-        ASSERT_EQ [dest], 1, byte
+        ASSERT_EQ [dest + 0], 1, byte
         ASSERT_EQ [dest + 1], 1, byte
 
         ; edi and ecx move as well.
@@ -62,10 +62,10 @@ ENTRY
 
     ; # memcpy
 
-        mov byte [src], 1
+        mov byte [src + 0], 1
         mov byte [src + 1], 2
         mov byte [src + 2], 3
-        mov byte [dest], 0
+        mov byte [dest + 0], 0
         mov byte [dest + 1], 0
         mov byte [dest + 1], 0
 
@@ -80,10 +80,10 @@ ENTRY
 
     ; # memcmp
 
-        mov byte [src], 0
+        mov byte [src + 0], 0
         mov byte [src + 1], 1
         mov byte [src + 2], 2
-        mov byte [dest], 0
+        mov byte [dest + 0], 0
         mov byte [dest + 1], 1
         mov byte [dest + 1], 3
 

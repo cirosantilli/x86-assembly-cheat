@@ -58,7 +58,6 @@
             1. [ROL, ROR](rol.asm)
         1.  Test
             [BT](bt.asm)
-            [BTS](bts.asm)
             [BTR](btr.asm)
             [BTC](btc.asm)
     1.  Branching
@@ -81,9 +80,11 @@
     1.  [Floating point](floating-point.md)
         1.  [FPU](fpu.asm)
         1.  [SIMD](simd.asm)
-    1.  Synchronization
+    1.  [Synchronization](synchronization)
         1. [XADD](xadd.asm)
         1. [CMPXCHG](cmpxchg)
+        1. [BTS](bts.asm)
+        1. PAUSE TODO
     1.  Misc
         1. [RDRAND](rdrand.asm)
         1. [POPCNT](popcnt.asm)

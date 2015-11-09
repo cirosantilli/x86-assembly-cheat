@@ -1,11 +1,10 @@
 ; # CMPXCHG
 
-        ; cmpxchg x y
-
-    ; Is the same as: TODO
-
     ; Synchronization primitive.
 
+        ; cmpxchg x, y
+
+    ; Can have the LOCK prefix, but that is useless as it has lock semantics by default.
 
 %include "lib/asm_io.inc"
 

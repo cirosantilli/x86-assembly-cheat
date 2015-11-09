@@ -1,6 +1,6 @@
 # Assembly Cheat
 
-Assembly information and cheatsheets. x86 Linux focus. Containers (ELF), linking, calling conventions.
+x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (ELF), linking, calling conventions.
 
 1.  Featured
     1.  [Getting started](getting-started.md)

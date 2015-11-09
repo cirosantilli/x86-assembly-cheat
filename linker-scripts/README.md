@@ -95,7 +95,9 @@ Application: insert boot sector magic bytes: https://github.com/cirosantilli/x86
 
 Like `QUAD` but sign extends.
 
-### PROVIDE
+### Assignment
+
+#### PROVIDE
 
 <https://sourceware.org/binutils/docs/ld/PROVIDE.html#index-PROVIDE-408>
 
@@ -122,6 +124,10 @@ To set the value of the symbol, you'd need:
 Used on the default userland script for section position symbols like `etext` and `edata`: <http://stackoverflow.com/questions/1765969/where-are-the-symbols-etext-edata-and-end-defined>
 
 Those symbols are placed on the output right where they are defined, relative to other sections and symbols.
+
+#### ABSOLUTE
+
+TODO
 
 ### ALIGN
 

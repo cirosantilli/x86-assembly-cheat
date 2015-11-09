@@ -2,6 +2,8 @@
 
     ; BT + Set.
 
+    ; TODO confirm: synchronization primitive. http://wiki.osdev.org/Spinlock
+
 %include "lib/asm_io.inc"
 
 ENTRY
