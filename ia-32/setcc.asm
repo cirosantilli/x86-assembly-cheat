@@ -14,7 +14,7 @@
 
 ENTRY
 
-    mov al, 0
+    mov eax, 0
 
     stc
     setc al

@@ -2,7 +2,7 @@
 
     ; http://www.nasm.us/doc/nasmdoc3.html#section-3.9
 
-    ; Labels that start with a period get the previous non-local label
+    ; Labels that start with a period `.` get the previous non-local label
     ; prepended to them, which may give them uniqueness.
 
     ; Those are still present on the output `.o` however.

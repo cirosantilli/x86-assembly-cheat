@@ -4,6 +4,8 @@
 Macro for in loop.
 
 TODO: mnemonic?
+
+See also: .rept
 */
 
 #include "lib/asm_io_s.h"

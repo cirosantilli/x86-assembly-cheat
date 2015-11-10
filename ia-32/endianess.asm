@@ -1,8 +1,8 @@
-/*
-x86 is little endian.
+; # Endianess
 
-http://stackoverflow.com/questions/5185551/why-is-x86-little-endian
-*/
+; x86 is little endian.
+
+; http://stackoverflow.com/questions/5185551/why-is-x86-little-endian
 
 %include "lib/asm_io.inc"
 

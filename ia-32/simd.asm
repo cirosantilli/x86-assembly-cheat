@@ -170,6 +170,8 @@ ENTRY
 
                 mov dword [resd0], __float32__(1.5)
                 movss xmm0, [resd0]
+                cvttss2si eax, xmm0
+                call print_int
                 ASSERT_EQ eax, 1
 
     ; # SSSE3
