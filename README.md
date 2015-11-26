@@ -13,7 +13,7 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
     1.  [Pros and cons](pros-and-cons.md)
     1.  [Intel processor history](intel-processor-history.md)
     1.  [CPU Architecture](cpu-architecture.md)
-        1. [Optimizations](optimizations.md)
+        1. [CPU Optimizations](cpu-optimizations.md)
     1.  [CPU bugs](cpu-bugs.md)
     1.  [Calling conventions](calling-conventions.md)
 1.  [IA-32](ia-32.md)
@@ -25,7 +25,7 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
     1.  [ELF](elf.md)
         1. [ELF Hello World Tutorial](http://www.cirosantilli.com/elf-hello-world)
     1.  [Library](library/)
-1.  [ldd](ldd.md)
+1.  [Compiler generated](compiler-generated/)
 1.  [Binutils](binutils.md)
     1.  [ld](ld.md)
         1. [Linker scripts](linker-scripts/)
@@ -33,14 +33,13 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
     1.  [objcopy](objcopy.md)
     1.  [objdump](objdump.md)
     1.  [size](size.md)
-1.  [in tel2gas](intel2gas)
+1.  [ldd](ldd.md)
+1.  [intel2gas](intel2gas)
 1.  [Bibliography](bibliography.md)
     1.  Related repositories
         1. [Bare metal programming](https://github.com/cirosantilli/x86-bare-metal-examples)
         1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
         1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
-
-    1.  [Compiler generated](compiler-generated/)
 
 WIP
 

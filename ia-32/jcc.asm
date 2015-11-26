@@ -16,6 +16,8 @@ ENTRY
 
     ; # je
 
+    ; # jne
+
         ; je is the same as jz: http://stackoverflow.com/questions/14267081/difference-between-je-jne-and-jz-jnz
 
         ; jz is specially common with cmp, as `cmp` sets the `z` if the operands are equal.

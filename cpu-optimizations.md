@@ -1,4 +1,4 @@
-# Optimizations
+# CPU Optimizations
 
 WIP
 
@@ -12,6 +12,7 @@ WIP
 
 - <http://en.wikipedia.org/wiki/Operand_forwarding>
 - <http://en.wikipedia.org/wiki/Bubble_%28computing%29>
+- <https://en.wikipedia.org/wiki/Very_long_instruction_word>
 
 ### Out of order processing
 

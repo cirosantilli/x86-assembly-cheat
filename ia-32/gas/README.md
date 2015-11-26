@@ -22,6 +22,7 @@
     1. [.asciz](asciz.S)
     1. [.byte](byte.S)
     1. [.equ](equ.S)
+    1. [.extern](extern.md)
     1. [.global](.global.S)
     1. [.print](print.S)
     1. [.type](type.S)
