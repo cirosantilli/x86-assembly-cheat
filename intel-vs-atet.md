@@ -25,3 +25,5 @@ Downsides:
         [eax + 2*ebx + 4]
 
     with:
+
+        4(eax,ebx,2)
