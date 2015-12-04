@@ -2,17 +2,41 @@
 
 GNU assembler syntax cheatsheet.
 
+Part of the GNU Binutils projects, which also includes other lower-level toolchain tools like `ld` (but not `gcc`).
+
 Supposes that you already know IA-32 and NASM.
 
 Documentation: <https://sourceware.org/binutils/docs-2.25/as/> Many questions can be answered directly via the index: <https://sourceware.org/binutils/docs/as/index.html>
 
-Used by the kernel, GCC and glibc... so just learn it.
+Executable name: `as`.
+
+Used by the kernel, GCC default backend and glibc... so just learn it.
 
 Part of Binutils.
 
+## Vs NASM
+
 Advantages over NASM:
 
-- can handle multiple architectures, not just x86, including ARM
+- can handle multiple architectures, not just x86, including:
+
+    - i386
+    - SPARC
+    - ARM
+
+    and more.
+
+-   NASM is slightly more convenient to write by hand, maybe because it is more focused as a direct input language, rather than a GCC backend.
+
+But given the huge Linux support for GAS, it is my preferred assembler.
+
+### GCC as a GAS front-end
+
+GCC can be used as a frontend for GAS:
+
+    gcc -S a.c -o a.s
+    gcc -masm=att -S a.c -o a.s
+    gcc -masm=intel -S a.c -o a.s
 
 ## Comments
 

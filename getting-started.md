@@ -1,5 +1,7 @@
 # Getting started
 
+## Ubuntu 14.04 quick start
+
     sudo apt-get install build-essential gcc-multilib nasm
 
     # Run all programs in the current directory.
@@ -11,13 +13,43 @@
     # Run a default program, usually a main file or a hello world.
     make run
 
-Since this is assembly, you need a compatible CPU to run most programs.
+## Pre-requisites
 
-Tested on the latest Ubuntu LTS, but maximum portability is intended. Arch and OS specifics are clearly separated in sub-directories.
+-   an x86 processor or emulator, 32 or 64-bit. We provide a [Vagrantfile](Vagrantfile).
 
-## You can run this even if you are on x86-64 Linux
+    Beware that the virtual machine provided by [Vagrantfile](Vagrantfile) may have less features than your own CPU. Check `cat /proc/cpuinfo` inside the VM.
 
-x86-64 Linux is able to run IA-32 code out of the box if compiled with `CONFIG_IA32_EMULATION=y`, which is the default in any sane distro.
+-   common GNU/Linux build tools: `make`, `gcc`, `nasm`, Binutils (`as`, `ld`).
+
+-   OS: most programs will work on Linux, Windows and Mac if you install the Linux build tools on them, because we use C instead of direct system calls for IO via [lib/](lib/).
+
+    The main test environment is the latest 64-bit Ubuntu LTS, but maximum portability is intended.
+
+    Architecture and OS specifics are clearly separated in sub-directories. E.g., Linux-only programs will be put into the [linux](linux/) directory.
+
+## Assertions
+
+One distinctive feature of this tutorial is that we have assertions.
+
+So edit a test to make it fail and see it blow up. E.g., modify [add.asm](add.asm) to contain:
+
+    mov eax, 0
+    add eax, 1
+    ASSERT_EQ 2
+
+and run:
+
+    make test
+
+It will now say that a test failed, because usually:
+
+    0 + 1 != 2
+
+## 64-bit CPUs can run this
+
+x86-64 is a backwards compatible extension of IA-32, and has a mode which emulates IA-32.
+
+x86-64 Linux is able to run IA-32 code out of the box using the hardware backwards compatibility if compiled with `CONFIG_IA32_EMULATION=y`, which is the default in any sane distro.
 
 You only have to make sure that `gcc -m32 hello_world.c` compiles correctly.
 
@@ -31,30 +63,3 @@ See also:
 - <http://stackoverflow.com/questions/9807581/cannot-find-crtn-o-linking-32-bit-code-on-64-bit-system>
 
 If you don't have a compatible CPU, use the `Vagrantfile`s provided in each directory or your favorite virtualization method.
-
-## Portability
-
-Whenever possible, programs are made OS-portable by using the C driver under [lib/](lib/)
-
-It uses your C standard library to make the right system calls to whatever OS you use.
-
-If we assume a single OS, then simpler examples can be produced with direct system calls, e.g. [linux/](linux/)
-
-Beware that the virtual machine provided by [Vagrantfile](Vagrantfile) may have less features than you actual CPU. Check `cat /proc/cpuinfo` inside the VM.
-
-## Concepts that require OS privilege
-
-Concepts that require OS privileges (ring 0) will not be explained here.
-
-Those include:
-
--   instructions like:
-    - `cli` and `sti`
-    - `hlt`
-    - `inb`
-    - `outb`
--   special registers like: `ds`, `cs`, `ss`
-
-Those concepts cannot be tried out while an OS is running without disrupting the OS.
-
-They might be explained at: <https://github.com/cirosantilli/x86-bare-metal-examples>

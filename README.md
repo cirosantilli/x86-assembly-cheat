@@ -2,29 +2,26 @@
 
 x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (ELF), linking, calling conventions.
 
-1.  Featured
-    1.  [Getting started](getting-started.md)
-    1.  [IA-32](ia-32/)
-    1.  [x86 paging tutorial](http://www.cirosantilli.com/x86-paging)
+1.  [Getting started](getting-started.md)
 1.  Introduction
     1.  [How to learn](how-to-learn.md)
     1.  [Instruction sets](instruction-sets.md)
+        1. [Other architectures](other-architectures.md)
+        1. [RISC vs CISC](risc-vs-cisc.md)
+        1. [Microcode](microcode.md)
+        1. [System vs application programming](system-vs-application-programming.md)
+        1. [Flynn's Taxonomy](flynns-taxonomy.md)
     1.  [Assemblers](assemblers.md)
-    1.  [Pros and cons](pros-and-cons.md)
+        1.  [gas/](gas/)
+        1.  [nasm/](nasm/)
+    1.  [Pros and cons of assembly](pros-and-cons-of-assembly.md)
     1.  [Intel processor history](intel-processor-history.md)
-    1.  [CPU Architecture](cpu-architecture.md)
-        1. [CPU Optimizations](cpu-optimizations.md)
+    1.  [Intel vs AT&T syntax](intel-vs-atet-syntax.md)
+        1.  [intel2gas](intel2gas.md)
+    1.  [CPU Optimizations](cpu-optimizations.md)
     1.  [CPU bugs](cpu-bugs.md)
-    1.  [Calling conventions](calling-conventions.md)
 1.  [IA-32](ia-32.md)
     1.  [main.asm](main.asm)
-    1.  [Introduction](introduction.md)
-        1.  [Intel vs AT&T](intel-vs-atet.md)
-        1.  [Instruction encoding](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
-    1.  [lib/](lib/)
-    1.  [linux/](linux/)
-    1.  [gas/](gas/)
-    1.  [Vagrantfile](Vagrantfile)
     1.  [hello_world.asm](hello_world.asm)
     1.  Base concepts
         1.  [Registers](registers.asm)
@@ -106,13 +103,11 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
             1. [RDTSC](rdtsc.asm)
             1. [NOP](nop.asm)
             1. [CPUID](cpuid.asm)
-    1.  Calling conventions
+    1.  [Calling conventions](calling-conventions.md)
         1.  [cdecl](cdecl.md)
         1.  [cdecl examples](cdecl.asm)
         1.  [stdcall](stdcall.asm)
-    1.  [Encoding](encoding.asm)
-    1.  [Segmentation](segmentation.md)
-        1. [Rings](rings.md)
+    1.  [Linux](linux/)
 1.  [x86-64](x86-64/)
 1.  [Containers](containers.md)
     1.  [ELF](elf.md)
@@ -127,12 +122,14 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
     1.  [objdump](objdump.md)
     1.  [size](size.md)
 1.  [ldd](ldd.md)
-1.  [intel2gas](intel2gas)
+1.  [misc](misc.md)
 1.  [Bibliography](bibliography.md)
-    1.  Related repositories
-        1. [Bare metal programming](https://github.com/cirosantilli/x86-bare-metal-examples)
-        1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
-        1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
+1.  Related tutorials by the same author
+    1. [x86 Instruction Encoding Tutorial](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
+    1. [x86 Bare Metal Examples](https://github.com/cirosantilli/x86-bare-metal-examples)
+    1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
+    1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
+    1. [x86 paging tutorial](http://www.cirosantilli.com/x86-paging)
 
 WIP
 

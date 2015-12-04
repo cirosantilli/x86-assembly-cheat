@@ -1,4 +1,6 @@
-# Pros and cons
+# Pros and cons of assembly
+
+Assembly vs. higher level languages like C.
 
 ## Pros
 

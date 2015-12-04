@@ -2,11 +2,8 @@
 
 ; # pop
 
-    ; Decrement / increment `esp` by 4, and then write something to memory.
-
+    ; For-newb explanation and rationale:
     ; http://stackoverflow.com/questions/4584089/what-is-the-function-of-push-pop-registers-in-x86-assembly/33583134#33583134
-
-    ; The stack grows down, so `push` decrements, and `pop` increments.
 
     ; # How many bytes are pushed
 

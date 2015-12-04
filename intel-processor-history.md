@@ -1,16 +1,18 @@
 # Intel processor history
 
-Important to understand instruction set names used until today.
+Intel is highly backwards compatible and hugely influential, so understanding their processor history helps to understand terms and concepts which are still relevant.
 
 ## Intel 4004
 
 <https://en.wikipedia.org/wiki/Intel_4004>
 
-The first.
+The first commercial integrated CPU in the world. Huge breakthrough.
 
 ## Intel 8080
 
-1974, 8 bit, 2MHz, very popular
+1974, 8 bit, 2MHz. Hit a price / performance point that kick-started the PC revolution: Apple, Microsoft, etc.
+
+Before it, computers were huge machines for large corporations only.
 
 ## Intel 8086
 
