@@ -2,6 +2,17 @@
 
 ## Manuals
 
+-   [IA-32 manual](http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html)
+
+    Intel man pages, *the* official source.
+
+    Also includes Intel 64.
+
+    Interesting sections:
+
+    - Vol 1 5: instruction overview. In particular, groups instructions logically.
+    - Vol 2 3: full instruction listing and API.
+
 -   [AMD64 manuals](http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/)
 
     Under the manuals section.
@@ -62,6 +73,12 @@
 -   <http://courses.cs.washington.edu/courses/cse471/12sp/lectures.html>
 
     Washington university course that covers branch prediction, cache and other CPU internals
+
+## Unofficial API references
+
+-   [Wikipedia Instruction List](http://en.wikipedia.org/wiki/X86_instruction_listings)
+
+    Instruction list.
 
 ## Libraries
 

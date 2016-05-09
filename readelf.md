@@ -33,7 +33,7 @@ Sample output:
 
 ## W
 
-Don't limit the output to 80 columns which is the default, and reduce the amount of `0` padding.
+Don't limit the output width to 80 columns which is the default, and reduce the amount of `0` padding.
 
 Makes things much more readable is your terminal is wide enough.
 

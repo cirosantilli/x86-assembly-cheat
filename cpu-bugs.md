@@ -2,6 +2,10 @@
 
 CPU bugs are obviously super serious to the company, as things may get super serious as users may ask for refunds on an expensive product.
 
+## 2015 bug fesetival
+
+<http://danluu.com/cpu-bugs/>
+
 ## Halt and catch fire
 
 <http://en.wikipedia.org/wiki/Halt_and_Catch_Fire>

@@ -1,6 +1,8 @@
 # CPU Optimizations
 
-WIP
+CPU semi-internals that can be used to write more efficient code.
+
+Compilers take most of those into consideration.
 
 ## Instruction level parallelism
 
@@ -37,3 +39,12 @@ TODO vs pipeline and instruction level parallelism?
 ## Megahertz myth
 
 - <http://en.wikipedia.org/wiki/Megahertz_myth>
+
+## Cache
+
+- <http://stackoverflow.com/questions/16699247/what-is-cache-friendly-code>
+- <http://stackoverflow.com/questions/9936132/why-does-the-order-of-the-loops-affect-performance-when-iterating-over-a-2d-arra>
+- <http://stackoverflow.com/questions/8469427/how-and-when-to-align-to-cache-line-size>
+- <http://stackoverflow.com/questions/763262/how-does-one-write-code-that-best-utilizes-the-cpu-cache-to-improve-performance>
+- <http://stackoverflow.com/questions/7905760/matrix-multiplication-small-difference-in-matrix-size-large-difference-in-timi>
+- <http://stackoverflow.com/questions/8547778/why-is-one-loop-so-much-slower-than-two-loops>

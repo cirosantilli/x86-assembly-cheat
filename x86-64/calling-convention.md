@@ -10,7 +10,7 @@ A simplified version of the most important points to keep in mind about the [Sys
 
 -   before call
 
-    -   the stack pointer *must* be aligned by a multiple of 16 bytes.
+    -   the stack pointer *must* be aligned by a multiple of 16 bytes after `call` pushes the return value to the stack.
 
         This often fails by default without explicitly changing `%rsp` because `call` will store the 8 byte return address on the stack, so you usually need to do:
 
@@ -28,6 +28,8 @@ A simplified version of the most important points to keep in mind about the [Sys
         Floating point arguments are passed through the %xmm0 to %xmm7 registers present in Intel's SSE2, which must be part of every x86-64 implementation.
 
         Linux system calls [use R10 is used instead of RCX](http://stackoverflow.com/questions/2535989/what-are-the-calling-conventions-for-unix-linux-system-calls-on-x86-64), Mac's [are unchanged](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/LowLevelABI/140-x86-64_Function_Calling_Conventions/x86_64.html)
+
+        Parameters only need to be pushed to the stack to allow for recursion or calling other functions, and this is done on the callee. So compilers can optimize and only use the registers if possible.
 
     -   variable argument functions like printf, `rax` must contain the number of vector (SSE / AVX) varargs: <http://stackoverflow.com/questions/6212665/why-is-eax-zeroed-before-a-call-to-printf>
 

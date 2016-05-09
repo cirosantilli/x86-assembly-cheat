@@ -1,6 +1,6 @@
 # x86 Assembly Cheat
 
-x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (ELF), linking, calling conventions.
+x86 minimal examples. Asserts used wherever possible. Linux focus, but mostly OS portable. Containers (ELF), linking, calling conventions.
 
 1.  [Getting started](getting-started.md)
 1.  Introduction
@@ -20,6 +20,8 @@ x86 minimal examples. Asserts used wherever possible. Linux focus. Containers (E
         1.  [intel2gas](intel2gas.md)
     1.  [CPU Optimizations](cpu-optimizations.md)
     1.  [CPU bugs](cpu-bugs.md)
+    1.  [Implementations](implementations.md)
+    1.  [Extensions](extensions.md)
 1.  [IA-32](ia-32.md)
     1.  [main.asm](main.asm)
     1.  [hello_world.asm](hello_world.asm)

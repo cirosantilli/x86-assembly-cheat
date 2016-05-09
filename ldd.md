@@ -4,6 +4,9 @@ List required shared libraries of an executable and if they can be found.
 
 `binutils` package.
 
+    man ldd
+    man ld.so
+
 Usage:
 
     ldd /bin/ls
@@ -61,3 +64,13 @@ Gives:
     0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]
 
 so this is where `libpcre` came from.
+
+## Verbose
+
+## Show linked symbols
+
+    LD_DEBUG=bindings ldd -r /bin/date
+
+Shows a huge amount of debug information! <http://stackoverflow.com/a/5567907/895245>
+
+But also consider `ld -y` and `info symbol &printf` inside GDB: <http://stackoverflow.com/a/5533801/895245>

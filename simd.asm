@@ -7,6 +7,10 @@
 
     ; SIMD came in multiple stages: first MMX, then XMM, then SSE[1-4], then AVX.
 
+    ; SIMD uses:
+
+    ; - https://software.intel.com/en-us/intel-ipp
+
 %include "lib/asm_io.inc"
 
 section .bss

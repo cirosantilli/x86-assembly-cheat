@@ -11,7 +11,7 @@ Things which it can do that `readelf` cannot:
 
 Most useful command `objdump` command:
 
-    objdump -Sr
+    objdump -Sr a.o
 
 ## d
 
