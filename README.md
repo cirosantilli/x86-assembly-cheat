@@ -1,16 +1,17 @@
 # x86 Assembly Cheat
 
-x86 minimal examples. Asserts used wherever possible. Linux focus, but mostly OS portable. Containers (ELF), linking, calling conventions.
+x86 userland minimal examples. Hundreds of runnable asserts. Linux focus for now, but highly OS portable. Containers (ELF), linking, calling conventions.
 
 1.  [Getting started](getting-started.md)
 1.  Introduction
     1.  [How to learn](how-to-learn.md)
     1.  [Instruction sets](instruction-sets.md)
-        1. [Other architectures](other-architectures.md)
-        1. [RISC vs CISC](risc-vs-cisc.md)
-        1. [Microcode](microcode.md)
-        1. [System vs application programming](system-vs-application-programming.md)
-        1. [Flynn's Taxonomy](flynns-taxonomy.md)
+        1.  [Other architectures](other-architectures.md)
+            1. [RISC-V](risc-v.md)
+        1.  [RISC vs CISC](risc-vs-cisc.md)
+            1.  [Microcode](microcode.md)
+        1.  [System vs application programming](system-vs-application-programming.md)
+        1.  [Flynn's Taxonomy](flynns-taxonomy.md)
     1.  [Assemblers](assemblers.md)
         1.  [gas/](gas/)
         1.  [nasm/](nasm/)
@@ -127,8 +128,8 @@ x86 minimal examples. Asserts used wherever possible. Linux focus, but mostly OS
 1.  [misc](misc.md)
 1.  [Bibliography](bibliography.md)
 1.  Related tutorials by the same author
-    1. [x86 Instruction Encoding Tutorial](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
     1. [x86 Bare Metal Examples](https://github.com/cirosantilli/x86-bare-metal-examples)
+    1. [x86 Instruction Encoding Tutorial](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
     1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
     1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
     1. [x86 paging tutorial](http://www.cirosantilli.com/x86-paging)
