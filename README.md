@@ -1,5 +1,7 @@
 # x86 Assembly Cheat
 
+[![Build Status](https://travis-ci.org/cirosantilli/x86-assembly-cheat.svg?branch=master)](https://travis-ci.org/cirosantilli/x86-assembly-cheat)
+
 x86 userland minimal examples. Hundreds of runnable asserts. Linux focus for now, but highly OS portable. Containers (ELF), linking, calling conventions. System land at: [x86 Bare Metal Examples](https://github.com/cirosantilli/x86-bare-metal-examples)
 
 1.  [Getting started](getting-started.md)

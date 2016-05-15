@@ -1,0 +1,6 @@
+before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install build-essential gcc-multilib nasm
+script:
+  - uname -a
+  - make test
