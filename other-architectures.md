@@ -1,4 +1,4 @@
-# Other Popular architectures
+# Other architectures
 
 This tutorial focuses only on the x86 architecture families.
 

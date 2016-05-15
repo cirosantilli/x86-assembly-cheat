@@ -1,6 +1,6 @@
 # x86 Assembly Cheat
 
-x86 userland minimal examples. Hundreds of runnable asserts. Linux focus for now, but highly OS portable. Containers (ELF), linking, calling conventions.
+x86 userland minimal examples. Hundreds of runnable asserts. Linux focus for now, but highly OS portable. Containers (ELF), linking, calling conventions. System land at: [x86 Bare Metal Examples](https://github.com/cirosantilli/x86-bare-metal-examples)
 
 1.  [Getting started](getting-started.md)
 1.  Introduction
@@ -127,12 +127,10 @@ x86 userland minimal examples. Hundreds of runnable asserts. Linux focus for now
 1.  [ldd](ldd.md)
 1.  [misc](misc.md)
 1.  [Bibliography](bibliography.md)
-1.  Related tutorials by the same author
-    1. [x86 Bare Metal Examples](https://github.com/cirosantilli/x86-bare-metal-examples)
+1.  Related tutorials
     1. [x86 Instruction Encoding Tutorial](https://github.com/cirosantilli/x86-instruction-encoding-tutorial)
     1. [C++ Cheat](https://github.com/cirosantilli/cpp-cheat)
     1. [Linux Cheat](https://github.com/cirosantilli/linux-cheat)
-    1. [x86 paging tutorial](http://www.cirosantilli.com/x86-paging)
 
 WIP
 
