@@ -5,6 +5,7 @@
     ; Family of conditional jumps.
 
     ; Conditional branches of the form `jX` and `jnX` exist for all flags X.
+
     ; `jX` jumps when the corresponding flag is set. `jnX` jumps when clear.
 
 %include "lib/asm_io.inc"

@@ -106,3 +106,5 @@ Previously closed source custom ISA I think, then opened and front-end hacked fo
 2016 India investment: <http://www.eetimes.com/document.asp?doc_id=1328790>
 
 <http://riscv.org/2016/04/risc-v-offers-simple-modular-isa/>
+
+<https://www.quora.com/Would-RISC-V-become-the-dominant-CPU-architecture-in-the-next-5-years-given-that-Google-Oracle-and-HP-are-strongly-rallying-behind-RISC-V>

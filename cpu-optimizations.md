@@ -10,11 +10,18 @@ Compilers take most of those into consideration.
 
 ### Instruction pipelining
 
-<http://en.wikipedia.org/wiki/Instruction_pipeline>
-
-- <http://en.wikipedia.org/wiki/Operand_forwarding>
+- <http://en.wikipedia.org/wiki/Instruction_pipeline>
+- <http://en.wikipedia.org/wiki/Operand_forwarding> <http://web.cs.iastate.edu/~prabhu/Tutorial/PIPELINE/forward.html>
 - <http://en.wikipedia.org/wiki/Bubble_%28computing%29>
 - <https://en.wikipedia.org/wiki/Very_long_instruction_word>
+- <https://en.wikipedia.org/wiki/Hazard_%28computer_architecture%29>
+- <https://en.wikipedia.org/wiki/Orthogonal_instruction_set>
+- <https://en.wikipedia.org/wiki/Bubble_(computing)> (AKA pipeline stall)
+
+Tutorials:
+
+- <https://scalibq.wordpress.com/2012/02/19/cpus-and-pipelines-how-do-they-work/>
+- <https://www.cs.uaf.edu/2010/fall/cs441/lecture/09_16_pipelining.html>
 
 ### Out of order processing
 

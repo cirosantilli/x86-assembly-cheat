@@ -22,6 +22,10 @@ armv7 is a version of arm that added floating point operations: <http://stackove
 
 ARM has already sued people in the past for implementing ARM ISA: http://www.eetimes.com/author.asp?section_id=36&doc_id=1287452 so not open.
 
+<http://semiengineering.com/an-alternative-to-x86-arm-architectures/>:
+
+> Asanovic joked that the shortest unit of time is not the moment between a traffic light turning green in New York City and the cab driver behind the first vehicle blowing the horn; it’s someone announcing that they have created an open-source, ARM-compatible core and receiving a “cease and desist” letter from a law firm representing ARM.
+
 ## PowerPC
 
 <https://en.wikipedia.org/wiki/PowerPC>
@@ -58,9 +62,35 @@ Created by Sun for its operating system Solaris. Now owned and used by Oracle. N
 
 Was meant to be the ultimate RISC beats Intel and Windows coalition, but it failed.
 
+## SuperH
+
+<https://en.wikipedia.org/wiki/SuperH>
+
+Renesas.
+
+Some patents expired: <https://youtu.be/lZGHbMS882w?t=281>
+
+### j-core
+
+Open implementation.
+
+<http://j-core.org/>
+
+<https://www.youtube.com/watch?v=lZGHbMS882w> Linux Foundation Events - Building a CPU from Scratch: jcore Design Walkthrough by Rob Landley & Jeff Dionne 
+
+## LEON
+
+<https://en.wikipedia.org/wiki/LEON>
+
+Open architecture based on SPARC made by <https://en.wikipedia.org/wiki/European_Space_Agency>
+
+## DLX
+
+<https://en.wikipedia.org/wiki/DLX>
+
 ## Operating systems
 
-Linux runs on all of the above and more: just do a `ls arch` to see the full list.
+Linux runs on tons of major archs: just do a `ls arch` to see the full list.
 
 TODO Windows and Mac OS? Likely they support only x86 on desktop, and have separate ARM portable versions that share some codebase.
 
