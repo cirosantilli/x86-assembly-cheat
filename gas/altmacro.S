@@ -66,7 +66,7 @@ ENTRY
 
     # Percent
 
-        Appears to work only on argumetns passed or their default values.
+        Appears to work only on arguments passed or their default values.
     */
 
             .macro PERCENT x

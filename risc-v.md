@@ -4,12 +4,6 @@
 
 Most promising open ;
 
-They have a full working software toolchain:
-
-- <https://github.com/riscv/riscv-linux> GCC
-- <https://github.com/riscv/riscv-tools>
-- <http://riscv.org/software-tools/riscv-qemu/>
-
 Created in 2010. BSD license.
 
 Userspace fixed in 2014, but kernel land not yet as of 2016. So the Linux port may have to change.
@@ -22,27 +16,21 @@ TODO: any real hardware produced besides FPGA?
 
 Debian port: <https://wiki.debian.org/RISC-V>
 
-## Rocket
+## Software toolchain
 
-<https://github.com/ucb-bar/rocket-chip>
+- <https://github.com/riscv/riscv-linux> GCC
+- <https://github.com/riscv/riscv-tools>
+- <http://riscv.org/software-tools/riscv-qemu/>
 
-Written in Chisel, which is Scala based: <https://github.com/ucb-bar/chisel>
+Emulators: Spike is dedicated for this project:
 
-By Berkley people.
+- <http://stackoverflow.com/questions/32881106/riscv-qemu-scall-versus-spike-ecall>
+- <http://52.32.189.224/angel-simulator/> JavaScript!
 
-2015 presentation by Yunsup Lee <https://www.youtube.com/watch?v=Ir3h3qWcNlg>
+There are two types of simulation you can do:
 
-A single source coce + some input parameters can generate:
-
-- C++ simulator code
-- FPGA Verilog
-- ASIC Verilog
-
-TODO: any plans for silicon production?
-
-http://www.lowrisc.org/docs/untether-v0.2/
-
-2016 thesis on it: <http://www.eecs.berkeley.edu/~waterman/papers/phd-thesis.pdf>
+- functional: assembly comes in and is emulated. Faster. Does not use the hardware implementation at all, and therefore does not test it: what is does test are software tools like compiler and kernel ports. May or not be cycle accurate as well, with performance hit if yes.
+- RTL: the entire hardware is emulated. Slower, but more precise. You need the underlying hardware implementation. Always cycle accurate.
 
 ## lowRISC
 
@@ -52,6 +40,8 @@ http://www.lowrisc.org/docs/untether-v0.2/
 RISC-V ASIC and FPGA implementation.
 
 RISC-V is only the API.
+
+Uses Rocket, but one major innovation is that it includes IO devices, while Rocket needed an ARM IP for that: <https://youtu.be/9BU5yNeyI5k?t=91>
 
 Mass production planned for 2017: <http://www.lowrisc.org/about/>
 
@@ -63,9 +53,37 @@ Google summer of code projects in 2016: http://www.lowrisc.org/blog/2016/03/appl
 
 Initial implementation reuse part of FPGA hardware: http://www.lowrisc.org/docs/untether-v0.2/ , they are trying to open things up further.
 
+Uses Verilator for simulation.
+
+## Rocket
+
+Tooling to generate Chips.
+
+<https://github.com/ucb-bar/rocket-chip>
+
+Uses Chisel, which is Scala based: <https://github.com/ucb-bar/chisel>
+
+Used by lowRISC.
+
+By Berkley people.
+
+2015 presentation by Yunsup Lee <https://www.youtube.com/watch?v=Ir3h3qWcNlg>
+
+A single source code + some input parameters can generate:
+
+- C++ simulator code
+- FPGA Verilog
+- ASIC Verilog
+
+TODO: any plans for silicon production?
+
+http://www.lowrisc.org/docs/untether-v0.2/
+
+2016 thesis on it: <http://www.eecs.berkeley.edu/~waterman/papers/phd-thesis.pdf>
+
 ## SiFive
 
-http://sifive.com/
+<http://sifive.com/>
 
 Startup around RISC-V tech by Berkley people, contributors to <https://github.com/riscv/riscv-tools>
 
@@ -83,7 +101,7 @@ The project owner works at Rackspace, who is partnering with Google for open sou
 
 ## OpenRISC
 
-https://en.wikipedia.org/wiki/OpenRISC
+<https://en.wikipedia.org/wiki/OpenRISC>
 
 LGPL / GPL. TODO: history?
 
@@ -97,6 +115,8 @@ ETH Zurich.
 
 Previously closed source custom ISA I think, then opened and front-end hacked for RISC-V.
 
+Uses ModelSim...
+
 ## News
 
 2016 indiegogo https://www.indiegogo.com/projects/risc-v-microprocessor/x/6766065#/
@@ -108,3 +128,17 @@ Previously closed source custom ISA I think, then opened and front-end hacked fo
 <http://riscv.org/2016/04/risc-v-offers-simple-modular-isa/>
 
 <https://www.quora.com/Would-RISC-V-become-the-dominant-CPU-architecture-in-the-next-5-years-given-that-Google-Oracle-and-HP-are-strongly-rallying-behind-RISC-V>
+
+## Tethered vs untethered
+
+<https://youtu.be/XSyH9T-Cj4w?t=64> tethered cannot do IO on itself: <https://www.youtube.com/watch?v=XSyH9T-Cj4w>
+
+Rocket it tethered, lowRISC untethered.
+
+## Hardware implementations
+
+- <https://github.com/lowRISC/lowrisc-chip>
+- <https://github.com/ucb-bar/rocket-chip>
+- <https://github.com/ucb-bar/riscv-boom>
+- <https://github.com/cliffordwolf/picorv32>
+- Pulpino

@@ -31,3 +31,7 @@ Intel and AMD have cross-licensing agreements:
 - http://www.anandtech.com/show/2873
 - http://www.eetimes.com/document.asp?doc_id=1129690
 - Interview with W. Jerry Sanders http://silicongenesis.stanford.edu/transcripts/sanders.htm
+
+## Open implementations
+
+<https://github.com/marmolejo/zet> TODO legal?

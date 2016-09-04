@@ -88,5 +88,11 @@
 
     Binutils cannot be used as a library to disassemble? Sad.
 
+## Cool projects
+
+Useless but cool and educational:
+
+-   <https://github.com/flouthoc/calc.asm>
+
 [Itanium C++ ABI]: http://mentorembedded.github.io/cxx-abi/abi.html
 [System V ABI AMD64]: http://www.x86-64.org/documentation_folder/abi-0.99.pdf

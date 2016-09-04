@@ -4,28 +4,6 @@ This tutorial focuses only on the x86 architecture families.
 
 Here are some other popular architectures which you should have in mind as well:
 
-## ARM
-
-<https://en.wikipedia.org/wiki/ARM_architecture>
-
-Great majority of mobile phones.
-
-Low power consumption.
-
-RISC.
-
-armv7 is a version of arm that added floating point operations: <http://stackoverflow.com/questions/7080525/why-use-armeabi-v7a-code-over-armeabi-code>
-
-### Open implementations
-
-<https://en.wikipedia.org/wiki/Amber_%28processor_core%29> TODO how does it compare in performance / cost?
-
-ARM has already sued people in the past for implementing ARM ISA: http://www.eetimes.com/author.asp?section_id=36&doc_id=1287452 so not open.
-
-<http://semiengineering.com/an-alternative-to-x86-arm-architectures/>:
-
-> Asanovic joked that the shortest unit of time is not the moment between a traffic light turning green in New York City and the cab driver behind the first vehicle blowing the horn; it’s someone announcing that they have created an open-source, ARM-compatible core and receiving a “cease and desist” letter from a law firm representing ARM.
-
 ## PowerPC
 
 <https://en.wikipedia.org/wiki/PowerPC>
@@ -48,11 +26,14 @@ Officially supported on Android.
 
 <http://www.androidauthority.com/nintendo-64-android-l-microcontrollers-story-mips-538596/>
 
+Lextra story: <http://probell.com/lexra/> It is not possible to patent an entire ISA as there is too much prior art, but companies patent instead specific novel instructions, and the compatibility break kills off reimplementors.
+
 ### Open implementations
 
-Seems closed?
+Seems closed? TODO legal?
 
-Open implementation: <https://brej.org/yellow_star/> TODO legal?
+- <https://brej.org/yellow_star/>
+- <https://github.com/jmahler/mips-cpu>
 
 ## SPARC
 

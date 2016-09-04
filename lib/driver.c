@@ -10,5 +10,5 @@
 int PRE_CDECL asm_main(void) POST_CDECL;
 
 int main(void) {
-  return asm_main();
+    return asm_main();
 }
