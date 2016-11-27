@@ -1,5 +1,7 @@
 # ldd
 
+Print information about the configuration of the dynamic loader `ld-linux.so`.
+
 List required shared libraries of an executable and if they can be found.
 
 `binutils` package.

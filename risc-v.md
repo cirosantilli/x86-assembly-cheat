@@ -117,18 +117,6 @@ Previously closed source custom ISA I think, then opened and front-end hacked fo
 
 Uses ModelSim...
 
-## News
-
-2016 indiegogo https://www.indiegogo.com/projects/risc-v-microprocessor/x/6766065#/
-
-2016 overview http://www.nextplatform.com/2016/03/08/risc-v-inching-closer-to-reality-at-scale/
-
-2016 India investment: <http://www.eetimes.com/document.asp?doc_id=1328790>
-
-<http://riscv.org/2016/04/risc-v-offers-simple-modular-isa/>
-
-<https://www.quora.com/Would-RISC-V-become-the-dominant-CPU-architecture-in-the-next-5-years-given-that-Google-Oracle-and-HP-are-strongly-rallying-behind-RISC-V>
-
 ## Tethered vs untethered
 
 <https://youtu.be/XSyH9T-Cj4w?t=64> tethered cannot do IO on itself: <https://www.youtube.com/watch?v=XSyH9T-Cj4w>
@@ -142,3 +130,33 @@ Rocket it tethered, lowRISC untethered.
 - <https://github.com/ucb-bar/riscv-boom>
 - <https://github.com/cliffordwolf/picorv32>
 - Pulpino
+
+## Prototypes
+
+9 Silicon Prototypes: <https://web.archive.org/web/20160904102006/https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-17.pdf>
+
+https://web.archive.org/web/20160904102554/https://people.eecs.berkeley.edu/%7Eyunsup/papers/riscv-esscirc2014.pdf
+
+## News
+
+2016 indiegogo https://www.indiegogo.com/projects/risc-v-microprocessor/x/6766065#/
+
+2016 overview http://www.nextplatform.com/2016/03/08/risc-v-inching-closer-to-reality-at-scale/
+
+2016 India investment: <http://www.eetimes.com/document.asp?doc_id=1328790>
+
+<http://riscv.org/2016/04/risc-v-offers-simple-modular-isa/>
+
+<https://www.quora.com/Would-RISC-V-become-the-dominant-CPU-architecture-in-the-next-5-years-given-that-Google-Oracle-and-HP-are-strongly-rallying-behind-RISC-V>
+
+<http://www.design-reuse.com/news/40903/codasip-and-baysand-partnership-makes-risc-v-based-asics-an-ideal-choice-for-iot-designs.html>
+
+<https://www.crowdsupply.com/onchip/open-v>: crowd funded attempt of RV microcontroller, open up to RTL level, on dev board. 50\$  each, delivery in 1.5 years.
+
+## Conferences
+
+- <http://orconf.org/index.html>
+
+## Companies
+
+Good place to search: <http://orconf.org/index.html#sponsors>

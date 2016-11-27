@@ -52,34 +52,6 @@ Since the disadvantages are so minor, it is almost always better to use dynamic 
 
 <http://www.ibm.com/developerworks/library/l-dynamic-libraries/>
 
-## ld.so
-
-## ld-linux.so
-
-    man ld.so
-
-`ld-linux.so*` is the program that does the dynamic loading for every executable.
-
-Its path is specified in the `.interp` section of ELF files, which Linux reads and uses to call `ld-linux`.
-
-The default on Ubuntu 14.04 is `/lib64/ld-linux-x86-64.so.2`.
-
-The program to be run is passed as an argument to `ld-linux`:
-
-    /lib64/ld-linux-x86-64.so.2 a.out
-
-### LD_DEBUG
-
-TODO
-
-### LD_LIBRARY_PATH
-
-You can also add to path with environment variables.
-
-Don't rely on this method for production.
-
-    export LD_LIBRARY_PATH='/path/to/link'
-
 ## Search path
 
 Find where GCC search path for both `.a` and `.so`:
