@@ -36,12 +36,12 @@ Let's see what our compilers are compiling to.
         1.  [Precalculate loop without init](precalculate_loop_without_init.c)
         1.  [Bound simplficiation](bound_simplification.c)
 1.  C++
-    [class](class.cpp)
-    [template](template.cpp)
-    [constexpr.cpp](constexpr.cpp)
-    [atomic.cpp](atomic.cpp)
-    [this_method.cpp](this_method.cpp)
-    [virtual.cpp](virtual.cpp)
+    1. [class](class.cpp)
+    1. [template](template.cpp)
+    1. [constexpr.cpp](constexpr.cpp)
+    1. [atomic.cpp](atomic.cpp)
+    1. [this_method.cpp](this_method.cpp)
+    1. [virtual.cpp](virtual.cpp)
 1.  libc
     1. [memcmp.c](memcmp.c)
 1.  ELF sections

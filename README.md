@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cirosantilli/x86-assembly-cheat.svg?branch=master)](https://travis-ci.org/cirosantilli/x86-assembly-cheat)
 
-x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>
+x86 userland minimal examples tutorial. Hundreds of runnable asserts. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>
 
 1.  [Getting started](getting-started.md)
 1.  Introduction
@@ -12,7 +12,7 @@ x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), l
             1.  [ARM](https://github.com/cirosantilli/arm-assembly-cheat)
             1.  [RISC-V](risc-v.md)
             1.  [Microcontrollers](microcontrollers.md)
-            1.  Educational
+            1.  [Educational architectures](educational-architectures.md)
                 1. [Y86](y86.md)
         1.  [RISC vs CISC](risc-vs-cisc.md)
             1.  [Microcode](microcode.md)
@@ -27,7 +27,7 @@ x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), l
         1.  [intel2gas](intel2gas.md)
     1.  [Implementations](implementations.md)
     1.  [Extensions](extensions.md)
-    1.  [CPU Hardware design](cpu-hardware-design.md)
+    1.  [CPU architecture](cpu-architecture.md)
         1.  [CPU Optimizations](cpu-optimizations.md)
         1.  [CPU bugs](cpu-bugs.md)
         1.  [Cache](cache.md)
@@ -36,6 +36,8 @@ x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), l
             1.  [Branch prediction](branch-prediction.md)
             1.  [Superscalar](superscalar.md)
             1.  [VLIW](vliw.md)
+            1.  [SIMT](simt.md)
+        1.  [CPU benchmarks](cpu-benchmarks.md)
 1.  [IA-32](ia-32.md)
     1.  [main.asm](main.asm)
     1.  [hello_world.asm](hello_world.asm)
@@ -93,7 +95,7 @@ x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), l
             1.  [JMP](jmp.asm)
                 1. [JMP indirect](jmp_indirect.asm)
             1.  [LOOPcc](loopcc.asm)
-        1.  [Stack instructions](stack-instructions.md)
+        1.  [Stack instructions](stack-instrucastions.md)
             1. [enter](enter.asm)
             1. [leave](leave.asm)
             1. [pusha](pusha.asm)
@@ -108,6 +110,7 @@ x86 userland minimal examples. Hundreds of runnable asserts. Containers (ELF), l
         1.  [Floating point](floating-point.md)
             1.  [FPU](fpu.asm)
             1.  [SIMD](simd.asm)
+                1. [FMA](fma.md)
         1.  [Synchronization](synchronization.md)
             1. [XADD](xadd.asm)
             1. [CMPXCHG](cmpxchg.asm)

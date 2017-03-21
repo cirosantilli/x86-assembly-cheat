@@ -42,6 +42,8 @@
 
 -   [System V Application Binary Interface v0.99.7][]
 
+-   <https://github.com/intelxed/xed/tree/master/datafiles> open source machine readable definition of instructions (non-PDF), only published in 2016
+
 ## Tutorials
 
 -   <http://www.tldp.org/HOWTO/Assembly-HOWTO/index.html>

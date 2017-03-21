@@ -80,3 +80,12 @@ You have many CPUs modifying memory. How to keep caches up to date.
 - <https://en.wikipedia.org/wiki/MESI_protocol>
 - <https://en.wikipedia.org/wiki/MSI_protocol>
 - ARM AMBA 4 ACE
+
+## Register vs cache
+
+TODO physically different? Apparently not, both made of flip-flops (SRAM), registers can be seen as an L0 cache.
+
+- <http://stackoverflow.com/questions/3500491/are-cpu-registers-and-cpu-cache-different>
+- <http://stackoverflow.com/questions/14504734/cache-or-registers-which-is-faster>
+- <http://superuser.com/questions/208932/difference-between-cache-memory-and-register>
+- <https://www.quora.com/How-does-a-cache-memory-differ-from-registers>

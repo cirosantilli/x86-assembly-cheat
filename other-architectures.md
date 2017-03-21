@@ -59,6 +59,8 @@ Open implementation.
 
 <https://www.youtube.com/watch?v=lZGHbMS882w> Linux Foundation Events - Building a CPU from Scratch: jcore Design Walkthrough by Rob Landley & Jeff Dionne 
 
+<https://www.youtube.com/watch?v=o0milqmt4ao> Optimizing a new processor architecture linux.conf.au 2017 – Hobart, Tasmania Jan 19, 2017 Rob Landley
+
 ## LEON
 
 <https://en.wikipedia.org/wiki/LEON>
