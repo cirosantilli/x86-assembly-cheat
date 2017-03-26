@@ -131,7 +131,6 @@ x86 userland minimal examples tutorial. Hundreds of runnable asserts. Containers
 1.  [Containers](containers.md)
     1.  [ELF](elf.md)
         1. [ELF Hello World Tutorial](http://www.cirosantilli.com/elf-hello-world)
-    1.  [Library](library/)
 1.  Dynamic libraries
     1.  [ld-linux.so](ld-linux-so.md)
         1.  [ldd](ldd.md)
