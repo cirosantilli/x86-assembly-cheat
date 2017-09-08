@@ -12,8 +12,6 @@ x86 userland minimal examples tutorial. Hundreds of runnable asserts. Containers
             1.  [ARM](https://github.com/cirosantilli/arm-assembly-cheat)
             1.  [RISC-V](risc-v.md)
             1.  [Microcontrollers](microcontrollers.md)
-            1.  [Educational architectures](educational-architectures.md)
-                1. [Y86](y86.md)
         1.  [RISC vs CISC](risc-vs-cisc.md)
             1.  [Microcode](microcode.md)
         1.  [System vs application programming](system-vs-application-programming.md)
