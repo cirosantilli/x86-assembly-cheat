@@ -21,9 +21,17 @@
 
 -   common GNU/Linux build tools: `make`, `gcc`, `nasm`, Binutils (`as`, `ld`).
 
--   OS: most programs will work on Linux, Windows and Mac if you install the Linux build tools on them, because we use C instead of direct system calls for IO via [lib/](lib/).
+-   OS: most programs should work on any OS, including Linux, Windows and Mac, because we use the C standard library libc instead of direct system calls for IO via [lib/](lib/).
 
-    The main test environment is the latest 64-bit Ubuntu LTS, but maximum portability is intended.
+    However, I have only tested them on Ubuntu, which likely means that you will need to do a little bit of work to get them working elsewhere.
+
+    If you do to get the examples working on another OS, please send a patch documenting the installation and patching whatever was needed.
+
+    Porting will likely mean:
+
+    - installing the required assemblers / compilers
+    - getting make or rewriting our trivial build script into something more portable like Python
+    - possibly messing around with a few calling conventions to the stdlib
 
     Architecture and OS specifics are clearly separated in sub-directories. E.g., Linux-only programs will be put into the [linux](linux/) directory.
 

@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/cirosantilli/x86-assembly-cheat.svg?branch=master)](https://travis-ci.org/cirosantilli/x86-assembly-cheat)
 
-x86 userland minimal examples tutorial. Hundreds of runnable asserts. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>
+x86 userland minimal examples tutorial. Hundreds of runnable asserts. IO done with libc, so OS portable in theory. Tested in Ubuntu 14.04. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>
 
-1.  [Getting started](getting-started.md)
+1.  [**Getting started**](getting-started.md)
 1.  Introduction
     1.  [How to learn](how-to-learn.md)
     1.  [Instruction sets](instruction-sets.md)
