@@ -32,7 +32,35 @@ There are two types of simulation you can do:
 - functional: assembly comes in and is emulated. Faster. Does not use the hardware implementation at all, and therefore does not test it: what is does test are software tools like compiler and kernel ports. May or not be cycle accurate as well, with performance hit if yes.
 - RTL: the entire hardware is emulated. Slower, but more precise. You need the underlying hardware implementation. Always cycle accurate.
 
-## lowRISC
+## Hardware implementations
+
+### Rocket
+
+<https://github.com/ucb-bar/rocket-chip>
+
+Reference implementation.
+
+Uses Chisel, which is Scala based: <https://github.com/ucb-bar/chisel>
+
+Used by lowRISC.
+
+By Berkley people. Backed by SiFive.
+
+2015 presentation by Yunsup Lee <https://www.youtube.com/watch?v=Ir3h3qWcNlg>
+
+A single source code + some input parameters can generate:
+
+- C++ simulator code
+- FPGA Verilog
+- ASIC Verilog
+
+TODO: any plans for silicon production?
+
+<http://www.lowrisc.org/docs/untether-v0.2/>
+
+2016 thesis on it: <http://www.eecs.berkeley.edu/~waterman/papers/phd-thesis.pdf>
+
+### lowRISC
 
 - http://www.lowrisc.org/
 - https://github.com/lowRISC/lowrisc-chip
@@ -55,59 +83,7 @@ Initial implementation reuse part of FPGA hardware: http://www.lowrisc.org/docs/
 
 Uses Verilator for simulation.
 
-## Rocket
-
-Tooling to generate Chips.
-
-<https://github.com/ucb-bar/rocket-chip>
-
-Uses Chisel, which is Scala based: <https://github.com/ucb-bar/chisel>
-
-Used by lowRISC.
-
-By Berkley people.
-
-2015 presentation by Yunsup Lee <https://www.youtube.com/watch?v=Ir3h3qWcNlg>
-
-A single source code + some input parameters can generate:
-
-- C++ simulator code
-- FPGA Verilog
-- ASIC Verilog
-
-TODO: any plans for silicon production?
-
-http://www.lowrisc.org/docs/untether-v0.2/
-
-2016 thesis on it: <http://www.eecs.berkeley.edu/~waterman/papers/phd-thesis.pdf>
-
-## SiFive
-
-<http://sifive.com/>
-
-Startup around RISC-V tech by Berkley people, contributors to <https://github.com/riscv/riscv-tools>
-
-More linked to Rocket.
-
-## Kestrel
-
-<https://kestrelcomputer.github.io/kestrel/>
-
-TODO what does it add to other RISC-V projects?
-
-<https://www.reddit.com/r/linux/comments/4ez89a/kestrel_fullstack_open_source_and_open_hardware/>
-
-The project owner works at Rackspace, who is partnering with Google for open source hardware initiatives: https://www.reddit.com/r/programming/comments/4dncvw/google_and_rackspace_codevelop_open_server/ | https://github.com/sam-falvo | https://github.com/KestrelComputer/kestrel/graphs/contributors
-
-## OpenRISC
-
-<https://en.wikipedia.org/wiki/OpenRISC>
-
-LGPL / GPL. TODO: history?
-
-RISC-V says it is better than them.
-
-## Pulpino
+### Pulpino
 
 <https://github.com/pulp-platform/pulpino>
 
@@ -117,25 +93,44 @@ Previously closed source custom ISA I think, then opened and front-end hacked fo
 
 Uses ModelSim...
 
+<https://github.com/pulp-platform/ariane> TODO vs pulpino. Has system land.
+
+### Kestrel
+
+<https://kestrelcomputer.github.io/kestrel/>
+
+TODO what does it add to other RISC-V projects?
+
+<https://www.reddit.com/r/linux/comments/4ez89a/kestrel_fullstack_open_source_and_open_hardware/>
+
+The project owner works at Rackspace, who is partnering with Google for open source hardware initiatives: https://www.reddit.com/r/programming/comments/4dncvw/google_and_rackspace_codevelop_open_server/ | https://github.com/sam-falvo | https://github.com/KestrelComputer/kestrel/graphs/contributors
+
+### Other implementations
+
+- <https://github.com/cliffordwolf/picorv32>. Stand-alone Verilog, tiny implementation, easy to setup. No caches: <https://github.com/cliffordwolf/picorv32/issues/55> By Clifford Wolf.
+- <https://github.com/sergeykhbr/riscv_vhdl> VHDL
+- <https://github.com/ridecore/ridecore> out of core, Verilog
+- <https://github.com/watz0n/learn-rv32i-asap> minimal, Chisel
+
+## SiFive
+
+<http://sifive.com/>
+
+Startup around RISC-V tech by Berkley people, contributors to <https://github.com/riscv/riscv-tools>
+
+More linked to Rocket.
+
 ## Tethered vs untethered
 
 <https://youtu.be/XSyH9T-Cj4w?t=64> tethered cannot do IO on itself: <https://www.youtube.com/watch?v=XSyH9T-Cj4w>
 
 Rocket it tethered, lowRISC untethered.
 
-## Hardware implementations
-
-- <https://github.com/lowRISC/lowrisc-chip>
-- <https://github.com/ucb-bar/rocket-chip>
-- <https://github.com/ucb-bar/riscv-boom>
-- <https://github.com/cliffordwolf/picorv32>
-- Pulpino
-
-## Prototypes
+## Tapeouts
 
 9 Silicon Prototypes: <https://web.archive.org/web/20160904102006/https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-17.pdf>
 
-https://web.archive.org/web/20160904102554/https://people.eecs.berkeley.edu/%7Eyunsup/papers/riscv-esscirc2014.pdf
+<https://web.archive.org/web/20160904102554/https://people.eecs.berkeley.edu/%7Eyunsup/papers/riscv-esscirc2014.pdf>
 
 ## News
 

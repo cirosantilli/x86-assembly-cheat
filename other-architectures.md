@@ -71,10 +71,10 @@ Open architecture based on SPARC made by <https://en.wikipedia.org/wiki/European
 
 <https://en.wikipedia.org/wiki/DLX>
 
-## Operating systems
+## OpenRISC
 
-Linux runs on tons of major archs: just do a `ls arch` to see the full list.
+<https://en.wikipedia.org/wiki/OpenRISC>
 
-TODO Windows and Mac OS? Likely they support only x86 on desktop, and have separate ARM portable versions that share some codebase.
+LGPL / GPL. TODO: history?
 
-- <http://superuser.com/questions/1062487/did-windows-ever-support-any-hardware-architectures-other-than-x86>
+RISC-V says it is better than them.
