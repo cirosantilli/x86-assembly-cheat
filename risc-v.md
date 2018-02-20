@@ -60,6 +60,8 @@ TODO: any plans for silicon production?
 
 2016 thesis on it: <http://www.eecs.berkeley.edu/~waterman/papers/phd-thesis.pdf>
 
+Very good documentation: <https://github.com/ccelio/riscv-boom-doc>
+
 ### lowRISC
 
 - http://www.lowrisc.org/
