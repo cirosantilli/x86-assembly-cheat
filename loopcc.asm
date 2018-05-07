@@ -2,7 +2,6 @@
 
 %include "lib/asm_io.inc"
 
-
 RODATA
 
     bs4 db 0, 0, 1, 0
@@ -14,18 +13,18 @@ ENTRY
         ; ecx--;
         ; if (ecx != 0) goto lbl
 
-            mov ecx, 3
+                mov ecx, 3
             loop_lbl:
-                ;3, 2, 1
+                ; 3, 2, 1
                 PRINT_INT ecx
             loop loop_lbl
 
-            mov ecx, 3
-            mov ebx, ecx
+                mov ecx, 3
+                mov ebx, ecx
             loop_lbl_2:
                 mov eax, ebx
                 sub eax, ecx
-                ;0, 1, 2
+                ; 0, 1, 2
                 call print_int
             loop loop_lbl_2
 

@@ -75,8 +75,6 @@ Uses Rocket, but one major innovation is that it includes IO devices, while Rock
 
 Mass production planned for 2017: <http://www.lowrisc.org/about/>
 
-By Cambridge people.
-
 Mostly in System Verilog.
 
 Google summer of code projects in 2016: http://www.lowrisc.org/blog/2016/03/apply-now-to-work-with-lowrisc-in-google-summer-of-code/ Gives great insights into what is going on.
@@ -84,6 +82,20 @@ Google summer of code projects in 2016: http://www.lowrisc.org/blog/2016/03/appl
 Initial implementation reuse part of FPGA hardware: http://www.lowrisc.org/docs/untether-v0.2/ , they are trying to open things up further.
 
 Uses Verilator for simulation.
+
+Backed by a CIC: https://en.wikipedia.org/wiki/Community_interest_company
+
+By Cambridge UK people lists:
+
+- https://github.com/orgs/lowRISC/people
+- https://www.linkedin.com/company/lowrisc/
+- https://twitter.com/pulp_platform/status/980149998473097218
+
+People:
+
+- https://www.linkedin.com/in/alex-bradbury/ https://github.com/asb https://twitter.com/asbradbury
+- https://www.linkedin.com/in/robert-mullins-b6a9162/ also co founded Raspberry Pi...
+- https://github.com/wallento https://www.linkedin.com/in/wallento/
 
 ### Pulpino
 
