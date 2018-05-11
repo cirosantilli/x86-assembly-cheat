@@ -10,7 +10,6 @@ x86 userland minimal examples tutorial. Hundreds of runnable asserts. IO done wi
     1.  [Instruction sets](instruction-sets.md)
         1.  [Other architectures](other-architectures.md)
             1.  [ARM](https://github.com/cirosantilli/arm-assembly-cheat)
-            1.  [RISC-V](risc-v.md)
             1.  [Microcontrollers](microcontrollers.md)
         1.  [RISC vs CISC](risc-vs-cisc.md)
             1.  [Microcode](microcode.md)

@@ -28,13 +28,6 @@ Officially supported on Android.
 
 Lextra story: <http://probell.com/lexra/> It is not possible to patent an entire ISA as there is too much prior art, but companies patent instead specific novel instructions, and the compatibility break kills off reimplementors.
 
-### Open implementations
-
-Seems closed? TODO legal?
-
-- <https://brej.org/yellow_star/>
-- <https://github.com/jmahler/mips-cpu>
-
 ## SPARC
 
 <https://en.wikipedia.org/wiki/SPARC>
@@ -42,39 +35,3 @@ Seems closed? TODO legal?
 Created by Sun for its operating system Solaris. Now owned and used by Oracle. Not used much by anyone else.
 
 Was meant to be the ultimate RISC beats Intel and Windows coalition, but it failed.
-
-## SuperH
-
-<https://en.wikipedia.org/wiki/SuperH>
-
-Renesas.
-
-Some patents expired: <https://youtu.be/lZGHbMS882w?t=281>
-
-### j-core
-
-Open implementation.
-
-<http://j-core.org/>
-
-<https://www.youtube.com/watch?v=lZGHbMS882w> Linux Foundation Events - Building a CPU from Scratch: jcore Design Walkthrough by Rob Landley & Jeff Dionne 
-
-<https://www.youtube.com/watch?v=o0milqmt4ao> Optimizing a new processor architecture linux.conf.au 2017 – Hobart, Tasmania Jan 19, 2017 Rob Landley
-
-## LEON
-
-<https://en.wikipedia.org/wiki/LEON>
-
-Open architecture based on SPARC made by <https://en.wikipedia.org/wiki/European_Space_Agency>
-
-## DLX
-
-<https://en.wikipedia.org/wiki/DLX>
-
-## OpenRISC
-
-<https://en.wikipedia.org/wiki/OpenRISC>
-
-LGPL / GPL. TODO: history?
-
-RISC-V says it is better than them.
