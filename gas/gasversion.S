@@ -3,7 +3,7 @@
 #include "lib/asm_io_s.h"
 
 ENTRY
-.if .gasversion. >= 22800 && .gasversion. <= 22900
+.if .gasversion. >= 22800 && .gasversion. < 22900
     PRINT_STRING_LITERAL("bug")
 .else
     PRINT_STRING_LITERAL("no bug")
