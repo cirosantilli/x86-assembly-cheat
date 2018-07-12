@@ -24,5 +24,8 @@ all: $(OUTS)
 clean:
 	rm -f *$(OBJ_EXT) *$(OUT_EXT)
 
+test: all
+	# Lazy.
+
 run: all
 	qemu-system-i386 '$(RUN)$(OUT_EXT)'

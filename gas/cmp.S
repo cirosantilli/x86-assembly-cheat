@@ -11,9 +11,13 @@
 
 ENTRY
     mov $1, %eax
-    /* Good. */
+
+    /* Equal. */
     cmp $1, %eax
-    /* Error.. */
-    /*cmp %eax, 0*/
     ASSERT_FLAG(jz)
+
+    /* Different. */
+    cmp $2, %eax
+    ASSERT_FLAG(jnz)
+
     EXIT

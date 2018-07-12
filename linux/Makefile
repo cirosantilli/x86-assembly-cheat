@@ -15,10 +15,13 @@ all: $(OUTS)
 	ld -m elf_i386 -o '$@' '$<'
 
 %.o: %.asm
-	nasm -w+all -f elf32 -o '$@' '$<'
+	nasm -w+all -f elf32 -g -o '$@' '$<'
 
 clean:
 	rm -f *$(TMP_EXT) *$(OUT_EXT)
+
+test:
+	# Lazy.
 
 run: all
 	./$(RUN)$(OUT_EXT)
