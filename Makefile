@@ -3,6 +3,8 @@
 BITS = 32
 CC = gcc
 CFLAGS = -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
+# To match nasm.
+DISAS_FLAVOR = intel
 GAS_EXT = .S
 LIB_DIR = lib/
 NASM = nasm -f elf$(BITS) -gdwarf -w+all
@@ -46,7 +48,7 @@ driver:
 	$(MAKE) -C $(LIB_DIR)
 
 gdb-%: %$(OUT_EXT)
-	gdb --nh -ex 'layout split' -ex 'break asm_main' -ex 'run' '$<'
+	gdb --nh -ex 'set disassembly-flavor $(DISAS_FLAVOR)' -ex 'layout split' -ex 'break asm_main' -ex 'run' '$<'
 
 run-%: %$(OUT_EXT)
 	./'$<'
