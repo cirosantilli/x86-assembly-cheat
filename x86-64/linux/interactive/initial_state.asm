@@ -1,5 +1,7 @@
 ; Initial register state.
 
+; Pass output through hd.
+
 %include "common.inc"
 
 section .text

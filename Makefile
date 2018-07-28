@@ -2,7 +2,7 @@
 
 BITS = 32
 CC = gcc
-CFLAGS = -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
+CFLAGS = -ggdb3 -fno-pie -m$(BITS) -no-pie -O0 -pedantic-errors -std=c89 -Wall
 # To match nasm.
 DISAS_FLAVOR = intel
 GAS_EXT = .S
@@ -68,11 +68,9 @@ test: all
 	  if $$fail; then \
 	    echo "TEST FAILED: $$t" ;\
 	    exit 1 ;\
-	  else \
-	    echo 'ALL TESTS PASSED' ;\
-	    exit 0 ;\
 	  fi ;\
-	fi
+	fi; \
 	for phony in $(PHONY_MAKES); do \
 	  $(MAKE) -C $${phony} test; \
-	done
+	done; \
+	echo 'ALL TESTS PASSED'

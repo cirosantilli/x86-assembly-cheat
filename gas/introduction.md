@@ -1,5 +1,17 @@
 # Introduction
 
+## Why this tutorial uses NASM
+
+I started this tutorial a long time ago, and I made the mistake of using `nasm` for it by default.
+
+`gas` is the GNU assembler, backend to GCC, and used in the Linux kernel and glibc, and therefore the only true assembler.
+
+Oh, also it is cross ISA, in the sense that most of its directives can be used on all ISA, which is awesome.
+
+Just pipe it through GCC's C preproessor to gain some missing functionality that `nasm` provides natively, and we are golden.
+
+## Actual intro to GAS
+
 GNU assembler syntax cheatsheet.
 
 Part of the GNU Binutils projects, which also includes other lower-level toolchain tools like `ld` (but not `gcc`).
@@ -18,7 +30,7 @@ Part of Binutils.
 
 Advantages over NASM:
 
-- can handle multiple architectures, not just x86, including:
+-   can handle multiple architectures, not just x86, including:
 
     - i386
     - SPARC

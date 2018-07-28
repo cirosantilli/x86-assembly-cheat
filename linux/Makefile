@@ -7,7 +7,7 @@ INS := $(wildcard *$(IN_EXT))
 OUTS := $(patsubst %$(IN_EXT),%$(OUT_EXT),$(INS))
 
 .PRECIOUS: %$(TMP_EXT)
-.PHONY: all clean run
+.PHONY: all clean run test
 
 all: $(OUTS)
 
@@ -20,8 +20,8 @@ all: $(OUTS)
 clean:
 	rm -f *$(TMP_EXT) *$(OUT_EXT)
 
-test:
-	# Lazy.
-
 run: all
 	./$(RUN)$(OUT_EXT)
+
+test: all
+	for f in *$(OUT_EXT); do echo $$f; ./$$f; done

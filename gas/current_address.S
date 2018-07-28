@@ -10,9 +10,9 @@
 
 #include "lib/asm_io_s.h"
 
+/* x points to its own address. */
+x: .long .
 ENTRY
-    /* x points to its own address. */
-    x: .long .
     mov x, %eax
     mov $x, %ebx
     ASSERT_EQ(%ebx)

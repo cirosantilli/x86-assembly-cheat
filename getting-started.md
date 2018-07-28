@@ -23,7 +23,13 @@ Build and run all programs and check if any of them failed:
 
     make test
 
-TODO: some tests are currently failing, mainly because we didn't have a recursive test run as we currently do, and didn't notice as things got broken. Fix all of them.
+If all goes well, the last line of stdout will be:
+
+    ALL TESTS PASSED
+
+and the exit status is `0`:
+
+    echo $?
 
 ## Assertions
 

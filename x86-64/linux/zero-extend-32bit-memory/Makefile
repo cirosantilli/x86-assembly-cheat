@@ -6,3 +6,6 @@ main.out: main.asm link.ld
 
 clean:
 	rm -f *.o *.out
+
+test: main.out
+	./main.out

@@ -17,7 +17,7 @@ ENTRY
     ; Data:
 
         mov dword [resd0], 1
-        ASSERT_EQ [resd0]
+        ASSERT_EQ [resd0], 1, dword
 
     ; Address:
 

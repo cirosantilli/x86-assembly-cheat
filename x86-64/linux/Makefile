@@ -27,3 +27,6 @@ clean:
 
 run: all
 	./$(RUN)$(OUT_EXT)
+
+test: all
+	for f in *$(OUT_EXT); do echo $$f; ./$$f; done

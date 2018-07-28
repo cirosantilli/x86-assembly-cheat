@@ -8,4 +8,5 @@ clean:
 	rm -f *.o *.out
 
 run: main.out
+test: main.out
 	./main.out
