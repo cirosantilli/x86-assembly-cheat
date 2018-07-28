@@ -2,7 +2,7 @@
 
 BITS = 32
 CC = gcc
-CFLAGS = -ggdb3 -fno-pie -m$(BITS) -no-pie -O0 -pedantic-errors -std=c89 -Wall
+CFLAGS = -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
 # To match nasm.
 DISAS_FLAVOR = intel
 GAS_EXT = .S
@@ -15,6 +15,10 @@ PHONY_MAKES =
 RUN = main
 TEST = test
 export
+
+ifeq ($(TRAVIS),)
+  CFLAGS += -fno-pie -no-pie
+endif
 
 -include params.makefile
 

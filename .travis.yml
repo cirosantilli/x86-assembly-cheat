@@ -3,4 +3,4 @@ before_install:
   - sudo apt-get install build-essential gcc-multilib nasm
 script:
   - uname -a
-  - make test
+  - make TRAVIS=y test
