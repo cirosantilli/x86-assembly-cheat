@@ -14,4 +14,11 @@
 Low level:
 
 -   DMIPS <https://en.wikipedia.org/wiki/Dhrystone>
+
     - specially DMIPS / Watt.
+
+-   <http://lmbench.sourceforge.net/> Description:
+
+    > lmbench is a suite of simple, portable, ANSI/C microbenchmarks for UNIX/POSIX. In general, it measures two key features: latency and bandwidth.
+
+    GitHub mirror: <https://github.com/dmonakhov/lmbench>
