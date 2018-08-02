@@ -52,7 +52,10 @@ driver:
 	$(MAKE) -C $(LIB_DIR)
 
 gdb-%: %$(OUT_EXT)
-	gdb --nh -ex 'set disassembly-flavor $(DISAS_FLAVOR)' -ex 'layout split' -ex 'break asm_main' -ex 'run' '$<'
+	gdb -q --nh -ex 'set disassembly-flavor $(DISAS_FLAVOR)' -ex 'layout split' -ex 'break asm_main' -ex 'run' '$<'
+
+gdb2-%: %$(OUT_EXT)
+	gdb -q -ex 'break asm_main' -ex 'run' '$<'
 
 run-%: %$(OUT_EXT)
 	./'$<'

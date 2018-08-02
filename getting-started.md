@@ -110,6 +110,19 @@ Instead, you will want to use `starti` with them to start from the very first ex
 
 Bibliography: https://stackoverflow.com/questions/10483544/stopping-at-the-first-machine-code-instruction-in-gdb
 
+### GDB with your own scripts
+
+By default, we:
+
+- disable your GDB scripts by default to make things more reproducible
+- enter TUI by default to make it easier for beginners
+
+If you are already familiar with GDB however, and have your own setup, use it with:
+
+    make gdb2-add
+
+I currently recommend <https://github.com/cyrus-and/gdb-dashboard> or other scripts mentioned at: <https://stackoverflow.com/questions/209534/how-to-highlight-and-color-gdb-output-during-interactive-debugging>, which are more flexible and less buggy than TUI.
+
 ## Pre-requisites
 
 What you need to be able to run examples in this tutorial:
