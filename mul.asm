@@ -1,21 +1,19 @@
-; # mul
-
-    ; Unsigned multiply.
-
-    ; After:
-
-        ; mul SRC
-
-    ; For 16 bits and up:
-
-        ; DX:AX = AX * SRC;
-
-    ; And for 8 bits:
-
-        ; AX = AL * SRC;
-
-    ; No immediate form, although imul has.
-    ; http://stackoverflow.com/questions/20499141/is-it-possible-to-multiply-by-and-immediate-with-mul-in-x86-assembly/33202309#33202309
+; Unsigned multiply.
+;
+; After:
+;
+;     mul SRC
+;
+; For 16 bits and up:
+;
+;     DX:AX = AX * SRC;
+;
+; And for 8 bits:
+;
+;     AX = AL * SRC;
+;
+; No immediate form, although imul has one:
+; http://stackoverflow.com/questions/20499141/is-it-possible-to-multiply-by-and-immediate-with-mul-in-x86-assembly/33202309#33202309
 
 %include "lib/asm_io.inc"
 

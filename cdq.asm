@@ -1,11 +1,9 @@
-; # CDQ
-
-    ; Convert double word to quadword.
-
-    ; Sign extend `eax` into `edx:eax`.
-
-    ; Common combo with idiv 32-bit, which takes the input from `edx:eax`:
-    ; so you need to set up `edx` before calling it.
+; Convert double word to quadword.
+;
+; Sign extend `eax` into `edx:eax`.
+;
+; Common combo with idiv 32-bit, which takes the input from `edx:eax`:
+; so you need to set up `edx` before calling it.
 
 %include "lib/asm_io.inc"
 

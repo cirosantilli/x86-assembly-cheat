@@ -1,20 +1,20 @@
-; # CMP
-
-    ; `cmp X, Y` does `X - Y` and ignores the exact result,
-    ; but sets all flags that would be set on the subtraction.
-
-    ; If operands are unsigned:
-
-        ; ZF = (X == Y) ? 1 : 0
-        ; CF = (X < Y) ? 1 : 0
-
-    ; If operands are signed:
-
-        ; ZF = (eax == ebx) ? 1 : 0
-        ; if( eax < ebx)
-            ; assert(OF == SF)
-        ; else if(eax > ebx)
-            ; assert(OF != SF)
+; Compare two numbers and set the flags register.
+;
+; `cmp X, Y` does `X - Y` and ignores the exact result,
+; but sets all flags that would be set on the subtraction.
+;
+; If operands are unsigned:
+;
+;     ZF = (X == Y) ? 1 : 0
+;     CF = (X < Y) ? 1 : 0
+;
+; If operands are signed:
+;
+;     ZF = (eax == ebx) ? 1 : 0
+;     if( eax < ebx)
+;         assert(OF == SF)
+;     else if(eax > ebx)
+;         assert(OF != SF)
 
 %include "lib/asm_io.inc"
 

@@ -1,15 +1,11 @@
-; # DIV
-
-    ; Signed division:
-
-    ; eax = edx:eax / SRC
-    ; edx = edx:eax % SRC
-
-    ; # Modulo
-
-        ; div can be used to calculate modulus, but GCC does not use it becaues it is slow,
-        ; and choses alternative techniques instead instead:
-        ; http://stackoverflow.com/questions/4361979/how-does-the-gcc-implementation-of-module-work-and-why-does-it-not-use-the
+; Signed division:
+;
+;     eax = edx:eax / SRC
+;     edx = edx:eax % SRC
+;
+; div can be used to calculate modulus, but GCC does not use it becaues it is slow,
+; and choses alternative techniques instead instead:
+; http://stackoverflow.com/questions/4361979/how-does-the-gcc-implementation-of-module-work-and-why-does-it-not-use-the
 
 %include "lib/asm_io.inc"
 

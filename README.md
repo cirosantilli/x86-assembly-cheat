@@ -39,9 +39,10 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  Division
                 1. [div](div.asm)
                 1. [idiv](idiv.asm)
-            1.  [cdq](cdq.asm)
             1.  Comparison
                 1. [cmp](cmp.asm)
+            1.  [cdq](cdq.asm)
+            1.  [cwde](cwde.asm)
         1.  Bit-wise
             1.  Boolean
                 1. [not](not.asm)
@@ -94,13 +95,16 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [stdcall](stdcall.asm)
     1.  [Linux](linux/)
 1.  [x86-64](x86-64/)
-    1.  [cdqe](x86_64/cdqe.asm)
-    1.  [movabs](x86_64/movabs.asm)
+    1.  x86_64 general principles
+        1.  [cmp sign extend](x86_64/cmp-sign-extend.asm)
+        1.  [mov zero extend](x86_64/mov-zero-extend.asm)
+    1.  x86_64 instructions
+        1.  [cdqe](x86_64/cdqe.asm)
+        1.  [movabs](x86_64/movabs.asm)
     1.  [main](x86_64/main.asm)
-    1.  [mov zero extend](x86_64/mov-zero-extend.asm)
     1.  [x86_64 Linux system calls](x86_64/linux)
-    1.  [x86_64 GAS](x86_64/gas)
     1.  [x86_64 calling convention](x86_64/calling-convention.md)
+        1.  [x86_64 GAS](x86_64/gas)
 1.  Introduction
     1.  [How to learn](how-to-learn.md)
     1.  [Instruction sets](instruction-sets.md)

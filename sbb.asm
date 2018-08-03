@@ -1,8 +1,6 @@
-; # SBB
-
-    ; Subtraction with borrow:
-
-        ; edx:eax -= ebx:ecx
+; Subtract with borrow:
+;
+;     edx:eax -= ebx:ecx
 
 %include "lib/asm_io.inc"
 

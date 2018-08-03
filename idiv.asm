@@ -1,6 +1,4 @@
-; # IDIV
-
-    ; Integer division.
+; Integer division.
 
 %include "lib/asm_io.inc"
 

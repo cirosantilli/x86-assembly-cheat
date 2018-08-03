@@ -1,6 +1,4 @@
-; # SUB
-
-    ; Simple subtraction.
+; Subtraction.
 
 %include "lib/asm_io.inc"
 

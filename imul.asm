@@ -1,30 +1,32 @@
-; # IMUL
-
-    ; Signed multiply.
-
-    ; Has many more forms than the unsigned version,
-    ; including immediate and up to three arguments.
+; Signed multiply.
+;
+; Has many more forms than the unsigned version,
+; including immediate and up to three arguments.
 
 %include "lib/asm_io.inc"
 
 ENTRY
-    mov eax, 2
-    mov ebx, 2
-    imul ebx
-    ASSERT_EQ 4
-    ASSERT_EQ ebx, 2
-
-    mov eax, -2
-    imul eax
-    ASSERT_EQ 4
-
-    mov eax, 2
-    imul eax, 2
-    ASSERT_EQ 4
-
+    ; eax = ebx * 3
     mov eax, 0
     mov ebx, 2
-    imul eax, ebx, 2
-    ASSERT_EQ 4
+    imul eax, ebx, 3
+    ASSERT_EQ eax, 6
+
+    ; eax = eax * eax
+    mov eax, 2
+    mov ebx, 3
+    imul ebx
+    ASSERT_EQ eax, 6
+    ASSERT_EQ ebx, 3
+
+    ; eax = eax * eax
+    mov eax, -2
+    imul eax
+    ASSERT_EQ eax, 4
+
+    ; eax = eax * 3
+    mov eax, 2
+    imul eax, 3
+    ASSERT_EQ eax, 6
 
     EXIT
