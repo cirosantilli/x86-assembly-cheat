@@ -1,5 +1,3 @@
-; # RAM
-
 ; Examples of how to access RAM in NASM.
 
 %include "lib/asm_io.inc"
