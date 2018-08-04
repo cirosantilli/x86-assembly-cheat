@@ -14,10 +14,6 @@
     mov $0, %eax ;\
     ret
 
-#define PRINT_INT_HEX(x) \
-    mov x, %eax ;\
-    call print_int_hex
-
 #define PRINT_INT(x) \
     mov x, %eax ;\
     call print_int

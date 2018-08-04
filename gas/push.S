@@ -1,9 +1,3 @@
-/*
-# push
-
-# pop
-*/
-
 #include "lib/common_gas.h"
 
 .data

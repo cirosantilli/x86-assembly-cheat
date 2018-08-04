@@ -1,6 +1,6 @@
-; Test that we can use compiled functions of our library.
+; Expected outcome: print 1234567812345678 to stdout.
 %include "lib/common_nasm.inc"
 ENTRY
-    mov rdi, 0x12345678
-    call print_long_hex
+    mov rdi, 1234567812345678
+    call print_long
     EXIT

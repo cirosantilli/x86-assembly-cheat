@@ -26,4 +26,3 @@
     je  1f ;\
         ASSERT_FAIL ;\
     1:
-

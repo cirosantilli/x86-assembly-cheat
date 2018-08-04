@@ -94,6 +94,8 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [cdecl examples](cdecl.asm)
         1.  [stdcall](stdcall.asm)
     1.  [Linux](linux/)
+    1.  Infrastructure
+        1.  [lib_test](lib_test.asm)
 1.  [x86-64](x86-64/)
     1.  x86_64 general principles
         1.  [cmp sign extend](x86_64/cmp-sign-extend.asm)
@@ -128,8 +130,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [ljmp](gas/ljmp.md)
             1.  [cbtw](gas/cbtw.S)
             1.  [movz](gas/movz.S)
-            1.  Similar to asm
-                1. [push](gas/push.S)
+            1.  [push](gas/push.S)
         1.  Directives
             1. [.ascii](gas/ascii.S)
             1. [.asciz](gas/asciz.S)
@@ -145,6 +146,8 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [.altmacro](gas/altmacro.S)
             1.  [.irp](gas/irp.S)
             1.  [Comments](gas/comments.md)
+        1.  Infrastructure
+            1.  [lib_test](gas/lib_test.S)
         1.  [Bibliography](gas/bibliogrpahy.md)
     1.  [NASM](nasm/)
         1.  [RAM](nasm/ram.asm)

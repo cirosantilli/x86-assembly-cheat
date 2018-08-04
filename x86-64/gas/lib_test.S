@@ -1,8 +1,5 @@
-/* Test that we can use compiled functions of our library. */
-
 #include "lib/common_gas.h"
-
 ENTRY
-    mov $0x12345678, %rdi
-    call print_long_hex
+    mov $1234567812345678, %rdi
+    call print_long
     EXIT
