@@ -4,10 +4,10 @@
  */
 
 #define ENTRY \
-    enter $0, $0 ;\
     .text ;\
         .global asm_main ;\
-        asm_main:
+        asm_main: \
+        enter $0, $0
 
 #define EXIT \
     leave ;\
