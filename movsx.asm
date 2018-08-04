@@ -13,6 +13,6 @@ ENTRY
     mov eax, 0
     mov ax, -1
     movsx eax, ax
-    ASSERT_EQ -1
+    ASSERT_EQ eax, -1
 
     EXIT

@@ -9,10 +9,10 @@
 ENTRY
     mov ebx, 5
     popcnt eax, ebx
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     mov ebx, 9
     popcnt eax, ebx
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     EXIT

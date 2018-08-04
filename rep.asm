@@ -53,7 +53,7 @@ ENTRY
         ; edi and ecx move as well.
         mov eax, edi
         sub eax, dest
-        ASSERT_EQ 2
+        ASSERT_EQ eax, 2
         ASSERT_EQ ecx, 0
 
     ; # memchr

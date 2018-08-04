@@ -12,7 +12,7 @@ DATA
 ENTRY
     mov eax, 0
     mov al, [x]
-    ASSERT_EQ(1)
+    ASSERT_EQ eax, 1
     mov al, [y]
-    ASSERT_EQ(2)
+    ASSERT_EQ eax, 2
     EXIT

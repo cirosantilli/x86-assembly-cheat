@@ -5,7 +5,7 @@
 ENTRY
     mov eax, 2
     neg eax
-    ASSERT_EQ -2
+    ASSERT_EQ eax, -2
     neg eax
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
     EXIT

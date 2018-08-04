@@ -21,7 +21,7 @@ ENTRY
 
         mov dword eax, resd1
         sub eax, resd0
-        ASSERT_EQ 4
+        ASSERT_EQ eax, 4
 
     ; # Memory size
 

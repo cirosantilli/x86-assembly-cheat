@@ -14,7 +14,7 @@ ENTRY
     mov edx, 0
     mov ecx, 2
     div ecx
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
     ASSERT_EQ edx, 1
 
     ; 8 bit
@@ -22,7 +22,7 @@ ENTRY
     mov ax, 0x101
     mov cl, 2
     div cl
-    ASSERT_EQ 0x180
+    ASSERT_EQ eax, 0x180
 
     ; 16 bit
     mov eax, 0
@@ -31,7 +31,7 @@ ENTRY
     mov dx, 1
     mov cx, 2
     div cx
-    ASSERT_EQ 0x8000
+    ASSERT_EQ eax, 0x8000
     ASSERT_EQ edx, 1
 
     ; 32 bit
@@ -39,7 +39,7 @@ ENTRY
     mov edx, 1
     mov ecx, 2
     div ecx
-    ASSERT_EQ 0x80000000
+    ASSERT_EQ eax, 0x80000000
     ASSERT_EQ edx, 1
 
     ; # Division by zero

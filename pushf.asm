@@ -21,7 +21,7 @@ ENTRY
     pushf
     sub eax, esp
     ; Needs 2 bytes, stack min 1 dword.
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
 
     stc
     popf

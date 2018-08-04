@@ -22,11 +22,11 @@ ENTRY
     mov eax, 0
     cmp eax, 0
     ASSERT_FLAG je
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     mov eax, 2
     cmp eax, 1
     ASSERT_FLAG jne
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     EXIT

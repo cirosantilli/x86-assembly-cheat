@@ -11,6 +11,6 @@ ENTRY
     mov eax, 1
     mov ebx, 2
     xadd eax, ebx
-    ASSERT_EQ 3
+    ASSERT_EQ eax, 3
     ASSERT_EQ ebx, 1
     EXIT

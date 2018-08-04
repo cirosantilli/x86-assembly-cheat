@@ -14,7 +14,7 @@ ENTRY
     mov eax, esp
     enter 8, 0
     sub eax, esp
-    ASSERT_EQ 12
+    ASSERT_EQ eax, 12
 
     ; Modify 1st local var.
     mov dword [ebp - 4], 1

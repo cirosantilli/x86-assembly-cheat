@@ -19,7 +19,7 @@ ENTRY
     pusha
     sub eax, esp
     ; 8x 4 bytes
-    ASSERT_EQ 32
+    ASSERT_EQ eax, 32
 
     mov ebx, 1
     mov ecx, 1

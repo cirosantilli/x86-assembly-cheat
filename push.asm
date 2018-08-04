@@ -30,22 +30,22 @@ ENTRY
     mov eax, esp
     push dword 1
     sub eax, esp
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
     mov eax, [esp]
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     mov eax, esp
     push byte 2
     sub eax, esp
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
     mov eax, [esp]
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     pop eax
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     pop eax
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     ; Manual equivalent.
 
@@ -54,9 +54,9 @@ ENTRY
     mov dword [esp + 4], 1
 
     mov eax, [esp]
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
     mov eax, [esp + 4]
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     add esp, 8
 
     EXIT

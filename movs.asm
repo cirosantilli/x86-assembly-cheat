@@ -21,19 +21,19 @@ ENTRY
     ASSERT_EQ [dest], 0, byte
     mov eax, esi
     sub eax, src
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     mov eax, edi
     sub eax, dest
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     std
     movsb
     ASSERT_EQ [dest + 1], 1, byte
     mov eax, esi
     sub eax, src
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     mov eax, edi
     sub eax, dest
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     EXIT

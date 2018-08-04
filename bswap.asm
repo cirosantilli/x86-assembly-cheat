@@ -8,6 +8,6 @@ ENTRY
 
     mov eax, 0x12345678
     bswap eax
-    ASSERT_EQ 0x78563412
+    ASSERT_EQ eax, 0x78563412
 
     EXIT

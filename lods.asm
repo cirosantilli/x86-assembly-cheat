@@ -21,7 +21,7 @@ ENTRY
     ASSERT_EQ al, 0
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     ASSERT_EQ edi, 0
 
     std
@@ -30,7 +30,7 @@ ENTRY
     ASSERT_EQ al, 1
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     ASSERT_EQ edi, 0
 
     EXIT

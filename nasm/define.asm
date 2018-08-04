@@ -5,5 +5,5 @@
 ENTRY
     %define SIZE 10
     mov eax, SIZE
-    ASSERT_EQ 10
+    ASSERT_EQ eax, 10
     EXIT

@@ -41,7 +41,7 @@ E.g., modify [add.asm](add.asm) to contain:
 
     mov eax, 1
     add eax, 2
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
 
 and run:
 

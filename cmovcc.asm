@@ -34,19 +34,19 @@ ENTRY
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     clc
     mov eax, 0
     mov ebx, 1
     cmovnc eax, ebx
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     stc
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     ; ERROR: must be address
     ; cmovc eax, 1

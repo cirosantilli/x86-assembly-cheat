@@ -180,7 +180,7 @@ ENTRY
             fld dword [f0]
             fstp dword [resd0]
             mov eax, [f0]
-            ASSERT_EQ [resd0]
+            ASSERT_EQ eax, [resd0]
 
     ; # fcomip
 

@@ -7,11 +7,11 @@ ENTRY
     mov ebx, 1
 
     xchg eax, ebx
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     ASSERT_EQ ebx, 0
 
     xchg eax, ebx
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     ASSERT_EQ ebx, 1
 
     EXIT

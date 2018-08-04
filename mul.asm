@@ -24,7 +24,7 @@ ENTRY
     mov eax, 2
     mov ebx, 2
     mul ebx
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
     ASSERT_EQ ebx, 2
 
     ; 8 bit
@@ -33,7 +33,7 @@ ENTRY
     mov bl, 0x80
     mov dl, 0
     mul bl
-    ASSERT_EQ 0x100
+    ASSERT_EQ eax, 0x100
 
     ; 16 bit
     mov eax, 0
@@ -42,21 +42,21 @@ ENTRY
     mov bx, 0x8000
     mov dx, 0
     mul bx
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     mov ax, dx
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     ; 32 bit
     mov eax, 2
     mov ebx, 0x80000000
     mov edx, 0
     mul ebx
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     ASSERT_EQ edx, 1
 
     ; Memory version
     mov eax, 2
     mul dword [x]
-    ASSERT_EQ 0x24682468
+    ASSERT_EQ eax, 0x24682468
 
     EXIT

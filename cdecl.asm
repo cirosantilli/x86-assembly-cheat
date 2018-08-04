@@ -11,24 +11,24 @@ ENTRY
         ; We must clean up the argument stack ourselves.
         ; This allows for varargs like `printf`.
         add esp, 4
-        ASSERT_EQ 120
+        ASSERT_EQ eax, 120
 
         push dword 1
         call factorial_rec_cdecl
         add esp, 4
-        ASSERT_EQ 1
+        ASSERT_EQ eax, 1
 
     ; Non-recursive factorial.
 
         push dword 5
         call factorial_norec_cdecl
         add esp, 4
-        ASSERT_EQ 120
+        ASSERT_EQ eax, 120
 
         push dword 1
         call factorial_norec_cdecl
         add esp, 4
-        ASSERT_EQ 1
+        ASSERT_EQ eax, 1
 
     EXIT
 

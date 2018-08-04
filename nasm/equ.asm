@@ -10,7 +10,7 @@ DATA
     y: dd 1 + 1
 ENTRY
     mov eax, x
-    ASSERT_EQ(2)
+    ASSERT_EQ eax, 2
     mov eax, [y]
-    ASSERT_EQ(2)
+    ASSERT_EQ eax, 2
     EXIT

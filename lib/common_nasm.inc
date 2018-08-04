@@ -105,14 +105,6 @@ extern \
         ASSERT_EQ %1, %2, %3
     %endmacro
 
-    %macro ASSERT_EQ 1
-        ASSERT_EQ eax, %1
-    %endmacro
-
-    %macro ASSERT_EQ 0
-        ASSERT_EQ eax, ebx
-    %endmacro
-
     ; asserts eax neq %1
     %macro ASSERT_NEQ 2
         pushfd

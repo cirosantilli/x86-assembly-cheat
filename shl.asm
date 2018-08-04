@@ -15,20 +15,20 @@ ENTRY
 
     shl al, 1
     ASSERT_FLAG jc
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
 
     shl al, 1
-    ASSERT_EQ 4
+    ASSERT_EQ eax, 4
     ASSERT_FLAG jnc
 
     shr al, 1
-    ASSERT_EQ 2
+    ASSERT_EQ eax, 2
     ASSERT_FLAG jnc
 
     mov cl, 2
     shr al, cl
     ASSERT_FLAG jc
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     ;ERROR:
     ;shift must be either const or in `cl`

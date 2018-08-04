@@ -21,7 +21,7 @@ ENTRY
     ASSERT_FLAG jz
     mov eax, edi
     sub eax, bs4
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     std
     mov al, 2
@@ -29,6 +29,6 @@ ENTRY
     ASSERT_FLAG jnz
     mov eax, edi
     sub eax, bs4
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     EXIT

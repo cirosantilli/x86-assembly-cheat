@@ -6,5 +6,5 @@ ENTRY
     mov eax, 1
     ; eax--
     dec eax
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     EXIT

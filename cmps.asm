@@ -24,10 +24,10 @@ ENTRY
     ASSERT_FLAG jz
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     mov eax, edi
     sub eax, bs4_2
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
     ASSERT_EQ [bs4], 0, byte
     ASSERT_EQ [bs4_2], 0, byte
 
@@ -36,10 +36,10 @@ ENTRY
     ASSERT_FLAG jnz
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     mov eax, edi
     sub eax, bs4_2
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
     ASSERT_EQ [bs4 + 1], 1, byte
     ; TODO why fail?
     ;ASSERT_EQ [bs4_2 + 1], 2, byte

@@ -24,15 +24,15 @@ ENTRY
     ; eax = -2, CF = 1
     sal eax, 1
     ASSERT_FLAG jc
-    ASSERT_EQ -2
+    ASSERT_EQ eax, -2
 
     ;ax < 0, CF = 0
     sar eax, 1
-    ASSERT_EQ -1
+    ASSERT_EQ eax, -1
 
     ; Cannot replace div for negative odd numbers directly
     ; as it rounds do -infinity, while div rounds to 0. TODO check.
     sar eax, 1
-    ASSERT_EQ -1
+    ASSERT_EQ eax, -1
 
     EXIT

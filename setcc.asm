@@ -10,11 +10,11 @@ ENTRY
 
     stc
     setc al
-    ASSERT_EQ 1
+    ASSERT_EQ eax, 1
 
     clc
     setc al
-    ASSERT_EQ 0
+    ASSERT_EQ eax, 0
 
     ; ERROR: only for 8 bit registers or memory.
     ;setc eax

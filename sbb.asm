@@ -13,7 +13,7 @@ ENTRY
     sub eax, ecx
     sbb edx, ebx
 
-    ASSERT_EQ 0x80000000
+    ASSERT_EQ eax, 0x80000000
     ASSERT_EQ edx, 0
 
     EXIT
