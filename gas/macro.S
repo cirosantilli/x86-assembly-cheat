@@ -38,7 +38,7 @@ ENTRY
             .ascii "\x"
         .endm
         mov s, %al
-        ASSERT_EQ2($0x61, %al)
+        ASSERT_EQ($0x61, %al)
 
     EXIT
 

@@ -19,16 +19,16 @@ ENTRY
     mov orig, %esp
 
     /* val1 was modified by the push. */
-    ASSERT_EQ2($3, val1)
+    ASSERT_EQ($3, val1)
 
     /* esp was reduced by 4. */
-    ASSERT_EQ2($val1, %eax)
+    ASSERT_EQ($val1, %eax)
 
     mov $val1, %esp
     pop %ebx
     mov %esp, %eax
     mov orig, %esp
-    ASSERT_EQ2($3, %ebx)
-    ASSERT_EQ2($val2, %eax)
+    ASSERT_EQ($3, %ebx)
+    ASSERT_EQ($val2, %eax)
 
     EXIT

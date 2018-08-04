@@ -15,11 +15,11 @@ ENTRY
     mov $0, %eax
     mov $1, %al
     cbw
-    ASSERT_EQ($1)
+    ASSERT_EQ($1, %eax)
 
     mov $0, %eax
     mov $-1, %al
     cbw
-    ASSERT_EQ($0xFFFF)
+    ASSERT_EQ($0xFFFF, %eax)
 
     EXIT

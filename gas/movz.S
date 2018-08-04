@@ -20,18 +20,18 @@ ENTRY
     mov $0x01234567, %eax
     mov $1, %bl
     movzbl %bl, %eax
-    ASSERT_EQ($1)
+    ASSERT_EQ($1, %eax)
 
     mov $0x01234567, %eax
     mov $-1, %bl
     movzbl %bl, %eax
-    ASSERT_EQ($0xFF)
+    ASSERT_EQ($0xFF, %eax)
 
     /* Can omit the last character. */
     mov $0x01234567, %eax
     mov $-1, %bl
     movzb %bl, %eax
-    ASSERT_EQ($0xFF)
+    ASSERT_EQ($0xFF, %eax)
 
     /* ERROR: Cannot omit the before last character. */
     /*movz %bl, %eax*/

@@ -14,7 +14,7 @@
 ENTRY
     /* Sanity check: the label was stored OK in data. */
     mov symbol0, %eax
-    ASSERT_EQ($label0)
+    ASSERT_EQ($label0, %eax)
 
     jmp *symbol0
     ASSERT_FAIL

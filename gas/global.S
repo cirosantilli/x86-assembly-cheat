@@ -35,12 +35,12 @@ TODO what is the effect of this, since variables are already local by default?
 
 ENTRY
     mov not_global, %eax
-    ASSERT_EQ($1)
+    ASSERT_EQ($1, %eax)
 
     mov yes_global, %eax
-    ASSERT_EQ($2)
+    ASSERT_EQ($2, %eax)
 
     mov yes_local, %eax
-    ASSERT_EQ($3)
+    ASSERT_EQ($3, %eax)
 
     EXIT

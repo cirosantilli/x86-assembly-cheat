@@ -21,9 +21,9 @@ and cannot be redefined.
         .long 2
 ENTRY
     mov not_local, %eax
-    ASSERT_EQ($1)
+    ASSERT_EQ($1, %eax)
 
     mov .Lyes_local, %eax
-    ASSERT_EQ($2)
+    ASSERT_EQ($2, %eax)
 
     EXIT

@@ -32,7 +32,7 @@ ENTRY
         .endm
         mov $0, %eax
         STRING_ARG $1
-        ASSERT_EQ($1)
+        ASSERT_EQ($1, %eax)
 
         /* But escaping it still works. */
         .macro STRING_ARG_BACKSLASH x
@@ -40,7 +40,7 @@ ENTRY
         .endm
         mov $0, %eax
         STRING_ARG $1
-        ASSERT_EQ($1)
+        ASSERT_EQ($1, %eax)
 
         /* TODO how to avoid expansion? */
 
@@ -74,16 +74,16 @@ ENTRY
             .endm
             mov $0, %eax
             PERCENT %1+1
-            ASSERT_EQ($2)
+            ASSERT_EQ($2, %eax)
 
             .macro PERCENT_DEFAULT x=%1+1
                 mov $\x, %eax
             .endm
             mov $0, %eax
             PERCENT_DEFAULT 1
-            ASSERT_EQ($1)
+            ASSERT_EQ($1, %eax)
             PERCENT_DEFAULT
-            ASSERT_EQ($2)
+            ASSERT_EQ($2, %eax)
 
         /*
         This is a horrible feature as it makes it impossible to pass registers
@@ -98,7 +98,7 @@ ENTRY
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE <%ebx>
-            ASSERT_EQ($1)
+            ASSERT_EQ($1, %eax)
 
             .macro PERCENT_ESCAPE_DEFAULT x=<%ebx>
                 mov \x, %eax
@@ -106,7 +106,7 @@ ENTRY
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE_DEFAULT
-            ASSERT_EQ($1)
+            ASSERT_EQ($1, %eax)
 
         /*
         One alternative if we are sure that the argument is a register,
@@ -119,7 +119,7 @@ ENTRY
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE_REG ebx
-            ASSERT_EQ($1)
+            ASSERT_EQ($1, %eax)
 
         /* But this has the downside that we cannot pass immediates like `$1` anymore */
 

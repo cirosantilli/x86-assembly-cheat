@@ -43,24 +43,12 @@
     call assert_fail
 
 #define ASSERT_FLAG(flag) \
-    flag 1f ;\
-    ASSERT_FAIL ;\
-    1:
-
-#define ASSERT_EQ(x) \
-    ASSERT_EQ2(x, %eax)
-
-/* TODO factor out with ASSERT_EQ3.
- * Did not do it becase it would require an empty macro which is C99.
- */
-#define ASSERT_EQ2(x, y) \
-    cmp x, y ;\
-    je  1f ;\
+        flag 1f ;\
         ASSERT_FAIL ;\
     1:
 
-#define ASSERT_EQ3(x, y, size) \
-    cmp ## size x, y ;\
+#define ASSERT_EQ(x, y) \
+    cmp x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\
     1:

@@ -7,12 +7,12 @@ ENTRY
     mov $0x12345678, %eax
     mov $0x8000, %ax
     cwtl
-    ASSERT_EQ2($0xFFFF8000, %eax)
+    ASSERT_EQ($0xFFFF8000, %eax)
 
     /* cbtw: same as Intel cbw */
     mov $0x12345678, %eax
     mov $0x80, %al
     cbtw
-    ASSERT_EQ2($0x1234FF80, %eax)
+    ASSERT_EQ($0x1234FF80, %eax)
 
     EXIT

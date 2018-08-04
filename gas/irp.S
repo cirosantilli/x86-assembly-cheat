@@ -22,5 +22,5 @@ ENTRY
     .irp i, 3, 1, 2
         add $\i, %eax
     .endr
-    ASSERT_EQ($6)
+    ASSERT_EQ($6, %eax)
     EXIT

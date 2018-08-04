@@ -15,5 +15,5 @@ x: .long .
 ENTRY
     mov x, %eax
     mov $x, %ebx
-    ASSERT_EQ(%ebx)
+    ASSERT_EQ(%ebx, %eax)
     EXIT

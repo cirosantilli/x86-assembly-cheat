@@ -20,15 +20,15 @@ cat:
 
 ENTRY
     mov s, %eax
-    ASSERT_EQ($0x00636261)
+    ASSERT_EQ($0x00636261, %eax)
 
     /*
     Concatenates literals somewhat like C does,
     BUT adds a null after each one.
     */
     mov cat, %eax
-    ASSERT_EQ($0x00620061)
+    ASSERT_EQ($0x00620061, %eax)
 
     mov $s_len, %eax
-    ASSERT_EQ($4)
+    ASSERT_EQ($4, %eax)
     EXIT

@@ -22,12 +22,12 @@ ENTRY
     .equ x, 0x1234567
     mov $0, %eax
     mov $x, %eax
-    ASSERT_EQ($0x1234567)
+    ASSERT_EQ($0x1234567, %eax)
 
     .set y, 0x1234567
     mov $0, %eax
     mov $y, %eax
-    ASSERT_EQ($0x1234567)
+    ASSERT_EQ($0x1234567, %eax)
 
 
     /*
@@ -39,6 +39,6 @@ ENTRY
     .set y, 2 * 1 + 1
     mov $0, %eax
     mov $y, %eax
-    ASSERT_EQ($0x3)
+    ASSERT_EQ($0x3, %eax)
 
     EXIT

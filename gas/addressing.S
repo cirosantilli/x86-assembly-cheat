@@ -44,7 +44,7 @@ ENTRY
         /* GAS 2.24 Warning: segment override on `lea' is ineffectual. */
         /*lea %ds:4(%ebx, %ecx, 2), %eax*/
         lea 4(%ebx, %ecx, 2), %eax
-        ASSERT_EQ($15)
+        ASSERT_EQ($15, %eax)
 
         /*
         Omit the mulitplicator d.
@@ -54,38 +54,38 @@ ENTRY
         mov $3, %ebx
         mov $4, %ecx
         lea 2(%ebx, %ecx), %eax
-        ASSERT_EQ($9)
+        ASSERT_EQ($9, %eax)
 
         /* Omit c and d. */
         mov $0, %eax
         mov $1, %ebx
         lea 2(%ebx), %eax
-        ASSERT_EQ($3)
+        ASSERT_EQ($3, %eax)
 
         /* Register only address. We can omit commas. */
         mov $0, %eax
         mov $1, %ebx
         lea (%ebx), %eax
-        ASSERT_EQ($1)
+        ASSERT_EQ($1, %eax)
 
         /* TODO What is this syntax for? Compare to the next example. */
         mov $0, %eax
         lea 2(,1), %eax
-        ASSERT_EQ($2)
+        ASSERT_EQ($2, %eax)
 
         mov $0, %eax
         lea 2, %eax
-        ASSERT_EQ($2)
+        ASSERT_EQ($2, %eax)
 
         /* TODO What is this syntax for? Compare to the previous example. */
         mov $0, %eax
         lea (2), %eax
-        ASSERT_EQ($2)
+        ASSERT_EQ($2, %eax)
 
         mov $0, %eax
         mov $3, %ebx
         lea 2(,%ebx,4), %eax
-        ASSERT_EQ($14)
+        ASSERT_EQ($14, %eax)
 
         /*
         Expressions like (1 + 1) or more commonly (label + 1)
@@ -93,7 +93,7 @@ ENTRY
         */
         mov $1, %eax
         lea (1 + 1)(%eax), %eax
-        ASSERT_EQ($3)
+        ASSERT_EQ($3, %eax)
 
     /*
     Impossible addressings.
@@ -112,11 +112,11 @@ ENTRY
         /* `l` suffix needed here because there is no register to tell the size. */
         movl $1, i
         mov i, %eax
-        ASSERT_EQ($1)
+        ASSERT_EQ($1, %eax)
 
         /* To get the actual address instead of the data, use `$`: */
         mov $i, %ebx
         mov (%ebx), %eax
-        ASSERT_EQ(i)
+        ASSERT_EQ(i, %eax)
 
     EXIT
