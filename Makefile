@@ -25,7 +25,7 @@ endif
 OUTS := $(foreach IN_EXT,$(GAS_EXT) $(NASM_EXT),$(patsubst %$(IN_EXT),%$(OUT_EXT),$(wildcard *$(IN_EXT))))
 
 .PRECIOUS: %$(OBJ_EXT)
-.PHONY: all clean driver gas run $(PHONY_MAKES)
+.PHONY: all clean driver run test $(PHONY_MAKES)
 
 all: driver $(OUTS) $(PHONY_MAKES)
 	for phony in $(PHONY_MAKES); do \

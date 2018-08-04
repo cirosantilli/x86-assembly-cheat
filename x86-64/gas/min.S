@@ -1,5 +1,4 @@
-.text
-.global asm_main
-asm_main:
-    mov $0, %rax
-    ret
+/* Test that our base setup works. */
+#include "lib/asm_io_s.h"
+ENTRY
+    EXIT

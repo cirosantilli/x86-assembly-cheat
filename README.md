@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cirosantilli/x86-assembly-cheat.svg?branch=master)](https://travis-ci.org/cirosantilli/x86-assembly-cheat)
 
-x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable asserts. Nice GDB setup. IO done with libc, so OS portable in theory. Tested in Ubuntu 18.04. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>, ARM cheat at: <https://github.com/cirosantilli/arm-assembly-cheat>
+x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable asserts. Nice GDB setup. IO done with libc, so OS portable in theory. NASM and GAS covered. Tested in Ubuntu 18.04. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>, ARM cheat at: <https://github.com/cirosantilli/arm-assembly-cheat>
 
 1.  [**Getting started**](getting-started.md)
 1.  [IA-32](ia-32.md)
@@ -105,12 +105,19 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  [x86_64 Linux system calls](x86_64/linux)
     1.  [x86_64 calling convention](x86_64/calling-convention.md)
         1.  [x86_64 GAS](x86_64/gas)
+    1.  Infrastructure
+        1.  [min](x86_64/min.asm)
+        1.  [lib_test](x86_64/lib_test.asm)
 1.  [Assemblers](assemblers.md)
     1.  [GAS](gas/)
         1.  [Hello world](gas/hello_world.S)
         1.  [Immediate](gas/immediate.S)
         1.  [Addressing](gas/addressing.S)
         1.  [Char literal](gas/char_literal.S)
+        1.  [x86_64 GAS](x86_64/gas/)
+            1.  [min](x86_64/gas/min.S)
+            1.  [lib_test](x86_64/gas/lib_test.S)
+            1.  [cltq](x86_64/gas/cltq.S)
         1.  Symbol scope
             1.  [Local symbol](gas/local_symbol.S)
             1.  [Local label](gas/local_label.S)
