@@ -10,7 +10,7 @@ You can then write `1b` and `1f` to refer to the latest and next definition of s
 Such labels don't appear on the output file.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     /* Basic forward local jump. */

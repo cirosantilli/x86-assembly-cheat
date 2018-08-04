@@ -1,6 +1,6 @@
 /* https://stackoverflow.com/questions/51008231/how-to-check-the-version-of-binutils-on-gnu-gas-assembly-code-at-compile-time */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
 .if .gasversion. >= 22800 && .gasversion. < 22900

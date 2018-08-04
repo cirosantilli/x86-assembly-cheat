@@ -21,7 +21,7 @@
 ;
 ; http://stackoverflow.com/questions/19415184/load-from-a-64-bit-address-into-other-register-than-rax
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; TODO what is the case where only rax works?

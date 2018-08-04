@@ -29,7 +29,7 @@ and `long` is short for `long` word, which means double word.
 16
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 byte:

@@ -11,7 +11,7 @@ Unlike NASM's `.label`, such labels are visible on the entire file,
 and cannot be redefined.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
     not_local:

@@ -3,7 +3,7 @@
 ;
 ; https://stackoverflow.com/questions/6555094/what-does-cltq-do-in-assembly/31114310#31114310
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; cwde negative sign extend.

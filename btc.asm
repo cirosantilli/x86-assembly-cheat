@@ -2,7 +2,7 @@
 
     ; BT + complement.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov ax, 0x0A

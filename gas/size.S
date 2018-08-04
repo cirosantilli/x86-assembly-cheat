@@ -6,7 +6,7 @@ https://sourceware.org/binutils/docs/as/Size.html#Size
 Observe the generated object file with `readelf -s`.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     EXIT

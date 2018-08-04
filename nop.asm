@@ -6,7 +6,7 @@
 
     ; Application: http://stackoverflow.com/questions/234906/whats-the-purpose-of-the-nop-opcode
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     nop

@@ -1,6 +1,6 @@
 /* https://stackoverflow.com/questions/6555094/what-does-cltq-do-in-assembly/31114310#31114310 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     /* cwtl: same as Intel cwde */

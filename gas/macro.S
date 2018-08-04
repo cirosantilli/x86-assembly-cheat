@@ -4,7 +4,7 @@
     Avoid it, use `cpp` instead which is more powerful.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
 

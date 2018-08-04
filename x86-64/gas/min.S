@@ -1,4 +1,4 @@
 /* Test that our base setup works. */
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 ENTRY
     EXIT

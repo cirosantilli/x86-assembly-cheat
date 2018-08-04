@@ -5,7 +5,7 @@
         ; bt ax, i
         ; CF = ( ax[i] == 1 ) ? 1 : 0
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov ax, 0x0A

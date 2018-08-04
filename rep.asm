@@ -25,7 +25,7 @@
     ; Note that this is not the most efficient implementation possible
     ; of the C string instructions: like memset and memcmp: modern glibc uses SIMD.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 section .bss
 

@@ -2,7 +2,7 @@
 ;
 ; It's just a syntax error for NASM.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; mov byte [ecx], 0

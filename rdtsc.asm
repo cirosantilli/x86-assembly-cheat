@@ -27,7 +27,7 @@
         ; - http://stackoverflow.com/questions/12065721/why-isnt-rdtsc-a-serializing-instruction
 
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     rdtsc

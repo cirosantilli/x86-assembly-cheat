@@ -2,7 +2,7 @@
 
     ; http://stackoverflow.com/a/33148242/895245
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 DATA
     global x

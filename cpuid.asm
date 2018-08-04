@@ -23,7 +23,7 @@
     ; There is also the `cpuinfo` command line tool that parses the CPUID instruction from the command line.
     ; Source: http://www.etallen.com/cpuid.html
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov eax, 0

@@ -18,7 +18,7 @@ Local symbols still appear on the output obejct file. To remove them completely,
 TODO what is the effect of this, since variables are already local by default?
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 

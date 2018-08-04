@@ -6,7 +6,7 @@
 ;
 ; http://stackoverflow.com/questions/11177137/why-do-most-x64-instructions-zero-the-upper-part-of-a-32-bit-register
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov rax, 0x12345678_9ABCDEF0

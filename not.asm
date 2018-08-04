@@ -1,6 +1,6 @@
 ; # NOT
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov al, 0x0F0

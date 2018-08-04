@@ -2,7 +2,7 @@
 ;
 ; http://stackoverflow.com/questions/8006365/is-there-a-difference-between-using-or-not-a-colon-after-symbol-name-definitions
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 DATA
     ; With colon.

@@ -9,7 +9,7 @@
     http://stackoverflow.com/questions/6555094/what-does-cltq-do-in-assembly
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     mov $0, %eax

@@ -8,7 +8,7 @@ TODO: mnemonic?
 See also: .rept
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     mov $0, %eax

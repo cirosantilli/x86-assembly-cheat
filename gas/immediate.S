@@ -6,7 +6,7 @@
 # Dollar sign
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 

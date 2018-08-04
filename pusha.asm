@@ -8,7 +8,7 @@
     ; This is important for example in the C calling convention,
     ; where certain registers must not be changed by functions.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

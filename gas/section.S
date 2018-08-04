@@ -33,7 +33,7 @@
     This would be an Allocatable Writable and eXecutable section.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .section .data
     i: .long 1

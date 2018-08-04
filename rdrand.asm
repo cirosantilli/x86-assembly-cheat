@@ -12,7 +12,7 @@
     ; the carry flag isn't set, but unlike in this example, one should
     ; bound the number of attempts.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 .loop0:

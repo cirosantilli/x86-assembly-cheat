@@ -10,7 +10,7 @@ Not null terminated.
 TODO vs string? https://sourceware.org/binutils/docs/as/String.html
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 s:

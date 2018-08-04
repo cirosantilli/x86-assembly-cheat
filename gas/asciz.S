@@ -9,7 +9,7 @@
         .ascii "assert failed\n\000"
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 s:

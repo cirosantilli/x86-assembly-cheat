@@ -5,7 +5,7 @@
 ; This can be seen on the Intel manual: cmp has not imm64 encoding.
 ; So in general, we have to move values to registers before we can operate on them.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; Sanity check: mov can encode imm64, and cmp r64, r64 works as expected.

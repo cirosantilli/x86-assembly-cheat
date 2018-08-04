@@ -2,7 +2,7 @@
 ;
 ;     edx:eax -= ebx:ecx
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov eax, 0

@@ -4,7 +4,7 @@
 
 ; http://stackoverflow.com/questions/5185551/why-is-x86-little-endian
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 section .data
     x dw 0x0102

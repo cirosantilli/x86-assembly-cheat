@@ -1,6 +1,6 @@
 /* Test that we can use compiled functions of our library. */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     mov $0x12345678, %rdi

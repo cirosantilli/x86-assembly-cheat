@@ -5,7 +5,7 @@ https://sourceware.org/binutils/docs/as/Type.html#Type
 Observe the generated object file with `readelf -s`.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     EXIT

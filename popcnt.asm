@@ -4,7 +4,7 @@
 
     ; Count the number of 1 bits.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov ebx, 5

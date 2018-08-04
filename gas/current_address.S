@@ -8,7 +8,7 @@
     http://stackoverflow.com/questions/8987767/is-there-a-symbol-that-represents-the-current-address-in-gnu-gas-assembly
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 /* x points to its own address. */
 x: .long .

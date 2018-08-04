@@ -10,7 +10,7 @@
     ; GAS has a related convention which hides `.L` prefixed labels
     ; completely from the output `.o`.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 outside_label:

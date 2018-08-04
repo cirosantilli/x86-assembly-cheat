@@ -6,7 +6,7 @@
     ; There are many anterior commands that do this
     ; for specific sizes, created before 32 bit registers.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

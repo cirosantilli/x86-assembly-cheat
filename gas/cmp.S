@@ -7,7 +7,7 @@
     http://stackoverflow.com/questions/30200515/gcc-inline-operand-type-mismatch-for-cmp
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     mov $1, %eax

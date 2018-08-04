@@ -7,7 +7,7 @@
     which uses `$x` for the address, and `x` for indirection.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .section .rodata
     symbol0: .int label0

@@ -15,7 +15,7 @@
 ; No immediate form, although imul has one:
 ; http://stackoverflow.com/questions/20499141/is-it-possible-to-multiply-by-and-immediate-with-mul-in-x86-assembly/33202309#33202309
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 DATA
     x: dd 0x12341234

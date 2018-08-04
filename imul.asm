@@ -3,7 +3,7 @@
 ; Has many more forms than the unsigned version,
 ; including immediate and up to three arguments.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; eax = ebx * 3

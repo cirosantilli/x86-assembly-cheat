@@ -16,7 +16,7 @@ Then GAS has various syntaxes for omitting parts of the address.
 It's a bit harder to remember than AT&T.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
     i:

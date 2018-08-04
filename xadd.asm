@@ -5,7 +5,7 @@
     ; Useful syncrhonization primitive to make an atomc addition,
     ; this is how C++ atomic ++ is implemented in GCC 5.1.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov eax, 1

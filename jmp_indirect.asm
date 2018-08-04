@@ -2,7 +2,7 @@
 ;
 ; Using tables of such jump destinations can be used to implement switch in constant time.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 RODATA
 

@@ -10,7 +10,7 @@
 
     ; mov also has other more exotic forms for control and debug registers.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

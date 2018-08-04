@@ -24,7 +24,7 @@
 ; - NASM automatically decides between near and short, you cannot explicitly choose
 ; - task switch jump example
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

@@ -9,7 +9,7 @@
     ; This file is named `test_instruction`
     ; so as to not conflict with the `test` make target.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov al, 0x0F0

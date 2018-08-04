@@ -19,7 +19,7 @@
     print.S:6: Error: error
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     /*

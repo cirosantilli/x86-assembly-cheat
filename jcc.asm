@@ -8,7 +8,7 @@
 
     ; `jX` jumps when the corresponding flag is set. `jnX` jumps when clear.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; # jz

@@ -11,7 +11,7 @@
     - https://sourceware.org/binutils/docs/as/Set.html
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 .data
 

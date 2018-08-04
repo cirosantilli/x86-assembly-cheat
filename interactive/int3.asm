@@ -2,7 +2,7 @@
 
     ; http://unix.stackexchange.com/questions/131044/dialog-trap-and-sigtrap
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     int3

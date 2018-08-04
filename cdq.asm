@@ -5,7 +5,7 @@
 ; Common combo with idiv 32-bit, which takes the input from `edx:eax`:
 ; so you need to set up `edx` before calling it.
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov eax, 1

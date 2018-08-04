@@ -16,7 +16,7 @@
 ;     else if(eax > ebx)
 ;         assert(OF != SF)
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     mov eax, 0

@@ -23,7 +23,7 @@
         ; Impossible to push a single byte:
         ; http://stackoverflow.com/questions/2586591/why-is-it-not-possible-to-push-a-byte-onto-a-stack-on-pentium-ia-32
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

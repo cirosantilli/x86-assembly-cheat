@@ -14,7 +14,7 @@
     to mean that it is from byte to long, or word to long.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
     mov $0x01234567, %eax

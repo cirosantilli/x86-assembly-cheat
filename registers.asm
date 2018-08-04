@@ -8,7 +8,7 @@
     ; - Segment registers
     ; - EFLAGS (program status and control) register
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
 

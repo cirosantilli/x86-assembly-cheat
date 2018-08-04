@@ -2,7 +2,7 @@
 
     ; Store from `a` and move `edi`
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 section .data
 

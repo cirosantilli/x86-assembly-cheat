@@ -12,7 +12,7 @@ GAS macros work better here.
 And it generates trailing whitespace... bad move from GAS devs. They should just have closed it like C.
 */
 
-#include "lib/asm_io_s.h"
+#include "lib/common_gas.h"
 
 ENTRY
 

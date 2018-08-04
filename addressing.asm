@@ -32,7 +32,7 @@
     ; you should learn how those instructions are encoded.
 
 
-%include "lib/asm_io.inc"
+%include "lib/common_nasm.inc"
 
 ENTRY
     ; The simplest way to try them out is with `lea`.
