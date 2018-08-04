@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 all:
-	$(NASM) -o asm_io$(OBJ_EXT) asm_io.asm
+	$(NASM) -o common$(OBJ_EXT) common.asm
 	$(CC) $(CFLAGS) -o driver$(OBJ_EXT) -c driver.c
 
 clean:
