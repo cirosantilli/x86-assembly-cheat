@@ -31,6 +31,8 @@ and the exit status is `0`:
 
     echo $?
 
+You will see some `ALL TESTS PASSED` before the last one: these are for the subdirectories, e.g. [x86_64/](x86_64/). If `ALL TESTS PASSED` is the last line however, it means that all asserts in all subdirectories also passed as well as the ones in the current directory.
+
 ## Assertions
 
 One distinctive feature of this tutorial is that we have assertions.
