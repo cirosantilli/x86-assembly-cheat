@@ -94,7 +94,14 @@ This can be done however with Python extensions, and I highly recommend [GDB das
 
 which also shows which assembly instructions correspond to the current source line, awesome.
 
-Bibliography: https://stackoverflow.com/questions/10115540/gdb-split-view-with-code/51301717#51301717
+`make gdb-*` disables `.gdbinit` by default, to use it do:
+
+    make gdb2-add
+
+Other good alternatives to GDB dashboard are mentioned at:
+
+- https://stackoverflow.com/questions/209534/how-to-highlight-and-color-gdb-output-during-interactive-debugging
+- https://stackoverflow.com/questions/10115540/gdb-split-view-with-code/51301717
 
 ### GDB step debug freestanding programs
 
@@ -109,19 +116,6 @@ Instead, you will want to use `starti` with them to start from the very first ex
 	gdb --nh -ex 'layout src' -ex 'layout regs' -ex 'starti' 'hello_world.out'
 
 Bibliography: https://stackoverflow.com/questions/10483544/stopping-at-the-first-machine-code-instruction-in-gdb
-
-### GDB with your own scripts
-
-By default, we:
-
-- disable your GDB scripts by default to make things more reproducible
-- enter TUI by default to make it easier for beginners
-
-If you are already familiar with GDB however, and have your own setup, use it with:
-
-    make gdb2-add
-
-I currently recommend <https://github.com/cyrus-and/gdb-dashboard> or other scripts mentioned at: <https://stackoverflow.com/questions/209534/how-to-highlight-and-color-gdb-output-during-interactive-debugging>, which are more flexible and less buggy than TUI.
 
 ## Pre-requisites
 
