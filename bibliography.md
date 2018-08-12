@@ -76,7 +76,11 @@
 
     Washington university course that covers branch prediction, cache and other CPU internals
 
-No runnable source code:
+With runnable source code:
+
+-   https://github.com/0xAX/asm not extensive, but clean, and highly commented.
+
+Without runnable source code:
 
 -   http://www.egr.unlv.edu/~ed/assembly64.pdf by Ed Jorgensen.
 
