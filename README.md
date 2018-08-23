@@ -145,7 +145,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [.macro](gas/macro.S)
                 1.  [.altmacro](gas/altmacro.S)
             1.  [.irp](gas/irp.S)
-            1.  [Comments](gas/comments.md)
+            1.  [Comments](gas/comments.S)
         1.  Infrastructure
             1.  [lib_test](gas/lib_test.S)
         1.  [Bibliography](gas/bibliogrpahy.md)
