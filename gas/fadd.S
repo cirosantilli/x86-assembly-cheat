@@ -1,5 +1,3 @@
-/* # Floating point literal. */
-
 #include "lib/common_gas.h"
 
 .data

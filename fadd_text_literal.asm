@@ -2,7 +2,11 @@
 ;
 ; To create a constant you need to use the `__float32__` macro.
 ;
-; TODO why? http://stackoverflow.com/questions/29925432/nasm-why-must-float32-1-5-be-used-for-floating-point-literals-instead-of-j
+; TODO why? Does not seem possible in gas either:
+;
+; - http://stackoverflow.com/questions/29925432/nasm-why-must-float32-1-5-be-used-for-floating-point-literals-instead-of-j
+; - https://stackoverflow.com/questions/6514537/how-do-i-specify-immediate-floating-point-numbers-with-inline-assembly
+; - https://stackoverflow.com/questions/48460385/express-floating-point-constant-from-equ-symbolic-name
 ;
 ; E.g. this fails:
 ;

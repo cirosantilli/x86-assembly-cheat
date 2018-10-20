@@ -129,7 +129,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Immediate](gas/immediate.S)
         1.  [Addressing](gas/addressing.S)
         1.  [Char literal](gas/char_literal.S)
-        1.  [fadd](gas/fadd.S)
         1.  [x86_64 GAS](x86_64/gas/)
             1.  [min](x86_64/gas/min.S)
             1.  [lib_test](x86_64/gas/lib_test.S)
@@ -139,10 +138,11 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [Local label](gas/local_label.S)
         1.  [Current address](gas/current_address.S)
         1.  instructions
+            1.  [cbtw](gas/cbtw.S)
             1.  [cmp](gas/cmp.S)
+            1.  [fadd](gas/fadd.S)
             1.  [jmp indirect](gas/jmp_indirect.S)
             1.  [ljmp](gas/ljmp.md)
-            1.  [cbtw](gas/cbtw.S)
             1.  [movz](gas/movz.S)
             1.  [push](gas/push.S)
         1.  Directives
