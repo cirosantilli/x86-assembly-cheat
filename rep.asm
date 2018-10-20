@@ -101,4 +101,4 @@ ENTRY
         repz cmpsb
         ASSERT_EQ ecx, 1
 
-    EXIT
+EXIT

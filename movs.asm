@@ -36,4 +36,4 @@ ENTRY
     sub eax, dest
     ASSERT_EQ eax, 0
 
-    EXIT
+EXIT

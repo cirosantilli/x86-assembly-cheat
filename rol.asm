@@ -54,4 +54,4 @@ ENTRY
         ASSERT_EQ al, 0x40
         ASSERT_FLAG jc
 
-    EXIT
+EXIT

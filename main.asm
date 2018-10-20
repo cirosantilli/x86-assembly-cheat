@@ -356,7 +356,7 @@ ENTRY
 
         ; TODO something to do with out of order
 
-    EXIT
+EXIT
 
 TEXT
 

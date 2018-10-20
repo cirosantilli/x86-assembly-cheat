@@ -6,4 +6,4 @@
 
 ENTRY
     ; mov byte [ecx], 0
-    EXIT
+EXIT

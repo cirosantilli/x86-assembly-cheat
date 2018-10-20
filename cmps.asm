@@ -44,4 +44,4 @@ ENTRY
     ; TODO why fail?
     ;ASSERT_EQ [bs4_2 + 1], 2, byte
 
-    EXIT
+EXIT

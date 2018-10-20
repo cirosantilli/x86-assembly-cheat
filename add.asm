@@ -15,5 +15,4 @@ ENTRY
     ; ERROR: second register must be same size
     ;add ax,al
     ;add ax,eax
-
-    EXIT
+EXIT

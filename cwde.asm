@@ -30,4 +30,4 @@ ENTRY
     cbw
     ASSERT_EQ eax, 0x12340040
 
-    EXIT
+EXIT

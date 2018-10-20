@@ -32,7 +32,7 @@ ENTRY
     mov $'\n , %al
     ASSERT_EQ($0x0A, %al)
 
-    EXIT
+EXIT
 
 c:
     .byte 'a

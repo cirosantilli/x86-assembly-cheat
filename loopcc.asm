@@ -49,4 +49,4 @@ ENTRY
 
         ; ecx--; if (ecx != 0 && ZF == 0) goto lbl
 
-    EXIT
+EXIT

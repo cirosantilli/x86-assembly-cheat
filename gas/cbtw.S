@@ -22,4 +22,4 @@ ENTRY
     cbw
     ASSERT_EQ($0xFFFF, %eax)
 
-    EXIT
+EXIT

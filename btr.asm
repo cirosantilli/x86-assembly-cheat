@@ -9,4 +9,4 @@ ENTRY
     btr ax, 1
     ASSERT_EQ ax, 8
     ASSERT_FLAG jc
-    EXIT
+EXIT

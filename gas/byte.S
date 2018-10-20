@@ -65,4 +65,4 @@ ENTRY
     mov (%eax), %eax
     ASSERT_EQ($0x01234567, %eax)
 
-    EXIT
+EXIT

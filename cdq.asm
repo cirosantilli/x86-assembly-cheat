@@ -18,4 +18,4 @@ ENTRY
     cdq
     ASSERT_EQ edx, 0xFFFFFFFF
 
-    EXIT
+EXIT

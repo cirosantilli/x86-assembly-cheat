@@ -30,7 +30,7 @@ ENTRY
         add esp, 4
         ASSERT_EQ eax, 1
 
-    EXIT
+EXIT
 
 ; Recursive factorial. cdecl calling convention.
 factorial_rec_cdecl:

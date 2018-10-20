@@ -8,4 +8,4 @@ ENTRY
 .else
     PRINT_STRING_LITERAL("no bug")
 .endif
-    EXIT
+EXIT

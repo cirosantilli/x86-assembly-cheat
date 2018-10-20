@@ -15,4 +15,4 @@ ENTRY
     popcnt eax, ebx
     ASSERT_EQ eax, 2
 
-    EXIT
+EXIT

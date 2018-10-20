@@ -17,4 +17,4 @@ ENTRY
     ASSERT_FLAG jc
     ASSERT_EQ ax, 0x0A
 
-    EXIT
+EXIT

@@ -7,4 +7,4 @@
 ENTRY
     mov eax, 12345678
     call print_int
-    EXIT
+EXIT

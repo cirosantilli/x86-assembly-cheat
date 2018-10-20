@@ -2,4 +2,4 @@
 
 ENTRY
     PRINT_STRING_LITERAL("hello world")
-    EXIT
+EXIT

@@ -40,7 +40,7 @@ ENTRY
         mov s, %al
         ASSERT_EQ($0x61, %al)
 
-    EXIT
+EXIT
 
 .data
     s:

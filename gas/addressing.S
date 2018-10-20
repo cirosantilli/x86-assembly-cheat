@@ -119,4 +119,4 @@ ENTRY
         mov (%ebx), %eax
         ASSERT_EQ(i, %eax)
 
-    EXIT
+EXIT

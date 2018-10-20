@@ -27,4 +27,4 @@ outside_label:
     ASSERT_FAIL
 .inside_label2:
 
-    EXIT
+EXIT

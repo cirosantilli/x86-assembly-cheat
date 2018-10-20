@@ -30,4 +30,4 @@ ENTRY
         ; `test %eax, %eax` is often used instead of `cmp %eax, 0`
         ; as it generates shorter instructions:
 
-    EXIT
+EXIT

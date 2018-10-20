@@ -41,4 +41,4 @@ ENTRY
     mov $y, %eax
     ASSERT_EQ($0x3, %eax)
 
-    EXIT
+EXIT

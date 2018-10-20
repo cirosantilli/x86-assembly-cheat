@@ -20,4 +20,4 @@ ENTRY
     cmp $2, %eax
     ASSERT_FLAG(jnz)
 
-    EXIT
+EXIT

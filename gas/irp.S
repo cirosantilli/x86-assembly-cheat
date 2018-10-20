@@ -23,4 +23,4 @@ ENTRY
         add $\i, %eax
     .endr
     ASSERT_EQ($6, %eax)
-    EXIT
+EXIT

@@ -43,4 +43,4 @@ ENTRY
     mov yes_local, %eax
     ASSERT_EQ($3, %eax)
 
-    EXIT
+EXIT

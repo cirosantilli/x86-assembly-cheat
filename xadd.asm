@@ -13,4 +13,4 @@ ENTRY
     xadd eax, ebx
     ASSERT_EQ eax, 3
     ASSERT_EQ ebx, 1
-    EXIT
+EXIT

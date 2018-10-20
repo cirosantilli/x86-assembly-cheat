@@ -86,4 +86,4 @@ ENTRY
     ;mov rdx, asserts_passed_str_len
     ;syscall
 
-    EXIT
+EXIT

@@ -31,4 +31,4 @@ ENTRY
     ASSERT_EQ($3, %ebx)
     ASSERT_EQ($val2, %eax)
 
-    EXIT
+EXIT

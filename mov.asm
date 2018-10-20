@@ -27,4 +27,4 @@ ENTRY
     ; http://stackoverflow.com/questions/11910501/why-did-gcc-generate-mov-eax-eax-and-what-does-it-mean
     mov eax, eax
 
-    EXIT
+EXIT

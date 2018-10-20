@@ -17,4 +17,4 @@ ENTRY
     ASSERT_FAIL
     label2:
 
-    EXIT
+EXIT

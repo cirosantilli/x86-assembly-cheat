@@ -27,4 +27,4 @@ ENTRY
     .warning "warn"
     .error "error"
     */
-    EXIT
+EXIT

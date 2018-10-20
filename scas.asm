@@ -31,4 +31,4 @@ ENTRY
     sub eax, bs4
     ASSERT_EQ eax, 0
 
-    EXIT
+EXIT

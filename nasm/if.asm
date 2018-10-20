@@ -4,4 +4,4 @@ ENTRY
     %if 0
         ASSERT_FAIL
     %endif
-    EXIT
+EXIT

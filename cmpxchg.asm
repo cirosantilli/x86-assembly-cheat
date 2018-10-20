@@ -28,4 +28,4 @@ ENTRY
     ASSERT_EQ ebx, 2
     ASSERT_EQ ecx, 2
 
-    EXIT
+EXIT

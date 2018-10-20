@@ -25,4 +25,4 @@ ENTRY
     jnc .loop1
     call print_int
 
-    EXIT
+EXIT

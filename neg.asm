@@ -8,4 +8,4 @@ ENTRY
     ASSERT_EQ eax, -2
     neg eax
     ASSERT_EQ eax, 2
-    EXIT
+EXIT

@@ -10,4 +10,4 @@ ENTRY
     mov eax, 1
     %include "included.inc"
     ASSERT_EQ eax, 2
-    EXIT
+EXIT

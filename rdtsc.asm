@@ -42,4 +42,4 @@ ENTRY
     call print_int
     PRINT_INT ebx
 
-    EXIT
+EXIT

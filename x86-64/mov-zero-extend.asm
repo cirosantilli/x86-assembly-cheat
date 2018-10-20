@@ -22,4 +22,4 @@ ENTRY
     mov al, 1
     ASSERT_EQ rax, 0x12345601
 
-    EXIT
+EXIT

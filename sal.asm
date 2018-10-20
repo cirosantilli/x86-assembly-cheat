@@ -35,4 +35,4 @@ ENTRY
     sar eax, 1
     ASSERT_EQ eax, -1
 
-    EXIT
+EXIT

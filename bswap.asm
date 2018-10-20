@@ -10,4 +10,4 @@ ENTRY
     bswap eax
     ASSERT_EQ eax, 0x78563412
 
-    EXIT
+EXIT

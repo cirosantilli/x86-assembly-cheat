@@ -8,4 +8,4 @@ ENTRY
     int3
     ; 2 byte encoding.
     int 3
-    EXIT
+EXIT

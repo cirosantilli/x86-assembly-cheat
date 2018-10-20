@@ -15,4 +15,4 @@ ENTRY
     cbtw
     ASSERT_EQ($0x1234FF80, %eax)
 
-    EXIT
+EXIT

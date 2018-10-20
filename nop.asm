@@ -19,4 +19,4 @@ ENTRY
     mov eax, eax
     and eax, eax
 
-    EXIT
+EXIT

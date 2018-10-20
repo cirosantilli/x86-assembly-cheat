@@ -51,4 +51,4 @@ ENTRY
     ; ERROR: must be address
     ; cmovc eax, 1
 
-    EXIT
+EXIT

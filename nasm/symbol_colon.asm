@@ -15,4 +15,4 @@ ENTRY
     ASSERT_EQ eax, 1
     mov al, [y]
     ASSERT_EQ eax, 2
-    EXIT
+EXIT

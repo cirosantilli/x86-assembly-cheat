@@ -5,4 +5,4 @@
     .global _start
     _start:
         WRITE(s)
-        EXIT($0)
+    EXIT($0)

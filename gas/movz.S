@@ -36,4 +36,4 @@ ENTRY
     /* ERROR: Cannot omit the before last character. */
     /*movz %bl, %eax*/
 
-    EXIT
+EXIT

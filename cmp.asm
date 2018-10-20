@@ -29,4 +29,4 @@ ENTRY
     ASSERT_FLAG jne
     ASSERT_EQ eax, 2
 
-    EXIT
+EXIT

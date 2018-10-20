@@ -27,4 +27,4 @@ ENTRY
     ASSERT_EQ ebx, 0
     ASSERT_EQ ecx, 0
 
-    EXIT
+EXIT

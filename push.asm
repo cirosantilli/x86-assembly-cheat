@@ -59,4 +59,4 @@ ENTRY
     ASSERT_EQ eax, 1
     add esp, 8
 
-    EXIT
+EXIT

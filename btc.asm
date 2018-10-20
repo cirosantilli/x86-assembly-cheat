@@ -15,4 +15,4 @@ ENTRY
     ASSERT_EQ ax, 0x08
     ASSERT_FLAG jc
 
-    EXIT
+EXIT

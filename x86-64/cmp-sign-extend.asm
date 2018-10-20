@@ -64,4 +64,4 @@ reg_imm_sign_0:
     mov rbx, 0x12345679_80000000
     ASSERT_EQ rax, rbx
 
-    EXIT
+EXIT

@@ -26,4 +26,4 @@ ENTRY
     mov .Lyes_local, %eax
     ASSERT_EQ($2, %eax)
 
-    EXIT
+EXIT

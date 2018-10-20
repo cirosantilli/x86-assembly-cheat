@@ -19,4 +19,4 @@ ENTRY
     mov rbx, 0x00000000_40000000
     ASSERT_EQ rax, rbx
 
-    EXIT
+EXIT

@@ -24,4 +24,4 @@ ENTRY
     mov $0xFFFFFFFF80000000, %rbx
     ASSERT_EQ(%rax, %rbx)
 
-    EXIT
+EXIT

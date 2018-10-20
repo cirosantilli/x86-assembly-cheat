@@ -8,4 +8,4 @@
 
 ENTRY
     int 4
-    EXIT
+EXIT

@@ -76,4 +76,4 @@ ENTRY
         ; There is no immediate version:
         ; http://stackoverflow.com/questions/4529260/mul-instruction-doesnt-support-an-immediate-value
 
-    EXIT
+EXIT

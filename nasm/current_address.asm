@@ -13,4 +13,4 @@ ENTRY
     ; Infinite loop.
     ;jmp $
 
-    EXIT
+EXIT

@@ -29,4 +29,4 @@ ENTRY
     imul eax, 3
     ASSERT_EQ eax, 6
 
-    EXIT
+EXIT

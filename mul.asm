@@ -59,4 +59,4 @@ ENTRY
     mul dword [x]
     ASSERT_EQ eax, 0x24682468
 
-    EXIT
+EXIT

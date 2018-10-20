@@ -20,4 +20,4 @@ ENTRY
         ; Compileres often do this to generate shorter instrucitons,
         ; but there are also cases where `mov` is better.
 
-    EXIT
+EXIT

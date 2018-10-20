@@ -3,4 +3,4 @@
 ENTRY
     mov rdi, 1234567812345678
     call print_long
-    EXIT
+EXIT

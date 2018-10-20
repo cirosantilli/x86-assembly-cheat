@@ -7,4 +7,4 @@ ENTRY
     ; eax--
     dec eax
     ASSERT_EQ eax, 0
-    EXIT
+EXIT

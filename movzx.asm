@@ -29,4 +29,4 @@ ENTRY
 
     ; ERROR: must be a register
     ;movzx eax, 0
-    EXIT
+EXIT

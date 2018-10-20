@@ -270,4 +270,4 @@ ENTRY
             ; Load and set the lower 8 bits of flags and AH register.
 
             ; Only works for those 8-lower bits.
-    EXIT
+EXIT

@@ -15,4 +15,4 @@ ENTRY
     movsx eax, ax
     ASSERT_EQ eax, -1
 
-    EXIT
+EXIT

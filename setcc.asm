@@ -19,4 +19,4 @@ ENTRY
     ; ERROR: only for 8 bit registers or memory.
     ;setc eax
 
-    EXIT
+EXIT

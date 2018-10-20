@@ -9,7 +9,7 @@ Observe the generated object file with `readelf -s`.
 #include "lib/common_gas.h"
 
 ENTRY
-    EXIT
+EXIT
 
 /*
 In ELF, adds st_size attribute of a symbol.
