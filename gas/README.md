@@ -8,7 +8,7 @@ I started this tutorial a long time ago, and I made the mistake of using `nasm` 
 
 Oh, also it is cross ISA, in the sense that most of its directives can be used on all ISA, which is awesome.
 
-Just pipe it through GCC's C preproessor to gain some missing functionality that `nasm` provides natively, and we are golden.
+Just pipe it through GCC's C preprocessor to gain some missing functionality that `nasm` provides natively, and we are golden.
 
 ## Actual intro to GAS
 
