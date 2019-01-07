@@ -47,8 +47,15 @@
         ASSERT_FAIL ;\
     1:
 
+/* TODO define in terms of ASSERT_EQ_SIZE, need empty macro argument. */
 #define ASSERT_EQ(x, y) \
     cmp x, y ;\
+    je  1f ;\
+        ASSERT_FAIL ;\
+    1:
+
+#define ASSERT_EQ_SIZE(x, y, size) \
+    cmp ## size x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\
     1:

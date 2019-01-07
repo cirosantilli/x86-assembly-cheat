@@ -2,7 +2,7 @@
 
 BITS = 32
 CC = gcc
-CFLAGS = -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c89 -Wall
+CFLAGS = -ggdb3 -m$(BITS) -O0 -pedantic-errors -std=c99 -Wall -Wextra -pedantic
 # To match nasm.
 DISAS_FLAVOR = intel
 GAS_EXT = .S

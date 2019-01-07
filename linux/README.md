@@ -1,13 +1,5 @@
 # Linux
 
-1. [min](hello_world.asm)
-1. [hello_world](hello_world.asm)
-1. [hello_world_min](hello_world_min.asm)
-1. [stack_top.asm](stack_top.asm)
-1. [C from assembly](c-from-assembly/)
-1. [Custom entry](custom-entry/)
-1. [Custom entry GCC](custom-entry-gcc/)
-
 ## Introduction
 
 Linux-specific IA-32 examples without external libraries like libc.
