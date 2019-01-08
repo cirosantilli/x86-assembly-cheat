@@ -127,6 +127,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  [x86_64 Linux system calls](x86_64/linux)
     1.  [x86_64 calling convention](x86_64/calling-convention.md)
         1.  [x86_64 GAS](x86_64/gas)
+            1.  [x86_64 GAS Linux](x86_64/gas/linux)
     1.  Infrastructure
         1.  [min](x86_64/min.asm)
         1.  [lib_test](x86_64/lib_test.asm)
