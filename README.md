@@ -198,7 +198,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Flynn's Taxonomy](flynns-taxonomy.md)
     1.  [Pros and cons of assembly](pros-and-cons-of-assembly.md)
     1.  [Intel processor history](intel-processor-history.md)
-    1.  [Intel vs AT&T syntax](intel-vs-atet-syntax.md)
+    1.  [Intel vs AT&T syntax](intel-vs-atet.md)
         1.  [intel2gas](intel2gas.md)
     1.  [Implementations](implementations.md)
     1.  [Extensions](extensions.md)
