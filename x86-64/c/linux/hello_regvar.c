@@ -1,3 +1,7 @@
+/* Same as hello.c, but with explicit register variables, see:
+ * https://stackoverflow.com/questions/9506353/how-to-invoke-a-system-call-via-sysenter-in-inline-assembly/54956854#54956854
+ */
+
 #define _XOPEN_SOURCE 700
 #include <inttypes.h>
 #include <sys/types.h>

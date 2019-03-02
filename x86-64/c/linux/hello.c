@@ -1,3 +1,5 @@
+/* Linux freestanding hello world with inline assembly..*/
+
 #define _XOPEN_SOURCE 700
 #include <inttypes.h>
 #include <sys/types.h>
