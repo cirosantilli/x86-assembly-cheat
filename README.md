@@ -131,6 +131,9 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  Infrastructure
         1.  [min](x86_64/min.asm)
         1.  [lib_test](x86_64/lib_test.asm)
+    1.  [x86-64 inline assembly](x86-64/c/linux)
+        1.  [hello.c](x86-64/c/linux/hello.c)
+        1.  [hello_regvar.c](x86-64/c/linux/hello_regvar.c)
 1.  [Assemblers](assemblers.md)
     1.  [GAS](gas/)
         1.  Your first GAS examples
