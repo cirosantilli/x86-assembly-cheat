@@ -4,9 +4,9 @@
 
 ssize_t my_write(int fd, const void *buf, size_t size) {
     register int64_t rax __asm__ ("rax") = 1;
-    register int64_t rdi __asm__ ("rdi") = fd;
-    register const char *rsi __asm__ ("rsi") = buf;
-    register uint64_t rdx __asm__ ("rdx") = size;
+    register int rdi __asm__ ("rdi") = fd;
+    register const void *rsi __asm__ ("rsi") = buf;
+    register size_t rdx __asm__ ("rdx") = size;
     __asm__ __volatile__ (
         "syscall"
         : "+r" (rax)
@@ -18,7 +18,7 @@ ssize_t my_write(int fd, const void *buf, size_t size) {
 
 void my_exit(int exit_status) {
     register int64_t rax __asm__ ("rax") = 60;
-    register int64_t rdi __asm__ ("rdi") = exit_status;
+    register int rdi __asm__ ("rdi") = exit_status;
     __asm__ __volatile__ (
         "syscall"
         : "+r" (rax)
