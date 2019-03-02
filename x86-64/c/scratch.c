@@ -1,3 +1,5 @@
+/* https://stackoverflow.com/questions/6682733/gcc-prohibit-use-of-some-registers/54963829#54963829 */
+
 #include <assert.h>
 #include <inttypes.h>
 
