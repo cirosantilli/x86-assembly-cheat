@@ -1,6 +1,7 @@
 _out/
 _tmp/
 *.tmp
+tmp.*
 
 # Compiled Object files
 *.slo
