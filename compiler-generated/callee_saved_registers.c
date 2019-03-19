@@ -13,7 +13,10 @@ uint64_t inc(uint64_t i) {
           "rdx",
           "rsi",
           "rdi",
-          "rbp",
+          /* GCC 8.2: compiles in -O3, fails in -O0 with:
+           * error: bp cannot be used in asm here
+           */
+          /*"rbp",*/
           "rsp",
           "r8",
           "r9",
