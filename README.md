@@ -135,6 +135,9 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  Infrastructure
         1.  [min](x86-64/min.asm)
         1.  [lib_test](x86-64/lib_test.asm)
+    1.  C from assembly
+        1.  [x86_64 C from assembly hello](x86-64/linux/c-from-assembly/hello.asm)
+        1.  [x86_64 printf](x86-64/linux/c-from-assembly/printf.asm)
     1.  [x86-64 inline assembly](x86-64/c)
         1.  [inc](x86-64/c/inc.c)
         1.  [scratch](x86-64/c/scratch.c)
