@@ -171,7 +171,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  Directives
             1.  [.ascii](gas/ascii.S)
             1.  [.asciz](gas/asciz.S)
-            1.  [.byte](gas/byte.S)
             1.  [.equ](gas/equ.S)
             1.  [.extern](gas/extern.md)
             1.  [.gasversion.](gas/gasversion.S)
