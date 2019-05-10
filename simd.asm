@@ -138,20 +138,6 @@ ENTRY
 
     ; # SSE2
 
-        ; # paddq
-
-            ; Packed Add Quadwords (integers).
-
-                MOV4 reso0, 0x0000_0000, 0x0000_0001, 0x0000_0002, 0x0000_0003
-                MOV4 reso1, 0x0000_0000, 0x1000_0000, 0x2000_0000, 0x3000_0000
-
-                movups xmm0, [reso0]
-                movups xmm1, [reso1]
-                paddq xmm0, xmm1
-                movups [reso0], xmm0
-
-                ASSERT_EQ4 reso0, 0x0000_0000, 0x1000_0001, 0x2000_0002, 0x3000_0003
-
         ; # addps
 
             ; Add Packed Single precision float.
