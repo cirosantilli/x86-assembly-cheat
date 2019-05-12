@@ -24,13 +24,6 @@ ENTRY
 
     ; # SIMD Registers
 
-        ; # MMX
-
-            ; From the MMX extenion.
-
-            ; TODO. Not very useful after SSE: splits 32 bits into multiple sections,
-            ; but not any larger than EAX.
-
         ; # XMM
 
             ; # movss
@@ -106,22 +99,6 @@ ENTRY
 
             ; # MOVMSKPS - Move sign bits of each of the 4 packed scalars to an x86 integer register.
 
-        ; # AVX
-
-            ; From AVX extensions.
-
-            ; 32 bytes.
-
-    ; # pcmpeqd
-
-        ; Compare each double word of the registers for equality.
-
-    ; # pmovmskb
-
-    ; # VEX prefix
-
-        ; TODO
-
     ; # packed
 
     ; # scalar
@@ -137,20 +114,6 @@ ENTRY
         ; - packed: the more interesting method, which operates on multiple data at once (4 floats or 2 doubles)
 
     ; # SSE2
-
-        ; # addps
-
-            ; Add Packed Single precision float.
-
-                MOV4 reso0, __float32__(0.0), __float32__(0.5), __float32__(0.25), __float32__(0.125)
-                MOV4 reso1, __float32__(0.0), __float32__(1.0), __float32__(2.0), __float32__(4.0)
-
-                movups xmm0, [reso0]
-                movups xmm1, [reso1]
-                addps xmm0, xmm1
-                movups [reso0], xmm0
-
-                ASSERT_EQ4 reso0, __float32__(0.0), __float32__(1.5), __float32__(2.25), __float32__(4.125)
 
         ; # cvttss2si
 
