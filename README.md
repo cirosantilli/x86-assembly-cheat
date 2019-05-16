@@ -1,5 +1,26 @@
 # x86 Assembly Cheat
 
+This repo is moving to: https://github.com/cirosantilli/linux-kernel-module-cheat#userland-assembly
+
+No major new features are intended to be added here.
+
+Notable advantages of LKMC repository include:
+
+- a single unified cross arch setup for ARM and x86_64, with cross arch concepts all nicely factored out
+- gem5 support. This is because we have integration of QEMU / gem5 / Buildroot setups already done there
+- parallel testing. Mostly because the build system there is Python, which is more flexible.
+- other stuff I can't remember right now. That setup just has a ton of features, and will continue to get more and more ;-)
+
+The bulk of this repo was written a long time ago, and so it is semi crappy.
+
+In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default.
+
+However, the LKMC infrastructure is already working and completely superior, all that is left if to migrate some missing key concept examples there.
+
+Then all will be left here will bulk instructions, which I will migrate little by little when I'm bored. But this is a trivial mechanical process, and we can never cover all of x86 anyways ;-)
+
+## Old README
+
 [![Build Status](https://travis-ci.org/cirosantilli/x86-assembly-cheat.svg?branch=master)](https://travis-ci.org/cirosantilli/x86-assembly-cheat)
 
 x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable asserts. Nice GDB setup. IO done with libc, so OS portable in theory. NASM and GAS covered. Tested in Ubuntu 18.04. Containers (ELF), linking, calling conventions. System land cheat at: <https://github.com/cirosantilli/x86-bare-metal-examples>, ARM cheat at: <https://github.com/cirosantilli/arm-assembly-cheat>
