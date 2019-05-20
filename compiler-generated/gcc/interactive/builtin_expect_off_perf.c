@@ -19,7 +19,6 @@ int main() {
         if (x[5]) y++;
         if (!x[6]) y++;
         if (x[7]) y++;
-        if (x[8])
         y =  2*y*y + 3*y + 5;
     }
     printf("%u\n", y);
