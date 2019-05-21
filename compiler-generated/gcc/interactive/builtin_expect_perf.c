@@ -1,3 +1,5 @@
+/* https://stackoverflow.com/questions/7346929/what-is-the-advantage-of-gccs-builtin-expect-in-if-else-statements/31540623#31540623 */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
