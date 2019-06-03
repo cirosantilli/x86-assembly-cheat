@@ -29,7 +29,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
 1.  IA-32
     1.  Your first IA-32 examples
         1.  [add](add.asm)
-        1.  [mov](mov.asm)
     1.  Base concepts
         1.  [Registers](registers.asm)
             1.  [Segment registers](segment_registers.asm)
