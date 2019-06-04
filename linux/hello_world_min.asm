@@ -5,7 +5,7 @@
 ;
 ; We could also:
 ;
-; -  remove `_start` as `ld` defaults to `.text` when the `ENTRY` symbol is not specified
+; -  remove `_start` as `ld` defaults to `.text` when the `LKMC_PROLOGUE` symbol is not specified
 ;
 ;    But that would generate warnings.
 

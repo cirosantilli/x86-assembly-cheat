@@ -32,9 +32,9 @@
     ; you should learn how those instructions are encoded.
 
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; The simplest way to try them out is with `lea`.
 
     ; Full form (except no segment, DS used by default):
@@ -42,14 +42,14 @@ ENTRY
         mov eax, 1
         mov ebx, 3
         lea eax, [eax + 2*ebx + 4]
-        ASSERT_EQ eax, 11
+        LKMC_ASSERT_EQ(%eax, $11)
 
     ; NASM is quite flexible about the ordering of operands:
 
         mov eax, 1
         mov ebx, 3
         lea eax, [4 + eax + 2*ebx]
-        ASSERT_EQ eax, 11
+        LKMC_ASSERT_EQ(%eax, $11)
 
     ; but avoid that and use the `[a + b*c + d]` form proposed,
     ; as that is the simplest one to interpret as array of struct + field access.
@@ -60,13 +60,13 @@ ENTRY
 
             mov eax, 1
             lea eax, [3*eax]
-            ASSERT_EQ eax, 3
+            LKMC_ASSERT_EQ(%eax, $3)
 
         ; Which compiles to:
 
             mov eax, 1
             lea eax, [eax + 2*eax]
-            ASSERT_EQ eax, 3
+            LKMC_ASSERT_EQ(%eax, $3)
 
         ; since `b` must be a power of 2.
         ; This is documented at: http://www.nasm.us/doc/nasmdoc3.html#section-3.3
@@ -75,7 +75,7 @@ ENTRY
 
             mov eax, 1
             lea eax, [9*eax]
-            ASSERT_EQ eax, 9
+            LKMC_ASSERT_EQ(%eax, $9)
 
         ; Which compiles to [eax + eax*8].
 
@@ -90,7 +90,7 @@ ENTRY
         mov ax, 0
         mov bx, 1
         lea ax, [bx]
-        ASSERT_EQ ax, 1
+        LKMC_ASSERT_EQ(%ax, $1)
 
         ; TODO why is this invalid while the above works?
         ;lea bx, [ax]
@@ -99,4 +99,4 @@ ENTRY
         ;lea bl, [al]
         ;lea al, [bl]
 
-EXIT
+LKMC_EPILOGUE

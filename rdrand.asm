@@ -12,9 +12,9 @@
     ; the carry flag isn't set, but unlike in this example, one should
     ; bound the number of attempts.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 .loop0:
     rdrand eax
     jnc .loop0
@@ -25,4 +25,4 @@ ENTRY
     jnc .loop1
     call print_int
 
-EXIT
+LKMC_EPILOGUE

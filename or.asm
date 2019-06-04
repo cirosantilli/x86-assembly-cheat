@@ -1,9 +1,9 @@
 ; # OR
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov ax, 0x00FF
     or  ax, 0x0F0F
-    ASSERT_EQ ax, 0x0FFF
-EXIT
+    LKMC_ASSERT_EQ(%ax, $0x0FFF)
+LKMC_EPILOGUE

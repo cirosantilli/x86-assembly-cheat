@@ -1,4 +1,4 @@
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
-EXIT
+LKMC_PROLOGUE
+LKMC_EPILOGUE

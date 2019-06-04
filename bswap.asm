@@ -2,12 +2,12 @@
 
     ; Little endian <=> big endian.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     mov eax, 0x12345678
     bswap eax
-    ASSERT_EQ eax, 0x78563412
+    LKMC_ASSERT_EQ(%eax, $0x78563412)
 
-EXIT
+LKMC_EPILOGUE

@@ -5,12 +5,12 @@
 ; st0 = |st0|
 
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_minus_1_0 dd -1.0
     float_1_0 dd 1.0
-ENTRY
+LKMC_PROLOGUE
     ; |-1| == 1
     fld dword [float_minus_1_0]
     fabs
@@ -26,4 +26,4 @@ ENTRY
     fcomip st1
     ASSERT_FLAG je
     finit
-EXIT
+LKMC_EPILOGUE

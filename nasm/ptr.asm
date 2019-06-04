@@ -2,8 +2,8 @@
 ;
 ; It's just a syntax error for NASM.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; mov byte [ecx], 0
-EXIT
+LKMC_EPILOGUE

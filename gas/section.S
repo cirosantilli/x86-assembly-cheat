@@ -39,7 +39,7 @@
     i: .long 1
 .data
     j: .long 1
-ENTRY
+LKMC_PROLOGUE
     mov i, %eax
-    ASSERT_EQ($1, %eax)
-EXIT
+    LKMC_ASSERT_EQ(%eax, $1)
+LKMC_EPILOGUE

@@ -7,8 +7,8 @@ Observe the generated object file with `readelf -s`.
 
 #include "lib/common_gas.h"
 
-ENTRY
-EXIT
+LKMC_PROLOGUE
+LKMC_EPILOGUE
 
 /*
 In ELF, adds the STT_FUNC type to the symbol.

@@ -8,9 +8,9 @@
     ; This is important for example in the C calling convention,
     ; where certain registers must not be changed by functions.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     mov ebx, 0
     mov ecx, 0
@@ -19,12 +19,12 @@ ENTRY
     pusha
     sub eax, esp
     ; 8x 4 bytes
-    ASSERT_EQ eax, 32
+    LKMC_ASSERT_EQ(%eax, $32)
 
     mov ebx, 1
     mov ecx, 1
     popa
-    ASSERT_EQ ebx, 0
-    ASSERT_EQ ecx, 0
+    LKMC_ASSERT_EQ(%ebx, $0)
+    LKMC_ASSERT_EQ(%ecx, $0)
 
-EXIT
+LKMC_EPILOGUE

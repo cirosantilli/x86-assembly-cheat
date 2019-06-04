@@ -4,10 +4,10 @@
 
     ; The common standard extension is `.inc`.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 1
     %include "included.inc"
-    ASSERT_EQ eax, 2
-EXIT
+    LKMC_ASSERT_EQ(%eax, $2)
+LKMC_EPILOGUE

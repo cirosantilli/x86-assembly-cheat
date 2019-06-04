@@ -8,9 +8,9 @@
     ; - Segment registers
     ; - EFLAGS (program status and control) register
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     ; # General purpose registers
 
@@ -83,12 +83,12 @@ ENTRY
 
                 mov eax, 0x0102_0304
                 mov ebx, 0x0000_0004
-                ASSERT_EQ al, bl
+                LKMC_ASSERT_EQ(%al, %bl)
                 ASSERT_NEQ ax, bx
 
                 mov eax, 0x0102_0304
                 mov ebx, 0x0000_0304
-                ASSERT_EQ ax, bx
+                LKMC_ASSERT_EQ(%ax, %bx)
                 ASSERT_NEQ eax, ebx
 
         ; # esi
@@ -270,4 +270,4 @@ ENTRY
             ; Load and set the lower 8 bits of flags and AH register.
 
             ; Only works for those 8-lower bits.
-EXIT
+LKMC_EPILOGUE

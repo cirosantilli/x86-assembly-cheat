@@ -1,6 +1,6 @@
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     ; # syscall
 
@@ -86,4 +86,4 @@ ENTRY
     ;mov rdx, asserts_passed_str_len
     ;syscall
 
-EXIT
+LKMC_EPILOGUE

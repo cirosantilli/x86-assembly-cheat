@@ -12,8 +12,8 @@
 
 /* x points to its own address. */
 x: .long .
-ENTRY
+LKMC_PROLOGUE
     mov x, %eax
     mov $x, %ebx
-    ASSERT_EQ(%ebx, %eax)
-EXIT
+    LKMC_ASSERT_EQ(%eax, %ebx)
+LKMC_EPILOGUE

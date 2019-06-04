@@ -12,15 +12,15 @@
 
     symbol: .long 1
 
-ENTRY
+LKMC_PROLOGUE
     /*
     Immediates require `$`.
     */
     mov $1, %eax
-    ASSERT_EQ($1, %eax)
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov $-1, %eax
-    ASSERT_EQ($-1, %eax)
+    LKMC_ASSERT_EQ(%eax, $-1)
 
     /*
     Without `$`, the data at given address is understood. Segfault:
@@ -33,11 +33,11 @@ ENTRY
     */
 
         mov symbol, %eax
-        ASSERT_EQ($1, %eax)
+        LKMC_ASSERT_EQ(%eax, $1)
 
         mov $symbol, %ebx
         mov (%ebx), %eax
-        ASSERT_EQ($1, %eax)
+        LKMC_ASSERT_EQ(%eax, $1)
 
         1:
         nop
@@ -46,7 +46,7 @@ ENTRY
         mov $0, %eax
         mov 1b, %al
         /* Encoding of NOP. */
-        ASSERT_EQ($0x90, %eax)
+        LKMC_ASSERT_EQ(%eax, $0x90)
 
         1:
         nop
@@ -54,7 +54,7 @@ ENTRY
 
         mov $2b, %eax
         sub $1b, %eax
-        ASSERT_EQ($1, %eax)
+        LKMC_ASSERT_EQ(%eax, $1)
 
     /*
     Jump instructions however break the rule: you don't need `$` for the actual address.
@@ -66,4 +66,4 @@ ENTRY
         ASSERT_FAIL
         1:
 
-EXIT
+LKMC_EPILOGUE

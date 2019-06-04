@@ -2,13 +2,13 @@
 ;
 ; st0 = st0 * 2 ^ RoundTowardZero(st1)
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_1_0 dd 1.0
     float_2_5 dd 2.5
     float_4_0 dd 4.0
-ENTRY
+LKMC_PROLOGUE
     fld dword [float_4_0]
     ; st0 = 4.0
 
@@ -32,4 +32,4 @@ ENTRY
     ; st1 = 2.5
 
     ASSERT_FLAG je
-EXIT
+LKMC_EPILOGUE

@@ -21,10 +21,10 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     /*
     .print "print"
     .warning "warn"
     .error "error"
     */
-EXIT
+LKMC_EPILOGUE

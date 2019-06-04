@@ -1,13 +1,13 @@
 ; Examples of how to access RAM in NASM.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .bss
 
     resd0 resd 1
     resd1 resd 1
 
-ENTRY
+LKMC_PROLOGUE
 
     ; Square brackets `[]` are needed to access the *data*,
     ; otherwise the address of the label is understood:
@@ -15,13 +15,13 @@ ENTRY
     ; Data:
 
         mov dword [resd0], 1
-        ASSERT_EQ [resd0], 1, dword
+        LKMC_ASSERT_EQ [resd0], 1, dword
 
     ; Address:
 
         mov dword eax, resd1
         sub eax, resd0
-        ASSERT_EQ eax, 4
+        LKMC_ASSERT_EQ(%eax, $4)
 
     ; # Memory size
 
@@ -89,4 +89,4 @@ ENTRY
 
             ; 64
 
-EXIT
+LKMC_EPILOGUE

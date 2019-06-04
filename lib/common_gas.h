@@ -3,13 +3,13 @@
  * Use cpp because GAS macros are too limted.
  */
 
-#define ENTRY \
+#define LKMC_PROLOGUE \
     .text ;\
         .global asm_main ;\
         asm_main: \
         enter $0, $0
 
-#define EXIT \
+#define LKMC_EPILOGUE \
     leave ;\
     mov $0, %eax ;\
     ret
@@ -48,7 +48,7 @@
     1:
 
 /* TODO define in terms of ASSERT_EQ_SIZE, need empty macro argument. */
-#define ASSERT_EQ(x, y) \
+#define LKMC_ASSERT_EQ(x, y) \
     cmp x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\

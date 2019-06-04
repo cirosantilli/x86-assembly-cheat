@@ -7,7 +7,7 @@
         .long 2
     orig:
         .skip 4
-ENTRY
+LKMC_PROLOGUE
 
     mov %esp, orig
 
@@ -19,16 +19,16 @@ ENTRY
     mov orig, %esp
 
     /* val1 was modified by the push. */
-    ASSERT_EQ($3, val1)
+    LKMC_ASSERT_EQ(val1, $3)
 
     /* esp was reduced by 4. */
-    ASSERT_EQ($val1, %eax)
+    LKMC_ASSERT_EQ(%eax, $val1)
 
     mov $val1, %esp
     pop %ebx
     mov %esp, %eax
     mov orig, %esp
-    ASSERT_EQ($3, %ebx)
-    ASSERT_EQ($val2, %eax)
+    LKMC_ASSERT_EQ(%ebx, $3)
+    LKMC_ASSERT_EQ(%eax, $val2)
 
-EXIT
+LKMC_EPILOGUE

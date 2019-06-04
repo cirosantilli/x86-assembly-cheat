@@ -11,15 +11,15 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     mov $0, %eax
     mov $1, %al
     cbw
-    ASSERT_EQ($1, %eax)
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov $0, %eax
     mov $-1, %al
     cbw
-    ASSERT_EQ($0xFFFF, %eax)
+    LKMC_ASSERT_EQ(%eax, $0xFFFF)
 
-EXIT
+LKMC_EPILOGUE

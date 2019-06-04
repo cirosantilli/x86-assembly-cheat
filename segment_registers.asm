@@ -19,9 +19,9 @@
 
     ; TODO what are their initial values in Linux?
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     PRINT_STRING_LITERAL 'CS'
     PRINT_INT cs
 
@@ -44,4 +44,4 @@ ENTRY
     ;mov eax, 0
     ;mov ss, eax
 
-EXIT
+LKMC_EPILOGUE

@@ -2,10 +2,10 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
 .if .gasversion. >= 22800 && .gasversion. < 22900
     PRINT_STRING_LITERAL("bug")
 .else
     PRINT_STRING_LITERAL("no bug")
 .endif
-EXIT
+LKMC_EPILOGUE

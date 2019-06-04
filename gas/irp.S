@@ -10,7 +10,7 @@ See also: .rept
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     mov $0, %eax
     /*
     Generate:
@@ -22,5 +22,5 @@ ENTRY
     .irp i, 3, 1, 2
         add $\i, %eax
     .endr
-    ASSERT_EQ($6, %eax)
-EXIT
+    LKMC_ASSERT_EQ(%eax, $6)
+LKMC_EPILOGUE

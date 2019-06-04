@@ -15,7 +15,7 @@ If start is not present, a series of defaults are used:
 - the address of the first byte of the `.text' section, if present
 - addres 0
  */
-ENTRY(_start);
+LKMC_PROLOGUE(_start);
 
 /* Program headers, each of which specifies a segment. */
 PHDRS

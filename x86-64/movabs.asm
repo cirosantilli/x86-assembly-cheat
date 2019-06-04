@@ -21,9 +21,9 @@
 ;
 ; http://stackoverflow.com/questions/19415184/load-from-a-64-bit-address-into-other-register-than-rax
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; TODO what is the case where only rax works?
     ; All of the below give the same error.
     ; Error: dword exceeds bounds.
@@ -39,4 +39,4 @@ ENTRY
     ; mov rbx, 0x8000_0000_0000_0000
     ; mov qword [rbx], rcx
 
-EXIT
+LKMC_EPILOGUE

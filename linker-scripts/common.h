@@ -9,7 +9,7 @@
         symbol ## _len = . - symbol
 
 /* Exit syscall. */
-#define EXIT(status) \
+#define LKMC_EPILOGUE(status) \
     mov $1, %eax;\
     mov status, %ebx;\
     int $0x80

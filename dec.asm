@@ -1,10 +1,10 @@
 ; Decrement: i--.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 1
     ; eax--
     dec eax
-    ASSERT_EQ eax, 0
-EXIT
+    LKMC_ASSERT_EQ(%eax, $0)
+LKMC_EPILOGUE

@@ -33,14 +33,14 @@ TODO what is the effect of this, since variables are already local by default?
     yes_local:
         .long 3
 
-ENTRY
+LKMC_PROLOGUE
     mov not_global, %eax
-    ASSERT_EQ($1, %eax)
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov yes_global, %eax
-    ASSERT_EQ($2, %eax)
+    LKMC_ASSERT_EQ(%eax, $2)
 
     mov yes_local, %eax
-    ASSERT_EQ($3, %eax)
+    LKMC_ASSERT_EQ(%eax, $3)
 
-EXIT
+LKMC_EPILOGUE

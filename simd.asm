@@ -11,7 +11,7 @@
 
     ; - https://software.intel.com/en-us/intel-ipp
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .bss
 
@@ -20,7 +20,7 @@ section .bss
     reso0 reso 1
     reso1 reso 1
 
-ENTRY
+LKMC_PROLOGUE
 
     ; # SIMD Registers
 
@@ -34,7 +34,7 @@ ENTRY
                     movss xmm0, [resd0]
                     movss xmm1, xmm0
                     movss [resd1], xmm1
-                    ASSERT_EQ [resd0], __float32__(0.1), dword
+                    LKMC_ASSERT_EQ [resd0], __float32__(0.1), dword
 
             ; # movups
 
@@ -125,10 +125,10 @@ ENTRY
                 movss xmm0, [resd0]
                 cvttss2si eax, xmm0
                 call print_int
-                ASSERT_EQ eax, 1
+                LKMC_ASSERT_EQ(%eax, $1)
 
     ; # SSSE3
 
     ; # SSE4
 
-EXIT
+LKMC_EPILOGUE

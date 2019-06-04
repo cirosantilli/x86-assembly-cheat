@@ -9,19 +9,19 @@
     ; This file is named `test_instruction`
     ; so as to not conflict with the `test` make target.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov al, 0x0F0
     test al, 0
     ASSERT_FLAG jz
-    ASSERT_EQ al, 0x0F0
+    LKMC_ASSERT_EQ(%al, $0x0F0)
 
     mov al, 0x0F0
-    ASSERT_EQ al, 0x0F0
+    LKMC_ASSERT_EQ(%al, $0x0F0)
     test al, 0x0F0
     ASSERT_FLAG jnz
-    ASSERT_EQ al, 0x0F0
+    LKMC_ASSERT_EQ(%al, $0x0F0)
 
     ; # test %eax, %eax vc cmp %eax, 0
 
@@ -30,4 +30,4 @@ ENTRY
         ; `test %eax, %eax` is often used instead of `cmp %eax, 0`
         ; as it generates shorter instructions:
 
-EXIT
+LKMC_EPILOGUE

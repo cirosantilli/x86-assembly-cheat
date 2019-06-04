@@ -12,11 +12,11 @@
 ;
 ;     mov eax, 1.5
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     my_float resd 1
-ENTRY
+LKMC_PROLOGUE
     mov dword [my_float], __float32__(1.5)
     fld dword [my_float]
     mov dword [my_float], __float32__(2.5)
@@ -26,4 +26,4 @@ ENTRY
     fld dword [my_float]
     fcomip st1
     ASSERT_FLAG je
-EXIT
+LKMC_EPILOGUE

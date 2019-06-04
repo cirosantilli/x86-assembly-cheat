@@ -23,9 +23,9 @@
     ; There is also the `cpuinfo` command line tool that parses the CPUID instruction from the command line.
     ; Source: http://www.etallen.com/cpuid.html
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 0
     cpuid
 
@@ -37,4 +37,4 @@ ENTRY
     ; 1818588270 == 0x 6c 65 74 6e == 'l', 'e', 't', 'n'
     PRINT_INT ecx
 
-EXIT
+LKMC_EPILOGUE

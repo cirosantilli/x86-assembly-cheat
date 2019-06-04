@@ -24,9 +24,9 @@
 ; - NASM automatically decides between near and short, you cannot explicitly choose
 ; - task switch jump example
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     ; max +-128 bytes away
     ; short: displacement uses 1 byte only
@@ -58,4 +58,4 @@ ENTRY
     ;mov eax, $ + 8
     ;jmp eax
 
-EXIT
+LKMC_EPILOGUE

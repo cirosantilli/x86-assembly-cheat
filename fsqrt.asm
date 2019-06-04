@@ -4,14 +4,14 @@
 ;
 ; st0 = sqrt(st0)
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_1_41 dd 1.41
     float_1_42 dd 1.42
     float_2_0 dd 2.0
     float_4_0 dd 4.0
-ENTRY
+LKMC_PROLOGUE
     ; sqrt(4) == 4
     fld dword [float_4_0]
     fsqrt
@@ -27,4 +27,4 @@ ENTRY
     fld dword [float_1_42]
     fcomip st1
     ASSERT_FLAG jae
-EXIT
+LKMC_EPILOGUE

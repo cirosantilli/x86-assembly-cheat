@@ -12,16 +12,16 @@
     ; - pushd/popd EFLAGS
 
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     clc
     mov eax, esp
     pushf
     sub eax, esp
     ; Needs 2 bytes, stack min 1 dword.
-    ASSERT_EQ eax, 4
+    LKMC_ASSERT_EQ(%eax, $4)
 
     stc
     popf
@@ -33,4 +33,4 @@ ENTRY
     popfd
     ASSERT_FLAG jnc
 
-EXIT
+LKMC_EPILOGUE

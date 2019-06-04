@@ -5,9 +5,9 @@
         ; bt ax, i
         ; CF = ( ax[i] == 1 ) ? 1 : 0
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov ax, 0x0A
 
     bt ax, 0
@@ -23,9 +23,9 @@ ENTRY
     ASSERT_FLAG jc
 
     ; Unchanged
-    ASSERT_EQ ax, 0x0A
+    LKMC_ASSERT_EQ(%ax, $0x0A)
 
     ; Not for bytes
     ;bt al, 0
 
-EXIT
+LKMC_EPILOGUE

@@ -16,24 +16,24 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     mov $0x01234567, %eax
     mov $1, %bl
     movzbl %bl, %eax
-    ASSERT_EQ($1, %eax)
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov $0x01234567, %eax
     mov $-1, %bl
     movzbl %bl, %eax
-    ASSERT_EQ($0xFF, %eax)
+    LKMC_ASSERT_EQ(%eax, $0xFF)
 
     /* Can omit the last character. */
     mov $0x01234567, %eax
     mov $-1, %bl
     movzb %bl, %eax
-    ASSERT_EQ($0xFF, %eax)
+    LKMC_ASSERT_EQ(%eax, $0xFF)
 
     /* ERROR: Cannot omit the before last character. */
     /*movz %bl, %eax*/
 
-EXIT
+LKMC_EPILOGUE

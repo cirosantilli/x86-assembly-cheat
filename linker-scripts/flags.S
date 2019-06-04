@@ -6,4 +6,4 @@ the default section is `.text`.
 #include "common.h"
 .section .mytext, "a"
 GLOBAL(_start)
-EXIT($0)
+LKMC_EPILOGUE($0)

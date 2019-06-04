@@ -1,9 +1,9 @@
 ; Subtraction.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 1
     sub eax, 1
-    ASSERT_EQ eax, 0
-EXIT
+    LKMC_ASSERT_EQ(%eax, $0)
+LKMC_EPILOGUE

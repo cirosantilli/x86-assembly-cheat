@@ -28,15 +28,15 @@ extern \
 
     ; Enter program that uses the C driver.
     ; The entry function is `asm_main`.
-    %macro ENTRY 0
+    %macro LKMC_PROLOGUE 0
         TEXT
         GLOBAL asm_main
         ; To align stack so that calls can be made directly.
         sub rsp, 8
     %endmacro
 
-    ; Exit program entered by `ENTRY`.
-    %macro EXIT 0
+    ; Exit program entered by `LKMC_PROLOGUE`.
+    %macro LKMC_EPILOGUE 0
         add rsp, 8
         mov rax, 0
         ret
@@ -45,23 +45,23 @@ extern \
 ; Assert macros
 
     ; Assert rax eq %1
-    %macro ASSERT_EQ 3
+    %macro LKMC_ASSERT_EQ 3
         cmp %3 %1, %2
         je %%ok
             ASSERT_FAIL
         %%ok:
     %endmacro
 
-    %macro ASSERT_EQ 2
-        ASSERT_EQ %1, %2, %3
+    %macro LKMC_ASSERT_EQ 2
+        LKMC_ASSERT_EQ %1, %2, %3
     %endmacro
 
-    %macro ASSERT_EQ 1
-        ASSERT_EQ rax, %1
+    %macro LKMC_ASSERT_EQ 1
+        LKMC_ASSERT_EQ rax, %1
     %endmacro
 
-    %macro ASSERT_EQ 0
-        ASSERT_EQ rax, rbx
+    %macro LKMC_ASSERT_EQ 0
+        LKMC_ASSERT_EQ(%rax, %rbx)
     %endmacro
 
     ; asserts rax neq %1

@@ -10,9 +10,9 @@
     ; GAS has a related convention which hides `.L` prefixed labels
     ; completely from the output `.o`.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 outside_label:
 
     ; This should be not done in practice,
@@ -27,4 +27,4 @@ outside_label:
     ASSERT_FAIL
 .inside_label2:
 
-EXIT
+LKMC_EPILOGUE

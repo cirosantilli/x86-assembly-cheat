@@ -4,8 +4,8 @@
 
     ; Segfaults. TODO why?
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     int 4
-EXIT
+LKMC_EPILOGUE

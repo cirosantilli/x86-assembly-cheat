@@ -31,14 +31,14 @@ extern \
 
     ; Enter program that uses the C driver.
     ; The entry function is `asm_main`.
-    %macro ENTRY 0
+    %macro LKMC_PROLOGUE 0
         TEXT
         GLOBAL asm_main
             enter 0, 0
     %endmacro
 
-    ; Exit program entered by `ENTRY`.
-    %macro EXIT 0
+    ; Exit program entered by `LKMC_PROLOGUE`.
+    %macro LKMC_EPILOGUE 0
         leave
         mov eax, 0
         ret
@@ -92,7 +92,7 @@ extern \
 ; Assert macros
 
     ; Assert eax eq %1
-    %macro ASSERT_EQ 3
+    %macro LKMC_ASSERT_EQ 3
         pushf
         cmp %3 %1, %2
         je %%ok
@@ -101,8 +101,8 @@ extern \
         popf
     %endmacro
 
-    %macro ASSERT_EQ 2
-        ASSERT_EQ %1, %2, %3
+    %macro LKMC_ASSERT_EQ 2
+        LKMC_ASSERT_EQ %1, %2, %3
     %endmacro
 
     ; asserts eax neq %1
@@ -132,10 +132,10 @@ extern \
 ; SIMD macros
 
     %macro ASSERT_EQ4 5
-        ASSERT_EQ [%1], %2, dword
-        ASSERT_EQ [%1 + 4], %3, dword
-        ASSERT_EQ [%1 + 8], %4, dword
-        ASSERT_EQ [%1 + 12], %5, dword
+        LKMC_ASSERT_EQ [%1], %2, dword
+        LKMC_ASSERT_EQ [%1 + 4], %3, dword
+        LKMC_ASSERT_EQ [%1 + 8], %4, dword
+        LKMC_ASSERT_EQ [%1 + 12], %5, dword
     %endmacro
 
     ; Move 4 given dwords into the given memory location.

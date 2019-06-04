@@ -1,12 +1,12 @@
 # LOOPcc
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 RODATA
 
     bs4 db 0, 0, 1, 0
 
-ENTRY
+LKMC_PROLOGUE
 
     ; # LOOP
 
@@ -43,10 +43,10 @@ ENTRY
                     inc ebx
                     cmp byte [bs4 + ebx], 0
                 loope loope_lbl
-                ASSERT_EQ ebx, 2
+                LKMC_ASSERT_EQ(%ebx, $2)
 
     ; # LOOPNE
 
         ; ecx--; if (ecx != 0 && ZF == 0) goto lbl
 
-EXIT
+LKMC_EPILOGUE

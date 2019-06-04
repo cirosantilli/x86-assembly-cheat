@@ -19,22 +19,22 @@ s:
 cat:
     .ascii  "ab" "cd"
 
-ENTRY
+LKMC_PROLOGUE
     mov s, %eax
-    ASSERT_EQ($0x00636261, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x00636261)
 
     /* Concatenates literals like C does. */
     mov cat, %eax
-    ASSERT_EQ($0x64636261, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x64636261)
 
     mov $s_len, %eax
-    ASSERT_EQ($4, %eax)
+    LKMC_ASSERT_EQ(%eax, $4)
 
     mov $0, %edx
     mov $30, %eax
     mov $25, %ecx
     div %ecx
     mov %edx, %eax
-    ASSERT_EQ($5, %eax)
+    LKMC_ASSERT_EQ(%eax, $5)
 
-EXIT
+LKMC_EPILOGUE

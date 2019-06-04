@@ -6,7 +6,7 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
 
     /*
     # Labels in macros
@@ -38,9 +38,9 @@ ENTRY
             .ascii "\x"
         .endm
         mov s, %al
-        ASSERT_EQ($0x61, %al)
+        LKMC_ASSERT_EQ(%al, $0x61)
 
-EXIT
+LKMC_EPILOGUE
 
 .data
     s:

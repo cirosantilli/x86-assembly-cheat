@@ -23,29 +23,29 @@
         ; Impossible to push a single byte:
         ; http://stackoverflow.com/questions/2586591/why-is-it-not-possible-to-push-a-byte-onto-a-stack-on-pentium-ia-32
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     mov eax, esp
     push dword 1
     sub eax, esp
-    ASSERT_EQ eax, 4
+    LKMC_ASSERT_EQ(%eax, $4)
     mov eax, [esp]
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov eax, esp
     push byte 2
     sub eax, esp
-    ASSERT_EQ eax, 4
+    LKMC_ASSERT_EQ(%eax, $4)
     mov eax, [esp]
-    ASSERT_EQ eax, 2
+    LKMC_ASSERT_EQ(%eax, $2)
 
     pop eax
-    ASSERT_EQ eax, 2
+    LKMC_ASSERT_EQ(%eax, $2)
 
     pop eax
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
 
     ; Manual equivalent.
 
@@ -54,9 +54,9 @@ ENTRY
     mov dword [esp + 4], 1
 
     mov eax, [esp]
-    ASSERT_EQ eax, 2
+    LKMC_ASSERT_EQ(%eax, $2)
     mov eax, [esp + 4]
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
     add esp, 8
 
-EXIT
+LKMC_EPILOGUE

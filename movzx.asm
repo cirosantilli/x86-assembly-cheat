@@ -4,20 +4,20 @@
 
     ; Works for unsigned numbers.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     mov eax, 0
     mov ax, 0x1000
     movzx eax, ax
-    ASSERT_EQ eax, 0x1000
+    LKMC_ASSERT_EQ(%eax, $0x1000)
 
     mov ebx, 0
     mov al, 0x10
     movzx ebx, al
     mov eax, ebx
-    ASSERT_EQ eax, 0x10
+    LKMC_ASSERT_EQ(%eax, $0x10)
 
     mov eax, 0
     mov ax, -1
@@ -29,4 +29,4 @@ ENTRY
 
     ; ERROR: must be a register
     ;movzx eax, 0
-EXIT
+LKMC_EPILOGUE

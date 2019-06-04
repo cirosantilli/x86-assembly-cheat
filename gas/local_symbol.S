@@ -19,11 +19,11 @@ and cannot be redefined.
 
     .Lyes_local:
         .long 2
-ENTRY
+LKMC_PROLOGUE
     mov not_local, %eax
-    ASSERT_EQ($1, %eax)
+    LKMC_ASSERT_EQ(%eax, $1)
 
     mov .Lyes_local, %eax
-    ASSERT_EQ($2, %eax)
+    LKMC_ASSERT_EQ(%eax, $2)
 
-EXIT
+LKMC_EPILOGUE

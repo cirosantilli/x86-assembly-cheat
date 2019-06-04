@@ -1,11 +1,11 @@
 ; # XOR
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov ax, 0x00FF
     xor ax, 0x0F0F
-    ASSERT_EQ ax, 0x0FF0
+    LKMC_ASSERT_EQ(%ax, $0x0FF0)
 
     ; # xor to set to zero idiom
 
@@ -20,4 +20,4 @@ ENTRY
         ; Compileres often do this to generate shorter instrucitons,
         ; but there are also cases where `mov` is better.
 
-EXIT
+LKMC_EPILOGUE

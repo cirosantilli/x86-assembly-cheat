@@ -26,29 +26,29 @@
 
     ; SETcc achieves a similar effect.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     clc
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    ASSERT_EQ eax, 0
+    LKMC_ASSERT_EQ(%eax, $0)
 
     clc
     mov eax, 0
     mov ebx, 1
     cmovnc eax, ebx
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
 
     stc
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
 
     ; ERROR: must be address
     ; cmovc eax, 1
 
-EXIT
+LKMC_EPILOGUE

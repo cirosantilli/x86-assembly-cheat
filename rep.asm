@@ -25,14 +25,14 @@
     ; Note that this is not the most efficient implementation possible
     ; of the C string instructions: like memset and memcmp: modern glibc uses SIMD.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .bss
 
     src resb 4
     dest resb 4
 
-ENTRY
+LKMC_PROLOGUE
 
     cld
 
@@ -47,14 +47,14 @@ ENTRY
         mov ecx, 2
         mov al, 1
         rep stosb
-        ASSERT_EQ [dest + 0], 1, byte
-        ASSERT_EQ [dest + 1], 1, byte
+        LKMC_ASSERT_EQ [dest + 0], 1, byte
+        LKMC_ASSERT_EQ [dest + 1], 1, byte
 
         ; edi and ecx move as well.
         mov eax, edi
         sub eax, dest
-        ASSERT_EQ eax, 2
-        ASSERT_EQ ecx, 0
+        LKMC_ASSERT_EQ(%eax, $2)
+        LKMC_ASSERT_EQ(%ecx, $0)
 
     ; # memchr
 
@@ -74,9 +74,9 @@ ENTRY
         mov ecx, 3
         rep movsb
 
-        ASSERT_EQ [dest + 0], 1, byte
-        ASSERT_EQ [dest + 1], 2, byte
-        ASSERT_EQ [dest + 2], 3, byte
+        LKMC_ASSERT_EQ [dest + 0], 1, byte
+        LKMC_ASSERT_EQ [dest + 1], 2, byte
+        LKMC_ASSERT_EQ [dest + 2], 3, byte
 
     ; # memcmp
 
@@ -92,13 +92,13 @@ ENTRY
         mov edi, dest
         mov ecx, 2
         repz cmpsb
-        ASSERT_EQ ecx, 0
+        LKMC_ASSERT_EQ(%ecx, $0)
 
         ; Compare 3 bytes. Last byte differs.
         mov esi, src
         mov edi, dest
         mov ecx, 3
         repz cmpsb
-        ASSERT_EQ ecx, 1
+        LKMC_ASSERT_EQ(%ecx, $1)
 
-EXIT
+LKMC_EPILOGUE

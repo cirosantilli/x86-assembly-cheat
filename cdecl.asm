@@ -1,8 +1,8 @@
 ; # cdecl
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     ; Recursive factorial.
 
@@ -11,26 +11,26 @@ ENTRY
         ; We must clean up the argument stack ourselves.
         ; This allows for varargs like `printf`.
         add esp, 4
-        ASSERT_EQ eax, 120
+        LKMC_ASSERT_EQ(%eax, $120)
 
         push dword 1
         call factorial_rec_cdecl
         add esp, 4
-        ASSERT_EQ eax, 1
+        LKMC_ASSERT_EQ(%eax, $1)
 
     ; Non-recursive factorial.
 
         push dword 5
         call factorial_norec_cdecl
         add esp, 4
-        ASSERT_EQ eax, 120
+        LKMC_ASSERT_EQ(%eax, $120)
 
         push dword 1
         call factorial_norec_cdecl
         add esp, 4
-        ASSERT_EQ eax, 1
+        LKMC_ASSERT_EQ(%eax, $1)
 
-EXIT
+LKMC_EPILOGUE
 
 ; Recursive factorial. cdecl calling convention.
 factorial_rec_cdecl:

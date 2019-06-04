@@ -1,7 +1,7 @@
 /*
 http://stackoverflow.com/questions/9827157/what-does-keep-mean-in-a-linker-script
 */
-ENTRY(_start)
+LKMC_PROLOGUE(_start)
 SECTIONS
 {
     . = 0x400000;

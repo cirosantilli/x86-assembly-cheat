@@ -4,17 +4,17 @@
 
     ; TODO confirm: synchronization primitive. http://wiki.osdev.org/Spinlock
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov ax, 0x0A
     bts ax, 0
-    ASSERT_EQ ax, 0x0B
+    LKMC_ASSERT_EQ(%ax, $0x0B)
     ASSERT_FLAG jnc
 
     mov ax, 0x0A
     bt ax, 1
     ASSERT_FLAG jc
-    ASSERT_EQ ax, 0x0A
+    LKMC_ASSERT_EQ(%ax, $0x0A)
 
-EXIT
+LKMC_EPILOGUE

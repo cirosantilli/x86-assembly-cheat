@@ -4,4 +4,4 @@ the default section is `.text`.
 */
 
 #include "common.h"
-EXIT($0)
+LKMC_EPILOGUE($0)

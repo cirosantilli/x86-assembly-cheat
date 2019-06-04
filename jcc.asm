@@ -8,9 +8,9 @@
 
     ; `jX` jumps when the corresponding flag is set. `jnX` jumps when clear.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; # jz
 
     ; # jnz
@@ -85,4 +85,4 @@ ENTRY
             ASSERT_FLAG jc
             clc
             ASSERT_FLAG jnc
-EXIT
+LKMC_EPILOGUE

@@ -43,7 +43,7 @@ E.g., modify [add.asm](add.asm) to contain:
 
     mov eax, 1
     add eax, 2
-    ASSERT_EQ eax, 4
+    LKMC_ASSERT_EQ(%eax, $4)
 
 and run:
 
@@ -64,7 +64,7 @@ Step debug `add.out`:
 
     make gdb-add
 
-This stops at `asm_main`, which is placed at the beginning of the `ENTRY` macro, which we use on almost all our programs, and shows both the assembly and source code with `layout asm`: https://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code
+This stops at `asm_main`, which is placed at the beginning of the `LKMC_PROLOGUE` macro, which we use on almost all our programs, and shows both the assembly and source code with `layout asm`: https://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code
 
 `asm_main` is not the first instruction of our executable, since we use a C driver under [lib](lib/) to access standard library functions: the true first instruction will be on some glibc wrapper code that enables glibc functionality. But we don't care about those for the most part.
 

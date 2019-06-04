@@ -6,9 +6,9 @@
 
     ; Application: http://stackoverflow.com/questions/234906/whats-the-purpose-of-the-nop-opcode
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     nop
     nop
 
@@ -19,4 +19,4 @@ ENTRY
     mov eax, eax
     and eax, eax
 
-EXIT
+LKMC_EPILOGUE

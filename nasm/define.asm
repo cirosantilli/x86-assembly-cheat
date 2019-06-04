@@ -1,9 +1,9 @@
 # define
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     %define SIZE 10
     mov eax, SIZE
-    ASSERT_EQ eax, 10
-EXIT
+    LKMC_ASSERT_EQ(%eax, $10)
+LKMC_EPILOGUE

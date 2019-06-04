@@ -4,13 +4,13 @@
 
     ; Does not touch edi.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 DATA
 
     bs4 db 0, 1
 
-ENTRY
+LKMC_PROLOGUE
 
     mov esi, bs4
     mov edi, 0
@@ -18,19 +18,19 @@ ENTRY
     cld
     ; Increase ESI
     lodsb
-    ASSERT_EQ al, 0
+    LKMC_ASSERT_EQ(%al, $0)
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ eax, 1
-    ASSERT_EQ edi, 0
+    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ(%edi, $0)
 
     std
     ; Decrease ESI
     lodsb
-    ASSERT_EQ al, 1
+    LKMC_ASSERT_EQ(%al, $1)
     mov eax, esi
     sub eax, bs4
-    ASSERT_EQ eax, 0
-    ASSERT_EQ edi, 0
+    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ(%edi, $0)
 
-EXIT
+LKMC_EPILOGUE

@@ -1,8 +1,8 @@
 ; A hello world using printf from the C standard library
 ; via our helper macros.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     PRINT_STRING_LITERAL 'hello world'
-EXIT
+LKMC_EPILOGUE

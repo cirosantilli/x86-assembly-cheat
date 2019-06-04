@@ -19,8 +19,8 @@
 
         ; For immediates, interchangable with mov.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; TODO example
-EXIT
+LKMC_EPILOGUE

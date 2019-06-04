@@ -5,14 +5,14 @@
     print_string, \
 ;
 
-#define ENTRY \
+#define LKMC_PROLOGUE \
     enter $0, $0 ;\
     .text ;\
         .global asm_main ;\
         asm_main: \
         sub $8, %rsp
 
-#define EXIT \
+#define LKMC_EPILOGUE \
     leave ;\
     mov $0, %eax ;\
     ret
@@ -21,7 +21,7 @@
     mov $__LINE__, %rdi ;\
     call assert_fail
 
-#define ASSERT_EQ(x, y) \
+#define LKMC_ASSERT_EQ(x, y) \
     cmp x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\

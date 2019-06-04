@@ -5,9 +5,9 @@
 ; This can be seen on the Intel manual: cmp has not imm64 encoding.
 ; So in general, we have to move values to registers before we can operate on them.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     ; Sanity check: mov can encode imm64, and cmp r64, r64 works as expected.
     mov rax, 0x12345678_80000000
     mov rbx, 0x00000001_00000000
@@ -55,13 +55,13 @@ reg_imm_sign_0:
     ;ASSERT_FAIL
 ;reg_imm_sign_nasm:
 
-    ; Don't forget that our macro ASSERT_EQ uses cmp, and won't work as expected
+    ; Don't forget that our macro LKMC_ASSERT_EQ(%uses cmp, %and won't work as expected)
     ; if the immediate cannot be encoded by sign extension.
     ; So juts move to a register before comparing.
     mov rax, 0x12345678_80000000
     mov rbx, 0x00000001_00000000
     add rax, rbx
     mov rbx, 0x12345679_80000000
-    ASSERT_EQ rax, rbx
+    LKMC_ASSERT_EQ(%rax, %rbx)
 
-EXIT
+LKMC_EPILOGUE

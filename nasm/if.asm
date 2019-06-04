@@ -1,7 +1,7 @@
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     %if 0
         ASSERT_FAIL
     %endif
-EXIT
+LKMC_EPILOGUE

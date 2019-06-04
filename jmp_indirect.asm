@@ -2,13 +2,13 @@
 ;
 ; Using tables of such jump destinations can be used to implement switch in constant time.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 RODATA
 
     table dd label, label2
 
-ENTRY
+LKMC_PROLOGUE
 
     jmp [table]
     ASSERT_FAIL
@@ -17,4 +17,4 @@ ENTRY
     ASSERT_FAIL
     label2:
 
-EXIT
+LKMC_EPILOGUE

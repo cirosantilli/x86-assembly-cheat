@@ -1,4 +1,4 @@
 ; Test that our base setup works.
-%include "lib/common_nasm.inc"
-ENTRY
-EXIT
+#include <lkmc.h>
+LKMC_PROLOGUE
+LKMC_EPILOGUE

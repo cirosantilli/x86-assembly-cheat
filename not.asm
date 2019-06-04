@@ -1,9 +1,9 @@
 ; # NOT
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov al, 0x0F0
     not al
-    ASSERT_EQ al, 0x0F
-EXIT
+    LKMC_ASSERT_EQ(%al, $0x0F)
+LKMC_EPILOGUE

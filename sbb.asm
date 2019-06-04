@@ -2,9 +2,9 @@
 ;
 ;     edx:eax -= ebx:ecx
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 0
     mov ebx, 0
     mov ecx, 0x80000000
@@ -13,7 +13,7 @@ ENTRY
     sub eax, ecx
     sbb edx, ebx
 
-    ASSERT_EQ eax, 0x80000000
-    ASSERT_EQ edx, 0
+    LKMC_ASSERT_EQ(%eax, $0x80000000)
+    LKMC_ASSERT_EQ(%edx, $0)
 
-EXIT
+LKMC_EPILOGUE

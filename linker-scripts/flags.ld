@@ -3,7 +3,7 @@ How to alter segment flags (permissions).
 
 Expected outcome: segfault, because the segment is not executable.
 */
-ENTRY(_start)
+LKMC_PROLOGUE(_start)
 PHDRS
 {
     /*

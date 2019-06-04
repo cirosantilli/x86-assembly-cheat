@@ -12,7 +12,7 @@ Such labels don't appear on the output file.
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     /* Basic forward local jump. */
     1:
     jmp 1f
@@ -30,4 +30,4 @@ ENTRY
     ASSERT_FAIL
     3:
 
-EXIT
+LKMC_EPILOGUE

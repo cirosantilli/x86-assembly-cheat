@@ -1,5 +1,5 @@
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     PRINT_STRING_LITERAL("hello world")
-EXIT
+LKMC_EPILOGUE

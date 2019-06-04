@@ -27,9 +27,9 @@
         ; - http://stackoverflow.com/questions/12065721/why-isnt-rdtsc-a-serializing-instruction
 
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     rdtsc
     mov ebx, eax
     rdtsc
@@ -42,4 +42,4 @@ ENTRY
     call print_int
     PRINT_INT ebx
 
-EXIT
+LKMC_EPILOGUE

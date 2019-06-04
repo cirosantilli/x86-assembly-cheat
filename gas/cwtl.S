@@ -2,17 +2,17 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     /* cwtl: same as Intel cwde */
     mov $0x12345678, %eax
     mov $0x8000, %ax
     cwtl
-    ASSERT_EQ($0xFFFF8000, %eax)
+    LKMC_ASSERT_EQ(%eax, $0xFFFF8000)
 
     /* cbtw: same as Intel cbw */
     mov $0x12345678, %eax
     mov $0x80, %al
     cbtw
-    ASSERT_EQ($0x1234FF80, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x1234FF80)
 
-EXIT
+LKMC_EPILOGUE

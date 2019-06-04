@@ -2,9 +2,9 @@
 
 ; # $
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
 
     PRINT_INT $
     PRINT_INT $
@@ -13,4 +13,4 @@ ENTRY
     ; Infinite loop.
     ;jmp $
 
-EXIT
+LKMC_EPILOGUE

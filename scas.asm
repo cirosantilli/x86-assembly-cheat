@@ -2,14 +2,14 @@
 
     ; Compare array and a.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
 
     bs4 db 0, 1, 2, 3
     bs4_2 db 0, 0, 0, 0
 
-ENTRY
+LKMC_PROLOGUE
 
     mov edi, bs4
     mov byte [bs4], 0
@@ -21,7 +21,7 @@ ENTRY
     ASSERT_FLAG jz
     mov eax, edi
     sub eax, bs4
-    ASSERT_EQ eax, 1
+    LKMC_ASSERT_EQ(%eax, $1)
 
     std
     mov al, 2
@@ -29,6 +29,6 @@ ENTRY
     ASSERT_FLAG jnz
     mov eax, edi
     sub eax, bs4
-    ASSERT_EQ eax, 0
+    LKMC_ASSERT_EQ(%eax, $0)
 
-EXIT
+LKMC_EPILOGUE

@@ -2,9 +2,9 @@
 ;
 ; Expected outcome: print 12345678 to stdout.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 12345678
     call print_int
-EXIT
+LKMC_EPILOGUE

@@ -8,18 +8,18 @@
 .data
     myint: .long 0x12345678
 
-ENTRY
+LKMC_PROLOGUE
     /* Immediates and registers. */
     mov $1, %eax
     add $2, %eax
-    ASSERT_EQ($3, %eax)
+    LKMC_ASSERT_EQ(%eax, $3)
 
     /* Memory. */
     mov myint, %eax
-    ASSERT_EQ($0x12345678, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x12345678)
 
     /* Pointer. */
     mov $myint, %eax
     movl $0x11112222, (%eax)
     ASSERT_EQ_SIZE($0x11112222, myint, l)
-EXIT
+LKMC_EPILOGUE

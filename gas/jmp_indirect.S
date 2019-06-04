@@ -11,13 +11,13 @@
 
 .section .rodata
     symbol0: .int label0
-ENTRY
+LKMC_PROLOGUE
     /* Sanity check: the label was stored OK in data. */
     mov symbol0, %eax
-    ASSERT_EQ($label0, %eax)
+    LKMC_ASSERT_EQ(%eax, $label0)
 
     jmp *symbol0
     ASSERT_FAIL
     label0:
 
-EXIT
+LKMC_EPILOGUE

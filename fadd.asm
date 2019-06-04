@@ -10,13 +10,13 @@
 ;
 ; see also: https://stackoverflow.com/revisions/38036152/4
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_1_5 dd 1.5
     float_2_5 dd 2.5
     float_4_0 dd 4.0
-ENTRY
+LKMC_PROLOGUE
     ; Load to the FPU stack.
     ; Push value from memory to the FPU stack.
     fld dword[float_1_5]
@@ -48,4 +48,4 @@ ENTRY
     ; st1 == 1.5
     ; st2 == 4.0
     ASSERT_FLAG je
-EXIT
+LKMC_EPILOGUE

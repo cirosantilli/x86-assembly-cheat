@@ -9,7 +9,7 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     mov $1, %eax
 
     /* Equal. */
@@ -20,4 +20,4 @@ ENTRY
     cmp $2, %eax
     ASSERT_FLAG(jnz)
 
-EXIT
+LKMC_EPILOGUE

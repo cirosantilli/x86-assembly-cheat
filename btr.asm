@@ -2,11 +2,11 @@
 
     ; BT + reset.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov ax, 0x0A
     btr ax, 1
-    ASSERT_EQ ax, 8
+    LKMC_ASSERT_EQ(%ax, $8)
     ASSERT_FLAG jc
-EXIT
+LKMC_EPILOGUE

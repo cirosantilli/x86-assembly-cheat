@@ -1,11 +1,11 @@
 ; Negate: i *= -1.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
-ENTRY
+LKMC_PROLOGUE
     mov eax, 2
     neg eax
-    ASSERT_EQ eax, -2
+    LKMC_ASSERT_EQ eax, -2
     neg eax
-    ASSERT_EQ eax, 2
-EXIT
+    LKMC_ASSERT_EQ(%eax, $2)
+LKMC_EPILOGUE

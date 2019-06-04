@@ -4,11 +4,11 @@
 ;
 ; Push 1 to st0
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_1_0 dd 1.0
-ENTRY
+LKMC_PROLOGUE
     fld1
     ; st0 == 1.0
 
@@ -20,4 +20,4 @@ ENTRY
     ; st0 == 1.0
 
     ASSERT_FLAG je
-EXIT
+LKMC_EPILOGUE

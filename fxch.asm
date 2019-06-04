@@ -2,12 +2,12 @@
 ;
 ; Swap st0 and another register.
 
-%include "lib/common_nasm.inc"
+#include <lkmc.h>
 
 section .data
     float_0_0 dd 0.0
     float_1_0 dd 1.0
-ENTRY
+LKMC_PROLOGUE
     fldz
     ; st0 = 0.0
 
@@ -38,4 +38,4 @@ ENTRY
     ; st0 = 1.0
     ; st1 = 0.0
     ASSERT_FLAG je
-EXIT
+LKMC_EPILOGUE

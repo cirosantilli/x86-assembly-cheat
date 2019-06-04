@@ -14,25 +14,25 @@ And it generates trailing whitespace... bad move from GAS devs. They should just
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
 
     /* Memory. */
     mov c, %al
-    ASSERT_EQ($0x61, %al)
+    LKMC_ASSERT_EQ(%al, $0x61)
 
     /* Immediate. Without the `$`, does a memory access, and segfaults! */
     mov $'b, %al
-    ASSERT_EQ($0x62, %al)
+    LKMC_ASSERT_EQ(%al, $0x62)
 
     /* Space character works. */
     mov $' , %al
-    ASSERT_EQ($0x20, %al)
+    LKMC_ASSERT_EQ(%al, $0x20)
 
     /* Backslash escapes work. */
     mov $'\n , %al
-    ASSERT_EQ($0x0A, %al)
+    LKMC_ASSERT_EQ(%al, $0x0A)
 
-EXIT
+LKMC_EPILOGUE
 
 c:
     .byte 'a

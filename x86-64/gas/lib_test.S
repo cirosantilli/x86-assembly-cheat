@@ -1,5 +1,5 @@
 #include "lib/common_gas.h"
-ENTRY
+LKMC_PROLOGUE
     mov $1234567812345678, %rdi
     call print_long
-EXIT
+LKMC_EPILOGUE

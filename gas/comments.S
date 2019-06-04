@@ -2,11 +2,11 @@
 
 #include "lib/common_gas.h"
 
-ENTRY
+LKMC_PROLOGUE
     // mycomment
     # mycomment
 #if 0
     nop # mycomment
 #endif
     nop // mycomment
-    EXIT
+    LKMC_EPILOGUE

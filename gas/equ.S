@@ -16,17 +16,17 @@
 
     .equ asdf, 0x1234567
 
-ENTRY
+LKMC_PROLOGUE
 
     .equ x, 0x1234567
     mov $0, %eax
     mov $x, %eax
-    ASSERT_EQ($0x1234567, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x1234567)
 
     .set y, 0x1234567
     mov $0, %eax
     mov $y, %eax
-    ASSERT_EQ($0x1234567, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x1234567)
 
 
     /* TODO: vs macro?
@@ -37,6 +37,6 @@ ENTRY
     .set y, 2 * 1 + 1
     mov $0, %eax
     mov $y, %eax
-    ASSERT_EQ($0x3, %eax)
+    LKMC_ASSERT_EQ(%eax, $0x3)
 
-EXIT
+LKMC_EPILOGUE
