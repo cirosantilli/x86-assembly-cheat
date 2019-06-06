@@ -13,7 +13,7 @@ Notable advantages of LKMC repository include:
 
 The bulk of this repo was written a long time ago, and so it is semi crappy.
 
-In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default.
+In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default. I intend to just migrate NASM examples to GAS, and let NASM die: if you really, want NASM, please checkout just before the migration. NASM devs are cool, but GCC wins.
 
 However, the LKMC infrastructure is already working and completely superior, all that is left if to migrate some missing key concept examples there.
 
