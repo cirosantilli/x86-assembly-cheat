@@ -21,7 +21,7 @@ LKMC_PROLOGUE
     pushf
     sub eax, esp
     ; Needs 2 bytes, stack min 1 dword.
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
 
     stc
     popf

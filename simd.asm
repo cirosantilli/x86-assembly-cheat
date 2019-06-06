@@ -34,7 +34,7 @@ LKMC_PROLOGUE
                     movss xmm0, [resd0]
                     movss xmm1, xmm0
                     movss [resd1], xmm1
-                    LKMC_ASSERT_EQ [resd0], __float32__(0.1), dword
+                    LKMC_ASSERT_EQ_32 [resd0], __float32__(0.1), dword
 
             ; # movups
 
@@ -125,7 +125,7 @@ LKMC_PROLOGUE
                 movss xmm0, [resd0]
                 cvttss2si eax, xmm0
                 call print_int
-                LKMC_ASSERT_EQ(%eax, $1)
+                LKMC_ASSERT_EQ_32(%eax, $1)
 
     ; # SSSE3
 

@@ -11,11 +11,11 @@ LKMC_PROLOGUE
     mov eax, 1
     mov edx, 0x01234567
     cdq
-    LKMC_ASSERT_EQ(%edx, $0)
+    LKMC_ASSERT_EQ_32(%edx, $0)
 
     mov eax, -1
     mov edx, 0x01234567
     cdq
-    LKMC_ASSERT_EQ(%edx, $0xFFFFFFFF)
+    LKMC_ASSERT_EQ_32(%edx, $0xFFFFFFFF)
 
 LKMC_EPILOGUE

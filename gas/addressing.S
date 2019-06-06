@@ -44,7 +44,7 @@ LKMC_PROLOGUE
         /* GAS 2.24 Warning: segment override on `lea' is ineffectual. */
         /*lea %ds:4(%ebx, %ecx, 2), %eax*/
         lea 4(%ebx, %ecx, 2), %eax
-        LKMC_ASSERT_EQ(%eax, $15)
+        LKMC_ASSERT_EQ_32(%eax, $15)
 
         /*
         Omit the mulitplicator d.
@@ -54,38 +54,38 @@ LKMC_PROLOGUE
         mov $3, %ebx
         mov $4, %ecx
         lea 2(%ebx, %ecx), %eax
-        LKMC_ASSERT_EQ(%eax, $9)
+        LKMC_ASSERT_EQ_32(%eax, $9)
 
         /* Omit c and d. */
         mov $0, %eax
         mov $1, %ebx
         lea 2(%ebx), %eax
-        LKMC_ASSERT_EQ(%eax, $3)
+        LKMC_ASSERT_EQ_32(%eax, $3)
 
         /* Register only address. We can omit commas. */
         mov $0, %eax
         mov $1, %ebx
         lea (%ebx), %eax
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
         /* TODO What is this syntax for? Compare to the next example. */
         mov $0, %eax
         lea 2(,1), %eax
-        LKMC_ASSERT_EQ(%eax, $2)
+        LKMC_ASSERT_EQ_32(%eax, $2)
 
         mov $0, %eax
         lea 2, %eax
-        LKMC_ASSERT_EQ(%eax, $2)
+        LKMC_ASSERT_EQ_32(%eax, $2)
 
         /* TODO What is this syntax for? Compare to the previous example. */
         mov $0, %eax
         lea (2), %eax
-        LKMC_ASSERT_EQ(%eax, $2)
+        LKMC_ASSERT_EQ_32(%eax, $2)
 
         mov $0, %eax
         mov $3, %ebx
         lea 2(,%ebx,4), %eax
-        LKMC_ASSERT_EQ(%eax, $14)
+        LKMC_ASSERT_EQ_32(%eax, $14)
 
         /*
         Expressions like (1 + 1) or more commonly (label + 1)
@@ -93,7 +93,7 @@ LKMC_PROLOGUE
         */
         mov $1, %eax
         lea (1 + 1)(%eax), %eax
-        LKMC_ASSERT_EQ(%eax, $3)
+        LKMC_ASSERT_EQ_32(%eax, $3)
 
     /*
     Impossible addressings.
@@ -112,11 +112,11 @@ LKMC_PROLOGUE
         /* `l` suffix needed here because there is no register to tell the size. */
         movl $1, i
         mov i, %eax
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
         /* To get the actual address instead of the data, use `$`: */
         mov $i, %ebx
         mov (%ebx), %eax
-        LKMC_ASSERT_EQ(%eax, i)
+        LKMC_ASSERT_EQ_32(%eax, i)
 
 LKMC_EPILOGUE

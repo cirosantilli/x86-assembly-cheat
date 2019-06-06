@@ -14,7 +14,7 @@
 LKMC_PROLOGUE
     /* Sanity check: the label was stored OK in data. */
     mov symbol0, %eax
-    LKMC_ASSERT_EQ(%eax, $label0)
+    LKMC_ASSERT_EQ_32(%eax, $label0)
 
     jmp *symbol0
     ASSERT_FAIL

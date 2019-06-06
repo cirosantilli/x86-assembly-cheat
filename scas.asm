@@ -21,7 +21,7 @@ LKMC_PROLOGUE
     ASSERT_FLAG jz
     mov eax, edi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     std
     mov al, 2
@@ -29,6 +29,6 @@ LKMC_PROLOGUE
     ASSERT_FLAG jnz
     mov eax, edi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
 LKMC_EPILOGUE

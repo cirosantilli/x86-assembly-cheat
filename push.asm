@@ -30,22 +30,22 @@ LKMC_PROLOGUE
     mov eax, esp
     push dword 1
     sub eax, esp
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
     mov eax, [esp]
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     mov eax, esp
     push byte 2
     sub eax, esp
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
     mov eax, [esp]
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
     pop eax
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
     pop eax
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     ; Manual equivalent.
 
@@ -54,9 +54,9 @@ LKMC_PROLOGUE
     mov dword [esp + 4], 1
 
     mov eax, [esp]
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
     mov eax, [esp + 4]
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
     add esp, 8
 
 LKMC_EPILOGUE

@@ -11,6 +11,6 @@ LKMC_PROLOGUE
     mov edx, 0
     add eax, ecx
     adc edx, ebx
-    LKMC_ASSERT_EQ(%eax, $0)
-    LKMC_ASSERT_EQ(%edx, $1)
+    LKMC_ASSERT_EQ_32(%eax, $0)
+    LKMC_ASSERT_EQ_32(%edx, $1)
 LKMC_EPILOGUE

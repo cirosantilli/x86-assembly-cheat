@@ -22,5 +22,5 @@ LKMC_PROLOGUE
     .irp i, 3, 1, 2
         add $\i, %eax
     .endr
-    LKMC_ASSERT_EQ(%eax, $6)
+    LKMC_ASSERT_EQ_32(%eax, $6)
 LKMC_EPILOGUE

@@ -7,12 +7,12 @@ LKMC_PROLOGUE
     mov $0x12345678, %eax
     mov $0x8000, %ax
     cwtl
-    LKMC_ASSERT_EQ(%eax, $0xFFFF8000)
+    LKMC_ASSERT_EQ_32(%eax, $0xFFFF8000)
 
     /* cbtw: same as Intel cbw */
     mov $0x12345678, %eax
     mov $0x80, %al
     cbtw
-    LKMC_ASSERT_EQ(%eax, $0x1234FF80)
+    LKMC_ASSERT_EQ_32(%eax, $0x1234FF80)
 
 LKMC_EPILOGUE

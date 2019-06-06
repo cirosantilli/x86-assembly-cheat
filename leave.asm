@@ -14,7 +14,7 @@ LKMC_PROLOGUE
     mov eax, esp
     enter 8, 0
     sub eax, esp
-    LKMC_ASSERT_EQ(%eax, $12)
+    LKMC_ASSERT_EQ_32(%eax, $12)
 
     ; Modify 1st local var.
     mov dword [ebp - 4], 1

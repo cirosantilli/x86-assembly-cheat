@@ -5,7 +5,7 @@
 LKMC_PROLOGUE
     mov eax, 2
     neg eax
-    LKMC_ASSERT_EQ eax, -2
+    LKMC_ASSERT_EQ_32 eax, -2
     neg eax
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

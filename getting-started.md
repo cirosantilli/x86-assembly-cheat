@@ -43,7 +43,7 @@ E.g., modify [add.asm](add.asm) to contain:
 
     mov eax, 1
     add eax, 2
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
 
 and run:
 

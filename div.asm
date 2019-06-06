@@ -14,15 +14,15 @@ LKMC_PROLOGUE
     mov edx, 0
     mov ecx, 2
     div ecx
-    LKMC_ASSERT_EQ(%eax, $2)
-    LKMC_ASSERT_EQ(%edx, $1)
+    LKMC_ASSERT_EQ_32(%eax, $2)
+    LKMC_ASSERT_EQ_32(%edx, $1)
 
     ; 8 bit
     mov eax, 0
     mov ax, 0x101
     mov cl, 2
     div cl
-    LKMC_ASSERT_EQ(%eax, $0x180)
+    LKMC_ASSERT_EQ_32(%eax, $0x180)
 
     ; 16 bit
     mov eax, 0
@@ -31,16 +31,16 @@ LKMC_PROLOGUE
     mov dx, 1
     mov cx, 2
     div cx
-    LKMC_ASSERT_EQ(%eax, $0x8000)
-    LKMC_ASSERT_EQ(%edx, $1)
+    LKMC_ASSERT_EQ_32(%eax, $0x8000)
+    LKMC_ASSERT_EQ_32(%edx, $1)
 
     ; 32 bit
     mov eax, 1
     mov edx, 1
     mov ecx, 2
     div ecx
-    LKMC_ASSERT_EQ(%eax, $0x80000000)
-    LKMC_ASSERT_EQ(%edx, $1)
+    LKMC_ASSERT_EQ_32(%eax, $0x80000000)
+    LKMC_ASSERT_EQ_32(%edx, $1)
 
     ; # Division by zero
 

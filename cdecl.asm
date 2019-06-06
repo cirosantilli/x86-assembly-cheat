@@ -11,24 +11,24 @@ LKMC_PROLOGUE
         ; We must clean up the argument stack ourselves.
         ; This allows for varargs like `printf`.
         add esp, 4
-        LKMC_ASSERT_EQ(%eax, $120)
+        LKMC_ASSERT_EQ_32(%eax, $120)
 
         push dword 1
         call factorial_rec_cdecl
         add esp, 4
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
     ; Non-recursive factorial.
 
         push dword 5
         call factorial_norec_cdecl
         add esp, 4
-        LKMC_ASSERT_EQ(%eax, $120)
+        LKMC_ASSERT_EQ_32(%eax, $120)
 
         push dword 1
         call factorial_norec_cdecl
         add esp, 4
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
 LKMC_EPILOGUE
 

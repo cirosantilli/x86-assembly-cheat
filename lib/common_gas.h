@@ -48,7 +48,7 @@
     1:
 
 /* TODO define in terms of ASSERT_EQ_SIZE, need empty macro argument. */
-#define LKMC_ASSERT_EQ(x, y) \
+#define LKMC_ASSERT_EQ_32(x, y) \
     cmp x, y ;\
     je  1f ;\
         ASSERT_FAIL ;\

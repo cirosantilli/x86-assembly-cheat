@@ -9,5 +9,5 @@
 section .data
     x dw 0x0102
 LKMC_PROLOGUE
-    LKMC_ASSERT_EQ [x], 2, byte
+    LKMC_ASSERT_EQ_32 [x], 2, byte
 LKMC_EPILOGUE

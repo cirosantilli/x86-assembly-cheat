@@ -11,13 +11,13 @@ LKMC_PROLOGUE
     mov eax, 0
     mov ax, 0x1000
     movzx eax, ax
-    LKMC_ASSERT_EQ(%eax, $0x1000)
+    LKMC_ASSERT_EQ_32(%eax, $0x1000)
 
     mov ebx, 0
     mov al, 0x10
     movzx ebx, al
     mov eax, ebx
-    LKMC_ASSERT_EQ(%eax, $0x10)
+    LKMC_ASSERT_EQ_32(%eax, $0x10)
 
     mov eax, 0
     mov ax, -1

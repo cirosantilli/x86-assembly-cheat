@@ -38,7 +38,7 @@ LKMC_PROLOGUE
             .ascii "\x"
         .endm
         mov s, %al
-        LKMC_ASSERT_EQ(%al, $0x61)
+        LKMC_ASSERT_EQ_32(%al, $0x61)
 
 LKMC_EPILOGUE
 

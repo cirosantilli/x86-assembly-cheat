@@ -83,12 +83,12 @@ LKMC_PROLOGUE
 
                 mov eax, 0x0102_0304
                 mov ebx, 0x0000_0004
-                LKMC_ASSERT_EQ(%al, %bl)
+                LKMC_ASSERT_EQ_32(%al, %bl)
                 ASSERT_NEQ ax, bx
 
                 mov eax, 0x0102_0304
                 mov ebx, 0x0000_0304
-                LKMC_ASSERT_EQ(%ax, %bx)
+                LKMC_ASSERT_EQ_32(%ax, %bx)
                 ASSERT_NEQ eax, ebx
 
         ; # esi

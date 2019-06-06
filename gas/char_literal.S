@@ -18,19 +18,19 @@ LKMC_PROLOGUE
 
     /* Memory. */
     mov c, %al
-    LKMC_ASSERT_EQ(%al, $0x61)
+    LKMC_ASSERT_EQ_32(%al, $0x61)
 
     /* Immediate. Without the `$`, does a memory access, and segfaults! */
     mov $'b, %al
-    LKMC_ASSERT_EQ(%al, $0x62)
+    LKMC_ASSERT_EQ_32(%al, $0x62)
 
     /* Space character works. */
     mov $' , %al
-    LKMC_ASSERT_EQ(%al, $0x20)
+    LKMC_ASSERT_EQ_32(%al, $0x20)
 
     /* Backslash escapes work. */
     mov $'\n , %al
-    LKMC_ASSERT_EQ(%al, $0x0A)
+    LKMC_ASSERT_EQ_32(%al, $0x0A)
 
 LKMC_EPILOGUE
 

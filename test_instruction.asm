@@ -15,13 +15,13 @@ LKMC_PROLOGUE
     mov al, 0x0F0
     test al, 0
     ASSERT_FLAG jz
-    LKMC_ASSERT_EQ(%al, $0x0F0)
+    LKMC_ASSERT_EQ_32(%al, $0x0F0)
 
     mov al, 0x0F0
-    LKMC_ASSERT_EQ(%al, $0x0F0)
+    LKMC_ASSERT_EQ_32(%al, $0x0F0)
     test al, 0x0F0
     ASSERT_FLAG jnz
-    LKMC_ASSERT_EQ(%al, $0x0F0)
+    LKMC_ASSERT_EQ_32(%al, $0x0F0)
 
     ; # test %eax, %eax vc cmp %eax, 0
 

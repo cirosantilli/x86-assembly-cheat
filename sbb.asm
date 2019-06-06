@@ -13,7 +13,7 @@ LKMC_PROLOGUE
     sub eax, ecx
     sbb edx, ebx
 
-    LKMC_ASSERT_EQ(%eax, $0x80000000)
-    LKMC_ASSERT_EQ(%edx, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0x80000000)
+    LKMC_ASSERT_EQ_32(%edx, $0)
 
 LKMC_EPILOGUE

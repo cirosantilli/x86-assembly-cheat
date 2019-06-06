@@ -34,19 +34,19 @@ LKMC_PROLOGUE
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
     clc
     mov eax, 0
     mov ebx, 1
     cmovnc eax, ebx
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     stc
     mov eax, 0
     mov ebx, 1
     cmovc eax, ebx
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     ; ERROR: must be address
     ; cmovc eax, 1

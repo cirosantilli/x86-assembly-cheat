@@ -21,20 +21,20 @@ cat:
 
 LKMC_PROLOGUE
     mov s, %eax
-    LKMC_ASSERT_EQ(%eax, $0x00636261)
+    LKMC_ASSERT_EQ_32(%eax, $0x00636261)
 
     /* Concatenates literals like C does. */
     mov cat, %eax
-    LKMC_ASSERT_EQ(%eax, $0x64636261)
+    LKMC_ASSERT_EQ_32(%eax, $0x64636261)
 
     mov $s_len, %eax
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
 
     mov $0, %edx
     mov $30, %eax
     mov $25, %ecx
     div %ecx
     mov %edx, %eax
-    LKMC_ASSERT_EQ(%eax, $5)
+    LKMC_ASSERT_EQ_32(%eax, $5)
 
 LKMC_EPILOGUE

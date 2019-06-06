@@ -42,14 +42,14 @@ LKMC_PROLOGUE
         mov eax, 1
         mov ebx, 3
         lea eax, [eax + 2*ebx + 4]
-        LKMC_ASSERT_EQ(%eax, $11)
+        LKMC_ASSERT_EQ_32(%eax, $11)
 
     ; NASM is quite flexible about the ordering of operands:
 
         mov eax, 1
         mov ebx, 3
         lea eax, [4 + eax + 2*ebx]
-        LKMC_ASSERT_EQ(%eax, $11)
+        LKMC_ASSERT_EQ_32(%eax, $11)
 
     ; but avoid that and use the `[a + b*c + d]` form proposed,
     ; as that is the simplest one to interpret as array of struct + field access.
@@ -60,13 +60,13 @@ LKMC_PROLOGUE
 
             mov eax, 1
             lea eax, [3*eax]
-            LKMC_ASSERT_EQ(%eax, $3)
+            LKMC_ASSERT_EQ_32(%eax, $3)
 
         ; Which compiles to:
 
             mov eax, 1
             lea eax, [eax + 2*eax]
-            LKMC_ASSERT_EQ(%eax, $3)
+            LKMC_ASSERT_EQ_32(%eax, $3)
 
         ; since `b` must be a power of 2.
         ; This is documented at: http://www.nasm.us/doc/nasmdoc3.html#section-3.3
@@ -75,7 +75,7 @@ LKMC_PROLOGUE
 
             mov eax, 1
             lea eax, [9*eax]
-            LKMC_ASSERT_EQ(%eax, $9)
+            LKMC_ASSERT_EQ_32(%eax, $9)
 
         ; Which compiles to [eax + eax*8].
 
@@ -90,7 +90,7 @@ LKMC_PROLOGUE
         mov ax, 0
         mov bx, 1
         lea ax, [bx]
-        LKMC_ASSERT_EQ(%ax, $1)
+        LKMC_ASSERT_EQ_32(%ax, $1)
 
         ; TODO why is this invalid while the above works?
         ;lea bx, [ax]

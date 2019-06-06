@@ -18,22 +18,22 @@ LKMC_PROLOGUE
 
     cld
     movsb
-    LKMC_ASSERT_EQ [dest], 0, byte
+    LKMC_ASSERT_EQ_32 [dest], 0, byte
     mov eax, esi
     sub eax, src
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
     mov eax, edi
     sub eax, dest
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     std
     movsb
-    LKMC_ASSERT_EQ [dest + 1], 1, byte
+    LKMC_ASSERT_EQ_32 [dest + 1], 1, byte
     mov eax, esi
     sub eax, src
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
     mov eax, edi
     sub eax, dest
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
 LKMC_EPILOGUE

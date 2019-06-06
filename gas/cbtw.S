@@ -15,11 +15,11 @@ LKMC_PROLOGUE
     mov $0, %eax
     mov $1, %al
     cbw
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     mov $0, %eax
     mov $-1, %al
     cbw
-    LKMC_ASSERT_EQ(%eax, $0xFFFF)
+    LKMC_ASSERT_EQ_32(%eax, $0xFFFF)
 
 LKMC_EPILOGUE

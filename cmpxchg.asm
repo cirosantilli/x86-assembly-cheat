@@ -15,17 +15,17 @@ LKMC_PROLOGUE
     cmpxchg ebx, ecx
     ASSERT_FLAG jnz
     ; TODO
-    ;LKMC_ASSERT_EQ(%eax, $0)
-    LKMC_ASSERT_EQ(%ebx, $1)
-    LKMC_ASSERT_EQ(%ecx, $2)
+    ;LKMC_ASSERT_EQ_32(%eax, $0)
+    LKMC_ASSERT_EQ_32(%ebx, $1)
+    LKMC_ASSERT_EQ_32(%ecx, $2)
 
     mov eax, 0
     mov ebx, 0
     mov ecx, 2
     cmpxchg ebx, ecx
     ASSERT_FLAG jz
-    LKMC_ASSERT_EQ(%eax, $0)
-    LKMC_ASSERT_EQ(%ebx, $2)
-    LKMC_ASSERT_EQ(%ecx, $2)
+    LKMC_ASSERT_EQ_32(%eax, $0)
+    LKMC_ASSERT_EQ_32(%ebx, $2)
+    LKMC_ASSERT_EQ_32(%ecx, $2)
 
 LKMC_EPILOGUE

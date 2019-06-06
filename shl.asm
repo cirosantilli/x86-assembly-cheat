@@ -15,20 +15,20 @@ LKMC_PROLOGUE
 
     shl al, 1
     ASSERT_FLAG jc
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
     shl al, 1
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
     ASSERT_FLAG jnc
 
     shr al, 1
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
     ASSERT_FLAG jnc
 
     mov cl, 2
     shr al, cl
     ASSERT_FLAG jc
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
     ;ERROR:
     ;shift must be either const or in `cl`

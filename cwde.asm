@@ -10,24 +10,24 @@ LKMC_PROLOGUE
     mov eax, 0x12345678
     mov ax,      0x8000
     cwde
-    LKMC_ASSERT_EQ(%eax, $0xFFFF8000)
+    LKMC_ASSERT_EQ_32(%eax, $0xFFFF8000)
 
     ; cwde positive sign extend.
     mov eax, 0x12345678
     mov ax,      0x4000
     cwde
-    LKMC_ASSERT_EQ(%eax, $0x00004000)
+    LKMC_ASSERT_EQ_32(%eax, $0x00004000)
 
     ; cbw negative sign extend.
     mov eax, 0x12345678
     mov al,       0x80
     cbw
-    LKMC_ASSERT_EQ(%eax, $0x1234FF80)
+    LKMC_ASSERT_EQ_32(%eax, $0x1234FF80)
 
     ; cbw positive sign extend.
     mov eax, 0x12345678
     mov al,        0x40
     cbw
-    LKMC_ASSERT_EQ(%eax, $0x12340040)
+    LKMC_ASSERT_EQ_32(%eax, $0x12340040)
 
 LKMC_EPILOGUE

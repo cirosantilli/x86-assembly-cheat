@@ -21,12 +21,12 @@ LKMC_PROLOGUE
     .equ x, 0x1234567
     mov $0, %eax
     mov $x, %eax
-    LKMC_ASSERT_EQ(%eax, $0x1234567)
+    LKMC_ASSERT_EQ_32(%eax, $0x1234567)
 
     .set y, 0x1234567
     mov $0, %eax
     mov $y, %eax
-    LKMC_ASSERT_EQ(%eax, $0x1234567)
+    LKMC_ASSERT_EQ_32(%eax, $0x1234567)
 
 
     /* TODO: vs macro?
@@ -37,6 +37,6 @@ LKMC_PROLOGUE
     .set y, 2 * 1 + 1
     mov $0, %eax
     mov $y, %eax
-    LKMC_ASSERT_EQ(%eax, $0x3)
+    LKMC_ASSERT_EQ_32(%eax, $0x3)
 
 LKMC_EPILOGUE

@@ -17,19 +17,19 @@ LKMC_PROLOGUE
     mov bl, 1
     mov al, bl
     stosb
-    LKMC_ASSERT_EQ [bs4], bl
+    LKMC_ASSERT_EQ_32 [bs4], bl
     mov eax, edi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
 
     std
     mov bl, 2
     mov al, bl
     stosb
-    LKMC_ASSERT_EQ [bs4 + 1], bl
+    LKMC_ASSERT_EQ_32 [bs4 + 1], bl
     mov eax, edi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
     cld
 

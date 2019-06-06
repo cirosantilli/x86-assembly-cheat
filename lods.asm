@@ -18,19 +18,19 @@ LKMC_PROLOGUE
     cld
     ; Increase ESI
     lodsb
-    LKMC_ASSERT_EQ(%al, $0)
+    LKMC_ASSERT_EQ_32(%al, $0)
     mov eax, esi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $1)
-    LKMC_ASSERT_EQ(%edi, $0)
+    LKMC_ASSERT_EQ_32(%eax, $1)
+    LKMC_ASSERT_EQ_32(%edi, $0)
 
     std
     ; Decrease ESI
     lodsb
-    LKMC_ASSERT_EQ(%al, $1)
+    LKMC_ASSERT_EQ_32(%al, $1)
     mov eax, esi
     sub eax, bs4
-    LKMC_ASSERT_EQ(%eax, $0)
-    LKMC_ASSERT_EQ(%edi, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
+    LKMC_ASSERT_EQ_32(%edi, $0)
 
 LKMC_EPILOGUE

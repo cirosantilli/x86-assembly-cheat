@@ -12,7 +12,7 @@ DATA
 LKMC_PROLOGUE
     mov eax, 0
     mov al, [x]
-    LKMC_ASSERT_EQ(%eax, $1)
+    LKMC_ASSERT_EQ_32(%eax, $1)
     mov al, [y]
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

@@ -15,21 +15,21 @@ LKMC_PROLOGUE
     ; eax += 2
     add eax, 2
     ; assert(eax == 3)
-    LKMC_ASSERT_EQ(%eax, $3)
+    LKMC_ASSERT_EQ_32(%eax, $3)
 
     ; Register and register.
     mov eax, 1
     mov ebx, 2
     add eax, ebx
-    LKMC_ASSERT_EQ(%eax, $3)
+    LKMC_ASSERT_EQ_32(%eax, $3)
 
     ; Memory and register.
     mov eax, [myint]
-    LKMC_ASSERT_EQ(%eax, $0x1234_5678)
+    LKMC_ASSERT_EQ_32(%eax, $0x1234_5678)
 
     ; Memory and immediate.
     add dword [myint], 1
-    LKMC_ASSERT_EQ [myint], 0x1234_5679, dword
+    LKMC_ASSERT_EQ_32 [myint], 0x1234_5679, dword
 
     ; ERROR: second register must be same size
     ;add ax,al

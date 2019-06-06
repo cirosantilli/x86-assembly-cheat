@@ -19,16 +19,16 @@ LKMC_PROLOGUE
     mov orig, %esp
 
     /* val1 was modified by the push. */
-    LKMC_ASSERT_EQ(val1, $3)
+    LKMC_ASSERT_EQ_32(val1, $3)
 
     /* esp was reduced by 4. */
-    LKMC_ASSERT_EQ(%eax, $val1)
+    LKMC_ASSERT_EQ_32(%eax, $val1)
 
     mov $val1, %esp
     pop %ebx
     mov %esp, %eax
     mov orig, %esp
-    LKMC_ASSERT_EQ(%ebx, $3)
-    LKMC_ASSERT_EQ(%eax, $val2)
+    LKMC_ASSERT_EQ_32(%ebx, $3)
+    LKMC_ASSERT_EQ_32(%eax, $val2)
 
 LKMC_EPILOGUE

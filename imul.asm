@@ -10,23 +10,23 @@ LKMC_PROLOGUE
     mov eax, 0
     mov ebx, 2
     imul eax, ebx, 3
-    LKMC_ASSERT_EQ(%eax, $6)
+    LKMC_ASSERT_EQ_32(%eax, $6)
 
     ; eax = eax * eax
     mov eax, 2
     mov ebx, 3
     imul ebx
-    LKMC_ASSERT_EQ(%eax, $6)
-    LKMC_ASSERT_EQ(%ebx, $3)
+    LKMC_ASSERT_EQ_32(%eax, $6)
+    LKMC_ASSERT_EQ_32(%ebx, $3)
 
     ; eax = eax * eax
     mov eax, -2
     imul eax
-    LKMC_ASSERT_EQ(%eax, $4)
+    LKMC_ASSERT_EQ_32(%eax, $4)
 
     ; eax = eax * 3
     mov eax, 2
     imul eax, 3
-    LKMC_ASSERT_EQ(%eax, $6)
+    LKMC_ASSERT_EQ_32(%eax, $6)
 
 LKMC_EPILOGUE

@@ -92,7 +92,7 @@ extern \
 ; Assert macros
 
     ; Assert eax eq %1
-    %macro LKMC_ASSERT_EQ 3
+    %macro LKMC_ASSERT_EQ_32 3
         pushf
         cmp %3 %1, %2
         je %%ok
@@ -101,8 +101,8 @@ extern \
         popf
     %endmacro
 
-    %macro LKMC_ASSERT_EQ 2
-        LKMC_ASSERT_EQ %1, %2, %3
+    %macro LKMC_ASSERT_EQ_32 2
+        LKMC_ASSERT_EQ_32 %1, %2, %3
     %endmacro
 
     ; asserts eax neq %1
@@ -132,10 +132,10 @@ extern \
 ; SIMD macros
 
     %macro ASSERT_EQ4 5
-        LKMC_ASSERT_EQ [%1], %2, dword
-        LKMC_ASSERT_EQ [%1 + 4], %3, dword
-        LKMC_ASSERT_EQ [%1 + 8], %4, dword
-        LKMC_ASSERT_EQ [%1 + 12], %5, dword
+        LKMC_ASSERT_EQ_32 [%1], %2, dword
+        LKMC_ASSERT_EQ_32 [%1 + 4], %3, dword
+        LKMC_ASSERT_EQ_32 [%1 + 8], %4, dword
+        LKMC_ASSERT_EQ_32 [%1 + 12], %5, dword
     %endmacro
 
     ; Move 4 given dwords into the given memory location.

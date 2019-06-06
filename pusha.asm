@@ -19,12 +19,12 @@ LKMC_PROLOGUE
     pusha
     sub eax, esp
     ; 8x 4 bytes
-    LKMC_ASSERT_EQ(%eax, $32)
+    LKMC_ASSERT_EQ_32(%eax, $32)
 
     mov ebx, 1
     mov ecx, 1
     popa
-    LKMC_ASSERT_EQ(%ebx, $0)
-    LKMC_ASSERT_EQ(%ecx, $0)
+    LKMC_ASSERT_EQ_32(%ebx, $0)
+    LKMC_ASSERT_EQ_32(%ecx, $0)
 
 LKMC_EPILOGUE

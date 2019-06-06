@@ -8,15 +8,15 @@ LKMC_PROLOGUE
     cdq
     mov ecx, -2
     idiv ecx
-    LKMC_ASSERT_EQ(%eax, $2)
-    LKMC_ASSERT_EQ edx, -1
+    LKMC_ASSERT_EQ_32(%eax, $2)
+    LKMC_ASSERT_EQ_32 edx, -1
 
     mov eax, 1
     mov edx, 1
     mov ecx, 4
     idiv ecx
-    LKMC_ASSERT_EQ(%eax, $0x40000000)
-    LKMC_ASSERT_EQ(%edx, $1)
+    LKMC_ASSERT_EQ_32(%eax, $0x40000000)
+    LKMC_ASSERT_EQ_32(%edx, $1)
 
     ; RUNTIME ERROR: result must fit into signed dword:
     ;mov eax, 1

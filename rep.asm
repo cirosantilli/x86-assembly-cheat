@@ -47,14 +47,14 @@ LKMC_PROLOGUE
         mov ecx, 2
         mov al, 1
         rep stosb
-        LKMC_ASSERT_EQ [dest + 0], 1, byte
-        LKMC_ASSERT_EQ [dest + 1], 1, byte
+        LKMC_ASSERT_EQ_32 [dest + 0], 1, byte
+        LKMC_ASSERT_EQ_32 [dest + 1], 1, byte
 
         ; edi and ecx move as well.
         mov eax, edi
         sub eax, dest
-        LKMC_ASSERT_EQ(%eax, $2)
-        LKMC_ASSERT_EQ(%ecx, $0)
+        LKMC_ASSERT_EQ_32(%eax, $2)
+        LKMC_ASSERT_EQ_32(%ecx, $0)
 
     ; # memchr
 
@@ -74,9 +74,9 @@ LKMC_PROLOGUE
         mov ecx, 3
         rep movsb
 
-        LKMC_ASSERT_EQ [dest + 0], 1, byte
-        LKMC_ASSERT_EQ [dest + 1], 2, byte
-        LKMC_ASSERT_EQ [dest + 2], 3, byte
+        LKMC_ASSERT_EQ_32 [dest + 0], 1, byte
+        LKMC_ASSERT_EQ_32 [dest + 1], 2, byte
+        LKMC_ASSERT_EQ_32 [dest + 2], 3, byte
 
     ; # memcmp
 
@@ -92,13 +92,13 @@ LKMC_PROLOGUE
         mov edi, dest
         mov ecx, 2
         repz cmpsb
-        LKMC_ASSERT_EQ(%ecx, $0)
+        LKMC_ASSERT_EQ_32(%ecx, $0)
 
         ; Compare 3 bytes. Last byte differs.
         mov esi, src
         mov edi, dest
         mov ecx, 3
         repz cmpsb
-        LKMC_ASSERT_EQ(%ecx, $1)
+        LKMC_ASSERT_EQ_32(%ecx, $1)
 
 LKMC_EPILOGUE

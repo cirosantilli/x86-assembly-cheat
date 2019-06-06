@@ -15,13 +15,13 @@ LKMC_PROLOGUE
     ; Data:
 
         mov dword [resd0], 1
-        LKMC_ASSERT_EQ [resd0], 1, dword
+        LKMC_ASSERT_EQ_32 [resd0], 1, dword
 
     ; Address:
 
         mov dword eax, resd1
         sub eax, resd0
-        LKMC_ASSERT_EQ(%eax, $4)
+        LKMC_ASSERT_EQ_32(%eax, $4)
 
     ; # Memory size
 

@@ -23,7 +23,7 @@ LKMC_PROLOGUE
     ASSERT_FLAG jc
 
     ; Unchanged
-    LKMC_ASSERT_EQ(%ax, $0x0A)
+    LKMC_ASSERT_EQ_32(%ax, $0x0A)
 
     ; Not for bytes
     ;bt al, 0

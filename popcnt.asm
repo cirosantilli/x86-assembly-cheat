@@ -9,10 +9,10 @@
 LKMC_PROLOGUE
     mov ebx, 5
     popcnt eax, ebx
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
     mov ebx, 9
     popcnt eax, ebx
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
 LKMC_EPILOGUE

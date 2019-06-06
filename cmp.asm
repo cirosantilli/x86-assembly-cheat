@@ -22,11 +22,11 @@ LKMC_PROLOGUE
     mov eax, 0
     cmp eax, 0
     ASSERT_FLAG je
-    LKMC_ASSERT_EQ(%eax, $0)
+    LKMC_ASSERT_EQ_32(%eax, $0)
 
     mov eax, 2
     cmp eax, 1
     ASSERT_FLAG jne
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 
 LKMC_EPILOGUE

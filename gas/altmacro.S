@@ -32,7 +32,7 @@ LKMC_PROLOGUE
         .endm
         mov $0, %eax
         STRING_ARG $1
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
         /* But escaping it still works. */
         .macro STRING_ARG_BACKSLASH x
@@ -40,7 +40,7 @@ LKMC_PROLOGUE
         .endm
         mov $0, %eax
         STRING_ARG $1
-        LKMC_ASSERT_EQ(%eax, $1)
+        LKMC_ASSERT_EQ_32(%eax, $1)
 
         /* TODO how to avoid expansion? */
 
@@ -74,16 +74,16 @@ LKMC_PROLOGUE
             .endm
             mov $0, %eax
             PERCENT %1+1
-            LKMC_ASSERT_EQ(%eax, $2)
+            LKMC_ASSERT_EQ_32(%eax, $2)
 
             .macro PERCENT_DEFAULT x=%1+1
                 mov $\x, %eax
             .endm
             mov $0, %eax
             PERCENT_DEFAULT 1
-            LKMC_ASSERT_EQ(%eax, $1)
+            LKMC_ASSERT_EQ_32(%eax, $1)
             PERCENT_DEFAULT
-            LKMC_ASSERT_EQ(%eax, $2)
+            LKMC_ASSERT_EQ_32(%eax, $2)
 
         /*
         This is a horrible feature as it makes it impossible to pass registers
@@ -98,7 +98,7 @@ LKMC_PROLOGUE
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE <%ebx>
-            LKMC_ASSERT_EQ(%eax, $1)
+            LKMC_ASSERT_EQ_32(%eax, $1)
 
             .macro PERCENT_ESCAPE_DEFAULT x=<%ebx>
                 mov \x, %eax
@@ -106,7 +106,7 @@ LKMC_PROLOGUE
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE_DEFAULT
-            LKMC_ASSERT_EQ(%eax, $1)
+            LKMC_ASSERT_EQ_32(%eax, $1)
 
         /*
         One alternative if we are sure that the argument is a register,
@@ -119,7 +119,7 @@ LKMC_PROLOGUE
             mov $0, %eax
             mov $1, %ebx
             PERCENT_ESCAPE_REG ebx
-            LKMC_ASSERT_EQ(%eax, $1)
+            LKMC_ASSERT_EQ_32(%eax, $1)
 
         /* But this has the downside that we cannot pass immediates like `$1` anymore */
 

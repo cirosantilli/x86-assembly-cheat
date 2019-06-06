@@ -9,5 +9,5 @@
 LKMC_PROLOGUE
     mov eax, 1
     %include "included.inc"
-    LKMC_ASSERT_EQ(%eax, $2)
+    LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

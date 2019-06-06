@@ -13,6 +13,6 @@ LKMC_PROLOGUE
     mov eax, 0
     mov ax, -1
     movsx eax, ax
-    LKMC_ASSERT_EQ eax, -1
+    LKMC_ASSERT_EQ_32 eax, -1
 
 LKMC_EPILOGUE

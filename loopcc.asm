@@ -43,7 +43,7 @@ LKMC_PROLOGUE
                     inc ebx
                     cmp byte [bs4 + ebx], 0
                 loope loope_lbl
-                LKMC_ASSERT_EQ(%ebx, $2)
+                LKMC_ASSERT_EQ_32(%ebx, $2)
 
     ; # LOOPNE
 

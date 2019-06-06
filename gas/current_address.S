@@ -15,5 +15,5 @@ x: .long .
 LKMC_PROLOGUE
     mov x, %eax
     mov $x, %ebx
-    LKMC_ASSERT_EQ(%eax, %ebx)
+    LKMC_ASSERT_EQ_32(%eax, %ebx)
 LKMC_EPILOGUE

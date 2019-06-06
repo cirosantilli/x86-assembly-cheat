@@ -24,15 +24,15 @@ LKMC_PROLOGUE
     ; eax = -2, CF = 1
     sal eax, 1
     ASSERT_FLAG jc
-    LKMC_ASSERT_EQ eax, -2
+    LKMC_ASSERT_EQ_32 eax, -2
 
     ;ax < 0, CF = 0
     sar eax, 1
-    LKMC_ASSERT_EQ eax, -1
+    LKMC_ASSERT_EQ_32 eax, -1
 
     ; Cannot replace div for negative odd numbers directly
     ; as it rounds do -infinity, while div rounds to 0. TODO check.
     sar eax, 1
-    LKMC_ASSERT_EQ eax, -1
+    LKMC_ASSERT_EQ_32 eax, -1
 
 LKMC_EPILOGUE
