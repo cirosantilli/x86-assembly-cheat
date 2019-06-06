@@ -3,41 +3,41 @@
 #     eax = edx:eax / SRC
 #     edx = edx:eax % SRC
 #
-# div can be used to calculate modulus, but GCC does not use it becaues it is slow,
+# div can be used to calculate modulus, but GCC does not use it becaues it is slow, 
 # and choses alternative techniques instead instead:
 # http://stackoverflow.com/questions/4361979/how-does-the-gcc-implementation-of-module-work-and-why-does-it-not-use-the
 
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $5,%eax
-    movl $0,%edx
-    movl $2,%ecx
+    movl $5, %eax
+    movl $0, %edx
+    movl $2, %ecx
     divl %ecx
     LKMC_ASSERT_EQ_32(%eax, $2)
     LKMC_ASSERT_EQ_32(%edx, $1)
 
     # 8 bit
-    movl $0,%eax
-    movw $0x101,%ax
-    movb $2,%cl
+    movl $0, %eax
+    movw $0x101, %ax
+    movb $2, %cl
     divb %cl
     LKMC_ASSERT_EQ_32(%eax, $0x180)
 
     # 16 bit
-    movl $0,%eax
-    movl $0,%edx
-    movw $1,%ax
-    movw $1,%dx
-    movw $2,%cx
+    movl $0, %eax
+    movl $0, %edx
+    movw $1, %ax
+    movw $1, %dx
+    movw $2, %cx
     divw %cx
     LKMC_ASSERT_EQ_32(%eax, $0x8000)
     LKMC_ASSERT_EQ_32(%edx, $1)
 
     # 32 bit
-    movl $1,%eax
-    movl $1,%edx
-    movl $2,%ecx
+    movl $1, %eax
+    movl $1, %edx
+    movl $2, %ecx
     divl %ecx
     LKMC_ASSERT_EQ_32(%eax, $0x80000000)
     LKMC_ASSERT_EQ_32(%edx, $1)

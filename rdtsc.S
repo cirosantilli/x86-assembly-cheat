@@ -17,7 +17,7 @@
 
     # # Number of cycles for each instruction
 
-        # A single instruction can take many cycles,
+        # A single instruction can take many cycles, 
         # so the number of instructions alone is not a good measure of speed.
 
         # The deltas are not predictable because of optimizations
@@ -31,13 +31,13 @@
 
 LKMC_PROLOGUE
     rdtsc
-    movl %eax,%ebx
+    movl %eax, %ebx
     rdtsc
     call print_int
     PRINT_INT ebx
 
     rdtscp
-    movl %eax,%ebx
+    movl %eax, %ebx
     rdtscp
     call print_int
     PRINT_INT ebx

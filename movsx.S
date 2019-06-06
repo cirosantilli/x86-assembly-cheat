@@ -10,9 +10,9 @@
 
 LKMC_PROLOGUE
 
-    movl $0,%eax
-    movw $-1,%ax
-    movswl %ax,%eax
+    movl $0, %eax
+    movw $-1, %ax
+    movswl %ax, %eax
     LKMC_ASSERT_EQ_32 eax, -1
 
 LKMC_EPILOGUE

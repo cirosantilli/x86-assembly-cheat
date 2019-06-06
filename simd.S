@@ -1,6 +1,6 @@
 # # SIMD
 
-    # Do a single operations at once on multiple memory locations,
+    # Do a single operations at once on multiple memory locations, 
     # e.g. add four integers in one go.
 
     # https://www.kernel.org/pub/linux/kernel/people/geoff/cell/ps3-linux-docs/CellProgrammingTutorial/BasicsOfSIMDProgramming.html
@@ -69,7 +69,7 @@ LKMC_PROLOGUE
 
                 # May be faster.
 
-                # If you attempt to use it on unaligned memory,
+                # If you attempt to use it on unaligned memory, 
                 # raises a general-protection exception (#GP).
                 # Let's do that now. One of the following must be misaligned:
 

@@ -9,12 +9,12 @@
 
 LKMC_PROLOGUE
 
-    # Square brackets `[]` are needed to access the *data*,
+    # Square brackets `[]` are needed to access the *data*, 
     # otherwise the address of the label is understood:
 
     # Data:
 
-        movl $1,resd0
+        movl $1, resd0
         LKMC_ASSERT_EQ_32 [resd0], 1, dword
 
     # Address:
@@ -39,8 +39,8 @@ LKMC_PROLOGUE
 
         # NASM knows it is 4 bytes because we are using eax:
 
-            movl $1,%eax
-            movl %eax,resd0
+            movl $1, %eax
+            movl %eax, resd0
 
         # List of all size keywords:
         # http://stackoverflow.com/questions/12063840/what-are-the-sizes-of-tword-oword-and-yword-operands

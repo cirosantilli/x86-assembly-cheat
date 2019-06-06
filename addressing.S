@@ -28,7 +28,7 @@
     # - `c`: size of each element. Known at compile time. TODO what gets compiled if >8 ?
     # - `d`: field of the array to be accessed. Known at compile time, so an immediate.
 
-    # Several sets of a, b, c and d can be omitted. To really understand what is going on,
+    # Several sets of a, b, c and d can be omitted. To really understand what is going on, 
     # you should learn how those instructions are encoded.
 
 
@@ -39,33 +39,33 @@ LKMC_PROLOGUE
 
     # Full form (except no segment, DS used by default):
 
-        movl $1,%eax
-        movl $3,%ebx
+        movl $1, %eax
+        movl $3, %ebx
         lea eax, [eax + 2*ebx + 4]
         LKMC_ASSERT_EQ_32(%eax, $11)
 
     # NASM is quite flexible about the ordering of operands:
 
-        movl $1,%eax
-        movl $3,%ebx
+        movl $1, %eax
+        movl $3, %ebx
         lea eax, [4 + eax + 2*ebx]
         LKMC_ASSERT_EQ_32(%eax, $11)
 
-    # but avoid that and use the `[a + b*c + d]` form proposed,
+    # but avoid that and use the `[a + b*c + d]` form proposed, 
     # as that is the simplest one to interpret as array of struct + field access.
 
     # # Magic multipliers
 
         # NASM can also do pure magic like:
 
-            movl $1,%eax
-            leal 3*eax,%eax
+            movl $1, %eax
+            leal 3*eax, %eax
             LKMC_ASSERT_EQ_32(%eax, $3)
 
         # Which compiles to:
 
-            movl $1,%eax
-            leal (%eax,%eax,2),%eax
+            movl $1, %eax
+            leal (%eax, %eax, 2), %eax
             LKMC_ASSERT_EQ_32(%eax, $3)
 
         # since `b` must be a power of 2.
@@ -73,8 +73,8 @@ LKMC_PROLOGUE
 
         # This can lead us up to 9:
 
-            movl $1,%eax
-            leal 9*eax,%eax
+            movl $1, %eax
+            leal 9*eax, %eax
             LKMC_ASSERT_EQ_32(%eax, $9)
 
         # Which compiles to [eax + eax*8].
@@ -87,9 +87,9 @@ LKMC_PROLOGUE
 
     # TODO Possible to use 8-bit or 16-bit registers?
 
-        movw $0,%ax
-        movw $1,%bx
-        leaw (%bx),%ax
+        movw $0, %ax
+        movw $1, %bx
+        leaw (%bx), %ax
         LKMC_ASSERT_EQ_32(%ax, $1)
 
         # TODO why is this invalid while the above works?

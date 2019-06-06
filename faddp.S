@@ -5,7 +5,7 @@
 #
 # P means Pop st0.
 #
-# It is present in many instructions,
+# It is present in many instructions, 
 # e.g. here we use it in fcompiP.
 
 #include <lkmc.h>
@@ -28,7 +28,7 @@ LKMC_PROLOGUE
 
     # st0 = st0 + st1
     # P means Pop st0.
-    faddp %st,%st(1)
+    faddp %st, %st(1)
     # FPU stack after operation:
     # st0 == 4.0
 

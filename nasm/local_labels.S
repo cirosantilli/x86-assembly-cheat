@@ -15,7 +15,7 @@
 LKMC_PROLOGUE
 outside_label:
 
-    # This should be not done in practice,
+    # This should be not done in practice, 
     # but shows how it works under the hood.
     jmp outside_label.inside_label
     ASSERT_FAIL

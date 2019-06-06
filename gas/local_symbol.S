@@ -7,7 +7,7 @@ Symbols that start with `.L` don't appear at all on the ELF output.
 
 By default, symbols do appear on ELF, but are local.
 
-Unlike NASM's `.label`, such labels are visible on the entire file,
+Unlike NASM's `.label`, such labels are visible on the entire file, 
 and cannot be redefined.
 */
 

@@ -28,7 +28,7 @@ LKMC_PROLOGUE
     /*PRINT_INT(1)*/
 
     /*
-    The same goes for symbol and label addresses: `$` indicates the address,
+    The same goes for symbol and label addresses: `$` indicates the address, 
     and its absence dereferences automatically.
     */
 

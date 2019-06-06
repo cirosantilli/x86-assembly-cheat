@@ -8,18 +8,18 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movw $0x0A,%ax
+    movw $0x0A, %ax
 
-    btw $0,%ax
+    btw $0, %ax
     ASSERT_FLAG jnc
 
-    btw $1,%ax
+    btw $1, %ax
     ASSERT_FLAG jc
 
-    btw $2,%ax
+    btw $2, %ax
     ASSERT_FLAG jnc
 
-    btw $3,%ax
+    btw $3, %ax
     ASSERT_FLAG jc
 
     # Unchanged

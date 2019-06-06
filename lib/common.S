@@ -12,7 +12,7 @@ extern printf, exit
 
 # Print error message and exit program with status 1.
 #
-# Usually called with the `assert_fail` macro,
+# Usually called with the `assert_fail` macro, 
 # which also prepares the line number.
 #
 # The line number must be set in a macro
@@ -22,10 +22,10 @@ extern printf, exit
 #
 .global assert_fail
 assert_fail: 
-    movl %eax,%ebx
+    movl %eax, %ebx
     movl $.message, %eax
     call print_string
-    movl %ebx,%eax
+    movl %ebx, %eax
     call print_int
     # Call libc exit with exit status 1:
     pushl $1
@@ -36,7 +36,7 @@ assert_fail:
 .global print_int
 print_int: 
     # Prologue.
-    enter $0,$0
+    enter $0, $0
     pusha
     pushf
     # Body.
@@ -56,7 +56,7 @@ print_int:
 .global print_string
 print_string: 
     # Prologue.
-    enter $0,$0
+    enter $0, $0
     pusha
     pushf
     # Body.

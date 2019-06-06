@@ -2,4 +2,4 @@
 .text
     .global _start
     _start: 
-        movq $0,%rax
+        movq $0, %rax

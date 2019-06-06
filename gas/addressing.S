@@ -48,7 +48,7 @@ LKMC_PROLOGUE
 
         /*
         Omit the mulitplicator d.
-        a(b,c) == a(b,c,1)
+        a(b, c) == a(b, c, 1)
         */
         mov $0, %eax
         mov $3, %ebx
@@ -70,7 +70,7 @@ LKMC_PROLOGUE
 
         /* TODO What is this syntax for? Compare to the next example. */
         mov $0, %eax
-        lea 2(,1), %eax
+        lea 2(, 1), %eax
         LKMC_ASSERT_EQ_32(%eax, $2)
 
         mov $0, %eax
@@ -84,7 +84,7 @@ LKMC_PROLOGUE
 
         mov $0, %eax
         mov $3, %ebx
-        lea 2(,%ebx,4), %eax
+        lea 2(, %ebx, 4), %eax
         LKMC_ASSERT_EQ_32(%eax, $14)
 
         /*

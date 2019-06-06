@@ -14,15 +14,15 @@ LKMC_PROLOGUE
 
     # # Registers
 
-        # General purpose registers got longer versions,
+        # General purpose registers got longer versions, 
         # and 8 new ones were extended: r8 through r15.
 
-            movq $0xFFFFFFFFFFFFFFFF,%rax
-            movq $0xFFFFFFFFFFFFFFFF,%rbx
-            movq $0xFFFFFFFFFFFFFFFF,%rcx
-            movq $0xFFFFFFFFFFFFFFFF,%rdx
-            movq $0xFFFFFFFFFFFFFFFF,%rsi
-            movq $0xFFFFFFFFFFFFFFFF,%rdi
+            movq $0xFFFFFFFFFFFFFFFF, %rax
+            movq $0xFFFFFFFFFFFFFFFF, %rbx
+            movq $0xFFFFFFFFFFFFFFFF, %rcx
+            movq $0xFFFFFFFFFFFFFFFF, %rdx
+            movq $0xFFFFFFFFFFFFFFFF, %rsi
+            movq $0xFFFFFFFFFFFFFFFF, %rdi
             #mov rbp, 0xFFFFFFFFFFFFFFFF
             #mov rsp, 0xFFFFFFFFFFFFFFFF
             mov r8,  0xFFFFFFFFFFFFFFFF
@@ -54,7 +54,7 @@ LKMC_PROLOGUE
             #lea rax, [rip]
             #lea rax, [rip + 4]
 
-        # Instead, it seems that you must use the `rel` or `abs` keyword,
+        # Instead, it seems that you must use the `rel` or `abs` keyword, 
         # and possibly set their defaults http://www.nasm.us/doc/nasmdoc6.html#section-6.2.1 :
 
             #lea rax, [rel _start]

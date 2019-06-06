@@ -10,13 +10,13 @@
 # For mov, rax is the only register that accepts it.
 # TODO see other instructions.
 #
-# I think this is encoded as `MOV moffs64*,RAX`. TODO better understand the `moffs` thing.
+# I think this is encoded as `MOV moffs64*, RAX`. TODO better understand the `moffs` thing.
 #
 # movabs is the AT&T name of the special form that accepts 64-bit immediates.
 #
 # Intel just puts it under MOV, and NASM just uses `mov`.
 #
-# NASM only gives warnings in case an impossible mov is coded,
+# NASM only gives warnings in case an impossible mov is coded, 
 # and silently truncates the address.
 #
 # http://stackoverflow.com/questions/19415184/load-from-a-64-bit-address-into-other-register-than-rax

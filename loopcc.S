@@ -13,17 +13,17 @@ LKMC_PROLOGUE
         # ecx--;
         # if (ecx != 0) goto lbl
 
-                movl $3,%ecx
+                movl $3, %ecx
             loop_lbl: 
                 # 3, 2, 1
                 PRINT_INT ecx
             loop loop_lbl
 
-                movl $3,%ecx
-                movl %ecx,%ebx
+                movl $3, %ecx
+                movl %ecx, %ebx
             loop_lbl_2: 
-                movl %ebx,%eax
-                subl %ecx,%eax
+                movl %ebx, %eax
+                subl %ecx, %eax
                 # 0, 1, 2
                 call print_int
             loop loop_lbl_2
@@ -37,8 +37,8 @@ LKMC_PROLOGUE
             # bx will contain its index afterwards.
             # If not found, bx is the length + 1.
 
-                movl $4,%ecx
-                movl $-1,%ebx
+                movl $4, %ecx
+                movl $-1, %ebx
                 loope_lbl: 
                     incl %ebx
                     cmp byte [bs4 + ebx], 0

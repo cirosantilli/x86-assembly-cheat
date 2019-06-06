@@ -3,14 +3,14 @@
 # The jmp address has the following forms. Quoting Intel manual:
 #
 # > - Near jump - A jump to an instruction within the current code segment
-# > (the segment currently pointed to by the CS register),
+# > (the segment currently pointed to by the CS register), 
 # > sometimes referred to as an intrasegment jump.
 # >
 # > - Short jump - A near jump where the jump range is limited to
 # > –128 to +127 from the current EIP value.
 # >
 # > - Far jump - A jump to an instruction located in a different segment
-# > than the current code segment but at the same privilege level,
+# > than the current code segment but at the same privilege level, 
 # > sometimes referred to as an intersegment jump.
 # >
 # > - Task switch - A jump to an instruction located in a different task.

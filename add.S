@@ -11,27 +11,27 @@ DATA
 LKMC_PROLOGUE
     # Immediate and register.
     # eax = 1
-    movl $1,%eax
+    movl $1, %eax
     # eax += 2
-    addl $2,%eax
+    addl $2, %eax
     # assert(eax == 3)
     LKMC_ASSERT_EQ_32(%eax, $3)
 
     # Register and register.
-    movl $1,%eax
-    movl $2,%ebx
-    addl %ebx,%eax
+    movl $1, %eax
+    movl $2, %ebx
+    addl %ebx, %eax
     LKMC_ASSERT_EQ_32(%eax, $3)
 
     # Memory and register.
-    movl myint,%eax
+    movl myint, %eax
     LKMC_ASSERT_EQ_32(%eax, $0x1234_5678)
 
     # Memory and immediate.
-    addl $1,myint
+    addl $1, myint
     LKMC_ASSERT_EQ_32 [myint], 0x1234_5679, dword
 
     # ERROR: second register must be same size
-    #add ax,al
-    #add ax,eax
+    #add ax, al
+    #add ax, eax
 LKMC_EPILOGUE

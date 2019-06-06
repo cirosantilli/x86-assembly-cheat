@@ -1,7 +1,7 @@
 /*
 # cmp
 
-    cmp must take the value first, register after,
+    cmp must take the value first, register after, 
     otherwise you get "operand type mismatch""
 
     http://stackoverflow.com/questions/30200515/gcc-inline-operand-type-mismatch-for-cmp

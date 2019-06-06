@@ -23,7 +23,7 @@ LKMC_PROLOGUE
     LKMC_ASSERT_EQ_32(%eax, $0x00636261)
 
     /*
-    Concatenates literals somewhat like C does,
+    Concatenates literals somewhat like C does, 
     BUT adds a null after each one.
     */
     mov cat, %eax

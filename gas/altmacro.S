@@ -109,7 +109,7 @@ LKMC_PROLOGUE
             LKMC_ASSERT_EQ_32(%eax, $1)
 
         /*
-        One alternative if we are sure that the argument is a register,
+        One alternative if we are sure that the argument is a register, 
         is to put the percent inside the macro:
         */
 

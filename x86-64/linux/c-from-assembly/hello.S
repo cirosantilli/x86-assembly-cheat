@@ -5,9 +5,9 @@ default rel
 .text
 .global main
 main: 
-    subq $8,%rsp
+    subq $8, %rsp
     lea rdi, [rel message]
     call puts
-    xorl %eax,%eax
-    addq $8,%rsp
+    xorl %eax, %eax
+    addq $8, %rsp
     ret

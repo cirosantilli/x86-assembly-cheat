@@ -21,7 +21,7 @@ LKMC_PROLOGUE
     fldl my_float
     mov dword [my_float], __float32__(2.5)
     fldl my_float
-    faddp %st,%st(1)
+    faddp %st, %st(1)
     mov dword [my_float], __float32__(4.0)
     fldl my_float
     fcomip %st(1)

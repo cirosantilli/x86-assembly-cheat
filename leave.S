@@ -11,15 +11,15 @@
 
 LKMC_PROLOGUE
 
-    movl %esp,%eax
-    enter $0,$8
-    subl %esp,%eax
+    movl %esp, %eax
+    enter $0, $8
+    subl %esp, %eax
     LKMC_ASSERT_EQ_32(%eax, $12)
 
     # Modify 1st local var.
-    movl $1,-4(%ebp)
+    movl $1, -4(%ebp)
     # Modify 2nd local var.
-    movl $2,-8(%ebp)
+    movl $2, -8(%ebp)
 
     leave
 

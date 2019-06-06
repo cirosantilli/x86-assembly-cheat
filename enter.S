@@ -9,7 +9,7 @@
     # Which implies an allocation of:
 
     # - one dword to remember `ebp`
-    # - `A` dwords for local function variables,
+    # - `A` dwords for local function variables, 
 
     # Enter is almost never used by GCC as it is slower than `push`:
     # http://stackoverflow.com/questions/5959890/enter-vs-push-ebp-mov-ebp-esp-sub-esp-imm-and-leave-vs-mov-esp-ebp

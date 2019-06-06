@@ -7,11 +7,11 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $5,%ebx
+    movl $5, %ebx
     popcnt eax, ebx
     LKMC_ASSERT_EQ_32(%eax, $2)
 
-    movl $9,%ebx
+    movl $9, %ebx
     popcnt eax, ebx
     LKMC_ASSERT_EQ_32(%eax, $2)
 

@@ -29,9 +29,9 @@ LKMC_PROLOGUE
 
         # Has equivalent:
 
-            movl $0,%eax
-            movl $1,%ebx
-            cmpl %ebx,%eax
+            movl $0, %eax
+            movl $1, %ebx
+            cmpl %ebx, %eax
             jnz jnz_test
             ASSERT_FAIL
             jnz_test: 
@@ -62,18 +62,18 @@ LKMC_PROLOGUE
         # - `a`: above
         # - `b`: below
 
-        movl $0,%eax
-        cmpl $1,%eax
+        movl $0, %eax
+        cmpl $1, %eax
         ASSERT_FLAG jl
         ASSERT_FLAG jle
 
-        movl $1,%eax
-        cmpl $0,%eax
+        movl $1, %eax
+        cmpl $0, %eax
         ASSERT_FLAG jg
         ASSERT_FLAG jge
 
-        movl $0,%eax
-        cmpl $0,%eax
+        movl $0, %eax
+        cmpl $0, %eax
         ASSERT_FLAG jle
         ASSERT_FLAG jge
 

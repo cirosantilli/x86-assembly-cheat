@@ -2,7 +2,7 @@
 
     # Load Effective Address
 
-    # Do an addressing calculation, and store the **address**,
+    # Do an addressing calculation, and store the **address**, 
     # not the value at that memory location as would be done with `mov`.
 
     # Often used in an attempt to speed up arithmetic operations.

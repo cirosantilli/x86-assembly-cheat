@@ -20,7 +20,7 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $-1,%eax
+    movl $-1, %eax
     # eax = -2, CF = 1
     sall %eax
     ASSERT_FLAG jc

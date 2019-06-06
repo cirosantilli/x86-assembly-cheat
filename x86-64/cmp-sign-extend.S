@@ -11,9 +11,9 @@ LKMC_PROLOGUE
     # Sanity check: mov can encode imm64, and cmp r64, r64 works as expected.
     movq $0x12345678_80000000, %rax
     movq $0x00000001_00000000, %rbx
-    addq %rbx,%rax
+    addq %rbx, %rax
     movq $0x12345679_80000000, %rbx
-    cmpq %rbx,%rax
+    cmpq %rbx, %rax
     je reg_reg
     ASSERT_FAIL
 reg_reg: 
@@ -32,7 +32,7 @@ reg_imm_sign_1:
 
     # Positive sign extend.
     movq $0x00000000_40000000, %rax
-    cmpq $0x40000000,%rax
+    cmpq $0x40000000, %rax
     je reg_imm_sign_0
     ASSERT_FAIL
 reg_imm_sign_0: 
@@ -60,7 +60,7 @@ reg_imm_sign_0:
     # So juts move to a register before comparing.
     movq $0x12345678_80000000, %rax
     movq $0x00000001_00000000, %rbx
-    addq %rbx,%rax
+    addq %rbx, %rax
     movq $0x12345679_80000000, %rbx
     LKMC_ASSERT_EQ(%rax, %rbx)
 

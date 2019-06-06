@@ -3,17 +3,17 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $-5,%eax
+    movl $-5, %eax
     # Don't forget this!
     cltd
-    movl $-2,%ecx
+    movl $-2, %ecx
     idivl %ecx
     LKMC_ASSERT_EQ_32(%eax, $2)
     LKMC_ASSERT_EQ_32 edx, -1
 
-    movl $1,%eax
-    movl $1,%edx
-    movl $4,%ecx
+    movl $1, %eax
+    movl $1, %edx
+    movl $4, %ecx
     idivl %ecx
     LKMC_ASSERT_EQ_32(%eax, $0x40000000)
     LKMC_ASSERT_EQ_32(%edx, $1)

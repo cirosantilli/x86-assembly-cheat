@@ -13,13 +13,13 @@ DATA
 LKMC_PROLOGUE
 
     movl $bs4, %esi
-    movl $0,%edi
+    movl $0, %edi
 
     cld
     # Increase ESI
     lodsb
     LKMC_ASSERT_EQ_32(%al, $0)
-    movl %esi,%eax
+    movl %esi, %eax
     subl $bs4, %eax
     LKMC_ASSERT_EQ_32(%eax, $1)
     LKMC_ASSERT_EQ_32(%edi, $0)
@@ -28,7 +28,7 @@ LKMC_PROLOGUE
     # Decrease ESI
     lodsb
     LKMC_ASSERT_EQ_32(%al, $1)
-    movl %esi,%eax
+    movl %esi, %eax
     subl $bs4, %eax
     LKMC_ASSERT_EQ_32(%eax, $0)
     LKMC_ASSERT_EQ_32(%edi, $0)

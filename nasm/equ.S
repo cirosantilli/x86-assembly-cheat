@@ -11,6 +11,6 @@ DATA
 LKMC_PROLOGUE
     movl $x, %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
-    movl y,%eax
+    movl y, %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

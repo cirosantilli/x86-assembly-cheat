@@ -27,18 +27,18 @@
 
 LKMC_PROLOGUE
 
-    movl %esp,%eax
+    movl %esp, %eax
     pushl $1
-    subl %esp,%eax
+    subl %esp, %eax
     LKMC_ASSERT_EQ_32(%eax, $4)
-    movl (%esp),%eax
+    movl (%esp), %eax
     LKMC_ASSERT_EQ_32(%eax, $1)
 
-    movl %esp,%eax
+    movl %esp, %eax
     pushb $2
-    subl %esp,%eax
+    subl %esp, %eax
     LKMC_ASSERT_EQ_32(%eax, $4)
-    movl (%esp),%eax
+    movl (%esp), %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
 
     popl %eax
@@ -49,14 +49,14 @@ LKMC_PROLOGUE
 
     # Manual equivalent.
 
-    subl $8,%esp
-    movl $2,(%esp)
-    movl $1,4(%esp)
+    subl $8, %esp
+    movl $2, (%esp)
+    movl $1, 4(%esp)
 
-    movl (%esp),%eax
+    movl (%esp), %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
-    movl 4(%esp),%eax
+    movl 4(%esp), %eax
     LKMC_ASSERT_EQ_32(%eax, $1)
-    addl $8,%esp
+    addl $8, %esp
 
 LKMC_EPILOGUE

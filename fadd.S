@@ -29,7 +29,7 @@ LKMC_PROLOGUE
     # st1 == 1.5
 
     # st0 = st0 + st1
-    fadd %st,%st(1)
+    fadd %st, %st(1)
     # FPU stack after operation:
     # st0 == 4.0
     # st1 == 1.5

@@ -26,7 +26,7 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $0,%eax
+    movl $0, %eax
     cpuid
 
     # "Genu", shorthand for "genuine"

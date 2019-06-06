@@ -11,7 +11,7 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $0x81,%eax
+    movl $0x81, %eax
 
     shlb %al
     ASSERT_FLAG jc
@@ -25,8 +25,8 @@ LKMC_PROLOGUE
     LKMC_ASSERT_EQ_32(%eax, $2)
     ASSERT_FLAG jnc
 
-    movb $2,%cl
-    shrb %cl,%al
+    movb $2, %cl
+    shrb %cl, %al
     ASSERT_FLAG jc
     LKMC_ASSERT_EQ_32(%eax, $0)
 

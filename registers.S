@@ -23,7 +23,7 @@ LKMC_PROLOGUE
             movl $0xFFFF_FFFF, %esi
             movl $0xFFFF_FFFF, %edi
             # SEGFAULT
-            # We could compile and run the following,
+            # We could compile and run the following, 
             # but that would segfault us later
             # since those are used on calling conventions:
             #mov ebp, 0xFFFF_FFFF
@@ -60,7 +60,7 @@ LKMC_PROLOGUE
             # - CX = counter
             # - BX = base register
 
-            # This is also reflected by the way that those registers are encoded,
+            # This is also reflected by the way that those registers are encoded, 
             # which uses the order `acdb` instead of `abcd`.
 
         # # Register parts
@@ -110,7 +110,7 @@ LKMC_PROLOGUE
 
             # Increment and decrement are differentiated by the direction flag.
 
-            # Whenever you are not dealing with string instructions,
+            # Whenever you are not dealing with string instructions, 
             # those registers are useful for general purpose.
 
         # # ebp
@@ -168,7 +168,7 @@ LKMC_PROLOGUE
 
         # Most flag are identified by one letter, and commonly denoted `XF` for "flag X".
 
-        # Flags may be set or reset explicitly by dedicated instructions,
+        # Flags may be set or reset explicitly by dedicated instructions, 
         # and also as side effects of other instructions, e.g. `cmp` for ZF and CF.
 
         # The flags are:

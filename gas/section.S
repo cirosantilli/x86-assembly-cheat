@@ -7,7 +7,7 @@
 
     Same as `.section`.
 
-    So don't use, since what we actually create are sections,
+    So don't use, since what we actually create are sections, 
     not segments, which are created by the linker.
 
 # .text
@@ -21,7 +21,7 @@
     TODO vs `.section .data`
     http://stackoverflow.com/questions/21606690/whats-difference-between-section-data-and-just-data-in-gas-coding
 
-    Actually looks like the exact same: even with `.section .data`,
+    Actually looks like the exact same: even with `.section .data`, 
     the section is treated magically, e.g. gets W flag.
 
 # Section flags

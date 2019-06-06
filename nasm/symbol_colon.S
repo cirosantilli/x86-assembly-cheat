@@ -10,9 +10,9 @@ DATA
     # Without colon.
     y db 2
 LKMC_PROLOGUE
-    movl $0,%eax
-    movb x,%al
+    movl $0, %eax
+    movb x, %al
     LKMC_ASSERT_EQ_32(%eax, $1)
-    movb y,%al
+    movb y, %al
     LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

@@ -7,26 +7,26 @@
 
 LKMC_PROLOGUE
     # cwde negative sign extend.
-    movl $0x12345678,%eax
-    movw $0x8000,%ax
+    movl $0x12345678, %eax
+    movw $0x8000, %ax
     cwtl
     LKMC_ASSERT_EQ_32(%eax, $0xFFFF8000)
 
     # cwde positive sign extend.
-    movl $0x12345678,%eax
-    movw $0x4000,%ax
+    movl $0x12345678, %eax
+    movw $0x4000, %ax
     cwtl
     LKMC_ASSERT_EQ_32(%eax, $0x00004000)
 
     # cbw negative sign extend.
-    movl $0x12345678,%eax
-    movb $0x80,%al
+    movl $0x12345678, %eax
+    movb $0x80, %al
     cbtw
     LKMC_ASSERT_EQ_32(%eax, $0x1234FF80)
 
     # cbw positive sign extend.
-    movl $0x12345678,%eax
-    movb $0x40,%al
+    movl $0x12345678, %eax
+    movb $0x40, %al
     cbtw
     LKMC_ASSERT_EQ_32(%eax, $0x12340040)
 
