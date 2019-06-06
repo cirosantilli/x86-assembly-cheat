@@ -1,0 +1,4 @@
+#include <lkmc.h>
+
+LKMC_PROLOGUE
+LKMC_EPILOGUE
