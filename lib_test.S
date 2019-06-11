@@ -5,6 +5,6 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $12345678, %eax
+    mov $12345678, %eax
     call print_int
 LKMC_EPILOGUE

@@ -31,20 +31,20 @@
 LKMC_PROLOGUE
 
     clc
-    movl $0, %eax
-    movl $1, %ebx
+    mov $0, %eax
+    mov $1, %ebx
     cmovc eax, ebx
     LKMC_ASSERT_EQ_32(%eax, $0)
 
     clc
-    movl $0, %eax
-    movl $1, %ebx
+    mov $0, %eax
+    mov $1, %ebx
     cmovnc eax, ebx
     LKMC_ASSERT_EQ_32(%eax, $1)
 
     stc
-    movl $0, %eax
-    movl $1, %ebx
+    mov $0, %eax
+    mov $1, %ebx
     cmovc eax, ebx
     LKMC_ASSERT_EQ_32(%eax, $1)
 

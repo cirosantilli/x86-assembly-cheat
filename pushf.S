@@ -17,7 +17,7 @@
 LKMC_PROLOGUE
 
     clc
-    movl %esp, %eax
+    mov %esp, %eax
     pushf
     subl %esp, %eax
     # Needs 2 bytes, stack min 1 dword.

@@ -31,13 +31,13 @@
 
 LKMC_PROLOGUE
     rdtsc
-    movl %eax, %ebx
+    mov %eax, %ebx
     rdtsc
     call print_int
     PRINT_INT ebx
 
     rdtscp
-    movl %eax, %ebx
+    mov %eax, %ebx
     rdtscp
     call print_int
     PRINT_INT ebx

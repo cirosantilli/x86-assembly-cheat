@@ -43,16 +43,16 @@ LKMC_PROLOGUE
         mov byte [dest + 0], 0
         mov byte [dest + 1], 0
 
-        movl $dest, %edi
-        movl $2, %ecx
-        movb $1, %al
+        mov $dest, %edi
+        mov $2, %ecx
+        mov $1, %al
         rep
         stosb
         LKMC_ASSERT_EQ_32 [dest + 0], 1, byte
         LKMC_ASSERT_EQ_32 [dest + 1], 1, byte
 
         # edi and ecx move as well.
-        movl %edi, %eax
+        mov %edi, %eax
         subl $dest, %eax
         LKMC_ASSERT_EQ_32(%eax, $2)
         LKMC_ASSERT_EQ_32(%ecx, $0)
@@ -70,9 +70,9 @@ LKMC_PROLOGUE
         mov byte [dest + 1], 0
         mov byte [dest + 1], 0
 
-        movl $src, %esi
-        movl $dest, %edi
-        movl $3, %ecx
+        mov $src, %esi
+        mov $dest, %edi
+        mov $3, %ecx
         rep
         movsb
 
@@ -90,16 +90,16 @@ LKMC_PROLOGUE
         mov byte [dest + 1], 3
 
         # Compare 2 bytes. They are equal.
-        movl $src, %esi
-        movl $dest, %edi
-        movl $2, %ecx
+        mov $src, %esi
+        mov $dest, %edi
+        mov $2, %ecx
         repz cmpsb
         LKMC_ASSERT_EQ_32(%ecx, $0)
 
         # Compare 3 bytes. Last byte differs.
-        movl $src, %esi
-        movl $dest, %edi
-        movl $3, %ecx
+        mov $src, %esi
+        mov $dest, %edi
+        mov $3, %ecx
         repz cmpsb
         LKMC_ASSERT_EQ_32(%ecx, $1)
 

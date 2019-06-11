@@ -19,12 +19,12 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $0, %eax
+    mov $0, %eax
     cmpl $0, %eax
     ASSERT_FLAG je
     LKMC_ASSERT_EQ_32(%eax, $0)
 
-    movl $2, %eax
+    mov $2, %eax
     cmpl $1, %eax
     ASSERT_FLAG jne
     LKMC_ASSERT_EQ_32(%eax, $2)

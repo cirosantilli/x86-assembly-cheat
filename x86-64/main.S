@@ -17,12 +17,12 @@ LKMC_PROLOGUE
         # General purpose registers got longer versions, 
         # and 8 new ones were extended: r8 through r15.
 
-            movq $0xFFFFFFFFFFFFFFFF, %rax
-            movq $0xFFFFFFFFFFFFFFFF, %rbx
-            movq $0xFFFFFFFFFFFFFFFF, %rcx
-            movq $0xFFFFFFFFFFFFFFFF, %rdx
-            movq $0xFFFFFFFFFFFFFFFF, %rsi
-            movq $0xFFFFFFFFFFFFFFFF, %rdi
+            mov $0xFFFFFFFFFFFFFFFF, %rax
+            mov $0xFFFFFFFFFFFFFFFF, %rbx
+            mov $0xFFFFFFFFFFFFFFFF, %rcx
+            mov $0xFFFFFFFFFFFFFFFF, %rdx
+            mov $0xFFFFFFFFFFFFFFFF, %rsi
+            mov $0xFFFFFFFFFFFFFFFF, %rdi
             #mov rbp, 0xFFFFFFFFFFFFFFFF
             #mov rsp, 0xFFFFFFFFFFFFFFFF
             mov r8,  0xFFFFFFFFFFFFFFFF

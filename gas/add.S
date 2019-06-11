@@ -20,6 +20,6 @@ LKMC_PROLOGUE
 
     /* Pointer. */
     mov $myint, %eax
-    movl $0x11112222, (%eax)
+    mov $0x11112222, (%eax)
     ASSERT_EQ_SIZE($0x11112222, myint, l)
 LKMC_EPILOGUE

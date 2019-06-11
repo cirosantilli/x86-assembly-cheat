@@ -2,6 +2,6 @@
 .text
     .global _start
     _start: 
-        movq $60, %rax
-        movq $0, %rdi
+        mov $60, %rax
+        mov $0, %rdi
         syscall

@@ -11,23 +11,23 @@
 
 LKMC_PROLOGUE
 
-    movl $bs4, %edi
+    mov $bs4, %edi
     movb $0, bs4
     mov byte [bs4 + 1], 1
 
     cld
-    movb $0, %al
+    mov $0, %al
     scasb
     ASSERT_FLAG jz
-    movl %edi, %eax
+    mov %edi, %eax
     subl $bs4, %eax
     LKMC_ASSERT_EQ_32(%eax, $1)
 
     std
-    movb $2, %al
+    mov $2, %al
     scasb
     ASSERT_FLAG jnz
-    movl %edi, %eax
+    mov %edi, %eax
     subl $bs4, %eax
     LKMC_ASSERT_EQ_32(%eax, $0)
 

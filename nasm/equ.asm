@@ -4,7 +4,7 @@
 
 #include <lkmc.h>
 
-DATA
+.data
     global x
     x: equ 1 + 1
     y: dd 1 + 1

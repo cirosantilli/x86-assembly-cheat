@@ -9,9 +9,9 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $0, %eax
-    movl $1, %ebx
-    movl $2, %ecx
+    mov $0, %eax
+    mov $1, %ebx
+    mov $2, %ecx
     cmpxchgl %ecx, %ebx
     ASSERT_FLAG jnz
     # TODO
@@ -19,9 +19,9 @@ LKMC_PROLOGUE
     LKMC_ASSERT_EQ_32(%ebx, $1)
     LKMC_ASSERT_EQ_32(%ecx, $2)
 
-    movl $0, %eax
-    movl $0, %ebx
-    movl $2, %ecx
+    mov $0, %eax
+    mov $0, %ebx
+    mov $2, %ecx
     cmpxchgl %ecx, %ebx
     ASSERT_FLAG jz
     LKMC_ASSERT_EQ_32(%eax, $0)

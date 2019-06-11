@@ -8,8 +8,8 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movl $1, %eax
-    movl $2, %ebx
+    mov $1, %eax
+    mov $2, %ebx
     xaddl %ebx, %eax
     LKMC_ASSERT_EQ_32(%eax, $3)
     LKMC_ASSERT_EQ_32(%ebx, $1)

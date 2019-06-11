@@ -17,7 +17,7 @@
 
 #include <lkmc.h>
 
-DATA
+.data
     x: dd 0x12341234
 
 LKMC_PROLOGUE

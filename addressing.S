@@ -39,15 +39,15 @@ LKMC_PROLOGUE
 
     # Full form (except no segment, DS used by default):
 
-        movl $1, %eax
-        movl $3, %ebx
+        mov $1, %eax
+        mov $3, %ebx
         lea eax, [eax + 2*ebx + 4]
         LKMC_ASSERT_EQ_32(%eax, $11)
 
     # NASM is quite flexible about the ordering of operands:
 
-        movl $1, %eax
-        movl $3, %ebx
+        mov $1, %eax
+        mov $3, %ebx
         lea eax, [4 + eax + 2*ebx]
         LKMC_ASSERT_EQ_32(%eax, $11)
 
@@ -58,13 +58,13 @@ LKMC_PROLOGUE
 
         # NASM can also do pure magic like:
 
-            movl $1, %eax
+            mov $1, %eax
             leal 3*eax, %eax
             LKMC_ASSERT_EQ_32(%eax, $3)
 
         # Which compiles to:
 
-            movl $1, %eax
+            mov $1, %eax
             leal (%eax, %eax, 2), %eax
             LKMC_ASSERT_EQ_32(%eax, $3)
 
@@ -73,7 +73,7 @@ LKMC_PROLOGUE
 
         # This can lead us up to 9:
 
-            movl $1, %eax
+            mov $1, %eax
             leal 9*eax, %eax
             LKMC_ASSERT_EQ_32(%eax, $9)
 
@@ -87,8 +87,8 @@ LKMC_PROLOGUE
 
     # TODO Possible to use 8-bit or 16-bit registers?
 
-        movw $0, %ax
-        movw $1, %bx
+        mov $0, %ax
+        mov $1, %bx
         leaw (%bx), %ax
         LKMC_ASSERT_EQ_32(%ax, $1)
 

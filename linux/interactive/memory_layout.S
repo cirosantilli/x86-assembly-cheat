@@ -12,14 +12,14 @@
 # This is specified by the AMD64 ABI.
 
 %macro print_address 1
-    movl $4, %eax
-    movl $1, %ebx
-    movl $%1, %ecx
+    mov $4, %eax
+    mov $1, %ebx
+    mov $%1, %ecx
     # Little endian is easier for humans to read.
     bswapl %ecx
-    movl %ecx, resd0
-    movl $resd0, %ecx
-    movl $4, %edx
+    mov %ecx, resd0
+    mov $resd0, %ecx
+    mov $4, %edx
     int $0x80
 %endmacro
 
@@ -38,6 +38,6 @@
         pushl $1
         print_address esp
 
-        movl $1, %eax
-        movl $0, %ebx
+        mov $1, %eax
+        mov $0, %ebx
         int $0x80

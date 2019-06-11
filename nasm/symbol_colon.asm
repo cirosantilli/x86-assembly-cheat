@@ -4,7 +4,7 @@
 
 #include <lkmc.h>
 
-DATA
+.data
     ; With colon.
     x: db 1
     ; Without colon.

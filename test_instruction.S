@@ -12,12 +12,12 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movb $0x0F0, %al
+    mov $0x0F0, %al
     testb $0, %al
     ASSERT_FLAG jz
     LKMC_ASSERT_EQ_32(%al, $0x0F0)
 
-    movb $0x0F0, %al
+    mov $0x0F0, %al
     LKMC_ASSERT_EQ_32(%al, $0x0F0)
     testb $0x0F0, %al
     ASSERT_FLAG jnz

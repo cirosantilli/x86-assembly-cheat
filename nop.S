@@ -16,7 +16,7 @@ LKMC_PROLOGUE
 
     # Only in 32-bit! In 64-bit zero extends!
     # http://stackoverflow.com/questions/11910501/why-did-gcc-generate-mov-eax-eax-and-what-does-it-mean
-    movl %eax, %eax
+    mov %eax, %eax
     andl %eax, %eax
 
 LKMC_EPILOGUE

@@ -22,10 +22,10 @@ extern printf, exit
 #
 .global assert_fail
 assert_fail: 
-    movl %eax, %ebx
-    movl $.message, %eax
+    mov %eax, %ebx
+    mov $.message, %eax
     call print_string
-    movl %ebx, %eax
+    mov %ebx, %eax
     call print_int
     # Call libc exit with exit status 1:
     pushl $1

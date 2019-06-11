@@ -8,7 +8,7 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-    movw $0x0A, %ax
+    mov $0x0A, %ax
 
     btw $0, %ax
     ASSERT_FLAG jnc

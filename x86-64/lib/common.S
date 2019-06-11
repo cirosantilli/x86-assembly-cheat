@@ -7,9 +7,9 @@ extern printf, exit
 .global print_long
 print_long: 
     subq $8, %rsp
-    movq %rdi, %rsi
-    movq $.format, %rdi
-    movq $1, %rax
+    mov %rdi, %rsi
+    mov $.format, %rdi
+    mov $1, %rax
     call printf
     addq $8, %rsp
     ret
@@ -18,9 +18,9 @@ print_long:
 .global print_string
 print_string: 
     subq $8, %rsp
-    movq %rdi, %rsi
-    movq $.format, %rdi
-    movq $1, %rax
+    mov %rdi, %rsi
+    mov $.format, %rdi
+    mov $1, %rax
     call printf
     addq $8, %rsp
     ret
@@ -29,13 +29,13 @@ print_string:
 .global assert_fail
 assert_fail: 
     subq $8, %rsp
-    movq %rdi, %rbx
-    movq $.message, %rdi
+    mov %rdi, %rbx
+    mov $.message, %rdi
     call print_string
-    movq %rbx, %rdi
+    mov %rbx, %rdi
     call print_long
 
     # Call libc exit with exit status 1.
-    movq $1, %rdi
+    mov $1, %rdi
     call exit
 .message db 10, 'ASSERT FAILED AT LINE: ', 0

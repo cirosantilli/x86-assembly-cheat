@@ -16,12 +16,12 @@ LKMC_PROLOGUE
 
         # There are 8:
 
-            movl $0xFFFF_FFFF, %eax
-            movl $0xFFFF_FFFF, %ebx
-            movl $0xFFFF_FFFF, %ecx
-            movl $0xFFFF_FFFF, %edx
-            movl $0xFFFF_FFFF, %esi
-            movl $0xFFFF_FFFF, %edi
+            mov $0xFFFF_FFFF, %eax
+            mov $0xFFFF_FFFF, %ebx
+            mov $0xFFFF_FFFF, %ecx
+            mov $0xFFFF_FFFF, %edx
+            mov $0xFFFF_FFFF, %esi
+            mov $0xFFFF_FFFF, %edi
             # SEGFAULT
             # We could compile and run the following, 
             # but that would segfault us later
@@ -81,13 +81,13 @@ LKMC_PROLOGUE
             # Many instructions do different things
             # depending on the size of the register passed.
 
-                movl $0x0102_0304, %eax
-                movl $0x0000_0004, %ebx
+                mov $0x0102_0304, %eax
+                mov $0x0000_0004, %ebx
                 LKMC_ASSERT_EQ_32(%al, %bl)
                 ASSERT_NEQ ax, bx
 
-                movl $0x0102_0304, %eax
-                movl $0x0000_0304, %ebx
+                mov $0x0102_0304, %eax
+                mov $0x0000_0304, %ebx
                 LKMC_ASSERT_EQ_32(%ax, %bx)
                 ASSERT_NEQ eax, ebx
 

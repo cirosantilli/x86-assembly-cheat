@@ -6,8 +6,8 @@
 .text
     .global _start
     _start: 
-        movl $4, %eax
-        movl $1, %ebx
-        movl $hello_world, %ecx
-        movl $hello_world_len, %edx
+        mov $4, %eax
+        mov $1, %ebx
+        mov $hello_world, %ecx
+        mov $hello_world_len, %edx
         int $0x80

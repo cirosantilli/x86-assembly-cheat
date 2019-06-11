@@ -9,10 +9,10 @@
 
 LKMC_PROLOGUE
     # Sanity check: mov can encode imm64, and cmp r64, r64 works as expected.
-    movq $0x12345678_80000000, %rax
-    movq $0x00000001_00000000, %rbx
+    mov $0x12345678_80000000, %rax
+    mov $0x00000001_00000000, %rbx
     addq %rbx, %rax
-    movq $0x12345679_80000000, %rbx
+    mov $0x12345679_80000000, %rbx
     cmpq %rbx, %rax
     je reg_reg
     ASSERT_FAIL
@@ -24,14 +24,14 @@ reg_reg:
     # the actual encoded immediate is just 0x80000000.
     #
     # NASM does not give warnings however, so we prefer this syntax.
-    movq $0xFFFFFFFF_80000000, %rax
+    mov $0xFFFFFFFF_80000000, %rax
     cmpq $0xFFFFFFFF_80000000, %rax
     je reg_imm_sign_1
     ASSERT_FAIL
 reg_imm_sign_1: 
 
     # Positive sign extend.
-    movq $0x00000000_40000000, %rax
+    mov $0x00000000_40000000, %rax
     cmpq $0x40000000, %rax
     je reg_imm_sign_0
     ASSERT_FAIL
@@ -58,10 +58,10 @@ reg_imm_sign_0:
     # Don't forget that our macro LKMC_ASSERT_EQ(%uses cmp, %and won't work as expected)
     # if the immediate cannot be encoded by sign extension.
     # So juts move to a register before comparing.
-    movq $0x12345678_80000000, %rax
-    movq $0x00000001_00000000, %rbx
+    mov $0x12345678_80000000, %rax
+    mov $0x00000001_00000000, %rbx
     addq %rbx, %rax
-    movq $0x12345679_80000000, %rbx
+    mov $0x12345679_80000000, %rbx
     LKMC_ASSERT_EQ(%rax, %rbx)
 
 LKMC_EPILOGUE

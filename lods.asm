@@ -6,7 +6,7 @@
 
 #include <lkmc.h>
 
-DATA
+.data
 
     bs4 db 0, 1
 

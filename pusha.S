@@ -12,17 +12,17 @@
 
 LKMC_PROLOGUE
 
-    movl $0, %ebx
-    movl $0, %ecx
+    mov $0, %ebx
+    mov $0, %ecx
 
-    movl %esp, %eax
+    mov %esp, %eax
     pusha
     subl %esp, %eax
     # 8x 4 bytes
     LKMC_ASSERT_EQ_32(%eax, $32)
 
-    movl $1, %ebx
-    movl $1, %ecx
+    mov $1, %ebx
+    mov $1, %ecx
     popa
     LKMC_ASSERT_EQ_32(%ebx, $0)
     LKMC_ASSERT_EQ_32(%ecx, $0)

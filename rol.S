@@ -11,7 +11,7 @@
 #include <lkmc.h>
 
 LKMC_PROLOGUE
-        movl $0x81, %eax
+        mov $0x81, %eax
 
         # axl = 03h, CF = 1
         rolb $1, %al
@@ -35,7 +35,7 @@ LKMC_PROLOGUE
 
     # Rotate with cf inserted
 
-        movl $0x81, %eax
+        mov $0x81, %eax
         clc
 
         rclb $1, %al

@@ -4,6 +4,6 @@
 
 LKMC_PROLOGUE
     .equ SIZE, 10
-    movl $SIZE, %eax
+    mov $SIZE, %eax
     LKMC_ASSERT_EQ_32(%eax, $10)
 LKMC_EPILOGUE

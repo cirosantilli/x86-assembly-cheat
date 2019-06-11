@@ -8,19 +8,19 @@
 
 LKMC_PROLOGUE
 
-    movl $0, %eax
-    movw $0x1000, %ax
+    mov $0, %eax
+    mov $0x1000, %ax
     movzwl %ax, %eax
     LKMC_ASSERT_EQ_32(%eax, $0x1000)
 
-    movl $0, %ebx
-    movb $0x10, %al
+    mov $0, %ebx
+    mov $0x10, %al
     movzbl %al, %ebx
-    movl %ebx, %eax
+    mov %ebx, %eax
     LKMC_ASSERT_EQ_32(%eax, $0x10)
 
-    movl $0, %eax
-    movw $-1, %ax
+    mov $0, %eax
+    mov $-1, %ax
     movzwl %ax, %eax
     ASSERT_NEQ eax, -1
 

@@ -6,7 +6,7 @@
 
 LKMC_PROLOGUE
 
-    movl $0, %eax
+    mov $0, %eax
 
     stc
     setcb %al

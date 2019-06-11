@@ -4,13 +4,13 @@
 
 #include <lkmc.h>
 
-DATA
+.data
     .global x
     x: equ 1 + 1
     y: dd 1 + 1
 LKMC_PROLOGUE
-    movl $x, %eax
+    mov $x, %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
-    movl y, %eax
+    mov y, %eax
     LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

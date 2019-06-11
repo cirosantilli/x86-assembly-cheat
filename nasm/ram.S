@@ -39,8 +39,8 @@ LKMC_PROLOGUE
 
         # NASM knows it is 4 bytes because we are using eax:
 
-            movl $1, %eax
-            movl %eax, resd0
+            mov $1, %eax
+            mov %eax, resd0
 
         # List of all size keywords:
         # http://stackoverflow.com/questions/12063840/what-are-the-sizes-of-tword-oword-and-yword-operands

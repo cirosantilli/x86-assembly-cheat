@@ -4,15 +4,15 @@
 
 #include <lkmc.h>
 
-DATA
+.data
     # With colon.
     x: .byte 1
     # Without colon.
     y db 2
 LKMC_PROLOGUE
-    movl $0, %eax
-    movb x, %al
+    mov $0, %eax
+    mov x, %al
     LKMC_ASSERT_EQ_32(%eax, $1)
-    movb y, %al
+    mov y, %al
     LKMC_ASSERT_EQ_32(%eax, $2)
 LKMC_EPILOGUE

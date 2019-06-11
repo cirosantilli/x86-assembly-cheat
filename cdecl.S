@@ -43,7 +43,7 @@ factorial_rec_cdecl:
     # -  `[ebp + 12]` second argument passed
     cmpl $1, 8(%ebp)
     je factorial_rec_cdecl_base
-        movl 8(%ebp), %ebx
+        mov 8(%ebp), %ebx
         decl %ebx
         pushl %ebx
         call factorial_rec_cdecl
@@ -51,7 +51,7 @@ factorial_rec_cdecl:
         mull 8(%ebp)
     jmp factorial_rec_cdecl_return
     factorial_rec_cdecl_base: 
-        movl $1, %eax
+        mov $1, %eax
     factorial_rec_cdecl_return: 
     leave
     ret
@@ -61,8 +61,8 @@ factorial_norec_cdecl:
     # No need for `enter` since we are non-recursive.
     # This does not affect in any way the ccecl calling convertion:
     # enter and leave are invisible from the outside.
-    movl 4(%esp), %ecx
-    movl $1, %eax
+    mov 4(%esp), %ecx
+    mov $1, %eax
     factorial_norec_cdecl_loop: 
         mull %ecx
     loop factorial_norec_cdecl_loop
