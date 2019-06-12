@@ -42,22 +42,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  Flags
             1.  [setcc](setcc.asm)
         1.  Arithmetic
-            1.  Addition
-                1.  [adc](adc.asm)
-                1.  [inc](inc.asm)
-            1.  Subtraction
-                1.  [sub](sub.asm)
-                1.  [sbb](sbb.asm)
-                1.  [dec](dec.asm)
-            1.  Multiplication
-                1.  [mul](mul.asm)
-                1.  [imul](imul.asm)
-                1.  [neg](neg.asm)
-            1.  Division
-                1.  [div](div.asm)
-                1.  [idiv](idiv.asm)
-            1.  Comparison
-                1.  [cmp](cmp.asm)
             1.  [cdq](cdq.asm)
             1.  [cwde](cwde.asm)
         1.  Bit-wise
