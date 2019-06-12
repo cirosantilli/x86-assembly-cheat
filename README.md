@@ -46,10 +46,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [cwde](cwde.asm)
         1.  Bit-wise
             1.  Boolean
-                1.  [not](not.asm)
-                1.  [and](and.asm)
-                1.  [or](or.asm)
-                1.  [xor](xor.asm)
                 1.  [test](test_instruction.asm)
             1.  Shifts
                 1.  [shl, shr](shl.asm)
@@ -61,8 +57,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [btc](btc.asm)
         1.  Branching
             1.  [jcc](jcc.asm)
-            1.  [jmp](jmp.asm)
-                1.  [jmp indirect](jmp_indirect.asm)
             1.  [loopcc](loopcc.asm)
         1.  [Stack instructions](stack-instrucastions.md)
             1.  [enter](enter.asm)
@@ -131,7 +125,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [x86_64 GAS](x86-64/gas)
             1.  [add](x86-64/gas/add.S)
             1.  [clqt](x86-64/gas/clqt.S)
-            1.  [min](x86-64/gas/min.S)
             1.  [x86_64 GAS Linux](x86-64/gas/linux)
                 1.  [x86_64 GAS Linux hello world](x86-64/gas/linux/hello_world.S)
     1.  Infrastructure
@@ -155,7 +148,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Addressing](gas/addressing.S)
         1.  [Char literal](gas/char_literal.S)
         1.  [x86_64 GAS](x86-64/gas/)
-            1.  [min](x86-64/gas/min.S)
             1.  [lib_test](x86-64/gas/lib_test.S)
             1.  [cltq](x86-64/gas/cltq.S)
         1.  Symbol scope
@@ -164,10 +156,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Current address](gas/current_address.S)
         1.  instructions
             1.  [cbtw](gas/cbtw.S)
-            1.  [cmp](gas/cmp.S)
             1.  [fadd](gas/fadd.S)
-            1.  [jmp indirect](gas/jmp_indirect.S)
-            1.  [ljmp](gas/ljmp.md)
             1.  [movz](gas/movz.S)
             1.  [push](gas/push.S)
         1.  Directives
