@@ -55,9 +55,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [bt](bt.asm)
                 1.  [btr](btr.asm)
                 1.  [btc](btc.asm)
-        1.  Branching
-            1.  [jcc](jcc.asm)
-            1.  [loopcc](loopcc.asm)
         1.  [Stack instructions](stack-instrucastions.md)
             1.  [enter](enter.asm)
             1.  [leave](leave.asm)
