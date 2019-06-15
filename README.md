@@ -13,7 +13,7 @@ Notable advantages of LKMC repository include:
 
 The bulk of this repo was written a long time ago, and so it is semi crappy.
 
-In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default.
+In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default. I intend to just migrate NASM examples to GAS, and let NASM die: if you really, want NASM, please checkout just before the migration. NASM devs are cool, but GCC wins.
 
 However, the LKMC infrastructure is already working and completely superior, all that is left if to migrate some missing key concept examples there.
 
@@ -27,8 +27,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
 
 1.  [**Getting started**](getting-started.md)
 1.  IA-32
-    1.  Your first IA-32 examples
-        1.  [add](add.asm)
     1.  Base concepts
         1.  [Registers](registers.asm)
             1.  [Segment registers](segment_registers.asm)
@@ -44,30 +42,10 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  Flags
             1.  [setcc](setcc.asm)
         1.  Arithmetic
-            1.  Addition
-                1.  [adc](adc.asm)
-                1.  [inc](inc.asm)
-            1.  Subtraction
-                1.  [sub](sub.asm)
-                1.  [sbb](sbb.asm)
-                1.  [dec](dec.asm)
-            1.  Multiplication
-                1.  [mul](mul.asm)
-                1.  [imul](imul.asm)
-                1.  [neg](neg.asm)
-            1.  Division
-                1.  [div](div.asm)
-                1.  [idiv](idiv.asm)
-            1.  Comparison
-                1.  [cmp](cmp.asm)
             1.  [cdq](cdq.asm)
             1.  [cwde](cwde.asm)
         1.  Bit-wise
             1.  Boolean
-                1.  [not](not.asm)
-                1.  [and](and.asm)
-                1.  [or](or.asm)
-                1.  [xor](xor.asm)
                 1.  [test](test_instruction.asm)
             1.  Shifts
                 1.  [shl, shr](shl.asm)
@@ -77,11 +55,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [bt](bt.asm)
                 1.  [btr](btr.asm)
                 1.  [btc](btc.asm)
-        1.  Branching
-            1.  [jcc](jcc.asm)
-            1.  [jmp](jmp.asm)
-                1.  [jmp indirect](jmp_indirect.asm)
-            1.  [loopcc](loopcc.asm)
         1.  [Stack instructions](stack-instrucastions.md)
             1.  [enter](enter.asm)
             1.  [leave](leave.asm)
@@ -149,7 +122,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [x86_64 GAS](x86-64/gas)
             1.  [add](x86-64/gas/add.S)
             1.  [clqt](x86-64/gas/clqt.S)
-            1.  [min](x86-64/gas/min.S)
             1.  [x86_64 GAS Linux](x86-64/gas/linux)
                 1.  [x86_64 GAS Linux hello world](x86-64/gas/linux/hello_world.S)
     1.  Infrastructure
@@ -173,7 +145,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Addressing](gas/addressing.S)
         1.  [Char literal](gas/char_literal.S)
         1.  [x86_64 GAS](x86-64/gas/)
-            1.  [min](x86-64/gas/min.S)
             1.  [lib_test](x86-64/gas/lib_test.S)
             1.  [cltq](x86-64/gas/cltq.S)
         1.  Symbol scope
@@ -182,10 +153,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Current address](gas/current_address.S)
         1.  instructions
             1.  [cbtw](gas/cbtw.S)
-            1.  [cmp](gas/cmp.S)
             1.  [fadd](gas/fadd.S)
-            1.  [jmp indirect](gas/jmp_indirect.S)
-            1.  [ljmp](gas/ljmp.md)
             1.  [movz](gas/movz.S)
             1.  [push](gas/push.S)
         1.  Directives
