@@ -39,22 +39,9 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [cmovcc](cmovcc.asm)
             1.  [xchg](xchg.asm)
             1.  [lea](lea.asm)
-        1.  Flags
-            1.  [setcc](setcc.asm)
         1.  Arithmetic
             1.  [cdq](cdq.asm)
             1.  [cwde](cwde.asm)
-        1.  Bit-wise
-            1.  Boolean
-                1.  [test](test_instruction.asm)
-            1.  Shifts
-                1.  [shl, shr](shl.asm)
-                1.  [sal, sar](sal.asm)
-                1.  [rol, ror](rol.asm)
-            1.  Test
-                1.  [bt](bt.asm)
-                1.  [btr](btr.asm)
-                1.  [btc](btc.asm)
         1.  [Stack instructions](stack-instrucastions.md)
             1.  [enter](enter.asm)
             1.  [leave](leave.asm)
@@ -89,7 +76,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [cmpxchg](cmpxchg.asm)
             1.  [bts](bts.asm)
         1.  Misc
-            1.  [rdrand](rdrand.asm)
             1.  [popcnt](popcnt.asm)
             1.  [rdtsc](rdtsc.asm)
             1.  [nop](nop.asm)
