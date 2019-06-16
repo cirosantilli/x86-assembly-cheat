@@ -77,7 +77,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [bts](bts.asm)
         1.  Misc
             1.  [popcnt](popcnt.asm)
-            1.  [rdtsc](rdtsc.asm)
             1.  [nop](nop.asm)
             1.  [cpuid](cpuid.asm)
     1.  [Calling conventions](calling-conventions.md)
