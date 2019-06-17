@@ -75,8 +75,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [xadd](xadd.asm)
             1.  [cmpxchg](cmpxchg.asm)
             1.  [bts](bts.asm)
-        1.  Misc
-            1.  [cpuid](cpuid.asm)
     1.  [Calling conventions](calling-conventions.md)
         1.  [cdecl](cdecl.md)
         1.  [cdecl examples](cdecl.asm)
