@@ -33,27 +33,26 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Addressing](addressing.asm)
         1.  [Endianess](endianess.asm)
     1.  Instructions
-        1.  mov family
-            1.  [movzx](movzx.asm)
-            1.  [movsx](movsx.asm)
+        1.  Data transfer instructions
             1.  [cmovcc](cmovcc.asm)
-            1.  [xchg](xchg.asm)
             1.  [lea](lea.asm)
-        1.  Arithmetic
-            1.  [cdq](cdq.asm)
-            1.  [cwde](cwde.asm)
+            1.  [movsx](movsx.asm)
+            1.  [movzx](movzx.asm)
+            1.  [Synchronization](synchronization.md)
+                1.  [cmpxchg](cmpxchg.asm)
+                1.  [xadd](xadd.asm)
+                1.  [xchg](xchg.asm)
+            1.  Integer size conversion
+                1.  [cdq](cdq.asm)
+                1.  [cwde](cwde.asm)
+                1.  [cdqe](x86-64/cdqe.asm)
+            1.  Stack data transfer instructions
+                1.  [pusha](pusha.asm)
+                1.  [pushf](pushf.asm)
         1.  [Stack instructions](stack-instrucastions.md)
-            1.  [enter](enter.asm)
-            1.  [leave](leave.asm)
-            1.  [pusha](pusha.asm)
-            1.  [pushf](pushf.asm)
-        1.  [String instructions](string-instructions.md)
-            1.  [rep](rep.asm)
-            1.  [cmps](cmps.asm)
-            1.  [lods](lods.asm)
-            1.  [movs](movs.asm)
-            1.  [scas](scas.asm)
-            1.  [stos](stos.asm)
+            1.  Stack control transfer instructions
+                1.  [enter](enter.asm)
+                1.  [leave](leave.asm)
         1.  [Floating point](floating-point.md)
             1.  [FPU](fpu.md)
                 1.  FPU basic examples, start here
@@ -71,10 +70,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                     1.  [fxch](fxch.asm)
             1.  [SIMD](simd.asm)
                 1.  [FMA](fma.md)
-        1.  [Synchronization](synchronization.md)
-            1.  [xadd](xadd.asm)
-            1.  [cmpxchg](cmpxchg.asm)
-            1.  [bts](bts.asm)
     1.  [Calling conventions](calling-conventions.md)
         1.  [cdecl](cdecl.md)
         1.  [cdecl examples](cdecl.asm)
@@ -87,27 +82,19 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1. [C from assembly](linux/c-from-assembly/)
         1. [Custom entry](linux/custom-entry/)
         1. [Custom entry GCC](linux/custom-entry-gcc/)
-    1.  Infrastructure
-        1.  [hello_world.asm](hello_world.asm)
-        1.  [lib_test](lib_test.asm)
 1.  [x86-64](x86-64/)
     1.  x86_64 general principles
         1.  [cmp sign extend](x86-64/cmp-sign-extend.asm)
         1.  [mov zero extend](x86-64/mov-zero-extend.asm)
     1.  x86_64 instructions
-        1.  [cdqe](x86-64/cdqe.asm)
         1.  [movabs](x86-64/movabs.asm)
     1.  [main](x86-64/main.asm)
     1.  [x86_64 Linux system calls](x86-64/linux)
     1.  [x86_64 calling convention](x86-64/calling-convention.md)
         1.  [x86_64 GAS](x86-64/gas)
-            1.  [add](x86-64/gas/add.S)
             1.  [clqt](x86-64/gas/clqt.S)
             1.  [x86_64 GAS Linux](x86-64/gas/linux)
                 1.  [x86_64 GAS Linux hello world](x86-64/gas/linux/hello_world.S)
-    1.  Infrastructure
-        1.  [min](x86-64/min.asm)
-        1.  [lib_test](x86-64/lib_test.asm)
     1.  C from assembly
         1.  [x86_64 C from assembly hello](x86-64/linux/c-from-assembly/hello.asm)
         1.  [x86_64 printf](x86-64/linux/c-from-assembly/printf.asm)
