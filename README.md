@@ -34,18 +34,10 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
         1.  [Endianess](endianess.asm)
     1.  Instructions
         1.  Data transfer instructions
-            1.  [cmovcc](cmovcc.asm)
-            1.  [lea](lea.asm)
-            1.  [movsx](movsx.asm)
-            1.  [movzx](movzx.asm)
             1.  [Synchronization](synchronization.md)
                 1.  [cmpxchg](cmpxchg.asm)
                 1.  [xadd](xadd.asm)
                 1.  [xchg](xchg.asm)
-            1.  Integer size conversion
-                1.  [cdq](cdq.asm)
-                1.  [cwde](cwde.asm)
-                1.  [cdqe](x86-64/cdqe.asm)
             1.  Stack data transfer instructions
                 1.  [pusha](pusha.asm)
                 1.  [pushf](pushf.asm)
