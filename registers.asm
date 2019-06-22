@@ -1,117 +1,14 @@
-; # Registers
+; Intel puts the registers in the following groups:
 
-    ; TODO split this down further.
-
-    ; Intel puts the registers in the following groups:
-
-    ; - General-purpose registers
-    ; - Segment registers
-    ; - EFLAGS (program status and control) register
+; - General-purpose registers
+; - Segment registers
+; - EFLAGS (program status and control) register
 
 %include "lib/common_nasm.inc"
 
 ENTRY
 
     ; # General purpose registers
-
-        ; There are 8:
-
-            mov eax, 0xFFFF_FFFF
-            mov ebx, 0xFFFF_FFFF
-            mov ecx, 0xFFFF_FFFF
-            mov edx, 0xFFFF_FFFF
-            mov esi, 0xFFFF_FFFF
-            mov edi, 0xFFFF_FFFF
-            ; SEGFAULT
-            ; We could compile and run the following,
-            ; but that would segfault us later
-            ; since those are used on calling conventions:
-            ;mov ebp, 0xFFFF_FFFF
-            ;mov esp, 0xFFFF_FFFF
-
-        ; In theory, those can be used freely for many computations such as sums, subtractions, etc.
-
-        ; However, many instructions make extensive use
-        ; of certain of those registers such as `ESP` which keeps track of the stack.
-
-        ; Therefore, you should rely primarily on `eax`, `ebx`, `ecx` and `edx`
-        ; as actually being general purpose, and even for those you should check often
-        ; if each operation will not take resd0/output from them without you knowing it.
-
-        ; x86_64 adds 8 byte long versions of the IA32 registers
-        ; and 8 more plain new 8 byte registers: r8 to r16.
-
-        ; #ax
-
-        ; #dx
-
-        ; #cx
-
-        ; #bx
-
-            ; Although they are called "general purpose", that is a lie
-            ; since they are still treated magically by a few operations.
-
-            ; `abcd` is just a coincidence: the letters are actually
-            ; mnemonics for their special side effects:
-
-            ; - AX = accumulator
-            ; - DX = double word accumulator
-            ; - CX = counter
-            ; - BX = base register
-
-            ; This is also reflected by the way that those registers are encoded,
-            ; which uses the order `acdb` instead of `abcd`.
-
-        ; # Register parts
-
-            ; - Yl
-            ; - Yh
-            ; - Yx
-            ; - eYx
-
-            ; The parts of the register can be visualized as:
-
-                ; | 1    | 2    | 3    | 4    |
-                ; |---------------------------|
-                ; | eax                       |
-                ; |             | ax          |
-                ; |             | ah   | al   |
-
-            ; Many instructions do different things
-            ; depending on the size of the register passed.
-
-                mov eax, 0x0102_0304
-                mov ebx, 0x0000_0004
-                ASSERT_EQ al, bl
-                ASSERT_NEQ ax, bx
-
-                mov eax, 0x0102_0304
-                mov ebx, 0x0000_0304
-                ASSERT_EQ ax, bx
-                ASSERT_NEQ eax, ebx
-
-        ; # esi
-
-        ; # edi
-
-            ; http://stackoverflow.com/questions/1856320/purpose-of-esi-edi-registers
-
-            ; Automatically incremented or decremented by the string instructions.
-
-            ; - esi is the Source of string operations. Used by all string instructions.
-
-            ; - edi is the Destination of string operations.
-
-                ; Only used for string instruction that take two inputs, e.g.: movs (`memcpy`).
-
-                ; Some string instructions always use a given register as output and don't touch edi.
-                ; E.g. `lods` uses al, and does not touch `edi`.
-
-            ; Increment and decrement are differentiated by the direction flag.
-
-            ; Whenever you are not dealing with string instructions,
-            ; those registers are useful for general purpose.
 
         ; # ebp
 
@@ -262,12 +159,4 @@ ENTRY
             ASSERT_FLAG jc
             cmc
             ASSERT_FLAG jnc
-
-        ; # lahf
-
-        ; # sahf
-
-            ; Load and set the lower 8 bits of flags and AH register.
-
-            ; Only works for those 8-lower bits.
 EXIT
