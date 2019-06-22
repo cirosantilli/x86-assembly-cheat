@@ -45,21 +45,7 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  Stack control transfer instructions
                 1.  [enter](enter.asm)
                 1.  [leave](leave.asm)
-        1.  [Floating point](floating-point.md)
-            1.  [FPU](fpu.md)
-                1.  FPU basic examples, start here
-                    1.  [fadd](fadd.asm)
-                    1.  [faddp](faddp.asm)
-                    1.  [fadd_text_literal](fadd_text_literal.asm)
-                1.  Bulk instructions
-                    1.  [fabs](fsqrt.asm)
-                    1.  [fchs](fchs.asm)
-                    1.  [fild](fild.asm)
-                    1.  [fld1](fld1.asm)
-                    1.  [fldz](fldz.asm)
-                    1.  [fscale](fscale.asm)
-                    1.  [fsqrt](fsqrt.asm)
-                    1.  [fxch](fxch.asm)
+        1.  Floating point
             1.  [SIMD](simd.asm)
                 1.  [FMA](fma.md)
     1.  [Calling conventions](calling-conventions.md)
