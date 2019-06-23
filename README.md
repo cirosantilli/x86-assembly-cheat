@@ -41,9 +41,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [xchg](xchg.asm)
             1.  Stack data transfer instructions
                 1.  [pusha](pusha.asm)
-        1.  Floating point
-            1.  [SIMD](simd.asm)
-                1.  [FMA](fma.md)
     1.  [Calling conventions](calling-conventions.md)
         1.  [cdecl](cdecl.md)
         1.  [cdecl examples](cdecl.asm)
