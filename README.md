@@ -30,7 +30,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  Base concepts
         1.  [Registers](registers.asm)
             1.  [Segment registers](segment_registers.asm)
-        1.  [Addressing](addressing.asm)
         1.  [Endianess](endianess.asm)
     1.  Instructions
         1.  Data transfer instructions
@@ -40,11 +39,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [xchg](xchg.asm)
             1.  Stack data transfer instructions
                 1.  [pusha](pusha.asm)
-                1.  [pushf](pushf.asm)
-        1.  [Stack instructions](stack-instrucastions.md)
-            1.  Stack control transfer instructions
-                1.  [enter](enter.asm)
-                1.  [leave](leave.asm)
         1.  Floating point
             1.  [SIMD](simd.asm)
                 1.  [FMA](fma.md)
@@ -63,45 +57,24 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
 1.  [x86-64](x86-64/)
     1.  x86_64 general principles
         1.  [cmp sign extend](x86-64/cmp-sign-extend.asm)
-        1.  [mov zero extend](x86-64/mov-zero-extend.asm)
     1.  x86_64 instructions
         1.  [movabs](x86-64/movabs.asm)
     1.  [main](x86-64/main.asm)
     1.  [x86_64 Linux system calls](x86-64/linux)
     1.  [x86_64 calling convention](x86-64/calling-convention.md)
-        1.  [x86_64 GAS](x86-64/gas)
-            1.  [clqt](x86-64/gas/clqt.S)
-            1.  [x86_64 GAS Linux](x86-64/gas/linux)
-                1.  [x86_64 GAS Linux hello world](x86-64/gas/linux/hello_world.S)
     1.  C from assembly
         1.  [x86_64 C from assembly hello](x86-64/linux/c-from-assembly/hello.asm)
         1.  [x86_64 printf](x86-64/linux/c-from-assembly/printf.asm)
-    1.  [x86-64 inline assembly](x86-64/c)
-        1.  [inc](x86-64/c/inc.c)
-        1.  [scratch](x86-64/c/scratch.c)
-        1.  [x86-64 inline assembly Linux](x86-64/c/linux)
-            1.  [hello](x86-64/c/linux/hello.c)
-            1.  [hello_regvar](x86-64/c/linux/hello_regvar.c)
 1.  [Assemblers](assemblers.md)
     1.  [GAS](gas/)
-        1.  Your first GAS examples
-            1.  [gas](gas/add.S)
         1.  [GAS Linux hello world](gas/linux/hello.S)
         1.  [Immediate](gas/immediate.S)
         1.  [Addressing](gas/addressing.S)
         1.  [Char literal](gas/char_literal.S)
-        1.  [x86_64 GAS](x86-64/gas/)
-            1.  [lib_test](x86-64/gas/lib_test.S)
-            1.  [cltq](x86-64/gas/cltq.S)
         1.  Symbol scope
             1.  [Local symbol](gas/local_symbol.S)
             1.  [Local label](gas/local_label.S)
         1.  [Current address](gas/current_address.S)
-        1.  instructions
-            1.  [cbtw](gas/cbtw.S)
-            1.  [fadd](gas/fadd.S)
-            1.  [movz](gas/movz.S)
-            1.  [push](gas/push.S)
         1.  Directives
             1.  [.ascii](gas/ascii.S)
             1.  [.asciz](gas/asciz.S)
@@ -116,9 +89,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
                 1.  [.altmacro](gas/altmacro.S)
             1.  [.irp](gas/irp.S)
             1.  [Comments](gas/comments.S)
-        1.  Infrastructure
-            1.  [Hello world](gas/hello_world.S)
-            1.  [lib_test](gas/lib_test.S)
         1.  [Bibliography](gas/bibliogrpahy.md)
     1.  [NASM](nasm/)
         1.  [RAM](nasm/ram.asm)

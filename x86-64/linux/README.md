@@ -1,8 +1,5 @@
 # Linux
 
-1.  [hello_world.asm](hello_world.asm)
-1.  [min.asm](min.asm)
-1.  [int_system_call.asm](int_system_call.asm)
 1.  [C from assembly](c-from-assembly/)
 
 ## System calls
