@@ -1,6 +1,10 @@
 # x86 Assembly Cheat
 
-This repo is moving to: https://github.com/cirosantilli/linux-kernel-module-cheat#userland-assembly
+THIS REPO HAS MOVED TO: https://github.com/cirosantilli/linux-kernel-module-cheat#userland-assembly
+
+All the most valuable content has already been moved: the bulk of the x86 instruction examples with assertions.
+
+There is some stuff left here, e.g. 32-bit x86 and some useless prose. Maybe one day I'll migrate them, let's see.
 
 No major new features are intended to be added here.
 
@@ -11,13 +15,11 @@ Notable advantages of LKMC repository include:
 - parallel testing. Mostly because the build system there is Python, which is more flexible.
 - other stuff I can't remember right now. That setup just has a ton of features, and will continue to get more and more ;-)
 
-The bulk of this repo was written a long time ago, and so it is semi crappy.
+The bulk of this repo had been written a long time ago, and so it was semi-crappy. All content that moved to LKMC was reviewed and improved.
 
 In particular, the use of NASM was a bad choice from before I understood that GCC uses GNU GAS assembly by default. I intend to just migrate NASM examples to GAS, and let NASM die: if you really, want NASM, please checkout just before the migration. NASM devs are cool, but GCC wins.
 
 However, the LKMC infrastructure is already working and completely superior, all that is left if to migrate some missing key concept examples there.
-
-Then all will be left here will bulk instructions, which I will migrate little by little when I'm bored. But this is a trivial mechanical process, and we can never cover all of x86 anyways ;-)
 
 ## Old README
 
