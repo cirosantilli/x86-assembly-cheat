@@ -11,7 +11,6 @@ TODO Other sync instructions:
 Likely should be done with inline assembly. TODO: is it possible to test those things here (see failures) e.g. under the Linux kernel, or do we need to go bare metal?
 
 - http://stackoverflow.com/questions/4725676/how-does-x86-pause-instruction-work-in-spinlock-and-can-it-be-used-in-other-sc
-- http://stackoverflow.com/questions/6935442/x86-spinlock-using-cmpxchg
 - http://stackoverflow.com/questions/11959374/fastest-inline-assembly-spinlock
 - http://wiki.osdev.org/Spinlock
 

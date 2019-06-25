@@ -36,9 +36,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
     1.  Instructions
         1.  Data transfer instructions
             1.  [Synchronization](synchronization.md)
-                1.  [cmpxchg](cmpxchg.asm)
-                1.  [xadd](xadd.asm)
-                1.  [xchg](xchg.asm)
             1.  Stack data transfer instructions
                 1.  [pusha](pusha.asm)
     1.  [Calling conventions](calling-conventions.md)
@@ -67,9 +64,6 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
 1.  [Assemblers](assemblers.md)
     1.  [GAS](gas/)
         1.  [GAS Linux hello world](gas/linux/hello.S)
-        1.  [Immediate](gas/immediate.S)
-        1.  [Addressing](gas/addressing.S)
-        1.  [Char literal](gas/char_literal.S)
         1.  Symbol scope
             1.  [Local symbol](gas/local_symbol.S)
             1.  [Local label](gas/local_label.S)
@@ -83,11 +77,10 @@ x86 IA-32 and x86-64 userland minimal examples tutorial. Hundreds of runnable as
             1.  [.global](gas/global.S)
             1.  [.print](gas/print.S)
             1.  [.type](gas/type.S)
-        1.  [Preprocessor](gas/preprocessor.md)
+        1.  Macros
             1.  [.macro](gas/macro.S)
                 1.  [.altmacro](gas/altmacro.S)
             1.  [.irp](gas/irp.S)
-            1.  [Comments](gas/comments.S)
         1.  [Bibliography](gas/bibliogrpahy.md)
     1.  [NASM](nasm/)
         1.  [RAM](nasm/ram.asm)
